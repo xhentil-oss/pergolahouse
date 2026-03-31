@@ -105,7 +105,7 @@ export const PermitCheck = () => {
                     <div>
                       <p className="text-amber-800 font-semibold text-sm">Baugenehmigung wahrscheinlich erforderlich</p>
                       <p className="text-amber-700 text-xs mt-1">Für dein Vorhaben in {selectedState} wird vermutlich eine Baugenehmigung benötigt. Unser Partner berät dich kostenlos.</p>
-                      <a href="https://pergolux.de/pages/building-permit" className="inline-block mt-3 text-xs font-semibold text-amber-800 underline">Experten kontaktieren →</a>
+                      <a href="/pages/building-permit" className="inline-block mt-3 text-xs font-semibold text-amber-800 underline">Experten kontaktieren →</a>
                     </div>
                   </>
                 ) : (

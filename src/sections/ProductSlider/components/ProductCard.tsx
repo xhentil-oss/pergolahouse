@@ -50,7 +50,7 @@ export const ProductCard = (props: ProductCardProps) => {
                 <div className="text-yellow-800 text-sm font-semibold box-border caret-transparent leading-[18px] min-h-[18px]">
                   {props.modelLabel}
                 </div>
-                <h3 className="text-black text-2xl font-semibold box-border caret-transparent leading-7">
+                <h3 className="text-zinc-900 text-2xl font-semibold box-border caret-transparent leading-7">
                   {props.productName}
                 </h3>
               </div>
@@ -70,7 +70,7 @@ export const ProductCard = (props: ProductCardProps) => {
             </div>
           </div>
           <div className="items-center box-border caret-transparent gap-x-1 flex flex-col justify-center min-h-[auto] min-w-[auto] gap-y-1 text-center">
-            <div className="relative box-border caret-transparent gap-x-2 gap-y-2 flex min-h-[auto] min-w-[auto]">
+            <div className="relative box-border caret-transparent gap-x-2 gap-y-2 flex min-h-5 min-w-[auto] items-center">
               {props.colorSwatches &&
                 props.colorSwatches.map((swatch, index) => (
                   <div
@@ -85,7 +85,7 @@ export const ProductCard = (props: ProductCardProps) => {
                   </div>
                 ))}
             </div>
-            <div className="text-sm font-semibold box-border caret-transparent leading-[18px] min-h-[auto] min-w-[auto]">
+            <div className="text-zinc-900 text-sm font-semibold box-border caret-transparent leading-[18px] min-h-[auto] min-w-[auto]">
               {props.roofType}
             </div>
             <div className="text-neutral-500 text-sm box-border caret-transparent leading-[18px] min-h-[auto] min-w-[auto]">
@@ -114,7 +114,7 @@ export const ProductCard = (props: ProductCardProps) => {
             </div>
           </div>
         </div>
-        <div className="items-center box-border caret-transparent gap-x-2 flex flex-col min-h-[auto] min-w-[auto] gap-y-2 w-full border-neutral-100 pb-6 border-b border-solid">
+        <div className="items-center box-border caret-transparent gap-x-2 flex flex-col min-h-[auto] min-w-[auto] gap-y-2 w-full border-neutral-200 pb-6 border-b border-solid">
           <a
             href={props.productUrl}
             aria-label={props.buyButtonAriaLabel}

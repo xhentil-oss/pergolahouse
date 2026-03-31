@@ -10,7 +10,7 @@ export const FAQ = () => {
               Fragen und Antworten
             </h2>
             <a
-              href="https://pergolux.de/pages/fragen-und-antworten"
+              href="/pages/fragen-und-antworten"
               className="inline-block mt-6 text-sm font-semibold text-blue-800 hover:underline"
             >
               Alle FAQ ansehen →
@@ -86,7 +86,7 @@ export const FAQ = () => {
                 <p>
                   Das hängt von deinem Bundesland und den Maßen deines Projekts ab. Nutze unseren{" "}
                   <strong>interaktiven Genehmigungs-Check</strong>, um sofort Klarheit zu bekommen.{" "}
-                  <a href="https://pergolux.de/pages/building-permit" className="text-blue-800 hover:underline">Zum Genehmigungs-Check →</a>
+                  <a href="/pages/building-permit" className="text-blue-800 hover:underline">Zum Genehmigungs-Check →</a>
                 </p>
               }
             />

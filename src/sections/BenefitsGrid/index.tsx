@@ -29,7 +29,7 @@ export const BenefitsGrid = () => {
             imageAlt="Grünes Hammer-Symbol"
             title="Einfache Montage"
             description="Benötigst du Hilfe bei der Installation? Kontaktiere uns und wir unterstützen dich Schritt für Schritt!"
-            linkHref="https://pergolux.de/pages/installationsubersicht"
+            linkHref="/pages/installationsubersicht"
             linkText="Mehr erfahren"
           />
           <BenefitCard

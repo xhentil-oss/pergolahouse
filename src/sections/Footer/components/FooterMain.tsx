@@ -25,8 +25,8 @@ export const FooterMain = () => {
                 { href: "/pages/ueber-uns", label: "Über uns" },
                 { href: "/pages/showroom-3-0", label: "Showroom" },
                 { href: "/blogs/blogeintrag", label: "Blog" },
-                { href: "https://pergoluxshop.com/pages/career", label: "Karriere" },
-                { href: "https://support.pergolux.de/hc/de", label: "Hilfecenter" },
+                { href: "/pages/career", label: "Karriere" },
+                { href: "/help-center", label: "Hilfecenter" },
                 { href: "/pages/montageservice-plx-montage-gmbh", label: "Montage Service" },
               ]}
             />

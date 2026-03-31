@@ -1,12 +1,15 @@
-import { useRef } from "react";
 import { ProductCard } from "@/sections/ProductSlider/components/ProductCard";
+import photo2 from "@/assets/Photo (2).png";
+import photo3 from "@/assets/Photo (3).png";
+import photo4 from "@/assets/Photo (4).png";
+import photo5 from "@/assets/Photo (5).png";
 
 const products = [
   {
     productUrl: "/products/pergolux-pergola-s3",
     productAriaLabel: "Pergola S3",
     imageContainerClass: "",
-    imageSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/85.jpg",
+    imageSrc: photo2,
     imageAlt: "PERGOLUX Pergola S3",
     modelLabel: "Manuelles Modell",
     productName: "Pergola S3",
@@ -27,7 +30,7 @@ const products = [
     productUrl: "/products/pergolux-sundream-s3",
     productAriaLabel: "Sundream S3",
     imageContainerClass: "",
-    imageSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/121.jpg",
+    imageSrc: photo3,
     imageAlt: "PERGOLUX Sundream S3",
     modelLabel: "Beliebtestes Modell",
     productName: "Sundream S3",
@@ -48,7 +51,7 @@ const products = [
     productUrl: "/products/pergolux-skydance-s3",
     productAriaLabel: "Skydance S3",
     imageContainerClass: "",
-    imageSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/91.jpg",
+    imageSrc: photo4,
     imageAlt: "PERGOLUX Skydance S3",
     modelLabel: "Unser Premium-Modell",
     productName: "Skydance S3",
@@ -68,7 +71,7 @@ const products = [
     productUrl: "/products/pergola-custom-design",
     productAriaLabel: "Maßanfertigung S3",
     imageContainerClass: "",
-    imageSrc: "https://c.animaapp.com/mnd2jbm7kw8tP/assets/87.jpg",
+    imageSrc: photo5,
     imageAlt: "PERGOLUX Maßanfertigung S3",
     modelLabel: "Individuelle Maße",
     productName: "Maßanfertigung S3",
@@ -84,16 +87,8 @@ const products = [
 ];
 
 export const ProductSlider = () => {
-  const scrollRef = useRef<HTMLUListElement>(null);
-
-  const scroll = (dir: "left" | "right") => {
-    if (!scrollRef.current) return;
-    const amount = 380;
-    scrollRef.current.scrollBy({ left: dir === "right" ? amount : -amount, behavior: "smooth" });
-  };
-
   return (
-    <div className="bg-neutral-100">
+    <div className="bg-white">
       <div className="py-16 md:py-[120px]">
         <div className="flex flex-col gap-10">
           {/* Header row */}
@@ -114,37 +109,15 @@ export const ProductSlider = () => {
             </div>
           </div>
 
-          {/* Slider */}
-          <div className="relative">
-            <ul
-              ref={scrollRef}
-              className="flex gap-4 overflow-x-auto scroll-smooth px-4 md:px-16 pb-4 snap-x snap-mandatory"
-              style={{ scrollbarWidth: "none" }}
-            >
+          {/* Grid */}
+          <div className="max-w-[1440px] mx-auto px-4 md:px-16 w-full">
+            <ul className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center">
               {products.map((p) => (
-                <li key={p.productName} className="shrink-0 snap-start w-[280px] md:w-[340px]">
+                <li key={p.productName} className="w-full">
                   <ProductCard {...p} priceWrapperClass="items-center gap-x-1 flex flex-wrap justify-center gap-y-1" />
                 </li>
               ))}
             </ul>
-
-            {/* Nav buttons */}
-            <div className="hidden md:flex justify-end gap-3 pt-8 pr-16">
-              <button
-                onClick={() => scroll("left")}
-                aria-label="Previous"
-                className="bg-zinc-200 hover:bg-zinc-300 p-3 rounded-full transition-colors"
-              >
-                <svg width="10" height="17" viewBox="0 0 10 17" fill="none"><path d="M8.5 1L1.5 8.5L8.5 16" stroke="#666" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </button>
-              <button
-                onClick={() => scroll("right")}
-                aria-label="Next"
-                className="bg-zinc-200 hover:bg-zinc-300 p-3 rounded-full transition-colors"
-              >
-                <svg width="10" height="17" viewBox="0 0 10 17" fill="none"><path d="M1.5 1L8.5 8.5L1.5 16" stroke="#666" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </button>
-            </div>
           </div>
         </div>
       </div>

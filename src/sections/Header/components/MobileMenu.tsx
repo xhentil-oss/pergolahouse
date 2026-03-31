@@ -81,7 +81,7 @@ export const MobileMenu = ({ onClose }: MobileMenuProps) => {
           {[
             { label: "Showroom", href: "/pages/showroom-3-0" },
             { label: "Über uns", href: "/pages/ueber-uns" },
-            { label: "Hilfecenter", href: "https://support.pergolux.de/hc/de" },
+            { label: "Hilfecenter", href: "/help-center" },
           ].map((item) => (
             <a key={item.label} href={item.href} className="block font-semibold py-3 border-b border-zinc-100">
               {item.label}

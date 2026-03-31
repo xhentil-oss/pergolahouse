@@ -1,14 +1,16 @@
+import { Link } from "react-router-dom";
+
 export const HeaderActions = () => {
   return (
     <div className="items-center box-border caret-transparent gap-x-2 flex min-h-[auto] min-w-[auto] gap-y-2">
-      <a
-        href="/collections/unsere-pergolen"
+      <Link
+        to="/collections/unsere-pergolen"
         className="text-white font-medium items-center bg-zinc-900 box-border caret-transparent gap-x-2 hidden leading-5 max-h-10 min-h-0 min-w-0 gap-y-2 w-max border border-zinc-900 px-4 py-3 rounded-md border-solid md:flex md:min-h-[auto] md:min-w-[auto]"
       >
         <span className="box-border caret-transparent inline min-h-0 min-w-0 md:block md:min-h-[auto] md:min-w-[auto]">
           Modelle entdecken
         </span>
-      </a>
+      </Link>
       <div className="relative box-border caret-transparent h-6 min-h-[auto] min-w-[auto] w-6">
         <div
           aria-label="Cart"

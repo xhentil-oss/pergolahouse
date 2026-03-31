@@ -43,7 +43,7 @@ export const DesktopNav = () => {
       />
       <a href="/pages/showroom-3-0" className="font-semibold leading-5 mr-2 hover:text-zinc-600 transition-colors">Showroom</a>
       <a href="/pages/ueber-uns" className="font-semibold leading-5 mr-2 hover:text-zinc-600 transition-colors">Über uns</a>
-      <a href="https://support.pergolux.de/hc/de" className="font-semibold leading-5 mr-2 hover:text-zinc-600 transition-colors">Hilfecenter</a>
+      <a href="/help-center" className="font-semibold leading-5 mr-2 hover:text-zinc-600 transition-colors">Hilfecenter</a>
     </nav>
   );
 };
