@@ -4,12 +4,12 @@ export const FooterBrand = () => {
       <a href="/">
         <img
           src="https://c.animaapp.com/mnd7yb7cX3zmke/assets/90.png"
-          alt="PERGOLUX"
+          alt="Logo"
           className="h-8 object-contain brightness-0 invert"
           onError={(e) => {
             const el = e.target as HTMLImageElement;
             el.style.display = "none";
-            el.parentElement!.innerHTML = '<span class="text-white text-2xl font-bold tracking-widest">PERGOLUX</span>';
+            el.parentElement!.innerHTML = '<span class="text-white text-2xl font-bold tracking-widest">PERGOLA</span>';
           }}
         />
       </a>

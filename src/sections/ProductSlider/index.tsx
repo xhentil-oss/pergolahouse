@@ -1,4 +1,4 @@
-import { ProductCard } from "@/sections/ProductSlider/components/ProductCard";
+﻿import { ProductCard } from "@/sections/ProductSlider/components/ProductCard";
 import photo2 from "@/assets/Photo (2).png";
 import photo3 from "@/assets/Photo (3).png";
 import photo4 from "@/assets/Photo (4).png";
@@ -6,11 +6,11 @@ import photo5 from "@/assets/Photo (5).png";
 
 const products = [
   {
-    productUrl: "/products/pergolux-pergola-s3",
+    productUrl: "/products/pergola-s3",
     productAriaLabel: "Pergola S3",
     imageContainerClass: "",
     imageSrc: photo2,
-    imageAlt: "PERGOLUX Pergola S3",
+    imageAlt: "Pergola S3",
     modelLabel: "Manuelles Modell",
     productName: "Pergola S3",
     currentPrice: "2.589 €",
@@ -27,11 +27,11 @@ const products = [
     buyButtonAriaLabel: "Jetzt kaufen – Pergola S3",
   },
   {
-    productUrl: "/products/pergolux-sundream-s3",
+    productUrl: "/products/sundream-s3",
     productAriaLabel: "Sundream S3",
     imageContainerClass: "",
     imageSrc: photo3,
-    imageAlt: "PERGOLUX Sundream S3",
+    imageAlt: "Sundream S3",
     modelLabel: "Beliebtestes Modell",
     productName: "Sundream S3",
     currentPrice: "3.429 €",
@@ -48,11 +48,11 @@ const products = [
     buyButtonAriaLabel: "Jetzt kaufen – Sundream S3",
   },
   {
-    productUrl: "/products/pergolux-skydance-s3",
+    productUrl: "/products/skydance-s3",
     productAriaLabel: "Skydance S3",
     imageContainerClass: "",
     imageSrc: photo4,
-    imageAlt: "PERGOLUX Skydance S3",
+    imageAlt: "Skydance S3",
     modelLabel: "Unser Premium-Modell",
     productName: "Skydance S3",
     currentPrice: "5.099 €",
@@ -72,7 +72,7 @@ const products = [
     productAriaLabel: "Maßanfertigung S3",
     imageContainerClass: "",
     imageSrc: photo5,
-    imageAlt: "PERGOLUX Maßanfertigung S3",
+    imageAlt: "Maßanfertigung S3",
     modelLabel: "Individuelle Maße",
     productName: "Maßanfertigung S3",
     currentPrice: "6.785 €",

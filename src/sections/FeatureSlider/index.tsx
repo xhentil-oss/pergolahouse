@@ -25,7 +25,7 @@ export const FeatureSlider = () => {
       <div className="max-w-[1440px] mx-auto px-4 md:px-16">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
           <h2 className="text-zinc-900 text-[32px] font-semibold leading-10 md:text-5xl md:leading-[58px] max-w-[600px]">
-            Alles über deine neue PERGOLUX Serie 3 Pergola.
+            Alles über deine neue Serie 3 Pergola.
           </h2>
           <div className="flex items-center gap-3 shrink-0">
             <div className="h-8 w-8 rounded-full overflow-hidden shrink-0">

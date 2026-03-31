@@ -15,7 +15,7 @@ const videos = [
     duration: "5:13",
   },
   {
-    title: "PERGOLUX Sundream S3 – jetzt entdecken",
+    title: "Sundream S3 – jetzt entdecken",
     thumbnailUrl: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/122.png",
     videoId: "LXb3EKWsInQ",
     duration: "3:29",
@@ -34,10 +34,10 @@ export const VideoSlider = () => {
     <section className="bg-white overflow-hidden py-14 md:py-[120px]">
       <div className="max-w-[1440px] mx-auto px-4 md:px-16 mb-10">
         <h2 className="text-zinc-900 text-[32px] font-semibold leading-10 max-w-[748px] mb-4 md:text-5xl md:leading-[58px]">
-          Wie PERGOLUX die perfekte Pergola herstellt
+          Wie die perfekte Pergola hergestellt wird
         </h2>
         <p className="text-zinc-500 font-medium text-base max-w-[748px] md:text-xl md:leading-7">
-          Finde heraus, warum unsere Pergolen so geschätzt werden – und was andere über ihre Erfahrungen mit PERGOLUX berichten.
+          Finde heraus, warum unsere Pergolen so geschätzt werden – und was andere über ihre Erfahrungen mit uns berichten.
         </p>
       </div>
 

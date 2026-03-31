@@ -4,49 +4,49 @@ import { ReviewCard } from "@/sections/ReviewsSlider/components/ReviewCard";
 const reviews = [
   {
     imageSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/24.jpg",
-    imageAlt: "Pergolux Pergola mit Glaswänden im Winter",
+    imageAlt: "Pergola mit Glaswänden im Winter",
     reviewerName: "Stefanie Groß",
     reviewText: "Wir sind sehr zufrieden mit unserer Pergola! Die Bestellung war unkompliziert, und der Support war fantastisch. Alle unsere Fragen wurden freundlich und schnell beantwortet. Die Lieferung war pünktlich und die Installation verlief reibungslos.",
     rating: 5,
   },
   {
     imageSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/30.jpg",
-    imageAlt: "Pergolux Pergola mit LED-Beleuchtung",
+    imageAlt: "Pergola mit LED-Beleuchtung",
     reviewerName: "Markus Hoppe",
     reviewText: "Wir haben unsere Pergola heute aufgebaut! Es hat alles wunderbar funktioniert! Alle Teile waren vorhanden. Die Schritt für Schritt Anleitung hat an allen Stellen gepasst. Ein Rundum perfektes Produkt!",
     rating: 5,
   },
   {
     imageSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/34.jpg",
-    imageAlt: "Pergolux Pergola mit LED-Beleuchtung an einem Haus",
+    imageAlt: "Pergola mit LED-Beleuchtung an einem Haus",
     reviewerName: "Rainer Stuhlberger",
     reviewText: "Ich habe mittlerweile eine menge sachen aufgebaut, und bei der pergola muss ich sagen das diese sicher einer der hochwertigsten, durchdachtesten und schönsten sachen war. Einfach top!",
     rating: 5,
   },
   {
     imageSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/33.jpg",
-    imageAlt: "Anthrazitfarbene Pergolux Pergola als Terrassenüberdachung",
+    imageAlt: "Anthrazitfarbene Pergola als Terrassenüberdachung",
     reviewerName: "Kirsten Güther",
     reviewText: "Kein Vergleich zu unserer Pergola davor!! Sieht super aus und ist auch noch gut verarbeitet! MEEEGA!!",
     rating: 5,
   },
   {
     imageSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/35.jpg",
-    imageAlt: "Weiße Pergolux Pergola auf einer Terrasse",
+    imageAlt: "Weiße Pergola auf einer Terrasse",
     reviewerName: "Silvia Renner",
     reviewText: "Wir haben uns die Pergola in 6x 4 Meter gekauft. Schaut echt wunderschön aus, die Farbe passt perfekt zum Haus! Lieferzeit war top, sehr flott. Kundenservice sehr nett! Ein sehr gutes Produkt.",
     rating: 5,
   },
   {
     imageSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/31.jpg",
-    imageAlt: "Anthrazitfarbene Pergolux Pergola auf Terrasse mit Glasgeländer",
+    imageAlt: "Anthrazitfarbene Pergola auf Terrasse mit Glasgeländer",
     reviewerName: "Hoffmann",
-    reviewText: "Die Pergola hat alle Erwartungen erfüllt. Selbst das Anpassen der Höhe, sowie der Aufbau auf engstem Raum hat sehr gut geklappt. Wir können die Pergola S2 von Pergolux auf jeden Fall weiter empfehlen.",
+    reviewText: "Die Pergola hat alle Erwartungen erfüllt. Selbst das Anpassen der Höhe, sowie der Aufbau auf engstem Raum hat sehr gut geklappt. Wir können die Pergola S2 auf jeden Fall weiter empfehlen.",
     rating: 4,
   },
   {
     imageSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/28.jpg",
-    imageAlt: "Einfamilienhaus bei Nacht mit beleuchteter Pergolux Pergola",
+    imageAlt: "Einfamilienhaus bei Nacht mit beleuchteter Pergola",
     reviewerName: "Andreas Wolf",
     reviewText: "Wir sind sehr zufrieden mit unserer maßgefertigten Pergola Sundream S2 inkl. LED Beleuchtung und Rollos auf zwei Seiten. Die Pergola ist hochwertig, sieht toll aus und ist auch sehr gut verarbeitet.",
     rating: 5,
@@ -74,7 +74,7 @@ export const ReviewsSlider = () => {
               Folge uns für mehr
             </span>
             <div className="flex items-center gap-3">
-              <a href="https://www.instagram.com/pergolux_gmbh" aria-label="Instagram" className="hover:opacity-80 transition-opacity">
+              <a href="#" aria-label="Instagram" className="hover:opacity-80 transition-opacity">
                 <img src="https://c.animaapp.com/mnd7yb7cX3zmke/assets/111.png" alt="Instagram" className="w-7 h-7 object-contain" />
               </a>
               <a href="https://www.youtube.com/channel/UChFl3vWUBB0M5y4egNpDvsw" aria-label="YouTube" className="hover:opacity-80 transition-opacity">

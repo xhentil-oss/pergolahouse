@@ -14,7 +14,7 @@ export const BenefitsGrid = () => {
               <img src="https://c.animaapp.com/mnd7yb7cX3zmke/assets/95.png" alt="" className="h-full w-full object-cover" />
             </div>
             <div className="text-zinc-900 font-medium flex flex-col leading-5">
-              <span>Pergolux Showroom</span>
+              <span>Showroom</span>
               <a href="/pages/showroom-3-0" className="text-blue-800 font-semibold text-sm hover:underline">
                 Finde einen in deiner Nähe →
               </a>

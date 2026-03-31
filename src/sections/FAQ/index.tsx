@@ -23,7 +23,7 @@ export const FAQ = () => {
                 <p>
                   Eine Pergola ist eine{" "}
                   <strong>stilvolle Überdachung für den Außenbereich</strong>, die Schutz und Komfort mit modernem Design verbindet. Sie wertet{" "}
-                  <strong>Terrasse, Balkon oder Garten</strong> auf und schafft einen geschützten Rückzugsort bei Sonne und Regen. PERGOLUX-Pergolen bestehen aus{" "}
+                  <strong>Terrasse, Balkon oder Garten</strong> auf und schafft einen geschützten Rückzugsort bei Sonne und Regen. Unsere Pergolen bestehen aus{" "}
                   <strong>langlebigem Aluminium</strong>, sind pflegeleicht und lassen sich mit Zubehör wie Glaswänden, Screen-Rollos, Wärmelampen oder Beleuchtung individuell erweitern.
                 </p>
               }
@@ -74,7 +74,7 @@ export const FAQ = () => {
               content={
                 <>
                   <p>
-                    Für die PERGOLUX Pergola <strong>Serie S3</strong> erhältst du eine <strong>10-jährige Garantie</strong> – damit bist du langfristig auf der sicheren Seite.
+                    Für die Pergola <strong>Serie S3</strong> erhältst du eine <strong>10-jährige Garantie</strong> – damit bist du langfristig auf der sicheren Seite.
                   </p>
                   <a href="/pages/10-jahre-garantie" className="inline-block mt-2 text-blue-800 font-medium hover:underline">Mehr lesen →</a>
                 </>

@@ -7,7 +7,10 @@ import path from "path";
 export default defineConfig({
   plugins: [react()],
   publicDir: "./static",
-  base: "./",
+  base: "/",
+  server: {
+    historyApiFallback: true,
+  },
   css: {
     postcss: {
       plugins: [tailwind()],

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 type MobileMenuProps = {
   onClose: () => void;
@@ -8,9 +9,9 @@ const navGroups = [
   {
     label: "Pergolen",
     items: [
-      { label: "PERGOLUX Pergola S3", href: "/products/pergolux-pergola-s3" },
-      { label: "PERGOLUX Sundream S3", href: "/products/pergolux-sundream-s3" },
-      { label: "PERGOLUX Skydance S3", href: "/products/pergolux-skydance-s3" },
+      { label: "Pergola S3", href: "/products/pergola-s3" },
+      { label: "Sundream S3", href: "/products/sundream-s3" },
+      { label: "Skydance S3", href: "/products/skydance-s3" },
       { label: "Maßanfertigung S3", href: "/products/pergola-custom-design" },
       { label: "Alle anzeigen", href: "/collections/unsere-pergolen" },
     ],
@@ -46,7 +47,7 @@ export const MobileMenu = ({ onClose }: MobileMenuProps) => {
         <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-200">
           <img
             src="https://c.animaapp.com/mnd7yb7cX3zmke/assets/45.avif"
-            alt="PERGOLUX"
+            alt="Logo"
             className="h-8 object-contain"
           />
           <button onClick={onClose} aria-label="Close" className="text-2xl font-light leading-none">
@@ -54,10 +55,10 @@ export const MobileMenu = ({ onClose }: MobileMenuProps) => {
           </button>
         </div>
         <nav className="flex-1 px-5 py-4 space-y-1">
-          <a href="/collections/unsere-pergolen" className="flex items-center gap-1 text-amber-500 font-semibold py-3 border-b border-zinc-100">
+          <Link to="/collections/unsere-pergolen" className="flex items-center gap-1 text-amber-500 font-semibold py-3 border-b border-zinc-100">
             <img src="https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-3.svg" alt="" className="h-4 w-4" />
             Sale
-          </a>
+          </Link>
           {navGroups.map((group) => (
             <div key={group.label}>
               <button
@@ -70,9 +71,9 @@ export const MobileMenu = ({ onClose }: MobileMenuProps) => {
               {openGroup === group.label && (
                 <div className="pl-4 pb-2 space-y-2">
                   {group.items.map((item) => (
-                    <a key={item.label} href={item.href} className="block text-sm text-zinc-600 py-1 hover:text-zinc-900">
+                    <Link key={item.label} to={item.href} className="block text-sm text-zinc-600 py-1 hover:text-zinc-900" onClick={onClose}>
                       {item.label}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               )}
@@ -81,11 +82,11 @@ export const MobileMenu = ({ onClose }: MobileMenuProps) => {
           {[
             { label: "Showroom", href: "/pages/showroom-3-0" },
             { label: "Über uns", href: "/pages/ueber-uns" },
-            { label: "Hilfecenter", href: "/help-center" },
+            { label: "Contact", href: "/contact" },
           ].map((item) => (
-            <a key={item.label} href={item.href} className="block font-semibold py-3 border-b border-zinc-100">
+            <Link key={item.label} to={item.href} className="block font-semibold py-3 border-b border-zinc-100">
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
         <div className="px-5 pb-6">

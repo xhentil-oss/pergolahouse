@@ -31,7 +31,7 @@ export const HeroTrailer = () => {
             </button>
             <iframe
               src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
-              title="PERGOLUX Trailer"
+              title="Pergola Trailer"
               allow="autoplay; encrypted-media"
               allowFullScreen
               className="w-full h-full rounded-xl"

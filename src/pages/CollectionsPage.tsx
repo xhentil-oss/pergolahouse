@@ -1,7 +1,8 @@
-import { Header } from "@/sections/Header";
+﻿import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
 import { FeatureTicker } from "@/sections/FeatureTicker";
 import { FAQ } from "@/sections/FAQ";
+import { Link } from "react-router-dom";
 import photo2 from "@/assets/Photo (2).png";
 import photo3 from "@/assets/Photo (3).png";
 import photo4 from "@/assets/Photo (4).png";
@@ -10,12 +11,13 @@ import photo6 from "@/assets/Photo (6).png";
 import photo7 from "@/assets/Photo (7).png";
 import photo8 from "@/assets/Photo (8).png";
 import photo9 from "@/assets/Photo (9).png";
+import heroBg from "@/assets/Photo (1).png";
 
 const products = [
   {
-    href: "/products/pergolux-pergola-s3",
+    href: "/products/pergola-s3",
     imageSrc: photo2,
-    imageAlt: "PERGOLUX Pergola S3",
+    imageAlt: "Pergola S3",
     badge: "Manuelles Modell",
     name: "Pergola S3",
     currentPrice: "2.589 €",
@@ -27,9 +29,9 @@ const products = [
     reviews: 1240,
   },
   {
-    href: "/products/pergolux-sundream-s3",
+    href: "/products/sundream-s3",
     imageSrc: photo3,
-    imageAlt: "PERGOLUX Sundream S3",
+    imageAlt: "Sundream S3",
     badge: "Beliebtestes Modell",
     name: "Sundream S3",
     currentPrice: "3.429 €",
@@ -41,9 +43,9 @@ const products = [
     reviews: 876,
   },
   {
-    href: "/products/pergolux-skydance-s3",
+    href: "/products/skydance-s3",
     imageSrc: photo4,
-    imageAlt: "PERGOLUX Skydance S3",
+    imageAlt: "Skydance S3",
     badge: "Unser Premium-Modell",
     name: "Skydance S3",
     currentPrice: "5.099 €",
@@ -57,7 +59,7 @@ const products = [
   {
     href: "/products/pergola-custom-design",
     imageSrc: photo5,
-    imageAlt: "PERGOLUX Maßanfertigung S3",
+    imageAlt: "Maßanfertigung S3",
     badge: "Individuelle Maße",
     name: "Maßanfertigung S3",
     currentPrice: "6.785 €",
@@ -69,9 +71,9 @@ const products = [
     reviews: 321,
   },
   {
-    href: "/products/pergolux-pergola-s3",
+    href: "/products/pergola-s3",
     imageSrc: photo6,
-    imageAlt: "PERGOLUX Pergola S3 Anthrazit",
+    imageAlt: "Pergola S3 Anthrazit",
     badge: "Neu",
     name: "Pergola S3 Anthrazit",
     currentPrice: "2.789 €",
@@ -83,9 +85,9 @@ const products = [
     reviews: 210,
   },
   {
-    href: "/products/pergolux-sundream-s3",
+    href: "/products/sundream-s3",
     imageSrc: photo7,
-    imageAlt: "PERGOLUX Sundream S3 Weiß",
+    imageAlt: "Sundream S3 Weiß",
     badge: "Bestseller",
     name: "Sundream S3 Weiß",
     currentPrice: "3.629 €",
@@ -97,9 +99,9 @@ const products = [
     reviews: 645,
   },
   {
-    href: "/products/pergolux-skydance-s3",
+    href: "/products/skydance-s3",
     imageSrc: photo8,
-    imageAlt: "PERGOLUX Skydance S3 Schwarz",
+    imageAlt: "Skydance S3 Schwarz",
     badge: "Premium",
     name: "Skydance S3 Schwarz",
     currentPrice: "5.299 €",
@@ -113,7 +115,7 @@ const products = [
   {
     href: "/products/pergola-custom-design",
     imageSrc: photo9,
-    imageAlt: "PERGOLUX Maßanfertigung Premium",
+    imageAlt: "Maßanfertigung Premium",
     badge: "Auf Maß",
     name: "Maßanfertigung Premium",
     currentPrice: "7.185 €",
@@ -145,14 +147,18 @@ export const CollectionsPage = () => {
       <Header />
       <main role="main">
         {/* Hero Banner */}
-        <div className="bg-[#344148] py-14 md:py-20 text-center">
-          <p className="text-amber-400 text-sm font-semibold uppercase tracking-widest mb-3">Finaler Abverkauf</p>
-          <h1 className="text-white text-4xl md:text-6xl font-semibold leading-tight mb-4">
-            Unsere Pergolen
-          </h1>
-          <p className="text-white/70 text-lg max-w-xl mx-auto">
-            Serie 3 — Entdecke alle Modelle und finde deine perfekte Pergola.
-          </p>
+        <div className="relative min-h-[360px] md:min-h-[460px] py-14 md:py-20 text-center flex items-center justify-center px-4">
+          <img src={heroBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-black/55" />
+          <div className="relative z-10 max-w-3xl mx-auto">
+            <p className="text-amber-400 text-sm font-semibold uppercase tracking-widest mb-3">Finaler Abverkauf</p>
+            <h1 className="text-white text-4xl md:text-6xl font-semibold leading-tight mb-4">
+              Unsere Pergolen
+            </h1>
+            <p className="text-white/80 text-lg max-w-xl mx-auto">
+              Serie 3 - Entdecke alle Modelle und finde deine perfekte Pergola.
+            </p>
+          </div>
         </div>
 
         {/* Ticker */}
@@ -188,7 +194,7 @@ export const CollectionsPage = () => {
           <ul className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {products.map((p) => (
               <li key={p.name} className="flex flex-col group">
-                <a href={p.href} className="block overflow-hidden rounded-2xl mb-4 relative">
+                <Link to={p.href} className="block overflow-hidden rounded-2xl mb-4 relative">
                   <img
                     src={p.imageSrc}
                     alt={p.imageAlt}
@@ -197,7 +203,7 @@ export const CollectionsPage = () => {
                   <span className="absolute top-3 left-3 bg-white text-zinc-900 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm">
                     {p.badge}
                   </span>
-                </a>
+                </Link>
                 <div className="flex flex-col flex-1 text-center gap-1">
                   <h2 className="text-zinc-900 font-semibold text-lg leading-tight">{p.name}</h2>
                   <StarRating stars={p.stars} />
@@ -210,12 +216,12 @@ export const CollectionsPage = () => {
                       {p.savings}
                     </span>
                   </div>
-                  <a
-                    href={p.href}
+                  <Link
+                    to={p.href}
                     className="mt-3 block text-white bg-green-700 hover:bg-green-800 transition-colors font-medium text-sm py-3 px-4 rounded-xl border border-green-800"
                   >
                     Jetzt kaufen →
-                  </a>
+                  </Link>
                 </div>
               </li>
             ))}
