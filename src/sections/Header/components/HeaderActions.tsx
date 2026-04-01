@@ -19,33 +19,33 @@ export const HeaderActions = () => {
 
   return (
     <>
-      <div className="items-center box-border caret-transparent gap-x-2 flex min-h-[auto] min-w-[auto] gap-y-2">
+      <div className="flex items-center gap-3">
         <Link
           to="/collections/unsere-pergolen"
-          className="text-white font-medium items-center bg-zinc-900 box-border caret-transparent gap-x-2 hidden leading-5 max-h-10 min-h-0 min-w-0 gap-y-2 w-max border border-zinc-900 px-4 py-3 rounded-md border-solid md:flex md:min-h-[auto] md:min-w-[auto]"
+          className="hidden items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition-all hover:opacity-90 hover:shadow-lg md:inline-flex"
+          style={{ backgroundColor: '#344148' }}
         >
-          <span className="box-border caret-transparent inline min-h-0 min-w-0 md:block md:min-h-[auto] md:min-w-[auto]">
-            Modelle entdecken
-          </span>
+          <span>Modelle entdecken</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
         </Link>
-        <div className="relative box-border caret-transparent h-6 min-h-[auto] min-w-[auto] w-6">
-          <div
-            aria-label="Cart"
-            role="button"
-            className="box-border caret-transparent cursor-pointer"
-            onClick={() => setCartOpen(true)}
-          >
-            <img
-              src="https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-5.svg"
-              alt="Warenkorb"
-              className="box-border caret-transparent h-6 w-6"
-            />
-            {totalItems > 0 && (
-              <span className="absolute flex items-center justify-center h-4 w-4 rounded-full bg-amber-500 text-white text-[10px] font-bold -right-1.5 -top-1.5">
-                {totalItems}
-              </span>
-            )}
-          </div>
+        <div
+          aria-label="Cart"
+          role="button"
+          className="relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl transition-colors hover:bg-zinc-100"
+          onClick={() => setCartOpen(true)}
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#344148" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 01-8 0" />
+          </svg>
+          {totalItems > 0 && (
+            <span className="absolute -right-0.5 -top-0.5 flex h-4.5 w-4.5 items-center justify-center rounded-full text-[10px] font-bold text-white" style={{ backgroundColor: '#344148' }}>
+              {totalItems}
+            </span>
+          )}
         </div>
       </div>
 
@@ -62,7 +62,7 @@ export const HeaderActions = () => {
         {/* Header */}
         <div className="flex items-center justify-between border-b border-zinc-200 px-6 py-4">
           <h2 className="text-lg font-semibold text-zinc-900">
-            Warenkorb {totalItems > 0 && <span className="ml-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-amber-500 text-xs font-bold text-white">{totalItems}</span>}
+            Warenkorb {totalItems > 0 && <span className="ml-1 inline-flex h-5 w-5 items-center justify-center rounded-full text-xs font-bold text-white" style={{ backgroundColor: '#344148' }}>{totalItems}</span>}
           </h2>
           <button
             onClick={() => setCartOpen(false)}
@@ -74,7 +74,7 @@ export const HeaderActions = () => {
         </div>
 
         {/* Sale Banner */}
-        <div className="mx-4 mt-4 flex items-center justify-center gap-2 rounded-full bg-amber-500 px-4 py-2 text-sm font-semibold text-white">
+        <div className="mx-4 mt-4 flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white" style={{ backgroundColor: '#344148' }}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           Sale endet bald – jetzt zuschlagen!
         </div>
@@ -177,7 +177,7 @@ export const HeaderActions = () => {
             <span>Zwischensumme</span>
             <span className="text-lg font-semibold text-zinc-900">{formatPrice(totalPrice)}</span>
           </div>
-          <button className="mt-3 w-full rounded-md bg-zinc-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-zinc-800">
+          <button className="mt-3 w-full rounded-md px-4 py-3 text-sm font-semibold text-white transition hover:opacity-90" style={{ backgroundColor: '#344148' }}>
             Weiter zum Checkout
           </button>
           <button

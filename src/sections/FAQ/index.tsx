@@ -2,95 +2,115 @@ import { FAQItem } from "@/sections/FAQ/components/FAQItem";
 
 export const FAQ = () => {
   return (
-    <section className="bg-white">
-      <div className="max-w-[1440px] mx-auto px-4 py-16 md:px-16 md:py-[120px]">
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10 md:gap-20">
-          <div className="shrink-0 md:w-[340px]">
-            <h2 className="text-zinc-900 text-[32px] font-semibold leading-10 md:text-5xl md:leading-[58px]">
-              Fragen und Antworten
-            </h2>
-            <a
-              href="/pages/fragen-und-antworten"
-              className="inline-block mt-6 text-sm font-semibold text-blue-800 hover:underline"
-            >
-              Alle FAQ ansehen →
-            </a>
+    <section className="relative overflow-hidden bg-gradient-to-b from-zinc-50 to-white">
+      {/* decorative blobs */}
+      <div className="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-[#82B2CA]/20 blur-[100px]" />
+      <div className="pointer-events-none absolute -right-40 bottom-20 h-80 w-80 rounded-full bg-[#82B2CA]/15 blur-[100px]" />
+
+      <div className="relative max-w-[1440px] mx-auto px-4 py-16 md:px-16 md:py-[120px]">
+        {/* header */}
+        <div className="text-center mb-14">
+          <div className="inline-flex items-center gap-2 rounded-full bg-[#82B2CA]/10 border border-[#82B2CA]/30 px-4 py-1.5 mb-5">
+            <svg className="h-4 w-4 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+            </svg>
+            <span className="text-sm font-semibold text-[#82B2CA]">Häufig gestellte Fragen</span>
           </div>
-          <div className="flex-1 flex flex-col">
+          <h2 className="text-zinc-900 text-[32px] font-bold leading-10 md:text-5xl md:leading-[58px]">
+            Hast du noch Fragen?
+          </h2>
+          <p className="mx-auto mt-4 max-w-lg text-zinc-500 text-base md:text-lg">
+            Hier findest du Antworten auf die häufigsten Fragen rund um unsere Pergolen.
+          </p>
+        </div>
+
+        {/* FAQ grid – 2 columns on desktop */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-5xl mx-auto">
+          <div className="flex flex-col gap-4">
             <FAQItem
-              question="Was ist eine Pergola?"
+              number={1}
+              question="Kann ich meine Pergola selbst aufbauen?"
               content={
                 <p>
-                  Eine Pergola ist eine{" "}
-                  <strong>stilvolle Überdachung für den Außenbereich</strong>, die Schutz und Komfort mit modernem Design verbindet. Sie wertet{" "}
-                  <strong>Terrasse, Balkon oder Garten</strong> auf und schafft einen geschützten Rückzugsort bei Sonne und Regen. Unsere Pergolen bestehen aus{" "}
-                  <strong>langlebigem Aluminium</strong>, sind pflegeleicht und lassen sich mit Zubehör wie Glaswänden, Screen-Rollos, Wärmelampen oder Beleuchtung individuell erweitern.
+                  Ja, absolut! Unsere Pergolen werden mit einer <strong>detaillierten Schritt-für-Schritt-Anleitung</strong> geliefert. 
+                  Zusätzlich steht dir unsere <strong>Montage-App</strong> zur Verfügung, die dich in Echtzeit durch den gesamten Aufbau führt. 
+                  Die meisten Kunden schaffen die Montage zu zweit an einem Wochenende.
                 </p>
               }
             />
             <FAQItem
-              question="Wie lange dauert die Lieferung?"
+              number={2}
+              question="Aus welchem Material bestehen eure Pergolen?"
               content={
                 <p>
-                  Wenn deine gewünschte Pergola auf Lager ist, beträgt die Lieferzeit in der Regel{" "}
-                  <strong>2–6 Werktage</strong>. Die aktuellen Lieferzeiten findest du jederzeit direkt auf der jeweiligen Produktseite unterhalb des Preises.
+                  Alle unsere Pergolen werden aus <strong>hochwertigem Aluminium 6063-T5</strong> gefertigt – eines der stabilsten 
+                  und langlebigsten Materialien im Außenbereich. Es ist <strong>rostfrei, UV-beständig und zu 100 % recycelbar</strong>. 
+                  Die pulverbeschichtete Oberfläche sorgt für langanhaltenden Farbglanz ohne Nachstreichen.
                 </p>
               }
             />
             <FAQItem
-              question="Wie viel kostet die Lieferung?"
+              number={3}
+              question="Welches Zubehör kann ich nachträglich ergänzen?"
               content={
                 <p>
-                  <strong>Ab einem Bestellwert von 1.000 €</strong> ist die Lieferung für dich <strong>kostenlos</strong>.
-                </p>
-              }
-            />
-            <FAQItem
-              question="Wie wird meine Pergola geliefert?"
-              content={
-                <p>
-                  Deine Pergola wird zuverlässig von einem unserer erfahrenen Logistik-Partner zu dir nach Hause gebracht. Vor der Lieferung wirst du kontaktiert, um gemeinsam einen passenden Termin zu vereinbaren. Zusätzlich erhältst du kurz vor Ankunft (ca. 1–2 Stunden vorher) eine weitere Benachrichtigung.
-                  <br /><br />
-                  Die Pergola kommt sicher verpackt in mehreren handlichen Paketen auf einer Palette an. Jedes Paket wiegt etwa 30–50 kg.
-                </p>
-              }
-            />
-            <FAQItem
-              question="Gibt es einen Montageservice?"
-              content={
-                <>
-                  <p>
-                    Unsere Pergolen sind so konzipiert, dass du sie mit etwas handwerklichem Geschick selbst aufbauen kannst. Dabei unterstützt dich unsere Montage-App mit einer Schritt-für-Schritt-Anleitung direkt auf deinem Smartphone.
-                  </p>
-                  <p className="mt-3">
-                    Falls du den Aufbau lieber in professionelle Hände geben möchtest, bieten wir gemeinsam mit <strong>PLX Montage GmbH</strong> einen zuverlässigen Montageservice an.{" "}
-                    <a href="https://www.plx-montage.de/reserve-installation" className="text-blue-800 hover:underline">Angebot anfragen →</a>
-                  </p>
-                </>
-              }
-            />
-            <FAQItem
-              question="Welche Garantie habe ich auf meine Pergola?"
-              content={
-                <>
-                  <p>
-                    Für die Pergola <strong>Serie S3</strong> erhältst du eine <strong>10-jährige Garantie</strong> – damit bist du langfristig auf der sicheren Seite.
-                  </p>
-                  <a href="/pages/10-jahre-garantie" className="inline-block mt-2 text-blue-800 font-medium hover:underline">Mehr lesen →</a>
-                </>
-              }
-            />
-            <FAQItem
-              question="Brauche ich eine Baugenehmigung für meine Pergola?"
-              content={
-                <p>
-                  Das hängt von deinem Bundesland und den Maßen deines Projekts ab. Nutze unseren{" "}
-                  <strong>interaktiven Genehmigungs-Check</strong>, um sofort Klarheit zu bekommen.{" "}
-                  <a href="/pages/building-permit" className="text-blue-800 hover:underline">Zum Genehmigungs-Check →</a>
+                  Dank unseres <strong>SnapFIT™-Systems</strong> kannst du jederzeit Zubehör nachrüsten – ganz ohne Bohren oder Umbau. 
+                  Verfügbar sind unter anderem <strong>Screen Rollos, Glaswände, LED-Beleuchtung</strong> und <strong>Wärmelampen</strong>. 
+                  Alle Erweiterungen sind perfekt auf unsere Pergolen abgestimmt und in wenigen Minuten montiert.
                 </p>
               }
             />
           </div>
+          <div className="flex flex-col gap-4">
+            <FAQItem
+              number={4}
+              question="Wie wetterfest sind eure Pergolen?"
+              content={
+                <p>
+                  Unsere Pergolen sind <strong>in Norwegen entwickelt</strong> und für extreme Wetterbedingungen ausgelegt. 
+                  Sie halten <strong>Windgeschwindigkeiten bis 100 km/h</strong> und einer <strong>Schneelast von bis zu 150 kg/m²</strong> stand. 
+                  Das integrierte Wasserablaufsystem leitet Regenwasser zuverlässig ab – so bleibst du immer trocken.
+                </p>
+              }
+            />
+            <FAQItem
+              number={5}
+              question="Kann ich die Pergola per App steuern?"
+              content={
+                <p>
+                  Ja! Unsere smarten Pergolen lassen sich bequem per <strong>Smartphone-App (iOS & Android)</strong> steuern. 
+                  Du kannst das <strong>Lamellendach öffnen und schließen</strong>, die <strong>LED-Beleuchtung dimmen</strong> und 
+                  sogar <strong>Zeitpläne und Automatisierungen</strong> einrichten. Optional ist auch eine Steuerung per Sprachassistent möglich.
+                </p>
+              }
+            />
+            <FAQItem
+              number={6}
+              question="Welche Zahlungsmethoden akzeptiert ihr?"
+              content={
+                <p>
+                  Wir bieten dir flexible Zahlungsmöglichkeiten: <strong>Kreditkarte, PayPal, Sofortüberweisung, Klarna-Ratenkauf</strong> und 
+                  bequemen <strong>Kauf auf Rechnung</strong>. Beim Ratenkauf kannst du deine Pergola in bis zu <strong>36 Monatsraten</strong> bezahlen – 
+                  ganz ohne versteckte Gebühren.
+                </p>
+              }
+            />
+          </div>
+        </div>
+
+        {/* bottom CTA */}
+        <div className="mt-14 text-center">
+          <p className="text-zinc-500 text-sm mb-4">Noch weitere Fragen? Wir helfen dir gerne!</p>
+          <a
+            href="/contact"
+            className="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold text-white transition-all hover:opacity-90 hover:shadow-xl"
+            style={{ backgroundColor: '#344148' }}
+          >
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+            </svg>
+            Kontakt aufnehmen
+          </a>
         </div>
       </div>
     </section>

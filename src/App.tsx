@@ -3,8 +3,14 @@ import { HomePage } from "@/pages/HomePage";
 import { CollectionsPage } from "@/pages/CollectionsPage";
 import { UeberUnsPage } from "@/pages/UeberUnsPage";
 import { ContactPage } from "./pages/ContactPage";
-import { PergolaS3Page } from "@/pages/PergolaS3Page";
-import { MassanfertigungPage } from "@/pages/MassanfertigungPage";
+import { ElegantePergolaPage } from "@/pages/ElegantePergolaPage";
+import { LuxusPergolaPage } from "@/pages/LuxusPergolaPage";
+import { PreiswertePergolaPage } from "@/pages/PreiswertePergolaPage";
+import { PergolaManfertigungPage } from "@/pages/PergolaManfertigungPage";
+import { ScreenRolloPage } from "@/pages/ScreenRolloPage";
+import { GlaswandePage } from "@/pages/GlaswandePage";
+import { LEDStripesPage } from "@/pages/LEDStripesPage";
+import { WaermelampePage } from "@/pages/WaermelampePage";
 import { CartProvider } from "@/context/CartContext";
 
 export const App = () => {
@@ -14,8 +20,14 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/collections/unsere-pergolen" element={<CollectionsPage />} />
-        <Route path="/products/pergola-s3" element={<PergolaS3Page />} />
-        <Route path="/products/pergola-custom-design" element={<MassanfertigungPage />} />
+        <Route path="/products/pergola-s3" element={<ElegantePergolaPage />} />
+        <Route path="/products/pergola-custom-design" element={<LuxusPergolaPage />} />
+        <Route path="/products/preiswerte-pergola" element={<PreiswertePergolaPage />} />
+        <Route path="/products/pergola-massanfertigung" element={<PergolaManfertigungPage />} />
+        <Route path="/products/screen-rollo" element={<ScreenRolloPage />} />
+        <Route path="/products/glaswande" element={<GlaswandePage />} />
+        <Route path="/products/led-stripes" element={<LEDStripesPage />} />
+        <Route path="/products/waermelampe" element={<WaermelampePage />} />
         <Route path="/pages/ueber-uns" element={<UeberUnsPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<HomePage />} />

@@ -55,7 +55,7 @@ export const MobileMenu = ({ onClose }: MobileMenuProps) => {
           </button>
         </div>
         <nav className="flex-1 px-5 py-4 space-y-1">
-          <Link to="/collections/unsere-pergolen" className="flex items-center gap-1 text-amber-500 font-semibold py-3 border-b border-zinc-100">
+          <Link to="/collections/unsere-pergolen" className="flex items-center gap-1 font-semibold py-3 border-b border-zinc-100" style={{ color: '#82B2CA' }}>
             <img src="https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-3.svg" alt="" className="h-4 w-4" />
             Sale
           </Link>
@@ -98,7 +98,7 @@ export const MobileMenu = ({ onClose }: MobileMenuProps) => {
           </a>
           <div className="mt-4 border-t pt-4">
             <div className="text-neutral-500 text-sm font-medium flex items-center gap-1 justify-center">
-              Wir sind <span className="text-green-500">erreichbar</span>
+              Wir sind <span className="text-[#82B2CA]">erreichbar</span>
             </div>
             <a href="tel:+4966141087500" className="text-white font-semibold text-center block mt-1 bg-zinc-800 py-2 px-4 rounded">
               +49 661 4108750

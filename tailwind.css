@@ -1,6 +1,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 @font-face {
   font-family: 'Inter Tight';
   src: url('https://c.animaapp.com/mnd7yb7cX3zmke/assets/NGSwv5HMAFg6IuGlBNMjxLsH8ag.woff2');

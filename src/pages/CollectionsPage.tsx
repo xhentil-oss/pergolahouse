@@ -151,7 +151,7 @@ export const CollectionsPage = () => {
           <img src={heroBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/55" />
           <div className="relative z-10 max-w-3xl mx-auto">
-            <p className="text-amber-400 text-sm font-semibold uppercase tracking-widest mb-3">Finaler Abverkauf</p>
+            <p className="text-[#82B2CA] text-sm font-semibold uppercase tracking-widest mb-3">Finaler Abverkauf</p>
             <h1 className="text-white text-4xl md:text-6xl font-semibold leading-tight mb-4">
               Unsere Pergolen
             </h1>
@@ -162,17 +162,7 @@ export const CollectionsPage = () => {
         </div>
 
         {/* Ticker */}
-        <FeatureTicker
-          backgroundColorClass="bg-amber-500"
-          items={[
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-13.svg", iconClassName: "h-5 w-5", text: "Gratis Lieferung" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-14.svg", iconClassName: "h-5 w-5", text: "iOS und Android App" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-15.svg", iconClassName: "h-5 w-5", text: "Sicher in extremen Wetterbedingungen" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-16.svg", iconClassName: "h-5 w-5", text: "Hohe Schneelast" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-17.svg", iconClassName: "h-5 w-5", text: "Video-Anleitungen" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-18.svg", iconClassName: "h-5 w-5", text: "Sonnenschutz" },
-          ]}
-        />
+        <FeatureTicker backgroundColorClass="bg-[#344148]" />
 
         {/* Product Grid */}
         <section className="max-w-[1440px] mx-auto px-4 md:px-16 py-16 md:py-24">
@@ -212,13 +202,14 @@ export const CollectionsPage = () => {
                   <div className="flex items-center justify-center gap-2 mt-2 flex-wrap">
                     <span className="text-zinc-900 font-semibold text-base">{p.currentPrice}</span>
                     <span className="text-neutral-400 text-sm line-through">{p.originalPrice}</span>
-                    <span className="text-green-600 text-xs font-semibold bg-green-50 px-2 py-0.5 rounded-md uppercase">
+                    <span className="text-[#82B2CA] text-xs font-semibold bg-[#82B2CA]/10 px-2 py-0.5 rounded-md uppercase">
                       {p.savings}
                     </span>
                   </div>
                   <Link
                     to={p.href}
-                    className="mt-3 block text-white bg-green-700 hover:bg-green-800 transition-colors font-medium text-sm py-3 px-4 rounded-xl border border-green-800"
+                    className="mt-3 block text-white hover:opacity-90 transition-colors font-medium text-sm py-3 px-4 rounded-xl border border-[#344148]"
+                    style={{ backgroundColor: '#344148' }}
                   >
                     Jetzt kaufen →
                   </Link>

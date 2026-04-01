@@ -42,7 +42,7 @@ export const UeberUnsPage = () => {
           {/* Overlay */}
           <div className="absolute inset-0 bg-black/60 z-[1]" />
           <div className="relative z-10">
-          <p className="text-amber-400 text-sm font-semibold uppercase tracking-widest mb-4">Von Norwegen in die Welt</p>
+          <p className="text-[#82B2CA] text-sm font-semibold uppercase tracking-widest mb-4">Von Norwegen in die Welt</p>
           <h1 className="text-white text-4xl md:text-6xl font-semibold leading-tight max-w-3xl mx-auto mb-6">
             Gebaut auf skandinavischen Werten stellen wir Sie an erste Stelle
           </h1>
@@ -52,7 +52,8 @@ export const UeberUnsPage = () => {
           </p>
           <a
             href="/pages/career"
-            className="inline-block mt-8 bg-amber-500 hover:bg-amber-400 transition-colors text-white font-semibold px-8 py-4 rounded-xl text-base"
+            className="inline-block mt-8 hover:opacity-90 transition-colors text-white font-semibold px-8 py-4 rounded-xl text-base"
+            style={{ backgroundColor: '#344148' }}
           >
             Werde ein Pergonaut →
           </a>
@@ -74,7 +75,7 @@ export const UeberUnsPage = () => {
         {/* Mission */}
         <section className="max-w-[1440px] mx-auto px-4 md:px-16 py-20 md:py-32 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div>
-            <p className="text-amber-500 text-sm font-semibold uppercase tracking-widest mb-4">Mit Liebe hergestellt, mit Sorgfalt geliefert</p>
+            <p className="text-[#82B2CA] text-sm font-semibold uppercase tracking-widest mb-4">Mit Liebe hergestellt, mit Sorgfalt geliefert</p>
             <h2 className="text-zinc-900 text-3xl md:text-5xl font-semibold leading-tight mb-6">
               Wir machen Träume möglich
             </h2>
@@ -108,7 +109,7 @@ export const UeberUnsPage = () => {
               />
             </div>
             <div className="order-1 md:order-2">
-              <p className="text-amber-500 text-sm font-semibold uppercase tracking-widest mb-4">Mehr als ein Jahrzehnt Erfahrung</p>
+              <p className="text-[#82B2CA] text-sm font-semibold uppercase tracking-widest mb-4">Mehr als ein Jahrzehnt Erfahrung</p>
               <h2 className="text-zinc-900 text-3xl md:text-5xl font-semibold leading-tight mb-6">
                 Wir gehen die Dinge anders an
               </h2>
@@ -128,7 +129,7 @@ export const UeberUnsPage = () => {
         {/* Values */}
         <section className="max-w-[1440px] mx-auto px-4 md:px-16 py-20 md:py-32">
           <div className="text-center mb-14">
-            <p className="text-amber-500 text-sm font-semibold uppercase tracking-widest mb-4">Unsere Werte und unser Versprechen</p>
+            <p className="text-[#82B2CA] text-sm font-semibold uppercase tracking-widest mb-4">Unsere Werte und unser Versprechen</p>
             <h2 className="text-zinc-900 text-3xl md:text-5xl font-semibold leading-tight">
               Wir erfüllen Träume
             </h2>
@@ -152,7 +153,8 @@ export const UeberUnsPage = () => {
           </p>
           <a
             href="/pages/career"
-            className="inline-block bg-amber-500 hover:bg-amber-400 transition-colors text-white font-semibold px-8 py-4 rounded-xl text-base"
+            className="inline-block hover:opacity-90 transition-colors text-white font-semibold px-8 py-4 rounded-xl text-base"
+            style={{ backgroundColor: '#344148' }}
           >
             Werde ein Pergonaut →
           </a>

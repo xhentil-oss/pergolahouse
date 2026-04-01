@@ -59,10 +59,10 @@ export const ProductCard = (props: ProductCardProps) => {
                   <div className="font-medium items-end box-border caret-transparent gap-x-1 flex leading-5 min-h-[auto] min-w-[auto] gap-y-1 p-1">
                     {props.currentPrice}
                   </div>
-                  <span className="text-amber-500 font-medium box-border caret-transparent block leading-5 min-h-[auto] min-w-[auto] line-through">
+                  <span className="text-[#82B2CA] font-medium box-border caret-transparent block leading-5 min-h-[auto] min-w-[auto] line-through">
                     {props.originalPrice}
                   </span>
-                  <div className="text-green-500 font-medium bg-emerald-100 box-border caret-transparent leading-5 min-h-[auto] min-w-[auto] uppercase p-1 rounded-md">
+                  <div className="text-[#82B2CA] font-medium bg-[#82B2CA]/10 box-border caret-transparent leading-5 min-h-[auto] min-w-[auto] uppercase p-1 rounded-md">
                     {props.savingsText}
                   </div>
                 </span>
@@ -118,7 +118,8 @@ export const ProductCard = (props: ProductCardProps) => {
           <a
             href={props.productUrl}
             aria-label={props.buyButtonAriaLabel}
-            className="text-white font-medium items-center bg-green-700 box-border caret-transparent flex justify-center leading-5 max-h-12 min-h-[auto] min-w-[auto] text-center w-full border border-green-800 p-4 rounded-md border-solid"
+            className="text-white font-medium items-center box-border caret-transparent flex justify-center leading-5 max-h-12 min-h-[auto] min-w-[auto] text-center w-full border p-4 rounded-md border-solid"
+            style={{ backgroundColor: '#344148', borderColor: '#344148' }}
           >
             Jetzt kaufen →
           </a>

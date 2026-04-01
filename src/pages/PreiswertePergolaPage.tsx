@@ -10,10 +10,10 @@ import photo26 from "@/assets/Photo (26).png";
 
 /* ─── image gallery ─── */
 const gallery = [
-  { src: pergolaImg, alt: "Maßanfertigung S3" },
-  { src: photo18, alt: "Maßanfertigung S3 – Ansicht 2" },
-  { src: photo26, alt: "Maßanfertigung S3 – Ansicht 3" },
-  { src: "https://pergolux.de/cdn/shop/files/Background_2925695b-1454-42a8-a462-afa20b8f07be.png?crop=center&height=900&v=1746170598&width=1200", alt: "Maßanfertigung S3 – Outdoor-Bereich" },
+  { src: pergolaImg, alt: "Preiswerte Pergola" },
+  { src: photo18, alt: "Preiswerte Pergola – Ansicht 2" },
+  { src: photo26, alt: "Preiswerte Pergola – Ansicht 3" },
+  { src: "https://pergolux.de/cdn/shop/files/Background_2925695b-1454-42a8-a462-afa20b8f07be.png?crop=center&height=900&v=1746170598&width=1200", alt: "Preiswerte Pergola – Outdoor-Bereich" },
   { src: "https://pergolux.de/cdn/shop/files/S3_Stronger_than_ever5.png?crop=center&height=900&v=1745831741&width=1200", alt: "Aluminium-Detailansicht" },
   { src: "https://pergolux.de/cdn/shop/files/effortless-assembly_a659fcec-e1e2-42e3-8b42-98495d7574a5.png?crop=center&height=900&v=1742387411&width=1200", alt: "Montage mit App-Anleitung" },
   { src: "https://pergolux.de/cdn/shop/files/norway.png?crop=center&height=900&v=1742387411&width=1200", alt: "Norwegisches Design" },
@@ -21,20 +21,22 @@ const gallery = [
 
 /* ─── variants ─── */
 const colorOptions = [
-  { label: "1015", color: "#E6D2B5", hint: "Heller Elfenbeinton – warm und einladend" },
-  { label: "9005 T", color: "#0A0A0D", hint: "Tiefschwarz – markant und modern" },
-  { label: "7016 T", color: "#293133", hint: "Anthrazitgrau – zeitlos und elegant" },
-  { label: "9016 T", color: "#FFFFFF", hint: "Verkehrsweiß – hell und minimalistisch" },
+  { label: "White 9016 T", color: "#E8E4DF", hint: "Verkehrsweiß – hell und minimalistisch" },
+  { label: "Ivory 1015 T", color: "#D9C87A", hint: "Heller Elfenbeinton – warm und einladend" },
+  { label: "Gray 7046 T", color: "#8E9196", hint: "Telegrau – dezent und vielseitig" },
+  { label: "Gray 7016 T", color: "#2E3234", hint: "Anthrazitgrau – zeitlos und elegant" },
+  { label: "Black 9005 T", color: "#0A0A0D", hint: "Tiefschwarz – markant und modern" },
 ];
 
-/* Custom size: Breite, Länge, Höhe in mm */
-const breiteRange = { min: 1000, max: 7000, step: 1 };
-const laengeRange = { min: 1000, max: 7000, step: 1 };
-const hoeheRange = { min: 1000, max: 3500, step: 1 };
-
-/* Price per m² for custom sizes */
-const pricePerSqm = 290;
-const originalPricePerSqm = 445;
+const sizeOptions = [
+  { label: "3x3m", price: 2589, originalPrice: 3990 },
+  { label: "3x4m", price: 2899, originalPrice: 4390 },
+  { label: "3x5m", price: 3199, originalPrice: 4790 },
+  { label: "3x6m", price: 3499, originalPrice: 5190 },
+  { label: "4x4m", price: 3599, originalPrice: 5390 },
+  { label: "4x5m", price: 3899, originalPrice: 5790 },
+  { label: "4x6m", price: 4199, originalPrice: 6190 },
+];
 
 const mountOptions = [
   { label: "Freistehend", img: "https://pergolux.de/cdn/shop/files/freestanding_3957b877-f36f-45a0-986e-6f439f8f5f9c.png?crop=center&height=49&v=1746194687&width=66", surcharge: 0 },
@@ -42,16 +44,17 @@ const mountOptions = [
 ];
 
 const sideOptions = [
-  { key: "left", label: "Links", sizeLabel: "Seite", img: "https://pergolux.de/cdn/shop/files/sm-left.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "right", label: "Rechts", sizeLabel: "Seite", img: "https://pergolux.de/cdn/shop/files/sm-right.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "front", label: "Vorne", sizeLabel: "Seite", img: "https://pergolux.de/cdn/shop/files/sm-front.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "back", label: "Hinten", sizeLabel: "Seite", img: "https://pergolux.de/cdn/shop/files/sm-back.png?crop=center&height=68&v=1752586043&width=109" },
+  { key: "left", label: "Links", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-left.png?crop=center&height=68&v=1752586042&width=109" },
+  { key: "right", label: "Rechts", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-right.png?crop=center&height=68&v=1752586042&width=109" },
+  { key: "front", label: "Vorne", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-front.png?crop=center&height=68&v=1752586042&width=109" },
+  { key: "back", label: "Hinten", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-back.png?crop=center&height=68&v=1752586043&width=109" },
 ];
 
 const sideTypeChoices = [
   { value: "none", label: "Keine", price: 0 },
   { value: "screen", label: "Screen Rollo", price: 499 },
-  { value: "glass", label: "Glaswand", price: 899 },
+  { value: "schiebeglas", label: "Schiebeverglasung", price: 899 },
+  { value: "guillotine", label: "Guillotine-Verglasung", price: 1199 },
 ];
 
 const accessoryOptions = [
@@ -69,14 +72,15 @@ const trustBadges = [
   { icon: "https://pergolux.de/cdn/shop/files/Home_cef2a425-ad3f-4844-ae3d-e17d79c3ee77.png?crop=center&height=48&v=1757669933&width=48", label: "Wertsteigerung" },
 ];
 
+
 /* ─── feature story ─── */
 const featureStory = [
-  { title: "Individuelle Maße", text: "Deine Pergola wird exakt nach deinen Wunschmaßen gefertigt – millimetergenau für eine perfekte Passform an deinem Standort." },
-  { title: "Premium Qualität", text: "Gefertigt aus robustem 6063-T5 Aluminium nach den gleichen hohen Standards wie unsere Serienmodelle. TÜV-zertifiziert und sturmfest bis 100 km/h." },
-  { title: "SnapFIT™-System", text: "Trotz individueller Maße profitierst du vom bewährten SnapFIT™-System für eine besonders einfache Montage." },
-  { title: "Stabiler als je zuvor", text: "Konzipiert für extreme Wetterbedingungen mit außergewöhnlicher Haltbarkeit und zuverlässigem Betrieb – Tag für Tag." },
-  { title: "Norwegisches Design", text: "Minimalistisch, funktional und hochwertig bis ins Detail – echte skandinavische Handwerkskunst." },
-  { title: "Persönliche Beratung", text: "Unser Expertenteam berät dich individuell zu Maßen, Farben und Zubehör – damit deine Pergola perfekt wird." },
+  { title: "Federleichte Handkurbel", text: "Stelle deine Pergola mühelos mit der leichtgängigen Handkurbel ein – die Lamellen regulieren Sonne und Schatten flexibel, sorgen im Sommer für angenehme Kühle und halten Schneelasten bis 100 kg stand.", image: gallery[2].src },
+  { title: "Schnellster Aufbau aller Zeiten", text: "Die Pergola Serie 3 ist dank des bewährten SnapFIT™-Systems besonders einfach zu montieren – inspiriert von IKEA, mit weniger Bauteilen und einem benutzerfreundlichen Design.", image: "https://pergolux.de/cdn/shop/files/PERGOLUX_Story_6_88a3e853-e322-4f21-ab7a-60175e9204a0.jpg?crop=center&format=pjpg&height=900&v=1741620042&width=1200" },
+  { title: "Unsere preiswerteste Pergola", text: "Gefertigt nach den gleichen hohen Standards wie unsere Premium-Modelle und TÜV-zertifiziert. Aus robustem 6063-T5 Aluminium, sturmfest bis 100 km/h.", image: gallery[1].src },
+  { title: "Stabiler als je zuvor", text: "Die Pergola der Serie 3 ist dafür konzipiert, extremen Wetterbedingungen standzuhalten. Außergewöhnliche Haltbarkeit sowie zuverlässiger Betrieb – Tag für Tag.", image: gallery[0].src },
+  { title: "Norwegisches Design", text: "Minimalistisch, funktional und hochwertig bis ins Detail – von der Materialwahl bis zur Ausführung steht alles für echte skandinavische Handwerkskunst.", image: gallery[3].src },
+  { title: "Großartiger Kundenservice", text: "Genieße die deutsche Qualitätsgarantie mit einer 10-Jahres-Garantie und einem Kundenservice, der immer für dich da ist. Mit über 100.000 zufriedenen Kunden.", image: gallery[0].src },
 ];
 
 /* ─── reviews ─── */
@@ -127,7 +131,7 @@ const getRemainingTime = (target: Date) => {
 };
 
 const Stars = ({ count }: { count: number }) => (
-  <span className="inline-flex gap-0.5 text-amber-500">
+  <span className="inline-flex gap-0.5 text-[#82B2CA]">
     {[1, 2, 3, 4, 5].map((i) => (
       <svg key={i} className="h-4 w-4" viewBox="0 0 24 24" fill={i <= count ? "currentColor" : "#d1d5db"}>
         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
@@ -137,15 +141,13 @@ const Stars = ({ count }: { count: number }) => (
 );
 
 /* ─────────────────────────────────────────────── */
-export const MassanfertigungPage = () => {
+export const PreiswertePergolaPage = () => {
   const { addToCart } = useCart();
   /* state */
   const [activeImage, setActiveImage] = useState(0);
   const [descExpanded, setDescExpanded] = useState(false);
   const [selectedColor, setSelectedColor] = useState(colorOptions[0].label);
-  const [breite, setBreite] = useState(3395);
-  const [laenge, setLaenge] = useState(2330);
-  const [hoehe, setHoehe] = useState(1441);
+  const [selectedSize, setSelectedSize] = useState(sizeOptions[0].label);
   const [selectedMount, setSelectedMount] = useState(mountOptions[0].label);
   const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
   const [showAccessories, setShowAccessories] = useState(false);
@@ -164,7 +166,7 @@ export const MassanfertigungPage = () => {
     return () => clearInterval(id);
   }, [saleDeadline]);
 
-  /* sticky bar on mobile */
+  /* sticky bar on mobile: show once user scrolls past the CTA section */
   useEffect(() => {
     const observer = new IntersectionObserver(([e]) => setShowStickyBar(!e.isIntersecting), { threshold: 0 });
     if (ctaRef.current) observer.observe(ctaRef.current);
@@ -192,20 +194,16 @@ export const MassanfertigungPage = () => {
   }, []);
 
   /* price calculation */
-  const sqm = (breite / 1000) * (laenge / 1000);
-  const basePrice = Math.round(sqm * pricePerSqm);
-  const baseOriginalPrice = Math.round(sqm * originalPricePerSqm);
+  const sizeData = sizeOptions.find((o) => o.label === selectedSize) ?? sizeOptions[0];
   const mountData = mountOptions.find((o) => o.label === selectedMount) ?? mountOptions[0];
   const sideTotal = Object.values(sides).reduce((sum, v) => {
     const choice = sideTypeChoices.find((c) => c.value === v);
     return sum + (choice?.price ?? 0);
   }, 0);
   const accTotal = accessoryOptions.filter((o) => selectedAccessories.includes(o.label)).reduce((s, o) => s + o.price, 0);
-  const finalPrice = basePrice + mountData.surcharge + sideTotal + accTotal;
-  const originalPrice = baseOriginalPrice + mountData.surcharge + sideTotal + accTotal;
+  const finalPrice = sizeData.price + mountData.surcharge + sideTotal + accTotal;
+  const originalPrice = sizeData.originalPrice + mountData.surcharge + sideTotal + accTotal;
   const savings = originalPrice - finalPrice;
-
-  const sizeLabel = `${breite}x${laenge}x${hoehe}mm`;
 
   const toggleAccessory = (label: string) =>
     setSelectedAccessories((c) => (c.includes(label) ? c.filter((x) => x !== label) : [...c, label]));
@@ -222,15 +220,15 @@ export const MassanfertigungPage = () => {
       .map((o) => ({ label: o.label, price: o.price }));
 
     addToCart({
-      productName: "Maßanfertigung S3",
+      productName: "Preiswerte Pergola",
       image: gallery[0].src,
       color: selectedColor,
-      size: sizeLabel,
+      size: selectedSize,
       mount: selectedMount,
       mountSurcharge: mountData.surcharge,
       sides: cartSides,
       accessories: cartAccessories,
-      basePrice,
+      basePrice: sizeData.price,
       totalPrice: finalPrice,
     });
   };
@@ -253,7 +251,7 @@ export const MassanfertigungPage = () => {
               <div className="mb-3 hidden items-center gap-2 text-sm text-zinc-400 md:flex">
                 <Link to="/" className="hover:text-zinc-900">Startseite</Link><span>/</span>
                 <Link to="/collections/unsere-pergolen" className="hover:text-zinc-900">Pergolen</Link><span>/</span>
-                <span className="text-zinc-700">Maßanfertigung S3</span>
+                <span className="text-zinc-700">Preiswerte Pergola</span>
               </div>
 
               {/* main image + swipe */}
@@ -299,13 +297,13 @@ export const MassanfertigungPage = () => {
                 <span className="text-sm font-medium text-zinc-600">919 Bewertungen</span>
               </div>
 
-              <h1 className="text-3xl font-semibold tracking-tight text-zinc-950 md:text-4xl">Maßanfertigung S3</h1>
-              <h3 className="mt-1 text-lg font-semibold text-zinc-700">Deine Pergola nach Maß – millimetergenau gefertigt</h3>
+              <h1 className="text-3xl font-semibold tracking-tight text-zinc-950 md:text-4xl">Preiswerte Pergola</h1>
+              <h3 className="mt-1 text-lg font-semibold text-zinc-700">Unser Original, jetzt noch besser!</h3>
 
               {/* expandable description */}
               <div className="relative mt-3">
                 <p className={`text-sm leading-6 text-zinc-600 ${!descExpanded ? "line-clamp-3" : ""}`}>
-                  Deine Pergola wird exakt nach deinen individuellen Maßen gefertigt. Gleiche Premium-Qualität wie unsere Serienmodelle, perfekt angepasst an deinen Außenbereich. TÜV-zertifiziert, aus robustem 6063-T5 Aluminium, sturmfest bis 100 km/h und wartungsfrei. Das manuell verstellbare Lamellendach bietet dir volle Kontrolle über Sonne und Schatten – für deinen täglichen Outdoor-Lifestyle.
+                  Die preiswerte Pergola ist ein exklusives Aluminium-Pergolasystem mit drehbaren Lamellen, integriertem Wasserablauf und hoher Widerstandsfähigkeit gegenüber Witterungseinflüssen. Sie vereint modernes Design, eine präzise Licht- und Belüftungssteuerung sowie zuverlässigen Schutz vor Sonne, Regen und Schnee zu einer stilvollen Lösung für anspruchsvolle Außenbereiche. Optional ist sie mit LED-Beleuchtung, Regen- und Windsensoren, Smartphone-Steuerung sowie seitlichen Glas- oder Zip-Systemen erhältlich.
                 </p>
                 <button type="button" onClick={() => setDescExpanded(!descExpanded)} className="mt-1 text-sm font-semibold text-zinc-900 underline underline-offset-2">
                   {descExpanded ? "Weniger anzeigen" : "Mehr anzeigen"}
@@ -319,7 +317,7 @@ export const MassanfertigungPage = () => {
                   <span className="text-base text-white/50 line-through">{formatPrice(originalPrice)}</span>
                 </div>
                 <div className="mt-3 flex flex-wrap items-center gap-2">
-                  <span className="rounded-md bg-amber-400 px-2.5 py-1 text-xs font-bold text-zinc-900">{formatPrice(savings)} SPAREN</span>
+                  <span className="rounded-md bg-[#82B2CA] px-2.5 py-1 text-xs font-bold text-zinc-900">{formatPrice(savings)} SPAREN</span>
                   <span className="text-xs text-white/70">Sale endet in {remainingTime.days}t : {remainingTime.hours}h : {remainingTime.minutes}m : {remainingTime.seconds}s</span>
                 </div>
                 <ul className="mt-3 space-y-1 text-sm text-white/80">
@@ -345,89 +343,22 @@ export const MassanfertigungPage = () => {
                     ))}
                   </div>
                   <p className="mt-2 text-xs text-zinc-500">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
+                  <button type="button" className="mt-1 text-xs font-semibold text-zinc-900 underline underline-offset-2">Welche Farbe ist die passende?</button>
                 </div>
 
-                {/* Custom Size – Breite / Länge / Höhe in mm */}
+                {/* Size */}
                 <div>
-                  <div className="mb-2">
-                    <span className="text-sm font-semibold text-zinc-700">Größe<span className="text-zinc-400">.</span> <span className="font-normal text-zinc-500">Wähle die genaue Größe</span></span>
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="text-sm font-semibold text-zinc-700">Größe<span className="text-zinc-400">.</span> <span className="font-normal text-zinc-500">Passende Größe auswählen</span></span>
                   </div>
-                  <div className="space-y-5 rounded-xl border border-stone-200 bg-white p-5">
-                    {/* Breite */}
-                    <div>
-                      <label className="mb-2 flex items-center gap-1 text-sm font-semibold text-emerald-700">
-                        Breite
-                        <svg className="h-4 w-4 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" /><text x="10" y="14" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="bold">i</text></svg>
-                      </label>
-                      <div className="flex items-center gap-4">
-                        <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
-                          {breite}mm
-                        </div>
-                        <input
-                          type="range"
-                          min={breiteRange.min}
-                          max={breiteRange.max}
-                          step={breiteRange.step}
-                          value={breite}
-                          onChange={(e) => setBreite(Number(e.target.value))}
-                          className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-emerald-600 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
-                          style={{ background: `linear-gradient(to right, #059669 0%, #059669 ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #e7e5e4 ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #e7e5e4 100%)` }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Länge */}
-                    <div>
-                      <label className="mb-2 flex items-center gap-1 text-sm font-semibold text-emerald-700">
-                        Länge
-                        <svg className="h-4 w-4 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" /><text x="10" y="14" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="bold">i</text></svg>
-                      </label>
-                      <div className="flex items-center gap-4">
-                        <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
-                          {laenge}mm
-                        </div>
-                        <input
-                          type="range"
-                          min={laengeRange.min}
-                          max={laengeRange.max}
-                          step={laengeRange.step}
-                          value={laenge}
-                          onChange={(e) => setLaenge(Number(e.target.value))}
-                          className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-emerald-600 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
-                          style={{ background: `linear-gradient(to right, #059669 0%, #059669 ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #e7e5e4 ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #e7e5e4 100%)` }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Höhe */}
-                    <div>
-                      <label className="mb-2 flex items-center gap-1 text-sm font-semibold text-emerald-700">
-                        Höhe
-                        <svg className="h-4 w-4 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" /><text x="10" y="14" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="bold">i</text></svg>
-                      </label>
-                      <div className="flex items-center gap-4">
-                        <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
-                          {hoehe}mm
-                        </div>
-                        <input
-                          type="range"
-                          min={hoeheRange.min}
-                          max={hoeheRange.max}
-                          step={hoeheRange.step}
-                          value={hoehe}
-                          onChange={(e) => setHoehe(Number(e.target.value))}
-                          className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-emerald-600 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
-                          style={{ background: `linear-gradient(to right, #059669 0%, #059669 ${((hoehe - hoeheRange.min) / (hoeheRange.max - hoeheRange.min)) * 100}%, #e7e5e4 ${((hoehe - hoeheRange.min) / (hoeheRange.max - hoeheRange.min)) * 100}%, #e7e5e4 100%)` }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Summary */}
-                    <div className="flex items-center justify-between rounded-lg bg-stone-50 px-3 py-2 text-sm">
-                      <span className="text-zinc-500">Fläche</span>
-                      <span className="font-bold text-zinc-900">{sqm.toFixed(1)} m²</span>
-                    </div>
+                  <div className="grid grid-cols-4 gap-2">
+                    {sizeOptions.map((s) => (
+                      <button key={s.label} type="button" onClick={() => setSelectedSize(s.label)} className={`rounded-xl border-2 py-2.5 text-center text-sm font-semibold transition ${selectedSize === s.label ? "border-zinc-900 bg-zinc-900 text-white" : "border-stone-200 text-zinc-700 hover:border-stone-400"}`}>
+                        {s.label}
+                      </button>
+                    ))}
                   </div>
+                  <button type="button" className="mt-2 text-xs font-semibold text-zinc-900 underline underline-offset-2">Richtige Größe wählen</button>
                 </div>
 
                 {/* Mount type */}
@@ -443,6 +374,7 @@ export const MassanfertigungPage = () => {
                       </button>
                     ))}
                   </div>
+                  <button type="button" className="mt-2 text-xs font-semibold text-zinc-900 underline underline-offset-2">Welche Variante ist die passende?</button>
                 </div>
 
                 {/* ── Side elements configurator ── */}
@@ -482,14 +414,14 @@ export const MassanfertigungPage = () => {
                       {accessoryOptions.map((acc) => {
                         const active = selectedAccessories.includes(acc.label);
                         return (
-                          <button key={acc.label} type="button" onClick={() => toggleAccessory(acc.label)} className={`flex w-full items-center justify-between gap-3 rounded-xl border-2 p-3 text-left transition ${active ? "border-emerald-600 bg-emerald-50" : "border-stone-200 hover:border-stone-400"}`}>
+                          <button key={acc.label} type="button" onClick={() => toggleAccessory(acc.label)} className={`flex w-full items-center justify-between gap-3 rounded-xl border-2 p-3 text-left transition ${active ? "border-[#344148] bg-[#82B2CA]/10" : "border-stone-200 hover:border-stone-400"}`}>
                             <div>
                               <div className="text-sm font-semibold text-zinc-900">{acc.label}</div>
                               <div className="text-xs text-zinc-500">{acc.description}</div>
                             </div>
                             <div className="shrink-0 text-right">
                               <div className="text-sm font-semibold">+{formatPrice(acc.price)}</div>
-                              <div className={`text-xs font-bold ${active ? "text-emerald-600" : "text-zinc-400"}`}>{active ? "✓" : "+"}</div>
+                              <div className={`text-xs font-bold ${active ? "text-[#82B2CA]" : "text-zinc-400"}`}>{active ? "✓" : "+"}</div>
                             </div>
                           </button>
                         );
@@ -510,7 +442,7 @@ export const MassanfertigungPage = () => {
 
                 {/* ── CTA buttons ── */}
                 <div ref={ctaRef} className="grid gap-3 sm:grid-cols-2">
-                  <button type="button" onClick={handleAddToCart} className="rounded-xl bg-emerald-600 py-3.5 text-center text-sm font-bold text-white transition hover:bg-emerald-700">
+                  <button type="button" onClick={handleAddToCart} className="rounded-xl py-3.5 text-center text-sm font-bold text-white transition hover:opacity-90" style={{ backgroundColor: '#344148' }}>
                     In den Warenkorb – {formatPrice(finalPrice)}
                   </button>
                   <a href="tel:+4966141087500" className="flex items-center justify-center gap-2 rounded-xl border border-zinc-900 py-3.5 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-900 hover:text-white">
@@ -524,21 +456,11 @@ export const MassanfertigungPage = () => {
         </section>
 
         {/* ── Ticker ── */}
-        <FeatureTicker
-          backgroundColorClass="bg-zinc-900"
-          items={[
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-13.svg", iconClassName: "h-5 w-5", text: "Sicher in extremen Wetterbedingungen" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-14.svg", iconClassName: "h-5 w-5", text: "Kostenlose Lieferung ab 1.000 €" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-15.svg", iconClassName: "h-5 w-5", text: "Video-Anleitungen" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-16.svg", iconClassName: "h-5 w-5", text: "iOS und Android App" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-17.svg", iconClassName: "h-5 w-5", text: "Sonnenschutz" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-18.svg", iconClassName: "h-5 w-5", text: "Hohe Schneelast" },
-          ]}
-        />
+        <FeatureTicker backgroundColorClass="bg-[#344148]" />
 
         {/* ── Social proof ── */}
         <section className="bg-zinc-950 py-12 text-center text-white md:py-16">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-400">Über 100.000 zufriedene Kunden weltweit</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#82B2CA]">Über 100.000 zufriedene Kunden weltweit</p>
           <h2 className="mx-auto mt-3 max-w-xl text-3xl font-semibold md:text-4xl">Folge uns für mehr</h2>
           <div className="mt-5 flex items-center justify-center gap-4">
             <a href="#" target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/30 px-5 py-2 text-sm font-semibold transition hover:bg-white hover:text-zinc-900">Instagram</a>
@@ -565,7 +487,7 @@ export const MassanfertigungPage = () => {
               {[{ s: 5, n: 785 }, { s: 4, n: 127 }, { s: 3, n: 6 }, { s: 2, n: 1 }, { s: 1, n: 0 }].map((row) => (
                 <div key={row.s} className="flex items-center gap-2">
                   <Stars count={row.s} />
-                  <div className="h-2 w-20 overflow-hidden rounded-full bg-stone-200"><div className="h-full rounded-full bg-amber-500" style={{ width: `${(row.n / 919) * 100}%` }} /></div>
+                  <div className="h-2 w-20 overflow-hidden rounded-full bg-stone-200"><div className="h-full rounded-full bg-[#82B2CA]" style={{ width: `${(row.n / 919) * 100}%` }} /></div>
                   <span className="text-xs text-zinc-500">{row.n}</span>
                 </div>
               ))}
@@ -581,7 +503,7 @@ export const MassanfertigungPage = () => {
                     <p className="mt-3 text-sm leading-6 text-zinc-700">{r.quote}</p>
                     <div className="mt-4 flex items-center gap-2 text-xs text-zinc-500">
                       <span className="font-semibold text-zinc-800">{r.name}</span>
-                      <span className="rounded bg-emerald-50 px-1.5 py-0.5 text-[10px] font-bold text-emerald-700">Verifiziert</span>
+                      <span className="rounded bg-[#82B2CA]/10 px-1.5 py-0.5 text-[10px] font-bold text-[#82B2CA]">Verifiziert</span>
                     </div>
                   </div>
                 </article>
@@ -591,7 +513,7 @@ export const MassanfertigungPage = () => {
             {totalReviewPages > 1 && (
               <div className="mt-6 flex items-center justify-center gap-2">
                 {Array.from({ length: totalReviewPages }, (_, i) => (
-                  <button key={i} type="button" onClick={() => setReviewPage(i)} className={`h-8 w-8 rounded-full text-sm font-semibold transition ${reviewPage === i ? "bg-zinc-900 text-white" : "bg-stone-200 text-zinc-600 hover:bg-stone-300"}`}>{i + 1}</button>
+                  <button key={i} type="button" onClick={() => setReviewPage(i)} className={`h-8 w-8 rounded-full text-sm font-semibold transition ${reviewPage === i ? "bg-[#344148] text-white" : "bg-stone-200 text-zinc-600 hover:bg-stone-300"}`}>{i + 1}</button>
                 ))}
               </div>
             )}
@@ -605,13 +527,14 @@ export const MassanfertigungPage = () => {
               <h2 className="text-2xl font-semibold text-zinc-950 md:text-3xl">Die beste Wahl für deine Pergola</h2>
               <p className="mt-2 text-sm text-zinc-500">Hast du Fragen? <Link to="/contact" className="font-semibold text-zinc-900 underline underline-offset-2">Kundenservice kontaktieren</Link></p>
             </div>
+            {/* service cards */}
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {serviceCards.map((card) => (
                 <div key={card.title} className="flex flex-col items-center rounded-2xl border border-stone-200 p-6 text-center">
                   <img src={card.icon} alt={card.title} className="mb-3 h-12 w-12 object-contain" />
                   <h3 className="text-sm font-bold text-zinc-900">{card.title}</h3>
                   <p className="mt-1 text-xs leading-5 text-zinc-500">{card.text}</p>
-                  {card.link && <Link to={card.link} className="mt-2 text-xs font-semibold text-emerald-700 underline underline-offset-2">Mehr erfahren</Link>}
+                  {card.link && <Link to={card.link} className="mt-2 text-xs font-semibold text-[#82B2CA] underline underline-offset-2">Mehr erfahren</Link>}
                 </div>
               ))}
             </div>
@@ -632,17 +555,7 @@ export const MassanfertigungPage = () => {
         </section>
 
         {/* ── Ticker bottom ── */}
-        <FeatureTicker
-          backgroundColorClass="bg-zinc-900"
-          items={[
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-13.svg", iconClassName: "h-5 w-5", text: "Sicher in extremen Wetterbedingungen" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-14.svg", iconClassName: "h-5 w-5", text: "Kostenlose Lieferung ab 1.000 €" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-15.svg", iconClassName: "h-5 w-5", text: "Video-Anleitungen" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-16.svg", iconClassName: "h-5 w-5", text: "iOS und Android App" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-17.svg", iconClassName: "h-5 w-5", text: "Sonnenschutz" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-18.svg", iconClassName: "h-5 w-5", text: "Hohe Schneelast" },
-          ]}
-        />
+        <FeatureTicker backgroundColorClass="bg-[#344148]" />
 
         {/* ── FAQ ── */}
         <section className="border-t border-stone-200 bg-stone-50 py-12 md:py-20">
@@ -650,11 +563,11 @@ export const MassanfertigungPage = () => {
             <h2 className="mb-6 text-2xl font-semibold text-zinc-950 md:text-3xl">Häufige Fragen</h2>
             <div className="space-y-2">
               {[
-                { q: "Was unterscheidet die Maßanfertigung von der Standard-Pergola?", a: "Bei der Maßanfertigung wählst du Breite und Tiefe frei in cm – deine Pergola wird exakt nach deinen Wunschmaßen gefertigt. Qualität und Material sind identisch mit unseren Serienmodellen." },
-                { q: "Welche Maße sind möglich?", a: "Breite und Tiefe können jeweils zwischen 200 cm und 700 cm in 10-cm-Schritten frei gewählt werden." },
-                { q: "Kann ich die Pergola selbst montieren?", a: "Ja. Auch die Maßanfertigung nutzt das bewährte SnapFIT™-System für einen einfachen Aufbau. Bei Bedarf kannst du einen Montageservice anfragen." },
-                { q: "Wie wird der Preis berechnet?", a: "Der Preis berechnet sich nach der gewählten Fläche (m²) plus optionale Extras wie Seitenelemente, Zubehör und Montageart." },
-                { q: "Wie lange dauert die Lieferung?", a: "Maßanfertigungen werden individuell produziert. Die Lieferzeit beträgt in der Regel 4–6 Wochen. Ab 1.000 € Bestellwert ist die Lieferung kostenlos." },
+                { q: "Ist die Preiswerte Pergola für ganzjährige Nutzung geeignet?", a: "Ja. Die Konstruktion aus 6063-T5 Aluminium ist auf dauerhafte Nutzung im Außenbereich ausgelegt und widersteht Wind, Regen und hoher Schneelast." },
+                { q: "Kann ich die Pergola selbst montieren?", a: "Ja. Die Serie 3 ist für einen unkomplizierten Aufbau konzipiert. Wenn du möchtest, kannst du zusätzlich einen Montageservice anfragen." },
+                { q: "Wie funktioniert die Bedienung des Dachs?", a: "Die Lamellen werden manuell über eine leichtgängige Handkurbel verstellt. So regelst du Sonne, Schatten und Belüftung flexibel." },
+                { q: "Kann ich später Zubehör hinzufügen?", a: "Ja. Screen Rollos, Glaswände, LED-Beleuchtung und Wärmelampen lassen sich je nach Konfiguration passend ergänzen." },
+                { q: "Wie wird die Pergola geliefert?", a: "Die Pergola wird per Spedition in mehreren Paketen geliefert. Ab 1.000 € Bestellwert ist die Lieferung kostenlos." },
                 { q: "Ist eine Baugenehmigung erforderlich?", a: "Das hängt vom Bundesland und der Größe ab. Nutze unseren Baugenehmigungscheck, um die Anforderungen für deinen Standort zu prüfen." },
               ].map((item, i) => {
                 const isOpen = openFaq === i;
@@ -681,7 +594,7 @@ export const MassanfertigungPage = () => {
             <div className="text-lg font-bold text-zinc-950">{formatPrice(finalPrice)}</div>
             <div className="text-xs text-zinc-500 line-through">{formatPrice(originalPrice)}</div>
           </div>
-          <button type="button" onClick={handleAddToCart} className="rounded-xl bg-emerald-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-emerald-700">
+          <button type="button" onClick={handleAddToCart} className="rounded-xl px-6 py-3 text-sm font-bold text-white transition hover:opacity-90" style={{ backgroundColor: '#344148' }}>
             In den Warenkorb
           </button>
         </div>

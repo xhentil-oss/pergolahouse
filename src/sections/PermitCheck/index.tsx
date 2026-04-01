@@ -21,12 +21,12 @@ export const PermitCheck = () => {
   };
 
   return (
-    <section className="bg-zinc-900 py-16 md:py-[120px]">
+    <section className="py-16 md:py-[120px]" style={{ backgroundColor: '#344148' }}>
       <div className="max-w-[1440px] mx-auto px-4 md:px-16">
         <div className="flex flex-col md:flex-row md:items-center gap-10 md:gap-20">
           {/* Left text */}
           <div className="flex-1">
-            <div className="inline-flex items-center gap-2 bg-amber-500/20 text-amber-400 text-sm font-semibold px-3 py-1.5 rounded-full mb-6">
+            <div className="inline-flex items-center gap-2 text-sm font-semibold px-3 py-1.5 rounded-full mb-6" style={{ backgroundColor: 'rgba(130,178,202,0.2)', color: '#82B2CA' }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
               Baugenehmigung prüfen
             </div>
@@ -38,11 +38,11 @@ export const PermitCheck = () => {
             </p>
             <div className="flex items-center gap-4 mt-8">
               <div className="flex items-center gap-2 text-neutral-400 text-sm">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="#22c55e"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#82B2CA"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                 Kostenlos & unverbindlich
               </div>
               <div className="flex items-center gap-2 text-neutral-400 text-sm">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="#22c55e"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#82B2CA"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                 Sofortergebnis
               </div>
             </div>
@@ -90,7 +90,8 @@ export const PermitCheck = () => {
               <button
                 onClick={handleCheck}
                 disabled={!selectedState || !width || !depth}
-                className="w-full bg-zinc-900 text-white font-semibold py-4 rounded-xl hover:bg-zinc-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+                className="w-full text-white font-semibold py-4 rounded-xl hover:opacity-90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+                style={{ backgroundColor: '#344148' }}
               >
                 Jetzt prüfen →
               </button>
@@ -98,22 +99,22 @@ export const PermitCheck = () => {
 
             {/* Result */}
             {result && (
-              <div className={`mt-6 p-4 rounded-xl flex items-start gap-3 ${result === "required" ? "bg-amber-50 border border-amber-200" : "bg-green-50 border border-green-200"}`}>
+              <div className={`mt-6 p-4 rounded-xl flex items-start gap-3 ${result === "required" ? "bg-[#82B2CA]/10 border border-[#82B2CA]/30" : "bg-[#82B2CA]/10 border border-[#82B2CA]/30"}`}>
                 {result === "required" ? (
                   <>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#f59e0b" className="shrink-0 mt-0.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#82B2CA" className="shrink-0 mt-0.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
                     <div>
-                      <p className="text-amber-800 font-semibold text-sm">Baugenehmigung wahrscheinlich erforderlich</p>
-                      <p className="text-amber-700 text-xs mt-1">Für dein Vorhaben in {selectedState} wird vermutlich eine Baugenehmigung benötigt. Unser Partner berät dich kostenlos.</p>
-                      <a href="/pages/building-permit" className="inline-block mt-3 text-xs font-semibold text-amber-800 underline">Experten kontaktieren →</a>
+                      <p className="text-[#344148] font-semibold text-sm">Baugenehmigung wahrscheinlich erforderlich</p>
+                      <p className="text-[#344148]/70 text-xs mt-1">Für dein Vorhaben in {selectedState} wird vermutlich eine Baugenehmigung benötigt. Unser Partner berät dich kostenlos.</p>
+                      <a href="/pages/building-permit" className="inline-block mt-3 text-xs font-semibold text-[#82B2CA] underline">Experten kontaktieren →</a>
                     </div>
                   </>
                 ) : (
                   <>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#16a34a" className="shrink-0 mt-0.5"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#82B2CA" className="shrink-0 mt-0.5"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                     <div>
-                      <p className="text-green-800 font-semibold text-sm">Keine Baugenehmigung erforderlich</p>
-                      <p className="text-green-700 text-xs mt-1">Für dein Vorhaben in {selectedState} sollte in der Regel keine Genehmigung nötig sein. Bitte prüfe trotzdem beim lokalen Bauamt.</p>
+                      <p className="text-[#344148] font-semibold text-sm">Keine Baugenehmigung erforderlich</p>
+                      <p className="text-[#344148]/70 text-xs mt-1">Für dein Vorhaben in {selectedState} sollte in der Regel keine Genehmigung nötig sein. Bitte prüfe trotzdem beim lokalen Bauamt.</p>
                     </div>
                   </>
                 )}

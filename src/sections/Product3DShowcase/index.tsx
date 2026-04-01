@@ -50,6 +50,7 @@ export const Product3DShowcase = ({
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
   const [barsAnimated, setBarsAnimated] = useState(false);
+  const [louversOpen, setLouversOpen] = useState(false);
   const rafRef = useRef<number>(0);
   const targetRef = useRef({ x: 0, y: 0 });
 
@@ -206,11 +207,62 @@ export const Product3DShowcase = ({
               />
 
               {/* product image */}
-              <img
-                src={productImage}
-                alt={productName}
-                className="relative z-0 aspect-[4/3] w-full object-cover"
-              />
+              <div className="relative">
+                <img
+                  src={productImage}
+                  alt={productName}
+                  className="relative z-0 aspect-[4/3] w-full object-cover"
+                />
+
+                {/* louver slats overlay */}
+                <div className="absolute inset-0 z-[5] pointer-events-none" style={{ perspective: "400px" }}>
+                  {[...Array(12)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="absolute w-full transition-all ease-in-out"
+                      style={{
+                        height: "8.33%",
+                        top: `${i * 8.33}%`,
+                        transformOrigin: "center top",
+                        transform: louversOpen ? "rotateX(68deg)" : "rotateX(0deg)",
+                        transitionDuration: "800ms",
+                        transitionDelay: `${i * 40}ms`,
+                      }}
+                    >
+                      <div
+                        className="w-full h-full transition-all ease-in-out"
+                        style={{
+                          background: louversOpen
+                            ? "linear-gradient(to bottom, rgba(0,0,0,0.05), transparent)"
+                            : `linear-gradient(to bottom, rgba(30,30,30,0.85), rgba(50,50,50,0.7))`,
+                          transitionDuration: "800ms",
+                          transitionDelay: `${i * 40}ms`,
+                          borderBottom: louversOpen ? "1px solid rgba(255,255,255,0.1)" : "1px solid rgba(80,80,80,0.6)",
+                          boxShadow: louversOpen ? "none" : "0 2px 4px rgba(0,0,0,0.3)",
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                {/* toggle button */}
+                <button
+                  onClick={() => setLouversOpen((prev) => !prev)}
+                  className="absolute bottom-3 right-3 z-10 flex items-center gap-2 rounded-full border border-white/20 bg-black/60 px-3 py-2 backdrop-blur-md transition-all hover:bg-black/80 cursor-pointer"
+                >
+                  <span className="text-xs font-semibold text-white/80">Dach</span>
+                  <div className={`relative h-5 w-9 rounded-full transition-colors duration-300 ${
+                    louversOpen ? "bg-emerald-500" : "bg-white/20"
+                  }`}>
+                    <div className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform duration-300 ${
+                      louversOpen ? "translate-x-4" : "translate-x-0.5"
+                    }`} />
+                  </div>
+                  <span className={`text-xs font-bold transition-colors duration-300 ${
+                    louversOpen ? "text-emerald-400" : "text-white/50"
+                  }`}>{louversOpen ? "AUF" : "ZU"}</span>
+                </button>
+              </div>
 
               {/* bottom info bar */}
               <div className="relative z-10 flex items-center justify-between border-t border-white/10 bg-black/40 px-5 py-3 backdrop-blur-md md:px-6 md:py-4">
