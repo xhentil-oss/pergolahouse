@@ -1,35 +1,123 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
+import photo2 from "@/assets/Photo (2).png";
+import photo3 from "@/assets/Photo (3).png";
+import photo4 from "@/assets/Photo (4).png";
+import photo5 from "@/assets/Photo (5).png";
+import photo6 from "@/assets/Photo (6).png";
+
+const modelCards = [
+  { url: "/products/pergola-s3", img: photo2, savings: "35% sparen", name: "Elegante Pergola", price: "2.589 €", oldPrice: "3.990 €", spec1: "Manuelles Lamellendach", spec2: "Windfest bis 100km/h", colors: ["#2D3436","#F1EDE5","#0A0A0A","#8E9499","#D4BC6A"] },
+  { url: "/products/pergola-custom-design", img: photo3, savings: "35% sparen", name: "Luxus-Pergola", price: "3.429 €", oldPrice: "5.290 €", spec1: "Elektrisches Lamellendach", spec2: "Bis zu 120km/h (Sturm)", colors: ["#2D3436","#F1EDE5","#0A0A0A","#8E9499","#D4BC6A"] },
+  { url: "/products/preiswerte-pergola", img: photo4, savings: "30% sparen", name: "Preiswerte Pergola", price: "5.099 €", oldPrice: "7.290 €", spec1: "Elektrische LED-Lamellen", spec2: "Bis zu 140km/h (Orkan)", colors: ["#2D3436","#F1EDE5","#0A0A0A","#8E9499","#D4BC6A"] },
+  { url: "/collections/wintergarten-1", img: photo5, savings: "30% sparen", name: "Wintergärten", price: "6.785 €", oldPrice: "9.694 €", spec1: "Elektrisches Lamellendach", spec2: "Bis zu 120km/h (Sturm)", colors: ["#2D3436","#F1EDE5","#0A0A0A","#8E9499","#D4BC6A"] },
+  { url: "/products/pergola-massanfertigung", img: photo6, savings: "30% sparen", name: "Pergola Maßanfertigung", price: "4.899 €", oldPrice: "6.990 €", spec1: "Individuelle Maße & Ausstattung", spec2: "Bis zu 120km/h (Sturm)", colors: ["#2D3436","#F1EDE5","#0A0A0A","#8E9499","#D4BC6A"] },
+];
 
 const formatPrice = (n: number) =>
   new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n);
 
 export const HeaderActions = () => {
   const { items, removeFromCart, updateQuantity, cartOpen, setCartOpen, totalItems, totalPrice } = useCart();
+  const [modelsOpen, setModelsOpen] = useState(false);
+  const modelsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (cartOpen) {
       document.body.style.overflow = "hidden";
-    } else {
+    } else if (!modelsOpen) {
       document.body.style.overflow = "";
     }
     return () => { document.body.style.overflow = ""; };
-  }, [cartOpen]);
+  }, [cartOpen, modelsOpen]);
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (modelsRef.current && !modelsRef.current.contains(e.target as Node)) {
+        setModelsOpen(false);
+      }
+    };
+    if (modelsOpen) document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [modelsOpen]);
 
   return (
     <>
       <div className="flex items-center gap-3">
-        <Link
-          to="/collections/unsere-pergolen"
-          className="hidden items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition-all hover:opacity-90 hover:shadow-lg md:inline-flex"
-          style={{ backgroundColor: '#344148' }}
-        >
-          <span>Modelle entdecken</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </Link>
+        <div ref={modelsRef} className="relative hidden md:block">
+          <button
+            type="button"
+            onClick={() => setModelsOpen(!modelsOpen)}
+            className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition-all hover:opacity-90 hover:shadow-lg"
+            style={{ backgroundColor: '#344148' }}
+          >
+            <span>Modelle entdecken</span>
+            <svg className={`h-4 w-4 transition-transform ${modelsOpen ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+
+          {/* Mega dropdown */}
+          {modelsOpen && (
+            <div className="fixed inset-x-0 top-full z-[100] mt-0 border-t border-stone-200 bg-white shadow-2xl"
+                 style={{ top: modelsRef.current?.getBoundingClientRect().bottom ?? 0 }}>
+              <div className="mx-auto max-w-[1440px] px-4 py-8 md:px-16">
+                <div className="mb-6 flex items-end justify-between">
+                  <div>
+                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#82B2CA]">Unsere Kollektion</span>
+                    <h3 className="mt-1 text-2xl font-semibold text-[#344148]">Pergola Modelle</h3>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-5 xl:grid-cols-6">
+                  {modelCards.map((m) => (
+                    <Link
+                      key={m.url}
+                      to={m.url}
+                      onClick={() => setModelsOpen(false)}
+                      className="group flex flex-col overflow-hidden rounded-2xl border border-stone-200/80 bg-white transition-all hover:border-[#82B2CA]/30 hover:shadow-xl hover:shadow-[#82B2CA]/5"
+                    >
+                      <div className="relative aspect-[4/3] overflow-hidden">
+                        <img src={m.img} alt={m.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                        {/* badge removed */}
+                        <span className="absolute right-2 top-2 rounded-full bg-[#344148] px-2 py-1 text-[10px] font-bold uppercase text-white">{m.savings}</span>
+                      </div>
+                      <div className="flex flex-1 flex-col p-4">
+                        <h4 className="text-sm font-semibold text-[#344148] mb-1">{m.name}</h4>
+                        <div className="flex items-baseline gap-1.5 mb-2">
+                          <span className="text-sm font-bold text-[#344148]">{m.price}</span>
+                          <span className="text-xs text-neutral-400 line-through">{m.oldPrice}</span>
+                        </div>
+                        <div className="space-y-1 mb-3">
+                          <div className="flex items-center gap-1.5 text-xs text-neutral-600">
+                            <svg className="h-3 w-3 shrink-0 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            {m.spec1}
+                          </div>
+                          <div className="flex items-center gap-1.5 text-xs text-neutral-600">
+                            <svg className="h-3 w-3 shrink-0 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            {m.spec2}
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1 mb-3">
+                          {m.colors.map((c, i) => (
+                            <div key={i} className="h-4 w-4 rounded-full ring-1 ring-stone-300/60 shadow-sm" style={{ backgroundColor: c }} />
+                          ))}
+                          <span className="ml-1 text-[10px] text-neutral-400">{m.colors.length} Farben</span>
+                        </div>
+                        <div className="mt-auto">
+                          <span className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#344148] py-2.5 text-xs font-semibold text-white transition hover:bg-[#2a353b]">
+                            Jetzt entdecken
+                            <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
         <div
           aria-label="Cart"
           role="button"
@@ -92,78 +180,92 @@ export const HeaderActions = () => {
           ) : (
             <div className="space-y-4">
               {items.map((item) => (
-                <div key={item.id} className="rounded-xl border border-stone-200 bg-white p-4">
-                  {/* Product header */}
-                  <div className="flex gap-3">
-                    <img src={item.image} alt={item.productName} className="h-20 w-20 rounded-lg object-cover" />
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-start justify-between gap-2">
-                        <h3 className="text-sm font-bold text-zinc-900">{item.productName}</h3>
-                        <button
-                          onClick={() => removeFromCart(item.id)}
-                          className="shrink-0 text-zinc-400 transition hover:text-red-500"
-                          aria-label="Entfernen"
-                        >
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                        </button>
+                <div key={item.id} className="group overflow-hidden rounded-2xl border border-stone-200/80 bg-white transition-all hover:border-[#82B2CA]/30 hover:shadow-lg">
+                  {/* Image with badges */}
+                  <div className="relative">
+                    <div className="aspect-[4/3] overflow-hidden">
+                      <img src={item.image} alt={item.productName} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-[#344148] backdrop-blur-sm">
+                      {item.productName}
+                    </span>
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      className="absolute right-3 top-3 rounded-full bg-[#344148] px-2.5 py-1.5 text-[11px] font-bold uppercase text-white transition hover:bg-red-600"
+                      aria-label="Entfernen"
+                    >
+                      Entfernen
+                    </button>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-5">
+                    {/* Name */}
+                    <h3 className="text-lg font-semibold text-[#344148] mb-1.5">{item.productName}</h3>
+
+                    {/* Price */}
+                    <div className="flex items-baseline gap-2 mb-3">
+                      <span className="text-lg font-bold text-[#344148]">{formatPrice(item.totalPrice)}</span>
+                      {item.basePrice < item.totalPrice && (
+                        <span className="text-sm text-neutral-400 line-through">{formatPrice(item.basePrice)}</span>
+                      )}
+                    </div>
+
+                    {/* Specs with checkmarks */}
+                    <div className="space-y-1.5 mb-4">
+                      <div className="flex items-center gap-2 text-sm text-neutral-600">
+                        <svg className="h-3.5 w-3.5 shrink-0 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        Farbe: {item.color}
                       </div>
-                      <p className="mt-0.5 text-lg font-semibold text-zinc-900">{formatPrice(item.totalPrice)}</p>
+                      <div className="flex items-center gap-2 text-sm text-neutral-600">
+                        <svg className="h-3.5 w-3.5 shrink-0 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        Größe: {item.size}
+                      </div>
+                      {item.mount && (
+                        <div className="flex items-center gap-2 text-sm text-neutral-600">
+                          <svg className="h-3.5 w-3.5 shrink-0 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                          Aufbau: {item.mount}{item.mountSurcharge > 0 && ` (+${formatPrice(item.mountSurcharge)})`}
+                        </div>
+                      )}
+                      {item.sides.length > 0 && item.sides.map((s) => (
+                        <div key={s.key} className="flex items-center gap-2 text-sm text-neutral-600">
+                          <svg className="h-3.5 w-3.5 shrink-0 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                          {s.label}: {s.type} (+{formatPrice(s.price)})
+                        </div>
+                      ))}
+                      {item.accessories.length > 0 && item.accessories.map((a) => (
+                        <div key={a.label} className="flex items-center gap-2 text-sm text-neutral-600">
+                          <svg className="h-3.5 w-3.5 shrink-0 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                          {a.label} (+{formatPrice(a.price)})
+                        </div>
+                      ))}
                     </div>
-                  </div>
 
-                  {/* Configuration details */}
-                  <div className="mt-3 space-y-1.5 rounded-lg bg-stone-50 px-3 py-2.5 text-xs text-zinc-600">
-                    <div className="flex justify-between">
-                      <span className="font-medium text-zinc-500">Farbe</span>
-                      <span className="font-semibold text-zinc-800">{item.color}</span>
+                    {/* Quantity */}
+                    <div className="flex items-center gap-1.5 mb-4">
+                      <div className="flex items-center rounded-lg border border-stone-200">
+                        <button
+                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          className="px-2.5 py-1 text-sm text-zinc-600 transition hover:bg-stone-100 disabled:opacity-30"
+                          disabled={item.quantity <= 1}
+                        >−</button>
+                        <span className="min-w-[1.75rem] text-center text-sm font-semibold text-zinc-900">{item.quantity}</span>
+                        <button
+                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          className="px-2.5 py-1 text-sm text-zinc-600 transition hover:bg-stone-100"
+                        >+</button>
+                      </div>
+                      <span className="text-xs text-neutral-400 ml-1">Menge</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="font-medium text-zinc-500">Größe</span>
-                      <span className="font-semibold text-zinc-800">{item.size}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="font-medium text-zinc-500">Aufbau</span>
-                      <span className="font-semibold text-zinc-800">{item.mount}{item.mountSurcharge > 0 && ` (+${formatPrice(item.mountSurcharge)})`}</span>
-                    </div>
-                    {item.sides.length > 0 && (
-                      <>
-                        <div className="border-t border-stone-200 pt-1.5 font-medium text-zinc-500">Seitenelemente</div>
-                        {item.sides.map((s) => (
-                          <div key={s.key} className="flex justify-between pl-2">
-                            <span>{s.label}</span>
-                            <span className="font-semibold text-zinc-800">{s.type} (+{formatPrice(s.price)})</span>
-                          </div>
-                        ))}
-                      </>
-                    )}
-                    {item.accessories.length > 0 && (
-                      <>
-                        <div className="border-t border-stone-200 pt-1.5 font-medium text-zinc-500">Zubehör</div>
-                        {item.accessories.map((a) => (
-                          <div key={a.label} className="flex justify-between pl-2">
-                            <span>{a.label}</span>
-                            <span className="font-semibold text-zinc-800">+{formatPrice(a.price)}</span>
-                          </div>
-                        ))}
-                      </>
-                    )}
-                  </div>
 
-                  {/* Quantity */}
-                  <div className="mt-3 flex items-center gap-2">
-                    <span className="text-xs font-medium text-zinc-500">Menge:</span>
-                    <div className="flex items-center rounded-lg border border-stone-200">
-                      <button
-                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="px-2.5 py-1 text-sm text-zinc-600 transition hover:bg-stone-100 disabled:opacity-30"
-                        disabled={item.quantity <= 1}
-                      >−</button>
-                      <span className="min-w-[2rem] text-center text-sm font-semibold text-zinc-900">{item.quantity}</span>
-                      <button
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="px-2.5 py-1 text-sm text-zinc-600 transition hover:bg-stone-100"
-                      >+</button>
-                    </div>
+                    {/* CTA Button */}
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#344148] py-3 text-sm font-semibold text-white transition hover:bg-[#2a353b]"
+                    >
+                      Entfernen
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
                   </div>
                 </div>
               ))}

@@ -7,6 +7,11 @@ import { useCart } from "@/context/CartContext";
 import pergolaImg from "@/assets/pergola.png";
 import photo18 from "@/assets/Photo (18).png";
 import photo26 from "@/assets/Photo (26).png";
+import icon18 from "@/assets/icon18.jpeg";
+import icon6 from "@/assets/icon6.jpeg";
+import icon4 from "@/assets/icon4.jpeg";
+import icon11 from "@/assets/icon11.jpeg";
+import icon10 from "@/assets/icon10.jpeg";
 
 /* ─── image gallery ─── */
 const gallery = [
@@ -73,14 +78,13 @@ const trustBadges = [
 ];
 
 
-/* ─── feature story ─── */
+/* ─── feature story (icon-based) ─── */
 const featureStory = [
-  { title: "Federleichte Handkurbel", text: "Stelle deine Pergola mühelos mit der leichtgängigen Handkurbel ein – die Lamellen regulieren Sonne und Schatten flexibel, sorgen im Sommer für angenehme Kühle und halten Schneelasten bis 100 kg stand.", image: gallery[2].src },
-  { title: "Schnellster Aufbau aller Zeiten", text: "Die Pergola Serie 3 ist dank des bewährten SnapFIT™-Systems besonders einfach zu montieren – inspiriert von IKEA, mit weniger Bauteilen und einem benutzerfreundlichen Design.", image: "https://pergolux.de/cdn/shop/files/PERGOLUX_Story_6_88a3e853-e322-4f21-ab7a-60175e9204a0.jpg?crop=center&format=pjpg&height=900&v=1741620042&width=1200" },
-  { title: "Unsere preiswerteste Pergola", text: "Gefertigt nach den gleichen hohen Standards wie unsere Premium-Modelle und TÜV-zertifiziert. Aus robustem 6063-T5 Aluminium, sturmfest bis 100 km/h.", image: gallery[1].src },
-  { title: "Stabiler als je zuvor", text: "Die Pergola der Serie 3 ist dafür konzipiert, extremen Wetterbedingungen standzuhalten. Außergewöhnliche Haltbarkeit sowie zuverlässiger Betrieb – Tag für Tag.", image: gallery[0].src },
-  { title: "Norwegisches Design", text: "Minimalistisch, funktional und hochwertig bis ins Detail – von der Materialwahl bis zur Ausführung steht alles für echte skandinavische Handwerkskunst.", image: gallery[3].src },
-  { title: "Großartiger Kundenservice", text: "Genieße die deutsche Qualitätsgarantie mit einer 10-Jahres-Garantie und einem Kundenservice, der immer für dich da ist. Mit über 100.000 zufriedenen Kunden.", image: gallery[0].src },
+  { image: icon18 },
+  { image: icon6 },
+  { image: icon4 },
+  { image: icon11 },
+  { image: icon10 },
 ];
 
 /* ─── reviews ─── */
@@ -279,11 +283,10 @@ export const PreiswertePergolaPage = () => {
               </div>
 
               {/* feature highlights */}
-              <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {featureStory.map((item) => (
-                  <div key={item.title} className="rounded-xl border border-stone-200 bg-stone-50 p-4">
-                    <h4 className="text-sm font-bold text-zinc-900">{item.title}</h4>
-                    <p className="mt-1.5 line-clamp-3 text-xs leading-5 text-zinc-500">{item.text}</p>
+              <div className="mt-5 grid grid-cols-4 gap-2">
+                {featureStory.map((item, i) => (
+                  <div key={i} className="overflow-hidden rounded-[20px] border border-stone-200 bg-stone-50">
+                    <img src={item.image} alt="" className="h-full w-full object-cover" />
                   </div>
                 ))}
               </div>

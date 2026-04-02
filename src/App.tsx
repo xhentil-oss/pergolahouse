@@ -7,6 +7,9 @@ import { ElegantePergolaPage } from "@/pages/ElegantePergolaPage";
 import { LuxusPergolaPage } from "@/pages/LuxusPergolaPage";
 import { PreiswertePergolaPage } from "@/pages/PreiswertePergolaPage";
 import { PergolaManfertigungPage } from "@/pages/PergolaManfertigungPage";
+import { WintergartenPage } from "@/pages/WintergartenPage";
+import { CarportsPage } from "@/pages/CarportsPage";
+import { ZipScreensPage } from "@/pages/ZipScreensPage";
 import { ScreenRolloPage } from "@/pages/ScreenRolloPage";
 import { GlaswandePage } from "@/pages/GlaswandePage";
 import { LEDStripesPage } from "@/pages/LEDStripesPage";
@@ -24,6 +27,9 @@ export const App = () => {
         <Route path="/products/pergola-custom-design" element={<LuxusPergolaPage />} />
         <Route path="/products/preiswerte-pergola" element={<PreiswertePergolaPage />} />
         <Route path="/products/pergola-massanfertigung" element={<PergolaManfertigungPage />} />
+        <Route path="/collections/wintergarten-1" element={<WintergartenPage />} />
+        <Route path="/collections/carports" element={<CarportsPage />} />
+        <Route path="/collections/zip-screens" element={<ZipScreensPage />} />
         <Route path="/products/screen-rollo" element={<ScreenRolloPage />} />
         <Route path="/products/glaswande" element={<GlaswandePage />} />
         <Route path="/products/led-stripes" element={<LEDStripesPage />} />

@@ -7,43 +7,47 @@ import photo5 from "@/assets/Photo (5).png";
 import photo6 from "@/assets/Photo (6).png";
 import photo7 from "@/assets/Photo (7).png";
 
+const toKebab = (str) => str.toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
 const products = [
   {
-    productUrl: "/products/pergola-s3",
+    productUrl: `/products/${toKebab("Elegante Pergola")}`,
     productAriaLabel: "Elegante Pergola",
     imageContainerClass: "",
     imageSrc: photo2,
     imageAlt: "Elegante Pergola",
-    modelLabel: "Manuelles Modell",
     productName: "Elegante Pergola",
     currentPrice: "2.589 €",
     originalPrice: "3.990 €",
     savingsText: "35% sparen",
     colorSwatches: [
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/129.png", alt: "anthrazit" },
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/107.png", alt: "weiss" },
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/131.png", alt: "schwarz" },
+      { color: "#2D3436", label: "Gray 7016 T" },
+      { color: "#F1EDE5", label: "White 9016 T" },
+      { color: "#0A0A0A", label: "Black 9005 T" },
+      { color: "#8E9499", label: "Gray 7046 T" },
+      { color: "#D4BC6A", label: "Ivory 1015 T" },
     ],
     roofType: "Manuelles Lamellendach",
     windResistance: "Windfest bis 100km/h",
     interestedCount: "5030",
-    buyButtonAriaLabel: "Jetzt kaufen – Elegante Pergola",
+    buyButtonAriaLabel: "Mehr sehen – Elegante Pergola",
   },
   {
-    productUrl: "/products/pergola-custom-design",
+    productUrl: `/products/${toKebab("Luxus-Pergola")}`,
     productAriaLabel: "Luxus-Pergola",
     imageContainerClass: "",
     imageSrc: photo3,
     imageAlt: "Luxus-Pergola",
-    modelLabel: "Beliebtestes Modell",
     productName: "Luxus-Pergola",
     currentPrice: "3.429 €",
     originalPrice: "5.290 €",
     savingsText: "35% sparen",
     colorSwatches: [
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/129.png", alt: "anthrazit" },
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/107.png", alt: "weiss" },
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/131.png", alt: "schwarz" },
+      { color: "#2D3436", label: "Gray 7016 T" },
+      { color: "#F1EDE5", label: "White 9016 T" },
+      { color: "#0A0A0A", label: "Black 9005 T" },
+      { color: "#8E9499", label: "Gray 7046 T" },
+      { color: "#D4BC6A", label: "Ivory 1015 T" },
     ],
     roofType: "Elektrisches Lamellendach",
     windResistance: "Bis zu 120km/h (Sturm)",
@@ -51,19 +55,21 @@ const products = [
     buyButtonAriaLabel: "Jetzt kaufen – Luxus-Pergola",
   },
   {
-    productUrl: "/products/preiswerte-pergola",
+    productUrl: `/products/${toKebab("Preiswerte Pergola")}`,
     productAriaLabel: "Preiswerte Pergola",
     imageContainerClass: "",
     imageSrc: photo4,
     imageAlt: "Preiswerte Pergola",
-    modelLabel: "Unser Premium-Modell",
     productName: "Preiswerte Pergola",
     currentPrice: "5.099 €",
     originalPrice: "7.290 €",
     savingsText: "30% sparen",
     colorSwatches: [
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/129.png", alt: "anthrazit" },
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/107.png", alt: "weiss" },
+      { color: "#2D3436", label: "Gray 7016 T" },
+      { color: "#F1EDE5", label: "White 9016 T" },
+      { color: "#0A0A0A", label: "Black 9005 T" },
+      { color: "#8E9499", label: "Gray 7046 T" },
+      { color: "#D4BC6A", label: "Ivory 1015 T" },
     ],
     roofType: "Elektrische LED-Lamellen",
     windResistance: "Bis zu 140km/h (Orkan)",
@@ -76,56 +82,43 @@ const products = [
     imageContainerClass: "",
     imageSrc: photo5,
     imageAlt: "Wintergärten",
-    modelLabel: "Individuelle Maße",
     productName: "Wintergärten",
     currentPrice: "6.785 €",
     originalPrice: "9.694 €",
     savingsText: "30% sparen",
-    colorSwatches: [],
+    colorSwatches: [
+      { color: "#2D3436", label: "Gray 7016 T" },
+      { color: "#F1EDE5", label: "White 9016 T" },
+      { color: "#0A0A0A", label: "Black 9005 T" },
+      { color: "#8E9499", label: "Gray 7046 T" },
+      { color: "#D4BC6A", label: "Ivory 1015 T" },
+    ],
     roofType: "Elektrisches Lamellendach",
     windResistance: "Bis zu 120km/h (Sturm)",
     interestedCount: "2232",
     buyButtonAriaLabel: "Jetzt kaufen – Wintergärten",
   },
   {
-    productUrl: "/collections/carports",
-    productAriaLabel: "Carports",
+    productUrl: "/products/pergola-massanfertigung",
+    productAriaLabel: "Pergola Maßanfertigung",
     imageContainerClass: "",
     imageSrc: photo6,
-    imageAlt: "Carports",
-    modelLabel: "Wetterschutz",
-    productName: "Carports",
-    currentPrice: "4.299 €",
-    originalPrice: "6.150 €",
+    imageAlt: "Pergola Maßanfertigung",
+    productName: "Pergola Maßanfertigung",
+    currentPrice: "4.899 €",
+    originalPrice: "6.990 €",
     savingsText: "30% sparen",
     colorSwatches: [
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/129.png", alt: "anthrazit" },
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/131.png", alt: "schwarz" },
+      { color: "#2D3436", label: "Gray 7016 T" },
+      { color: "#F1EDE5", label: "White 9016 T" },
+      { color: "#0A0A0A", label: "Black 9005 T" },
+      { color: "#8E9499", label: "Gray 7046 T" },
+      { color: "#D4BC6A", label: "Ivory 1015 T" },
     ],
-    roofType: "Robustes Aluminium-Dach",
+    roofType: "Individuelle Maße & Ausstattung",
     windResistance: "Bis zu 120km/h (Sturm)",
-    interestedCount: "1845",
-    buyButtonAriaLabel: "Jetzt kaufen – Carports",
-  },
-  {
-    productUrl: "/collections/zip-screens",
-    productAriaLabel: "Zip-Screens",
-    imageContainerClass: "",
-    imageSrc: photo7,
-    imageAlt: "Zip-Screens",
-    modelLabel: "Sonnenschutz",
-    productName: "Zip-Screens",
-    currentPrice: "1.299 €",
-    originalPrice: "1.890 €",
-    savingsText: "31% sparen",
-    colorSwatches: [
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/129.png", alt: "anthrazit" },
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/107.png", alt: "weiss" },
-    ],
-    roofType: "Elektrisches Zip-System",
-    windResistance: "Windfest bis 80km/h",
-    interestedCount: "1567",
-    buyButtonAriaLabel: "Jetzt kaufen – Zip-Screens",
+    interestedCount: "1120",
+    buyButtonAriaLabel: "Jetzt kaufen – Pergola Maßanfertigung",
   },
 ];
 
@@ -161,64 +154,59 @@ export const ProductSlider = () => {
   };
 
   return (
-    <div className="bg-white">
-      <div className="py-16 md:py-[120px]">
-        <div className="flex flex-col gap-10">
-          {/* Header row */}
-          <div className="max-w-[1440px] mx-auto px-4 md:px-16 w-full flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <h2 className="text-zinc-900 text-[32px] font-semibold leading-10 md:text-5xl md:leading-[58px]">
+    <section className="bg-white py-16 md:py-24 overflow-hidden">
+      <div className="mx-auto max-w-[1440px] px-4 md:px-16">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14">
+          <div>
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[#82B2CA] mb-2">
+              Unsere Kollektion
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-[#344148]">
               Pergola Modelle
             </h2>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-3">
-                <div className="h-8 w-8 rounded-full overflow-hidden shrink-0">
-                  <img src="https://c.animaapp.com/mnd7yb7cX3zmke/assets/103.png" alt="" className="h-full w-full object-cover" />
-                </div>
-                <div className="text-zinc-900 font-medium flex flex-col leading-5">
-                  <span>Finde deine Pergola</span>
-                  <a href="/collections/unsere-pergolen" className="text-blue-800 font-semibold text-sm hover:underline">
-                    Modelle vergleichen →
-                  </a>
-                </div>
-              </div>
-              {/* Arrow buttons */}
-              <div className="hidden md:flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => scroll("left")}
-                  disabled={!canScrollLeft}
-                  className={`flex h-10 w-10 items-center justify-center rounded-full border border-stone-200 transition ${canScrollLeft ? "bg-white hover:bg-stone-50 text-zinc-900" : "bg-stone-100 text-zinc-300 cursor-not-allowed"}`}
-                  aria-label="Zurück scrollen"
-                >
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => scroll("right")}
-                  disabled={!canScrollRight}
-                  className={`flex h-10 w-10 items-center justify-center rounded-full border border-stone-200 transition ${canScrollRight ? "bg-white hover:bg-stone-50 text-zinc-900" : "bg-stone-100 text-zinc-300 cursor-not-allowed"}`}
-                  aria-label="Weiter scrollen"
-                >
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
-                </button>
-              </div>
-            </div>
           </div>
-
-          {/* Scrollable grid */}
-          <div className="max-w-[1440px] mx-auto px-4 md:px-16 w-full relative">
-            <div ref={scrollRef} className="overflow-x-auto scrollbar-hide scroll-smooth">
-              <ul className="flex gap-6 md:w-max">
-                {products.map((p) => (
-                  <li key={p.productName} className="w-[calc(50vw-2rem)] min-w-[160px] max-w-[320px] shrink-0 md:w-[calc((1440px-8rem-4.5rem)/4)]">
-                    <ProductCard {...p} priceWrapperClass="items-center gap-x-1 flex flex-wrap justify-center gap-y-1" />
-                  </li>
-                ))}
-              </ul>
+          <div className="flex items-center gap-4">
+            <a
+              href="/collections/unsere-pergolen"
+              className="text-sm font-semibold text-[#344148] hover:text-[#82B2CA] transition-colors"
+            >
+              Alle Modelle ansehen &rarr;
+            </a>
+            <div className="hidden md:flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => scroll("left")}
+                disabled={!canScrollLeft}
+                className={`flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 ${canScrollLeft ? "border-[#344148]/20 bg-white hover:bg-[#344148] hover:text-white hover:border-[#344148] text-[#344148]" : "border-stone-200 bg-stone-100 text-stone-300 cursor-not-allowed"}`}
+                aria-label="Zurück scrollen"
+              >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+              </button>
+              <button
+                type="button"
+                onClick={() => scroll("right")}
+                disabled={!canScrollRight}
+                className={`flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 ${canScrollRight ? "border-[#344148]/20 bg-white hover:bg-[#344148] hover:text-white hover:border-[#344148] text-[#344148]" : "border-stone-200 bg-stone-100 text-stone-300 cursor-not-allowed"}`}
+                aria-label="Weiter scrollen"
+              >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+              </button>
             </div>
           </div>
         </div>
+
+        {/* Scrollable cards */}
+        <div ref={scrollRef} className="overflow-x-auto scrollbar-hide scroll-smooth -mx-4 px-4 md:-mx-0 md:px-0">
+          <ul className="flex gap-5 md:gap-6 w-max list-none p-0 m-0">
+            {products.map((p) => (
+              <li key={p.productName} className="w-[280px] md:w-[310px] shrink-0">
+                <ProductCard {...p} priceWrapperClass="items-center gap-x-1.5 flex flex-wrap gap-y-1" />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };

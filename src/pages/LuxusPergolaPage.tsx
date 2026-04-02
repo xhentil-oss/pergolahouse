@@ -7,6 +7,13 @@ import { useCart } from "@/context/CartContext";
 import pergolaImg from "@/assets/pergola.png";
 import photo18 from "@/assets/Photo (18).png";
 import photo26 from "@/assets/Photo (26).png";
+import icon1 from "@/assets/icon1.jpeg";
+import icon4 from "@/assets/icon4.jpeg";
+import icon6 from "@/assets/icon6.jpeg";
+import icon10 from "@/assets/icon10.jpeg";
+import icon13 from "@/assets/icon13.jpeg";
+import icon17 from "@/assets/icon17.jpeg";
+import icon18 from "@/assets/icon18.jpeg";
 
 /* ─── image gallery ─── */
 const gallery = [
@@ -28,14 +35,15 @@ const colorOptions = [
   { label: "Black 9005 T", color: "#0A0A0D", hint: "Tiefschwarz – markant und modern" },
 ];
 
-/* Custom size: Breite, Länge, Höhe in mm */
-const breiteRange = { min: 1000, max: 7000, step: 1 };
-const laengeRange = { min: 1000, max: 7000, step: 1 };
-const hoeheRange = { min: 1000, max: 3500, step: 1 };
-
-/* Price per m² for custom sizes */
-const pricePerSqm = 290;
-const originalPricePerSqm = 445;
+const sizeOptions = [
+  { label: "3x3m", price: 3289, originalPrice: 4990 },
+  { label: "3x4m", price: 3689, originalPrice: 5490 },
+  { label: "3x5m", price: 4089, originalPrice: 5990 },
+  { label: "3x6m", price: 4489, originalPrice: 6490 },
+  { label: "4x4m", price: 4689, originalPrice: 6890 },
+  { label: "4x5m", price: 5089, originalPrice: 7390 },
+  { label: "4x6m", price: 5489, originalPrice: 7890 },
+];
 
 const mountOptions = [
   { label: "Freistehend", img: "https://pergolux.de/cdn/shop/files/freestanding_3957b877-f36f-45a0-986e-6f439f8f5f9c.png?crop=center&height=49&v=1746194687&width=66", surcharge: 0 },
@@ -73,12 +81,13 @@ const trustBadges = [
 
 /* ─── feature story ─── */
 const featureStory = [
-  { title: "Individuelle Maße", text: "Deine Pergola wird exakt nach deinen Wunschmaßen gefertigt – millimetergenau für eine perfekte Passform an deinem Standort." },
-  { title: "Premium Qualität", text: "Gefertigt aus robustem 6063-T5 Aluminium nach den gleichen hohen Standards wie unsere Serienmodelle. TÜV-zertifiziert und sturmfest bis 100 km/h." },
-  { title: "SnapFIT™-System", text: "Trotz individueller Maße profitierst du vom bewährten SnapFIT™-System für eine besonders einfache Montage." },
-  { title: "Stabiler als je zuvor", text: "Konzipiert für extreme Wetterbedingungen mit außergewöhnlicher Haltbarkeit und zuverlässigem Betrieb – Tag für Tag." },
-  { title: "Norwegisches Design", text: "Minimalistisch, funktional und hochwertig bis ins Detail – echte skandinavische Handwerkskunst." },
-  { title: "Persönliche Beratung", text: "Unser Expertenteam berät dich individuell zu Maßen, Farben und Zubehör – damit deine Pergola perfekt wird." },
+  { title: "Drehbare Lamellen", icon: icon18 },
+  { title: "Motorisiertes Dach", icon: icon13 },
+  { title: "Regenschutz", icon: icon6 },
+  { title: "Windbeständig", icon: icon4 },
+  { title: "Smartphone-Steuerung", icon: icon1 },
+  { title: "Regen- & Windsensor", icon: icon10 },
+  { title: "LED & RGB Beleuchtung", icon: icon17 },
 ];
 
 /* ─── reviews ─── */
@@ -145,9 +154,7 @@ export const LuxusPergolaPage = () => {
   const [activeImage, setActiveImage] = useState(0);
   const [descExpanded, setDescExpanded] = useState(false);
   const [selectedColor, setSelectedColor] = useState(colorOptions[0].label);
-  const [breite, setBreite] = useState(3395);
-  const [laenge, setLaenge] = useState(2330);
-  const [hoehe, setHoehe] = useState(1441);
+  const [selectedSize, setSelectedSize] = useState(sizeOptions[0].label);
   const [selectedMount, setSelectedMount] = useState(mountOptions[0].label);
   const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
   const [showAccessories, setShowAccessories] = useState(false);
@@ -194,20 +201,16 @@ export const LuxusPergolaPage = () => {
   }, []);
 
   /* price calculation */
-  const sqm = (breite / 1000) * (laenge / 1000);
-  const basePrice = Math.round(sqm * pricePerSqm);
-  const baseOriginalPrice = Math.round(sqm * originalPricePerSqm);
+  const sizeData = sizeOptions.find((o) => o.label === selectedSize) ?? sizeOptions[0];
   const mountData = mountOptions.find((o) => o.label === selectedMount) ?? mountOptions[0];
   const sideTotal = Object.values(sides).reduce((sum, v) => {
     const choice = sideTypeChoices.find((c) => c.value === v);
     return sum + (choice?.price ?? 0);
   }, 0);
   const accTotal = accessoryOptions.filter((o) => selectedAccessories.includes(o.label)).reduce((s, o) => s + o.price, 0);
-  const finalPrice = basePrice + mountData.surcharge + sideTotal + accTotal;
-  const originalPrice = baseOriginalPrice + mountData.surcharge + sideTotal + accTotal;
+  const finalPrice = sizeData.price + mountData.surcharge + sideTotal + accTotal;
+  const originalPrice = sizeData.originalPrice + mountData.surcharge + sideTotal + accTotal;
   const savings = originalPrice - finalPrice;
-
-  const sizeLabel = `${breite}x${laenge}x${hoehe}mm`;
 
   const toggleAccessory = (label: string) =>
     setSelectedAccessories((c) => (c.includes(label) ? c.filter((x) => x !== label) : [...c, label]));
@@ -227,12 +230,12 @@ export const LuxusPergolaPage = () => {
       productName: "Luxus-Pergola",
       image: gallery[0].src,
       color: selectedColor,
-      size: sizeLabel,
+      size: selectedSize,
       mount: selectedMount,
       mountSurcharge: mountData.surcharge,
       sides: cartSides,
       accessories: cartAccessories,
-      basePrice,
+      basePrice: sizeData.price,
       totalPrice: finalPrice,
     });
   };
@@ -283,11 +286,10 @@ export const LuxusPergolaPage = () => {
               </div>
 
               {/* feature highlights */}
-              <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
+              <div className="mt-5 grid grid-cols-4 gap-2">
                 {featureStory.map((item) => (
-                  <div key={item.title} className="rounded-xl border border-stone-200 bg-stone-50 p-4">
-                    <h4 className="text-sm font-bold text-zinc-900">{item.title}</h4>
-                    <p className="mt-1.5 line-clamp-3 text-xs leading-5 text-zinc-500">{item.text}</p>
+                  <div key={item.title} className="overflow-hidden rounded-[20px] border border-stone-200 bg-stone-50 transition hover:border-[#82B2CA]/40 hover:shadow-sm">
+                    <img src={item.icon} alt={item.title} className="w-full object-cover" />
                   </div>
                 ))}
               </div>
@@ -349,87 +351,19 @@ export const LuxusPergolaPage = () => {
                   <p className="mt-2 text-xs text-zinc-500">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
                 </div>
 
-                {/* Custom Size – Breite / Länge / Höhe in mm */}
+                {/* Size */}
                 <div>
-                  <div className="mb-2">
-                    <span className="text-sm font-semibold text-zinc-700">Größe<span className="text-zinc-400">.</span> <span className="font-normal text-zinc-500">Wähle die genaue Größe</span></span>
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="text-sm font-semibold text-zinc-700">Größe<span className="text-zinc-400">.</span> <span className="font-normal text-zinc-500">Passende Größe auswählen</span></span>
                   </div>
-                  <div className="space-y-5 rounded-xl border border-stone-200 bg-white p-5">
-                    {/* Breite */}
-                    <div>
-                      <label className="mb-2 flex items-center gap-1 text-sm font-semibold text-[#82B2CA]">
-                        Breite
-                        <svg className="h-4 w-4 text-[#82B2CA]" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" /><text x="10" y="14" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="bold">i</text></svg>
-                      </label>
-                      <div className="flex items-center gap-4">
-                        <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
-                          {breite}mm
-                        </div>
-                        <input
-                          type="range"
-                          min={breiteRange.min}
-                          max={breiteRange.max}
-                          step={breiteRange.step}
-                          value={breite}
-                          onChange={(e) => setBreite(Number(e.target.value))}
-                          className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
-                          style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #e7e5e4 ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #e7e5e4 100%)` }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Länge */}
-                    <div>
-                      <label className="mb-2 flex items-center gap-1 text-sm font-semibold text-[#82B2CA]">
-                        Länge
-                        <svg className="h-4 w-4 text-[#82B2CA]" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" /><text x="10" y="14" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="bold">i</text></svg>
-                      </label>
-                      <div className="flex items-center gap-4">
-                        <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
-                          {laenge}mm
-                        </div>
-                        <input
-                          type="range"
-                          min={laengeRange.min}
-                          max={laengeRange.max}
-                          step={laengeRange.step}
-                          value={laenge}
-                          onChange={(e) => setLaenge(Number(e.target.value))}
-                          className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
-                          style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #e7e5e4 ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #e7e5e4 100%)` }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Höhe */}
-                    <div>
-                      <label className="mb-2 flex items-center gap-1 text-sm font-semibold text-[#82B2CA]">
-                        Höhe
-                        <svg className="h-4 w-4 text-[#82B2CA]" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" /><text x="10" y="14" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="bold">i</text></svg>
-                      </label>
-                      <div className="flex items-center gap-4">
-                        <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
-                          {hoehe}mm
-                        </div>
-                        <input
-                          type="range"
-                          min={hoeheRange.min}
-                          max={hoeheRange.max}
-                          step={hoeheRange.step}
-                          value={hoehe}
-                          onChange={(e) => setHoehe(Number(e.target.value))}
-                          className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
-                          style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((hoehe - hoeheRange.min) / (hoeheRange.max - hoeheRange.min)) * 100}%, #e7e5e4 ${((hoehe - hoeheRange.min) / (hoeheRange.max - hoeheRange.min)) * 100}%, #e7e5e4 100%)` }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Summary */}
-                    <div className="flex items-center justify-between rounded-lg bg-stone-50 px-3 py-2 text-sm">
-                      <span className="text-zinc-500">Fläche</span>
-                      <span className="font-bold text-zinc-900">{sqm.toFixed(1)} m²</span>
-                    </div>
+                  <div className="grid grid-cols-4 gap-2">
+                    {sizeOptions.map((s) => (
+                      <button key={s.label} type="button" onClick={() => setSelectedSize(s.label)} className={`rounded-xl border-2 py-2.5 text-center text-sm font-semibold transition ${selectedSize === s.label ? "border-zinc-900 bg-zinc-900 text-white" : "border-stone-200 text-zinc-700 hover:border-stone-400"}`}>
+                        {s.label}
+                      </button>
+                    ))}
                   </div>
+                  <button type="button" className="mt-2 text-xs font-semibold text-zinc-900 underline underline-offset-2">Richtige Größe wählen</button>
                 </div>
 
                 {/* Mount type */}

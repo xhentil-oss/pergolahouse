@@ -7,19 +7,24 @@ import heroBg from "@/assets/Photo (1).png";
 
 const values = [
   {
-    icon: "❤️",
-    title: "Leidenschaft",
-    text: "Wir sind LEIDENSCHAFTLICH für das, was wir unseren Kunden bieten möchten; nämlich einen magischen Außenbereich.",
+    icon: "🔧",
+    title: "Einfache Selbstmontage",
+    text: "Schritt-für-Schritt Anleitungen & Video-Tutorials – kein Fachmann nötig.",
   },
   {
-    icon: "🤝",
-    title: "Persönlich",
-    text: "Wir haben PERSÖNLICHEN Kontakt zu unseren Kunden. Wir nutzen zahlreiche Portale, um die persönliche Beziehung zu unseren Kunden zu pflegen.",
+    icon: "⭐",
+    title: "Premium Aluminium",
+    text: "Pulverbeschichtetes Aluminium – rostfrei, langlebig & pflegeleicht.",
   },
   {
-    icon: "💚",
-    title: "Fair",
-    text: "Wir versprechen FAIRE Preise und konzentrieren uns darauf, unseren Kunden das beste Preis-Leistungs-Verhältnis zu bieten.",
+    icon: "🔒",
+    title: "Bis zu 10 Jahre Garantie",
+    text: "Sorgenfrei genießen – mit unserer erweiterten Herstellergarantie.",
+  },
+  {
+    icon: "📞",
+    title: "Persönliche Beratung",
+    text: "Unsere Experten helfen dir bei Planung, Auswahl & allen Fragen.",
   },
 ];
 

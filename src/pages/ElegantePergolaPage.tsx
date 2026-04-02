@@ -7,6 +7,13 @@ import { useCart } from "@/context/CartContext";
 import pergolaImg from "@/assets/pergola.png";
 import photo18 from "@/assets/Photo (18).png";
 import photo26 from "@/assets/Photo (26).png";
+import icon1 from "@/assets/icon1.jpeg";
+import icon4 from "@/assets/icon4.jpeg";
+import icon6 from "@/assets/icon6.jpeg";
+import icon11 from "@/assets/icon11.jpeg";
+import icon17 from "@/assets/icon17.jpeg";
+import icon18 from "@/assets/icon18.jpeg";
+import icon10 from "@/assets/icon10.jpeg";
 
 /* ─── image gallery ─── */
 const gallery = [
@@ -75,12 +82,13 @@ const trustBadges = [
 
 /* ─── feature story ─── */
 const featureStory = [
-  { title: "Federleichte Handkurbel", text: "Stelle deine Pergola mühelos mit der leichtgängigen Handkurbel ein – die Lamellen regulieren Sonne und Schatten flexibel, sorgen im Sommer für angenehme Kühle und halten Schneelasten bis 100 kg stand.", image: gallery[2].src },
-  { title: "Schnellster Aufbau aller Zeiten", text: "Die Pergola Serie 3 ist dank des bewährten SnapFIT™-Systems besonders einfach zu montieren – inspiriert von IKEA, mit weniger Bauteilen und einem benutzerfreundlichen Design.", image: "https://pergolux.de/cdn/shop/files/PERGOLUX_Story_6_88a3e853-e322-4f21-ab7a-60175e9204a0.jpg?crop=center&format=pjpg&height=900&v=1741620042&width=1200" },
-  { title: "Unsere preiswerteste Pergola", text: "Gefertigt nach den gleichen hohen Standards wie unsere Premium-Modelle und TÜV-zertifiziert. Aus robustem 6063-T5 Aluminium, sturmfest bis 100 km/h.", image: gallery[1].src },
-  { title: "Stabiler als je zuvor", text: "Die Pergola der Serie 3 ist dafür konzipiert, extremen Wetterbedingungen standzuhalten. Außergewöhnliche Haltbarkeit sowie zuverlässiger Betrieb – Tag für Tag.", image: gallery[0].src },
-  { title: "Norwegisches Design", text: "Minimalistisch, funktional und hochwertig bis ins Detail – von der Materialwahl bis zur Ausführung steht alles für echte skandinavische Handwerkskunst.", image: gallery[3].src },
-  { title: "Großartiger Kundenservice", text: "Genieße die deutsche Qualitätsgarantie mit einer 10-Jahres-Garantie und einem Kundenservice, der immer für dich da ist. Mit über 100.000 zufriedenen Kunden.", image: gallery[0].src },
+  { title: "Drehbare Lamellen", text: "Lamellen von 0° bis 120° stufenlos verstellbar – für perfekte Kontrolle über Licht, Schatten und Belüftung.", icon: icon18 },
+  { title: "Regenschutz", text: "Integrierter Wasserablauf mit einer Kapazität von bis zu 120 l/m²/h – zuverlässiger Schutz bei jedem Wetter.", icon: icon6 },
+  { title: "Windbeständig", text: "Geprüft und zertifiziert für Windgeschwindigkeiten bis 224 km/h – stabiler Halt auch bei stürmischem Wetter.", icon: icon4 },
+  { title: "Schneelast", text: "Belastbar bis 120 kg/m² Schneelast – robust und sicher auch in den härtesten Wintermonaten.", icon: icon11 },
+  { title: "Smartphone-Steuerung", text: "Bequeme Bedienung per App – Lamellen, Beleuchtung und Sensoren jederzeit und überall steuern.", icon: icon1 },
+  { title: "LED & RGB Beleuchtung", text: "Integrierte Lichtoptionen für stimmungsvolle Abende – warmweiß oder RGB-Farbwechsel nach Wunsch.", icon: icon17 },
+  { title: "Regen- & Windsensor", text: "Automatische Reaktion auf Wetteränderungen – deine Pergola schließt sich bei Regen oder starkem Wind.", icon: icon10 },
 ];
 
 /* ─── reviews ─── */
@@ -279,11 +287,10 @@ export const ElegantePergolaPage = () => {
               </div>
 
               {/* feature highlights */}
-              <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
+              <div className="mt-5 grid grid-cols-4 gap-2">
                 {featureStory.map((item) => (
-                  <div key={item.title} className="rounded-xl border border-stone-200 bg-stone-50 p-4">
-                    <h4 className="text-sm font-bold text-zinc-900">{item.title}</h4>
-                    <p className="mt-1.5 line-clamp-3 text-xs leading-5 text-zinc-500">{item.text}</p>
+                  <div key={item.title} className="overflow-hidden rounded-[20px] border border-stone-200 bg-stone-50 transition hover:border-[#82B2CA]/40 hover:shadow-sm">
+                    <img src={item.icon} alt={item.title} className="w-full object-cover" />
                   </div>
                 ))}
               </div>

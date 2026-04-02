@@ -7,20 +7,20 @@ import { useCart } from "@/context/CartContext";
 import pergolaImg from "@/assets/pergola.png";
 import photo18 from "@/assets/Photo (18).png";
 import photo26 from "@/assets/Photo (26).png";
-import icon18 from "@/assets/icon18.jpeg";
-import icon6 from "@/assets/icon6.jpeg";
-import icon4 from "@/assets/icon4.jpeg";
-import icon11 from "@/assets/icon11.jpeg";
-import icon13 from "@/assets/icon13.jpeg";
 import icon1 from "@/assets/icon1.jpeg";
-import { Pergola3DViewer } from "@/components/Pergola3DViewer";
+import icon4 from "@/assets/icon4.jpeg";
+import icon6 from "@/assets/icon6.jpeg";
+import icon11 from "@/assets/icon11.jpeg";
+import icon17 from "@/assets/icon17.jpeg";
+import icon18 from "@/assets/icon18.jpeg";
+import icon10 from "@/assets/icon10.jpeg";
 
 /* ─── image gallery ─── */
 const gallery = [
-  { src: pergolaImg, alt: "Pergola Maßanfertigung" },
-  { src: photo18, alt: "Pergola Maßanfertigung – Ansicht 2" },
-  { src: photo26, alt: "Pergola Maßanfertigung – Ansicht 3" },
-  { src: "https://pergolux.de/cdn/shop/files/Background_2925695b-1454-42a8-a462-afa20b8f07be.png?crop=center&height=900&v=1746170598&width=1200", alt: "Pergola Maßanfertigung – Outdoor-Bereich" },
+  { src: pergolaImg, alt: "Wintergarten" },
+  { src: photo18, alt: "Wintergarten – Ansicht 2" },
+  { src: photo26, alt: "Wintergarten – Ansicht 3" },
+  { src: "https://pergolux.de/cdn/shop/files/Background_2925695b-1454-42a8-a462-afa20b8f07be.png?crop=center&height=900&v=1746170598&width=1200", alt: "Wintergarten – Außenbereich" },
   { src: "https://pergolux.de/cdn/shop/files/S3_Stronger_than_ever5.png?crop=center&height=900&v=1745831741&width=1200", alt: "Aluminium-Detailansicht" },
   { src: "https://pergolux.de/cdn/shop/files/effortless-assembly_a659fcec-e1e2-42e3-8b42-98495d7574a5.png?crop=center&height=900&v=1742387411&width=1200", alt: "Montage mit App-Anleitung" },
   { src: "https://pergolux.de/cdn/shop/files/norway.png?crop=center&height=900&v=1742387411&width=1200", alt: "Norwegisches Design" },
@@ -35,14 +35,15 @@ const colorOptions = [
   { label: "Black 9005 T", color: "#0A0A0D", hint: "Tiefschwarz – markant und modern" },
 ];
 
-/* Custom size: Breite, Länge, Höhe in mm */
-const breiteRange = { min: 1000, max: 7000, step: 1 };
-const laengeRange = { min: 1000, max: 7000, step: 1 };
-const hoeheRange = { min: 1000, max: 3500, step: 1 };
-
-/* Price per m² for custom sizes */
-const pricePerSqm = 290;
-const originalPricePerSqm = 445;
+const sizeOptions = [
+  { label: "3x3m", price: 4289, originalPrice: 6490 },
+  { label: "3x4m", price: 4789, originalPrice: 7190 },
+  { label: "3x5m", price: 5289, originalPrice: 7890 },
+  { label: "3x6m", price: 5789, originalPrice: 8590 },
+  { label: "4x4m", price: 5989, originalPrice: 8990 },
+  { label: "4x5m", price: 6489, originalPrice: 9690 },
+  { label: "4x6m", price: 6989, originalPrice: 10390 },
+];
 
 const mountOptions = [
   { label: "Freistehend", img: "https://pergolux.de/cdn/shop/files/freestanding_3957b877-f36f-45a0-986e-6f439f8f5f9c.png?crop=center&height=49&v=1746194687&width=66", surcharge: 0 },
@@ -50,10 +51,10 @@ const mountOptions = [
 ];
 
 const sideOptions = [
-  { key: "left", label: "Links", sizeLabel: "Seite", img: "https://pergolux.de/cdn/shop/files/sm-left.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "right", label: "Rechts", sizeLabel: "Seite", img: "https://pergolux.de/cdn/shop/files/sm-right.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "front", label: "Vorne", sizeLabel: "Seite", img: "https://pergolux.de/cdn/shop/files/sm-front.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "back", label: "Hinten", sizeLabel: "Seite", img: "https://pergolux.de/cdn/shop/files/sm-back.png?crop=center&height=68&v=1752586043&width=109" },
+  { key: "left", label: "Links", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-left.png?crop=center&height=68&v=1752586042&width=109" },
+  { key: "right", label: "Rechts", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-right.png?crop=center&height=68&v=1752586042&width=109" },
+  { key: "front", label: "Vorne", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-front.png?crop=center&height=68&v=1752586042&width=109" },
+  { key: "back", label: "Hinten", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-back.png?crop=center&height=68&v=1752586043&width=109" },
 ];
 
 const sideTypeChoices = [
@@ -64,7 +65,7 @@ const sideTypeChoices = [
 ];
 
 const accessoryOptions = [
-  { label: "LED Warmweiß", description: "Warmweißes Licht für gemütliche Abende unter der Pergola.", price: 329 },
+  { label: "LED Warmweiß", description: "Warmweißes Licht für gemütliche Abende im Wintergarten.", price: 329 },
   { label: "LED RGB", description: "Farbwechsel-Beleuchtung für individuelle Stimmungen und Akzente.", price: 449 },
   { label: "Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühleren Tagen.", price: 549 },
   { label: "Smart Steuerung", description: "Intelligente Steuerung per App – Lamellen, Licht und Heizung.", price: 399 },
@@ -78,14 +79,16 @@ const trustBadges = [
   { icon: "https://pergolux.de/cdn/shop/files/Home_cef2a425-ad3f-4844-ae3d-e17d79c3ee77.png?crop=center&height=48&v=1757669933&width=48", label: "Wertsteigerung" },
 ];
 
+
 /* ─── feature story (icon-based) ─── */
 const featureStory = [
   { image: icon18 },
   { image: icon6 },
   { image: icon4 },
   { image: icon11 },
-  { image: icon13 },
   { image: icon1 },
+  { image: icon17 },
+  { image: icon10 },
 ];
 
 /* ─── reviews ─── */
@@ -109,7 +112,7 @@ const serviceCards = [
 
 const bottomTrustBadges = [
   { icon: "https://pergolux.de/cdn/shop/files/Confetti_198c4952-7307-43f9-8286-78ba45318c28.png?crop=center&height=46&v=1752586038&width=46", title: "+100.000 zufriedene Kunden", text: "Über 100.000 zufriedene Kunden sprechen für die hohe Qualität." },
-  { icon: "https://pergolux.de/cdn/shop/files/Cup_Star_7ee97793-32f0-4e9f-a94d-92c9ffa17b95.png?crop=center&height=66&v=1752586038&width=66", title: "Hochwertige Pergolen", text: "Mehrfach ausgezeichnet für Qualität und Langlebigkeit." },
+  { icon: "https://pergolux.de/cdn/shop/files/Cup_Star_7ee97793-32f0-4e9f-a94d-92c9ffa17b95.png?crop=center&height=66&v=1752586038&width=66", title: "Hochwertige Wintergärten", text: "Mehrfach ausgezeichnet für Qualität und Langlebigkeit." },
   { icon: "https://pergolux.de/cdn/shop/files/weather.png?crop=center&height=74&v=1752586039&width=74", title: "Für alle Wetterbedingungen", text: "Genieße deinen Außenbereich das ganze Jahr über." },
 ];
 
@@ -146,16 +149,13 @@ const Stars = ({ count }: { count: number }) => (
 );
 
 /* ─────────────────────────────────────────────── */
-export const PergolaManfertigungPage = () => {
+export const WintergartenPage = () => {
   const { addToCart } = useCart();
   /* state */
   const [activeImage, setActiveImage] = useState(0);
-  const [louversOpen, setLouversOpen] = useState(false);
   const [descExpanded, setDescExpanded] = useState(false);
   const [selectedColor, setSelectedColor] = useState(colorOptions[0].label);
-  const [breite, setBreite] = useState(3395);
-  const [laenge, setLaenge] = useState(2330);
-  const [hoehe, setHoehe] = useState(1441);
+  const [selectedSize, setSelectedSize] = useState(sizeOptions[0].label);
   const [selectedMount, setSelectedMount] = useState(mountOptions[0].label);
   const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
   const [showAccessories, setShowAccessories] = useState(false);
@@ -202,20 +202,16 @@ export const PergolaManfertigungPage = () => {
   }, []);
 
   /* price calculation */
-  const sqm = (breite / 1000) * (laenge / 1000);
-  const basePrice = Math.round(sqm * pricePerSqm);
-  const baseOriginalPrice = Math.round(sqm * originalPricePerSqm);
+  const sizeData = sizeOptions.find((o) => o.label === selectedSize) ?? sizeOptions[0];
   const mountData = mountOptions.find((o) => o.label === selectedMount) ?? mountOptions[0];
   const sideTotal = Object.values(sides).reduce((sum, v) => {
     const choice = sideTypeChoices.find((c) => c.value === v);
     return sum + (choice?.price ?? 0);
   }, 0);
   const accTotal = accessoryOptions.filter((o) => selectedAccessories.includes(o.label)).reduce((s, o) => s + o.price, 0);
-  const finalPrice = basePrice + mountData.surcharge + sideTotal + accTotal;
-  const originalPrice = baseOriginalPrice + mountData.surcharge + sideTotal + accTotal;
+  const finalPrice = sizeData.price + mountData.surcharge + sideTotal + accTotal;
+  const originalPrice = sizeData.originalPrice + mountData.surcharge + sideTotal + accTotal;
   const savings = originalPrice - finalPrice;
-
-  const sizeLabel = `${breite}x${laenge}x${hoehe}mm`;
 
   const toggleAccessory = (label: string) =>
     setSelectedAccessories((c) => (c.includes(label) ? c.filter((x) => x !== label) : [...c, label]));
@@ -232,15 +228,15 @@ export const PergolaManfertigungPage = () => {
       .map((o) => ({ label: o.label, price: o.price }));
 
     addToCart({
-      productName: "Pergola Maßanfertigung",
+      productName: "Wintergarten",
       image: gallery[0].src,
       color: selectedColor,
-      size: sizeLabel,
+      size: selectedSize,
       mount: selectedMount,
       mountSurcharge: mountData.surcharge,
       sides: cartSides,
       accessories: cartAccessories,
-      basePrice,
+      basePrice: sizeData.price,
       totalPrice: finalPrice,
     });
   };
@@ -263,38 +259,16 @@ export const PergolaManfertigungPage = () => {
               <div className="mb-3 hidden items-center gap-2 text-sm text-zinc-400 md:flex">
                 <Link to="/" className="hover:text-zinc-900">Startseite</Link><span>/</span>
                 <Link to="/collections/unsere-pergolen" className="hover:text-zinc-900">Pergolen</Link><span>/</span>
-                <span className="text-zinc-700">Pergola Maßanfertigung</span>
+                <span className="text-zinc-700">Wintergarten</span>
               </div>
 
               {/* main image + swipe */}
               <div ref={galleryRef} className="relative overflow-hidden rounded-2xl bg-stone-100 md:rounded-3xl">
-                {activeImage === 0 ? (
-                  <div className="aspect-square w-full md:aspect-[4/3] md:h-[520px]">
-                    <Pergola3DViewer breite={breite} laenge={laenge} hoehe={hoehe} color={selectedColor} louversOpen={louversOpen} />
-                  </div>
-                ) : (
-                  <img
-                    src={gallery[activeImage].src}
-                    alt={gallery[activeImage].alt}
-                    className="aspect-square w-full object-cover md:aspect-[4/3] md:h-[520px]"
-                  />
-                )}
-                {/* Louver toggle button */}
-                {activeImage === 0 && (
-                  <button
-                    onClick={() => setLouversOpen((prev) => !prev)}
-                    className="absolute bottom-12 right-3 md:bottom-3 md:right-3 z-10 flex items-center gap-2 rounded-full border border-white/30 bg-white/90 px-3 py-2 shadow-lg backdrop-blur-md transition-all hover:bg-white cursor-pointer"
-                  >
-                    <svg className="h-4 w-4 text-zinc-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
-                    <span className="text-xs font-semibold text-zinc-700">Dach</span>
-                    <div className={`relative h-5 w-9 rounded-full transition-colors duration-300 ${louversOpen ? "bg-[#344148]" : "bg-zinc-300"}`}>
-                      <div className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform duration-300 ${louversOpen ? "translate-x-4" : "translate-x-0.5"}`} />
-                    </div>
-                    <span className={`text-xs font-bold transition-colors duration-300 ${louversOpen ? "text-[#82B2CA]" : "text-zinc-400"}`}>{louversOpen ? "AUF" : "ZU"}</span>
-                  </button>
-                )}
+                <img
+                  src={gallery[activeImage].src}
+                  alt={gallery[activeImage].alt}
+                  className="aspect-square w-full object-cover md:aspect-[4/3] md:h-[520px]"
+                />
                 {/* dot indicators mobile */}
                 <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5 md:hidden">
                   {gallery.map((_, i) => (
@@ -307,14 +281,7 @@ export const PergolaManfertigungPage = () => {
               <div className="mt-3 hidden gap-2 md:grid md:grid-cols-4">
                 {gallery.map((img, i) => (
                   <button key={img.src} type="button" onClick={() => setActiveImage(i)} className={`overflow-hidden rounded-xl border-2 transition ${activeImage === i ? "border-zinc-900" : "border-transparent hover:border-stone-300"}`}>
-                    {i === 0 ? (
-                      <div className="relative flex h-24 w-full items-center justify-center bg-gradient-to-br from-stone-200 to-stone-100">
-                        <svg className="h-8 w-8 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" /></svg>
-                        <span className="absolute bottom-1 text-[10px] font-semibold text-zinc-500">3D</span>
-                      </div>
-                    ) : (
-                      <img src={img.src} alt={img.alt} className="h-24 w-full object-cover" />
-                    )}
+                    <img src={img.src} alt={img.alt} className="h-24 w-full object-cover" />
                   </button>
                 ))}
               </div>
@@ -337,13 +304,13 @@ export const PergolaManfertigungPage = () => {
                 <span className="text-sm font-medium text-zinc-600">919 Bewertungen</span>
               </div>
 
-              <h1 className="text-3xl font-semibold tracking-tight text-zinc-950 md:text-4xl">Pergola Maßanfertigung</h1>
-              <h3 className="mt-1 text-lg font-semibold text-zinc-700">Deine Pergola nach Maß – millimetergenau gefertigt</h3>
+              <h1 className="text-3xl font-semibold tracking-tight text-zinc-950 md:text-4xl">Wintergarten</h1>
+              <h3 className="mt-1 text-lg font-semibold text-zinc-700">Ganzjährig nutzbar, stilvoll geschützt</h3>
 
               {/* expandable description */}
               <div className="relative mt-3">
                 <p className={`text-sm leading-6 text-zinc-600 ${!descExpanded ? "line-clamp-3" : ""}`}>
-                  Die Pergola Maßanfertigung ist ein exklusives Aluminium-Pergolasystem mit vollständig einfahrbaren und drehbaren Lamellen, integriertem Wasserablauf und hoher Widerstandsfähigkeit gegenüber Witterungseinflüssen. Sie schafft elegante Außenräume mit maximalem Komfort und einem besonders großzügigen Raumgefühl, da sich das Dach vollständig öffnen lässt und die Lamellen zusätzlich flexibel gedreht werden können. So ermöglicht sie sowohl optimalen Schutz vor Sonne und Regen als auch eine individuelle Steuerung von Licht, Schatten und Belüftung. Optional ist sie mit LED-Beleuchtung, Regen- und Windsensoren, Smartphone-Steuerung sowie seitlichen Glas- oder Zip-Systemen erhältlich.
+                  Der Wintergarten ist ein hochwertiges Aluminium-System mit drehbaren Lamellen, integriertem Wasserablauf und rundum geschlossener Verglasung. Er verbindet modernes Design mit ganzjährigem Wetterschutz und schafft einen lichtdurchfluteten Wohnraum im Freien. Optional erhältlich mit LED-Beleuchtung, Regen- und Windsensoren, Smartphone-Steuerung sowie Heizung für die kalten Monate.
                 </p>
                 <button type="button" onClick={() => setDescExpanded(!descExpanded)} className="mt-1 text-sm font-semibold text-zinc-900 underline underline-offset-2">
                   {descExpanded ? "Weniger anzeigen" : "Mehr anzeigen"}
@@ -361,7 +328,7 @@ export const PergolaManfertigungPage = () => {
                   <span className="text-xs text-white/70">Sale endet in {remainingTime.days}t : {remainingTime.hours}h : {remainingTime.minutes}m : {remainingTime.seconds}s</span>
                 </div>
                 <ul className="mt-3 space-y-1 text-sm text-white/80">
-                  <li>• Bis zu 35 % Rabatt auf Pergolen</li>
+                  <li>• Bis zu 35 % Rabatt auf Wintergärten</li>
                   <li>• Bis zu 35 % Rabatt auf Seitenwände</li>
                   <li>• Bis zu 35 % Rabatt auf zusätzliches Zubehör</li>
                 </ul>
@@ -383,89 +350,22 @@ export const PergolaManfertigungPage = () => {
                     ))}
                   </div>
                   <p className="mt-2 text-xs text-zinc-500">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
+                  <button type="button" className="mt-1 text-xs font-semibold text-zinc-900 underline underline-offset-2">Welche Farbe ist die passende?</button>
                 </div>
 
-                {/* Custom Size – Breite / Länge / Höhe in mm */}
+                {/* Size */}
                 <div>
-                  <div className="mb-2">
-                    <span className="text-sm font-semibold text-zinc-700">Größe<span className="text-zinc-400">.</span> <span className="font-normal text-zinc-500">Wähle die genaue Größe</span></span>
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="text-sm font-semibold text-zinc-700">Größe<span className="text-zinc-400">.</span> <span className="font-normal text-zinc-500">Passende Größe auswählen</span></span>
                   </div>
-                  <div className="space-y-5 rounded-xl border border-stone-200 bg-white p-5">
-                    {/* Breite */}
-                    <div>
-                      <label className="mb-2 flex items-center gap-1 text-sm font-semibold text-[#82B2CA]">
-                        Breite
-                        <svg className="h-4 w-4 text-[#82B2CA]" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" /><text x="10" y="14" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="bold">i</text></svg>
-                      </label>
-                      <div className="flex items-center gap-4">
-                        <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
-                          {breite}mm
-                        </div>
-                        <input
-                          type="range"
-                          min={breiteRange.min}
-                          max={breiteRange.max}
-                          step={breiteRange.step}
-                          value={breite}
-                          onChange={(e) => setBreite(Number(e.target.value))}
-                          className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
-                          style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #e7e5e4 ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #e7e5e4 100%)` }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Länge */}
-                    <div>
-                      <label className="mb-2 flex items-center gap-1 text-sm font-semibold text-[#82B2CA]">
-                        Länge
-                        <svg className="h-4 w-4 text-[#82B2CA]" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" /><text x="10" y="14" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="bold">i</text></svg>
-                      </label>
-                      <div className="flex items-center gap-4">
-                        <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
-                          {laenge}mm
-                        </div>
-                        <input
-                          type="range"
-                          min={laengeRange.min}
-                          max={laengeRange.max}
-                          step={laengeRange.step}
-                          value={laenge}
-                          onChange={(e) => setLaenge(Number(e.target.value))}
-                          className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
-                          style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #e7e5e4 ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #e7e5e4 100%)` }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Höhe */}
-                    <div>
-                      <label className="mb-2 flex items-center gap-1 text-sm font-semibold text-[#82B2CA]">
-                        Höhe
-                        <svg className="h-4 w-4 text-[#82B2CA]" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" /><text x="10" y="14" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="bold">i</text></svg>
-                      </label>
-                      <div className="flex items-center gap-4">
-                        <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
-                          {hoehe}mm
-                        </div>
-                        <input
-                          type="range"
-                          min={hoeheRange.min}
-                          max={hoeheRange.max}
-                          step={hoeheRange.step}
-                          value={hoehe}
-                          onChange={(e) => setHoehe(Number(e.target.value))}
-                          className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
-                          style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((hoehe - hoeheRange.min) / (hoeheRange.max - hoeheRange.min)) * 100}%, #e7e5e4 ${((hoehe - hoeheRange.min) / (hoeheRange.max - hoeheRange.min)) * 100}%, #e7e5e4 100%)` }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Summary */}
-                    <div className="flex items-center justify-between rounded-lg bg-stone-50 px-3 py-2 text-sm">
-                      <span className="text-zinc-500">Fläche</span>
-                      <span className="font-bold text-zinc-900">{sqm.toFixed(1)} m²</span>
-                    </div>
+                  <div className="grid grid-cols-4 gap-2">
+                    {sizeOptions.map((s) => (
+                      <button key={s.label} type="button" onClick={() => setSelectedSize(s.label)} className={`rounded-xl border-2 py-2.5 text-center text-sm font-semibold transition ${selectedSize === s.label ? "border-zinc-900 bg-zinc-900 text-white" : "border-stone-200 text-zinc-700 hover:border-stone-400"}`}>
+                        {s.label}
+                      </button>
+                    ))}
                   </div>
+                  <button type="button" className="mt-2 text-xs font-semibold text-zinc-900 underline underline-offset-2">Richtige Größe wählen</button>
                 </div>
 
                 {/* Mount type */}
@@ -481,6 +381,7 @@ export const PergolaManfertigungPage = () => {
                       </button>
                     ))}
                   </div>
+                  <button type="button" className="mt-2 text-xs font-semibold text-zinc-900 underline underline-offset-2">Welche Variante ist die passende?</button>
                 </div>
 
                 {/* ── Side elements configurator ── */}
@@ -551,7 +452,7 @@ export const PergolaManfertigungPage = () => {
                   <button type="button" onClick={handleAddToCart} className="rounded-xl py-3.5 text-center text-sm font-bold text-white transition hover:opacity-90" style={{ backgroundColor: '#344148' }}>
                     In den Warenkorb – {formatPrice(finalPrice)}
                   </button>
-                  <a href="tel:+4966141087500" className="flex items-center justify-center gap-2 rounded-xl border border-[#344148] py-3.5 text-sm font-semibold text-zinc-900 transition hover:opacity-90">
+                  <a href="tel:+4966141087500" className="flex items-center justify-center gap-2 rounded-xl border border-zinc-900 py-3.5 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-900 hover:text-white">
                     Beratung anfragen
                   </a>
                 </div>
@@ -619,7 +520,7 @@ export const PergolaManfertigungPage = () => {
             {totalReviewPages > 1 && (
               <div className="mt-6 flex items-center justify-center gap-2">
                 {Array.from({ length: totalReviewPages }, (_, i) => (
-                  <button key={i} type="button" onClick={() => setReviewPage(i)} className={`h-8 w-8 rounded-full text-sm font-semibold transition ${reviewPage === i ? "text-white" : "bg-stone-200 text-zinc-600 hover:bg-stone-300"}`} style={reviewPage === i ? { backgroundColor: '#344148' } : undefined}>{i + 1}</button>
+                  <button key={i} type="button" onClick={() => setReviewPage(i)} className={`h-8 w-8 rounded-full text-sm font-semibold transition ${reviewPage === i ? "bg-[#344148] text-white" : "bg-stone-200 text-zinc-600 hover:bg-stone-300"}`}>{i + 1}</button>
                 ))}
               </div>
             )}
@@ -630,9 +531,10 @@ export const PergolaManfertigungPage = () => {
         <section className="bg-white py-10 md:py-16">
           <div className="mx-auto max-w-[1440px] px-4 md:px-16">
             <div className="mb-6 text-center">
-              <h2 className="text-2xl font-semibold text-zinc-950 md:text-3xl">Die beste Wahl für deine Pergola</h2>
+              <h2 className="text-2xl font-semibold text-zinc-950 md:text-3xl">Die beste Wahl für deinen Wintergarten</h2>
               <p className="mt-2 text-sm text-zinc-500">Hast du Fragen? <Link to="/contact" className="font-semibold text-zinc-900 underline underline-offset-2">Kundenservice kontaktieren</Link></p>
             </div>
+            {/* service cards */}
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {serviceCards.map((card) => (
                 <div key={card.title} className="flex flex-col items-center rounded-2xl border border-stone-200 p-6 text-center">
@@ -668,11 +570,11 @@ export const PergolaManfertigungPage = () => {
             <h2 className="mb-6 text-2xl font-semibold text-zinc-950 md:text-3xl">Häufige Fragen</h2>
             <div className="space-y-2">
               {[
-                { q: "Was unterscheidet die Pergola Maßanfertigung von der Standard-Pergola?", a: "Bei der Pergola Maßanfertigung wählst du Breite und Tiefe frei in cm – deine Pergola wird exakt nach deinen Wunschmaßen gefertigt. Qualität und Material sind identisch mit unseren Serienmodellen." },
-                { q: "Welche Maße sind möglich?", a: "Breite und Tiefe können jeweils zwischen 200 cm und 700 cm in 10-cm-Schritten frei gewählt werden." },
-                { q: "Kann ich die Pergola selbst montieren?", a: "Ja. Auch die Pergola Maßanfertigung nutzt das bewährte SnapFIT™-System für einen einfachen Aufbau. Bei Bedarf kannst du einen Montageservice anfragen." },
-                { q: "Wie wird der Preis berechnet?", a: "Der Preis berechnet sich nach der gewählten Fläche (m²) plus optionale Extras wie Seitenelemente, Zubehör und Montageart." },
-                { q: "Wie lange dauert die Lieferung?", a: "Die Pergola Maßanfertigung wird individuell produziert. Die Lieferzeit beträgt in der Regel 4–6 Wochen. Ab 1.000 € Bestellwert ist die Lieferung kostenlos." },
+                { q: "Ist der Wintergarten für ganzjährige Nutzung geeignet?", a: "Ja. Die Konstruktion aus 6063-T5 Aluminium mit rundum geschlossener Verglasung ist auf dauerhafte Nutzung im Außenbereich ausgelegt und bietet ganzjährigen Wetterschutz." },
+                { q: "Kann ich den Wintergarten selbst montieren?", a: "Ja. Der Wintergarten ist für einen unkomplizierten Aufbau konzipiert. Wenn du möchtest, kannst du zusätzlich einen Montageservice anfragen." },
+                { q: "Wie funktioniert die Belüftung?", a: "Die drehbaren Lamellen im Dach lassen sich stufenlos verstellen, sodass du Luftzirkulation, Licht und Schatten flexibel regulieren kannst." },
+                { q: "Kann ich später Zubehör hinzufügen?", a: "Ja. LED-Beleuchtung, Heizung, Smart Steuerung und weitere Seitenelemente lassen sich jederzeit ergänzen." },
+                { q: "Wie wird der Wintergarten geliefert?", a: "Der Wintergarten wird per Spedition in mehreren Paketen geliefert. Ab 1.000 € Bestellwert ist die Lieferung kostenlos." },
                 { q: "Ist eine Baugenehmigung erforderlich?", a: "Das hängt vom Bundesland und der Größe ab. Nutze unseren Baugenehmigungscheck, um die Anforderungen für deinen Standort zu prüfen." },
               ].map((item, i) => {
                 const isOpen = openFaq === i;

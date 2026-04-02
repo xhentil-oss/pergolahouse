@@ -20,8 +20,6 @@ export const DesktopNav = () => {
           { label: "Preiswerte Pergola", href: "/products/preiswerte-pergola" },
           { label: "Pergola Maßanfertigung", href: "/products/pergola-massanfertigung" },
           { label: "Wintergärten", href: "/collections/wintergarten-1" },
-          { label: "Carports", href: "/collections/carports" },
-          { label: "Zip-Screens", href: "/collections/zip-screens" },
         ]}
       />
       <NavItem
@@ -32,6 +30,8 @@ export const DesktopNav = () => {
           { label: "Glaswände", href: "/products/glaswande" },
           { label: "LEDs", href: "/products/led-stripes" },
           { label: "Wärmelampe", href: "/products/waermelampe" },
+          { label: "Carports", href: "/collections/carports" },
+          { label: "Zip-Screens", href: "/collections/zip-screens" },
         ]}
       />
       <Link
