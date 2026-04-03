@@ -561,29 +561,136 @@ export const LuxusPergolaPage = () => {
         <FeatureTicker backgroundColorClass="bg-[#344148]" />
 
         {/* ── FAQ ── */}
-        <section className="border-t border-stone-200 bg-stone-50 py-12 md:py-20">
-          <div className="mx-auto max-w-[900px] px-4 md:px-16">
-            <h2 className="mb-6 text-2xl font-semibold text-zinc-950 md:text-3xl">Häufige Fragen</h2>
-            <div className="space-y-2">
-              {[
-                { q: "Was unterscheidet die Luxus-Pergola von der Standard-Pergola?", a: "Bei der Luxus-Pergola wählst du Breite und Tiefe frei in cm – deine Pergola wird exakt nach deinen Wunschmaßen gefertigt. Qualität und Material sind identisch mit unseren Serienmodellen." },
-                { q: "Welche Maße sind möglich?", a: "Breite und Tiefe können jeweils zwischen 200 cm und 700 cm in 10-cm-Schritten frei gewählt werden." },
-                { q: "Kann ich die Pergola selbst montieren?", a: "Ja. Auch die Luxus-Pergola nutzt das bewährte SnapFIT™-System für einen einfachen Aufbau. Bei Bedarf kannst du einen Montageservice anfragen." },
-                { q: "Wie wird der Preis berechnet?", a: "Der Preis berechnet sich nach der gewählten Fläche (m²) plus optionale Extras wie Seitenelemente, Zubehör und Montageart." },
-                { q: "Wie lange dauert die Lieferung?", a: "Die Luxus-Pergola wird individuell produziert. Die Lieferzeit beträgt in der Regel 4–6 Wochen. Ab 1.000 € Bestellwert ist die Lieferung kostenlos." },
-                { q: "Ist eine Baugenehmigung erforderlich?", a: "Das hängt vom Bundesland und der Größe ab. Nutze unseren Baugenehmigungscheck, um die Anforderungen für deinen Standort zu prüfen." },
-              ].map((item, i) => {
-                const isOpen = openFaq === i;
-                return (
-                  <div key={item.q} className="rounded-xl border border-stone-200 bg-white">
-                    <button type="button" onClick={() => setOpenFaq(isOpen ? null : i)} className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
-                      <span className="text-sm font-semibold text-zinc-900">{item.q}</span>
-                      <span className="text-lg text-zinc-400">{isOpen ? "−" : "+"}</span>
-                    </button>
-                    {isOpen && <p className="px-5 pb-4 text-sm leading-6 text-zinc-600">{item.a}</p>}
-                  </div>
-                );
-              })}
+        <section className="relative overflow-hidden bg-gradient-to-b from-zinc-50 to-white">
+          {/* decorative blobs */}
+          <div className="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-[#82B2CA]/20 blur-[100px]" />
+          <div className="pointer-events-none absolute -right-40 bottom-20 h-80 w-80 rounded-full bg-[#82B2CA]/15 blur-[100px]" />
+
+          <div className="relative max-w-[1440px] mx-auto px-4 py-16 md:px-16 md:py-[120px]">
+            {/* header */}
+            <div className="text-center mb-14">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#82B2CA]/10 border border-[#82B2CA]/30 px-4 py-1.5 mb-5">
+                <svg className="h-4 w-4 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+                </svg>
+                <span className="text-sm font-semibold text-[#82B2CA]">Häufig gestellte Fragen</span>
+              </div>
+              <h2 className="text-zinc-900 text-[32px] font-bold leading-10 md:text-5xl md:leading-[58px]">
+                Hast du noch Fragen?
+              </h2>
+              <p className="mx-auto mt-4 max-w-lg text-zinc-500 text-base md:text-lg">
+                Hier findest du Antworten auf die häufigsten Fragen zu deiner Luxus-Pergola.
+              </p>
+            </div>
+
+            {/* FAQ grid – 2 columns on desktop */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-5xl mx-auto">
+              <div className="flex flex-col gap-4">
+                {[
+                  { q: "Was unterscheidet die Luxus-Pergola von der Standard-Pergola?", a: "Bei der Luxus-Pergola wählst du <strong>Breite und Tiefe frei in cm</strong> – deine Pergola wird <strong>exakt nach deinen Wunschmaßen</strong> gefertigt. Qualität und Material sind identisch mit unseren Serienmodellen. Du bestimmst jede Dimension präzise." },
+                  { q: "Welche Maße sind möglich?", a: "<strong>Breite und Tiefe können jeweils zwischen 200 cm und 700 cm</strong> in 10-cm-Schritten frei gewählt werden. Das gibt dir völlige Flexibilität beim Design deiner Pergola – genau nach deinen Anforderungen." },
+                  { q: "Kann ich die Pergola selbst montieren?", a: "Ja! Auch die Luxus-Pergola nutzt das bewährte <strong>SnapFIT™-System</strong> für einen einfachen Aufbau. Du erhältst eine <strong>detaillierte Anleitung und Zugang zur Montage-App</strong>. Bei Bedarf kannst du einen <strong>professionellen Montageservice</strong> anfragen." },
+                ].map((item, i) => {
+                  const isOpen = openFaq === i;
+                  return (
+                    <div
+                      key={item.q}
+                      className={`group rounded-2xl border transition-all duration-300 cursor-pointer ${
+                        isOpen
+                          ? "border-[#82B2CA]/30 bg-[#82B2CA]/5 shadow-lg shadow-[#82B2CA]/10"
+                          : "border-zinc-100 bg-white hover:border-zinc-200 hover:shadow-md"
+                      }`}
+                      onClick={() => setOpenFaq(isOpen ? null : i)}
+                    >
+                      <button className="w-full text-left px-6 py-5 flex items-center gap-4">
+                        <span
+                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-bold transition-all duration-300 ${
+                            isOpen
+                              ? "bg-[#344148] text-white shadow-md shadow-[#344148]/20"
+                              : "bg-zinc-100 text-zinc-400 group-hover:bg-zinc-200 group-hover:text-zinc-600"
+                          }`}
+                        >
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span className={`flex-1 font-semibold leading-6 transition-colors duration-300 ${isOpen ? "text-[#344148]" : "text-zinc-900"}`}>
+                          {item.q}
+                        </span>
+                        <span
+                          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
+                            isOpen
+                              ? "bg-[#344148] text-white rotate-180"
+                              : "bg-zinc-100 text-zinc-400 group-hover:bg-zinc-200"
+                          }`}
+                        >
+                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                          </svg>
+                        </span>
+                      </button>
+                      <div
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div className="px-6 pb-6 pl-20 text-zinc-600 leading-7" dangerouslySetInnerHTML={{ __html: item.a }} />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="flex flex-col gap-4">
+                {[
+                  { q: "Wie wird der Preis berechnet?", a: "Der Preis berechnet sich nach der <strong>gewählten Fläche (m²)</strong> zuzüglich <strong>optionale Extras wie Seitenelemente, Zubehör und Montageart</strong>. Du siehst den finalen Preis sofort während der Konfiguration – keine versteckten Kosten." },
+                  { q: "Wie lange dauert die Lieferung?", a: "Die Luxus-Pergola wird <strong>individuell für dich produziert</strong>. Die Lieferzeit beträgt in der Regel <strong>4–6 Wochen</strong>. Ab 1.000 € Bestellwert ist die Lieferung <strong>kostenlos</strong>. Express-Optionen verfügbar." },
+                  { q: "Ist eine Baugenehmigung erforderlich?", a: "Das hängt vom <strong>Bundesland und der Größe</strong> ab. Nutze unseren <strong>kostenlosen Baugenehmigungscheck</strong>, um die exakten Anforderungen für deinen Standort zu prüfen. Unser Team berät dich gerne weiter." },
+                ].map((item, i) => {
+                  const isOpen = openFaq === (i + 3);
+                  return (
+                    <div
+                      key={item.q}
+                      className={`group rounded-2xl border transition-all duration-300 cursor-pointer ${
+                        isOpen
+                          ? "border-[#82B2CA]/30 bg-[#82B2CA]/5 shadow-lg shadow-[#82B2CA]/10"
+                          : "border-zinc-100 bg-white hover:border-zinc-200 hover:shadow-md"
+                      }`}
+                      onClick={() => setOpenFaq(isOpen ? null : (i + 3))}
+                    >
+                      <button className="w-full text-left px-6 py-5 flex items-center gap-4">
+                        <span
+                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-bold transition-all duration-300 ${
+                            isOpen
+                              ? "bg-[#344148] text-white shadow-md shadow-[#344148]/20"
+                              : "bg-zinc-100 text-zinc-400 group-hover:bg-zinc-200 group-hover:text-zinc-600"
+                          }`}
+                        >
+                          {String(i + 4).padStart(2, "0")}
+                        </span>
+                        <span className={`flex-1 font-semibold leading-6 transition-colors duration-300 ${isOpen ? "text-[#344148]" : "text-zinc-900"}`}>
+                          {item.q}
+                        </span>
+                        <span
+                          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
+                            isOpen
+                              ? "bg-[#344148] text-white rotate-180"
+                              : "bg-zinc-100 text-zinc-400 group-hover:bg-zinc-200"
+                          }`}
+                        >
+                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                          </svg>
+                        </span>
+                      </button>
+                      <div
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div className="px-6 pb-6 pl-20 text-zinc-600 leading-7" dangerouslySetInnerHTML={{ __html: item.a }} />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>

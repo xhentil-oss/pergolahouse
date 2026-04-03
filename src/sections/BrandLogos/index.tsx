@@ -44,7 +44,7 @@ export const BrandLogos = () => {
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
           <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[#82B2CA] mb-3">
-            Warum Pergolux?
+            Warum Pergola Haus?
           </span>
           <h2 className="text-3xl md:text-4xl font-semibold text-[#344148]">
             Was uns auszeichnet

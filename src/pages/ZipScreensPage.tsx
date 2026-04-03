@@ -407,19 +407,101 @@ export const ZipScreensPage = () => {
         <FeatureTicker />
 
         {/* ── FAQ ── */}
-        <section className="bg-white py-12 md:py-16">
-          <div className="mx-auto max-w-3xl px-4 md:px-16">
-            <h2 className="mb-8 text-center text-2xl font-bold text-zinc-900 md:text-3xl">Häufig gestellte Fragen</h2>
-            <div className="divide-y divide-stone-200">
-              {faqItems.map((item, i) => (
-                <div key={i}>
-                  <button type="button" className="flex w-full items-center justify-between py-4 text-left" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
-                    <span className="text-sm font-semibold text-zinc-900 md:text-base">{item.q}</span>
-                    <svg className={`ml-4 h-5 w-5 shrink-0 text-zinc-400 transition-transform ${openFaq === i ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path d="M19 9l-7 7-7-7" /></svg>
-                  </button>
-                  {openFaq === i && <p className="pb-4 text-sm leading-relaxed text-zinc-600">{item.a}</p>}
-                </div>
-              ))}
+        <section className="relative overflow-hidden bg-gradient-to-b from-zinc-50 to-white">
+          {/* decorative blobs */}
+          <div className="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-[#82B2CA]/20 blur-[100px]" />
+          <div className="pointer-events-none absolute -right-40 bottom-20 h-80 w-80 rounded-full bg-[#82B2CA]/15 blur-[100px]" />
+
+          <div className="relative max-w-[1440px] mx-auto px-4 py-16 md:px-16 md:py-[120px]">
+            {/* header */}
+            <div className="text-center mb-14">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#82B2CA]/10 border border-[#82B2CA]/30 px-4 py-1.5 mb-5">
+                <svg className="h-4 w-4 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+                </svg>
+                <span className="text-sm font-semibold text-[#82B2CA]">Häufig gestellte Fragen</span>
+              </div>
+              <h2 className="text-zinc-900 text-[32px] font-bold leading-10 md:text-5xl md:leading-[58px]">
+                Hast du noch Fragen?
+              </h2>
+              <p className="mx-auto mt-4 max-w-lg text-zinc-500 text-base md:text-lg">
+                Hier findest du Antworten auf die häufigsten Fragen zu deinem Zip-Screen.
+              </p>
+            </div>
+
+            {/* FAQ grid – 2 columns on desktop */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-5xl mx-auto">
+              <div className="flex flex-col gap-4">
+                {faqItems.slice(0, 3).map((item, i) => {
+                  const isOpen = openFaq === i;
+                  return (
+                    <button key={i} type="button" onClick={() => setOpenFaq(isOpen ? null : i)} className="text-left">
+                      <div className="rounded-xl border border-zinc-200 bg-white p-5 transition-all hover:border-zinc-300">
+                        <div className="flex items-start gap-4">
+                          <span className={`h-10 w-10 shrink-0 flex items-center justify-center rounded-xl text-sm font-bold transition-all ${
+                            isOpen ? "bg-[#344148] text-white" : "bg-zinc-100 text-zinc-400"
+                          }`}>
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                          <div className="flex-1">
+                            <h3 className={`text-base font-semibold transition-colors ${
+                              isOpen ? "text-zinc-900" : "text-zinc-700"
+                            }`}>
+                              {item.q}
+                            </h3>
+                            {isOpen && (
+                              <p className="mt-3 text-sm leading-relaxed text-zinc-600">
+                                {item.a}
+                              </p>
+                            )}
+                          </div>
+                          <span className={`mt-1 text-xl transition-transform ${
+                            isOpen ? "rotate-180" : ""
+                          }`}>
+                            ▼
+                          </span>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="flex flex-col gap-4">
+                {faqItems.slice(3).map((item, i) => {
+                  const idx = i + 3;
+                  const isOpen = openFaq === idx;
+                  return (
+                    <button key={idx} type="button" onClick={() => setOpenFaq(isOpen ? null : idx)} className="text-left">
+                      <div className="rounded-xl border border-zinc-200 bg-white p-5 transition-all hover:border-zinc-300">
+                        <div className="flex items-start gap-4">
+                          <span className={`h-10 w-10 shrink-0 flex items-center justify-center rounded-xl text-sm font-bold transition-all ${
+                            isOpen ? "bg-[#344148] text-white" : "bg-zinc-100 text-zinc-400"
+                          }`}>
+                            {String(idx + 1).padStart(2, "0")}
+                          </span>
+                          <div className="flex-1">
+                            <h3 className={`text-base font-semibold transition-colors ${
+                              isOpen ? "text-zinc-900" : "text-zinc-700"
+                            }`}>
+                              {item.q}
+                            </h3>
+                            {isOpen && (
+                              <p className="mt-3 text-sm leading-relaxed text-zinc-600">
+                                {item.a}
+                              </p>
+                            )}
+                          </div>
+                          <span className={`mt-1 text-xl transition-transform ${
+                            isOpen ? "rotate-180" : ""
+                          }`}>
+                            ▼
+                          </span>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>

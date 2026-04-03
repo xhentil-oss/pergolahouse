@@ -11,7 +11,7 @@ Keep entries sorted in DESC order (newest first) so recent knowledge stays in pr
 </instructions>
 
 <coder>
-# Codebase Notes — Pergolux Clone
+# Codebase Notes — pergola Haus Clone
 
 ## Architecture
 - React 18 + TypeScript + Vite + Tailwind CSS
