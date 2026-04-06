@@ -20,9 +20,7 @@ const products = [
     imageAlt: "Pergola S3",
     badge: "Manuelles Modell",
     name: "Pergola S3",
-    currentPrice: "2.589 €",
-    originalPrice: "3.990 €",
-    savings: "35% sparen",
+    price: "3.990 €",
     roofType: "Manuelles Lamellendach",
     windResistance: "Windfest bis 100km/h",
     stars: 4.8,
@@ -34,9 +32,7 @@ const products = [
     imageAlt: "Sundream S3",
     badge: "Beliebtestes Modell",
     name: "Sundream S3",
-    currentPrice: "3.429 €",
-    originalPrice: "5.290 €",
-    savings: "35% sparen",
+    price: "5.290 €",
     roofType: "Elektrisches Lamellendach",
     windResistance: "Bis zu 120km/h (Sturm)",
     stars: 4.9,
@@ -48,9 +44,7 @@ const products = [
     imageAlt: "Skydance S3",
     badge: "Unser Premium-Modell",
     name: "Skydance S3",
-    currentPrice: "5.099 €",
-    originalPrice: "7.290 €",
-    savings: "30% sparen",
+    price: "7.290 €",
     roofType: "Elektrische LED-Lamellen",
     windResistance: "Bis zu 140km/h (Orkan)",
     stars: 4.9,
@@ -62,9 +56,7 @@ const products = [
     imageAlt: "Maßanfertigung S3",
     badge: "Individuelle Maße",
     name: "Maßanfertigung S3",
-    currentPrice: "6.785 €",
-    originalPrice: "9.694 €",
-    savings: "30% sparen",
+    price: "9.694 €",
     roofType: "Elektrisches Lamellendach",
     windResistance: "Bis zu 120km/h (Sturm)",
     stars: 4.8,
@@ -76,9 +68,7 @@ const products = [
     imageAlt: "Pergola S3 Anthrazit",
     badge: "Neu",
     name: "Pergola S3 Anthrazit",
-    currentPrice: "2.789 €",
-    originalPrice: "4.100 €",
-    savings: "32% sparen",
+    price: "4.100 €",
     roofType: "Manuelles Lamellendach",
     windResistance: "Windfest bis 100km/h",
     stars: 4.7,
@@ -90,9 +80,7 @@ const products = [
     imageAlt: "Sundream S3 Weiß",
     badge: "Bestseller",
     name: "Sundream S3 Weiß",
-    currentPrice: "3.629 €",
-    originalPrice: "5.490 €",
-    savings: "34% sparen",
+    price: "5.490 €",
     roofType: "Elektrisches Lamellendach",
     windResistance: "Bis zu 120km/h (Sturm)",
     stars: 4.8,
@@ -104,9 +92,7 @@ const products = [
     imageAlt: "Skydance S3 Schwarz",
     badge: "Premium",
     name: "Skydance S3 Schwarz",
-    currentPrice: "5.299 €",
-    originalPrice: "7.490 €",
-    savings: "29% sparen",
+    price: "7.490 €",
     roofType: "Elektrische LED-Lamellen",
     windResistance: "Bis zu 140km/h (Orkan)",
     stars: 5.0,
@@ -118,9 +104,7 @@ const products = [
     imageAlt: "Maßanfertigung Premium",
     badge: "Auf Maß",
     name: "Maßanfertigung Premium",
-    currentPrice: "7.185 €",
-    originalPrice: "10.200 €",
-    savings: "30% sparen",
+    price: "10.200 €",
     roofType: "Elektrisches Lamellendach",
     windResistance: "Bis zu 120km/h (Sturm)",
     stars: 4.9,
@@ -200,11 +184,7 @@ export const CollectionsPage = () => {
                   <p className="text-neutral-500 text-sm">{p.roofType}</p>
                   <p className="text-neutral-400 text-xs">{p.windResistance}</p>
                   <div className="flex items-center justify-center gap-2 mt-2 flex-wrap">
-                    <span className="text-zinc-900 font-semibold text-base">{p.currentPrice}</span>
-                    <span className="text-neutral-400 text-sm line-through">{p.originalPrice}</span>
-                    <span className="text-[#82B2CA] text-xs font-semibold bg-[#82B2CA]/10 px-2 py-0.5 rounded-md uppercase">
-                      {p.savings}
-                    </span>
+                    <span className="text-zinc-900 font-semibold text-base">{p.price}</span>
                   </div>
                   <Link
                     to={p.href}

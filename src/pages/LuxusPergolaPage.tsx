@@ -71,14 +71,6 @@ const accessoryOptions = [
   { label: "Smart Steuerung", description: "Intelligente Steuerung per App – Lamellen, Licht und Heizung.", price: 399 },
 ];
 
-/* ─── trust badges ─── */
-const trustBadges = [
-  { icon: "https://pergolux.de/cdn/shop/files/Shield_Check_54616393-e1cb-420b-80ab-1ce83c5de17f.png?crop=center&height=54&v=1752586038&width=54", label: "10 Jahre Garantie" },
-  { icon: "https://pergolux.de/cdn/shop/files/Bill_Check.png?crop=center&height=48&v=1753781502&width=48", label: "Rechnungskauf" },
-  { icon: "https://pergolux.de/cdn/shop/files/Confetti_198c4952-7307-43f9-8286-78ba45318c28.png?crop=center&height=46&v=1752586038&width=46", label: "+100.000 Kunden" },
-  { icon: "https://pergolux.de/cdn/shop/files/Home_cef2a425-ad3f-4844-ae3d-e17d79c3ee77.png?crop=center&height=48&v=1757669933&width=48", label: "Wertsteigerung" },
-];
-
 /* ─── feature story ─── */
 const featureStory = [
   { title: "Drehbare Lamellen", icon: icon18 },
@@ -88,31 +80,6 @@ const featureStory = [
   { title: "Smartphone-Steuerung", icon: icon1 },
   { title: "Regen- & Windsensor", icon: icon10 },
   { title: "LED & RGB Beleuchtung", icon: icon17 },
-];
-
-/* ─── reviews ─── */
-const reviewCards = [
-  { name: "Stefanie Groß", rating: 5, image: "https://pergolux.de/cdn/shop/files/PERGOLUX_Story_6_88a3e853-e322-4f21-ab7a-60175e9204a0.jpg?crop=center&format=pjpg&height=456&v=1741620042&width=289", quote: "Wir sind sehr zufrieden mit unserer Pergola! Die Bestellung war unkompliziert, und der Support war fantastisch." },
-  { name: "Markus Hoppe", rating: 5, image: "https://pergolux.de/cdn/shop/files/SCR-20250326-njsp.jpg?crop=center&format=pjpg&height=456&v=1745919383&width=289", quote: "Wir haben unsere Pergola heute aufgebaut! Es hat alles wunderbar funktioniert! Ein Rundum perfektes Produkt!" },
-  { name: "Rainer Stuhlberger", rating: 5, image: "https://pergolux.de/cdn/shop/files/SCR-20250326-nftx.jpg?crop=center&format=pjpg&height=456&v=1745919383&width=289", quote: "Eine der hochwertigsten, durchdachtesten und schönsten Sachen, die ich aufgebaut habe. Einfach top!" },
-  { name: "Kirsten Güther", rating: 5, image: "https://pergolux.de/cdn/shop/files/SCR-20250326-ngon.jpg?crop=center&format=pjpg&height=456&v=1745919382&width=289", quote: "Kein Vergleich zu unserer Pergola davor!! Sieht super aus und ist auch noch gut verarbeitet! MEEEGA!!" },
-  { name: "Silvia Renner", rating: 5, image: "https://pergolux.de/cdn/shop/files/SCR-20250326-nhcv_e75cd03d-8413-4832-ba66-57a9befd2997.jpg?crop=center&format=pjpg&height=456&v=1745919503&width=289", quote: "Die Farbe passt perfekt zum Haus! Lieferzeit war top, Kundenservice sehr nett! Ein sehr gutes Produkt." },
-  { name: "Hoffmann", rating: 4, image: "https://pergolux.de/cdn/shop/files/SCR-20250326-nhot.jpg?crop=center&format=pjpg&height=456&v=1745919476&width=289", quote: "Die Pergola hat alle Erwartungen erfüllt. Der Zeitansatz von 5 Stunden ist realistisch." },
-  { name: "Andreas Wolf", rating: 5, image: "https://pergolux.de/cdn/shop/files/SCR-20250326-nitw.jpg?crop=center&format=pjpg&height=456&v=1745919475&width=289", quote: "Sehr zufrieden mit unserer maßgefertigten Pergola. Hochwertig, toll verarbeitet, ohne einen einzigen Kratzer." },
-];
-
-/* ─── service cards ─── */
-const serviceCards = [
-  { icon: "https://pergolux.de/cdn/shop/files/showroom.png?crop=center&height=51&v=1752586038&width=51", title: "Showroom", text: "Finde einen in deiner Nähe", link: "/pages/showroom-3-0" },
-  { icon: "https://pergolux.de/cdn/shop/files/Sledgehammer_3984b0e5-e932-44e2-b41b-4719568216c6.png?crop=center&height=72&v=1758108706&width=72", title: "Einfache Montage", text: "Benötigst du Hilfe bei der Installation?" },
-  { icon: "https://pergolux.de/cdn/shop/files/delivery_628ce087-8faa-4b89-8d4e-0484def8bf68.png?crop=center&height=74&v=1752586038&width=74", title: "Schnelle Lieferung", text: "Ab 1.000 € kostenlos, verschiedene Optionen." },
-  { icon: "https://pergolux.de/cdn/shop/files/expert-advice.png?crop=center&height=74&v=1752586039&width=74", title: "Expertenberatung", text: "Kontaktiere uns jederzeit bei Fragen." },
-];
-
-const bottomTrustBadges = [
-  { icon: "https://pergolux.de/cdn/shop/files/Confetti_198c4952-7307-43f9-8286-78ba45318c28.png?crop=center&height=46&v=1752586038&width=46", title: "+100.000 zufriedene Kunden", text: "Über 100.000 zufriedene Kunden sprechen für die hohe Qualität." },
-  { icon: "https://pergolux.de/cdn/shop/files/Cup_Star_7ee97793-32f0-4e9f-a94d-92c9ffa17b95.png?crop=center&height=66&v=1752586038&width=66", title: "Hochwertige Pergolen", text: "Mehrfach ausgezeichnet für Qualität und Langlebigkeit." },
-  { icon: "https://pergolux.de/cdn/shop/files/weather.png?crop=center&height=74&v=1752586039&width=74", title: "Für alle Wetterbedingungen", text: "Genieße deinen Außenbereich das ganze Jahr über." },
 ];
 
 /* ─── helpers ─── */
@@ -162,7 +129,6 @@ export const LuxusPergolaPage = () => {
   const [saleDeadline] = useState(createTargetDate);
   const [remainingTime, setRemainingTime] = useState(() => getRemainingTime(saleDeadline));
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [reviewPage, setReviewPage] = useState(0);
   const [showStickyBar, setShowStickyBar] = useState(false);
   const ctaRef = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
@@ -239,10 +205,6 @@ export const LuxusPergolaPage = () => {
       totalPrice: finalPrice,
     });
   };
-
-  const reviewsPerPage = 3;
-  const pagedReviews = reviewCards.slice(reviewPage * reviewsPerPage, (reviewPage + 1) * reviewsPerPage);
-  const totalReviewPages = Math.ceil(reviewCards.length / reviewsPerPage);
 
   return (
     <div className="relative overflow-x-hidden bg-white font-inter_tight text-neutral-900">
@@ -434,22 +396,12 @@ export const LuxusPergolaPage = () => {
                   )}
                 </div>
 
-                {/* ── Trust badges row ── */}
-                <div className="grid grid-cols-4 gap-2">
-                  {trustBadges.map((b) => (
-                    <div key={b.label} className="flex flex-col items-center gap-1.5 rounded-xl border border-stone-200 p-3 text-center">
-                      <img src={b.icon} alt={b.label} className="h-8 w-8 object-contain" />
-                      <span className="text-[11px] font-semibold leading-tight text-zinc-700">{b.label}</span>
-                    </div>
-                  ))}
-                </div>
-
                 {/* ── CTA buttons ── */}
                 <div ref={ctaRef} className="grid gap-3 sm:grid-cols-2">
                   <button type="button" onClick={handleAddToCart} className="rounded-xl py-3.5 text-center text-sm font-bold text-white transition hover:opacity-90" style={{ backgroundColor: '#344148' }}>
                     In den Warenkorb – {formatPrice(finalPrice)}
                   </button>
-                  <a href="tel:+4966141087500" className="flex items-center justify-center gap-2 rounded-xl border border-[#344148] py-3.5 text-sm font-semibold text-zinc-900 transition hover:opacity-90">
+                  <a href="tel:+4966141087500" className="flex items-center justify-center gap-2 rounded-xl border border-zinc-900 py-3.5 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-900 hover:text-white">
                     Beratung anfragen
                   </a>
                 </div>
@@ -462,98 +414,51 @@ export const LuxusPergolaPage = () => {
         {/* ── Ticker ── */}
         <FeatureTicker backgroundColorClass="bg-[#344148]" />
 
-        {/* ── Social proof ── */}
+        {/* ── Contact CTA ── */}
         <section className="bg-zinc-950 py-12 text-center text-white md:py-16">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#82B2CA]">Über 100.000 zufriedene Kunden weltweit</p>
-          <h2 className="mx-auto mt-3 max-w-xl text-3xl font-semibold md:text-4xl">Folge uns für mehr</h2>
-          <div className="mt-5 flex items-center justify-center gap-4">
-            <a href="#" target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/30 px-5 py-2 text-sm font-semibold transition hover:bg-white hover:text-zinc-900">Instagram</a>
-            <a href="https://www.youtube.com/channel/UChFl3vWUBB0M5y4egNpDvsw" target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/30 px-5 py-2 text-sm font-semibold transition hover:bg-white hover:text-zinc-900">YouTube</a>
-          </div>
-        </section>
-
-        {/* ── Reviews slider ── */}
-        <section className="bg-stone-50 py-12 md:py-20">
-          <div className="mx-auto max-w-[1440px] px-4 md:px-16">
-            <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500">Kundenbewertungen</p>
-                <h2 className="mt-2 text-2xl font-semibold text-zinc-950 md:text-3xl">Was Kundinnen und Kunden sagen</h2>
-              </div>
-              <div className="text-right">
-                <span className="text-2xl font-semibold text-zinc-950">4.85</span><span className="text-sm text-zinc-500"> von 5</span>
-                <div className="mt-0.5 text-xs text-zinc-500">Basierend auf 919 Bewertungen</div>
-              </div>
-            </div>
-
-            {/* star distribution */}
-            <div className="mb-8 flex flex-wrap gap-3">
-              {[{ s: 5, n: 785 }, { s: 4, n: 127 }, { s: 3, n: 6 }, { s: 2, n: 1 }, { s: 1, n: 0 }].map((row) => (
-                <div key={row.s} className="flex items-center gap-2">
-                  <Stars count={row.s} />
-                  <div className="h-2 w-20 overflow-hidden rounded-full bg-stone-200"><div className="h-full rounded-full" style={{ width: `${(row.n / 919) * 100}%`, backgroundColor: '#82B2CA' }} /></div>
-                  <span className="text-xs text-zinc-500">{row.n}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* cards */}
-            <div className="grid gap-4 md:grid-cols-3">
-              {pagedReviews.map((r) => (
-                <article key={r.name} className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
-                  <img src={r.image} alt={r.name} className="aspect-[5/3] w-full object-cover" />
-                  <div className="p-5">
-                    <Stars count={r.rating} />
-                    <p className="mt-3 text-sm leading-6 text-zinc-700">{r.quote}</p>
-                    <div className="mt-4 flex items-center gap-2 text-xs text-zinc-500">
-                      <span className="font-semibold text-zinc-800">{r.name}</span>
-                      <span className="rounded bg-[#82B2CA]/10 px-1.5 py-0.5 text-[10px] font-bold text-[#82B2CA]">Verifiziert</span>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-            {/* pagination */}
-            {totalReviewPages > 1 && (
-              <div className="mt-6 flex items-center justify-center gap-2">
-                {Array.from({ length: totalReviewPages }, (_, i) => (
-                  <button key={i} type="button" onClick={() => setReviewPage(i)} className={`h-8 w-8 rounded-full text-sm font-semibold transition ${reviewPage === i ? "bg-[#344148] text-white" : "bg-stone-200 text-zinc-600 hover:bg-stone-300"}`}>{i + 1}</button>
-                ))}
-              </div>
-            )}
+          <h2 className="mx-auto mt-3 max-w-xl text-3xl font-semibold md:text-4xl">Haben Sie noch Fragen?</h2>
+          <p className="mx-auto mt-4 max-w-md text-sm text-white/70">Unser Kundenservice-Team steht Ihnen gerne zur Verfügung. Kontaktieren Sie uns für eine persönliche Beratung.</p>
+          <div className="mt-6 flex items-center justify-center gap-4">
+            <Link to="/contact" className="rounded-full border border-white/30 px-6 py-2.5 text-sm font-semibold transition hover:bg-white hover:text-zinc-900">Kontaktieren Sie uns</Link>
+            <a href="tel:+49" className="rounded-full bg-[#82B2CA] px-6 py-2.5 text-sm font-semibold text-zinc-900 transition hover:opacity-90">Anrufen</a>
           </div>
         </section>
 
         {/* ── Die beste Wahl ── */}
-        <section className="bg-white py-10 md:py-16">
+        <section className="bg-white py-12 md:py-16">
           <div className="mx-auto max-w-[1440px] px-4 md:px-16">
-            <div className="mb-6 text-center">
-              <h2 className="text-2xl font-semibold text-zinc-950 md:text-3xl">Die beste Wahl für deine Pergola</h2>
-              <p className="mt-2 text-sm text-zinc-500">Hast du Fragen? <Link to="/contact" className="font-semibold text-zinc-900 underline underline-offset-2">Kundenservice kontaktieren</Link></p>
+            <h2 className="mb-8 text-center text-2xl font-bold text-zinc-900 md:text-3xl">Die beste Wahl für Ihr Zuhause</h2>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { icon: "star", title: "Premium Qualität", text: "Hochwertige Materialien und Verarbeitung für langfristige Zufriedenheit" },
+                { icon: "shield", title: "10 Jahre Garantie", text: "Umfassender Schutz und volle Sicherheit für Ihre Investition" },
+                { icon: "lock", title: "Sichere Produkte", text: "Geprüftes Handwerk und zertifizierte Sicherheitsstandards" },
+                { icon: "sparkle", title: "Modernes Design", text: "Zeitlose Ästhetik und innovative Technologie vereint" },
+              ].map((c) => {
+                const getIcon = (iconType: string) => {
+                  switch(iconType) {
+                    case 'star':
+                      return <svg className="h-12 w-12 text-zinc-700" fill="currentColor" viewBox="0 0 24 24" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>;
+                    case 'shield':
+                      return <svg className="h-12 w-12 text-zinc-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
+                    case 'lock':
+                      return <svg className="h-12 w-12 text-zinc-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm6-10V7a3 3 0 00-6 0v4a3 3 0 006 0z" /></svg>;
+                    case 'sparkle':
+                      return <svg className="h-12 w-12 text-zinc-700" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 7.26L23 12l-8 .74L12 20l-3-7.26L1 12l8-.74L12 2z" /></svg>;
+                    default:
+                      return null;
+                  }
+                };
+                return (
+                  <div key={c.title} className="flex flex-col items-center rounded-2xl border border-stone-200 bg-stone-50 p-6 text-center">
+                    {getIcon(c.icon)}
+                    <h3 className="mt-4 text-sm font-bold text-zinc-900">{c.title}</h3>
+                    <p className="mt-1 text-xs text-zinc-500">{c.text}</p>
+                  </div>
+                );
+              })}
             </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {serviceCards.map((card) => (
-                <div key={card.title} className="flex flex-col items-center rounded-2xl border border-stone-200 p-6 text-center">
-                  <img src={card.icon} alt={card.title} className="mb-3 h-12 w-12 object-contain" />
-                  <h3 className="text-sm font-bold text-zinc-900">{card.title}</h3>
-                  <p className="mt-1 text-xs leading-5 text-zinc-500">{card.text}</p>
-                  {card.link && <Link to={card.link} className="mt-2 text-xs font-semibold text-[#82B2CA] underline underline-offset-2">Mehr erfahren</Link>}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── Bottom trust badges ── */}
-        <section className="border-t border-stone-200 bg-stone-50 py-10 md:py-16">
-          <div className="mx-auto grid max-w-[1440px] gap-4 px-4 sm:grid-cols-3 md:px-16">
-            {bottomTrustBadges.map((b) => (
-              <div key={b.title} className="flex flex-col items-center rounded-2xl border border-stone-200 bg-white p-6 text-center shadow-sm">
-                <img src={b.icon} alt={b.title} className="mb-3 h-12 w-12 object-contain" />
-                <h3 className="text-sm font-bold text-zinc-900">{b.title}</h3>
-                <p className="mt-1 text-xs leading-5 text-zinc-500">{b.text}</p>
-              </div>
-            ))}
           </div>
         </section>
 
@@ -583,110 +488,47 @@ export const LuxusPergolaPage = () => {
               </p>
             </div>
 
-            {/* FAQ grid – 2 columns on desktop */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-5xl mx-auto">
               <div className="flex flex-col gap-4">
                 {[
-                  { q: "Was unterscheidet die Luxus-Pergola von der Standard-Pergola?", a: "Bei der Luxus-Pergola wählst du <strong>Breite und Tiefe frei in cm</strong> – deine Pergola wird <strong>exakt nach deinen Wunschmaßen</strong> gefertigt. Qualität und Material sind identisch mit unseren Serienmodellen. Du bestimmst jede Dimension präzise." },
-                  { q: "Welche Maße sind möglich?", a: "<strong>Breite und Tiefe können jeweils zwischen 200 cm und 700 cm</strong> in 10-cm-Schritten frei gewählt werden. Das gibt dir völlige Flexibilität beim Design deiner Pergola – genau nach deinen Anforderungen." },
-                  { q: "Kann ich die Pergola selbst montieren?", a: "Ja! Auch die Luxus-Pergola nutzt das bewährte <strong>SnapFIT™-System</strong> für einen einfachen Aufbau. Du erhältst eine <strong>detaillierte Anleitung und Zugang zur Montage-App</strong>. Bei Bedarf kannst du einen <strong>professionellen Montageservice</strong> anfragen." },
+                  { q: "Was unterscheidet die Luxus-Pergola von der Standard-Pergola?", a: "Bei der Luxus-Pergola wählst du Breite und Tiefe frei in cm – deine Pergola wird exakt nach deinen Wunschmaßen gefertigt. Qualität und Material sind identisch mit unseren Serienmodellen. Du bestimmst jede Dimension präzise." },
+                  { q: "Welche Maße sind möglich?", a: "Breite und Tiefe können jeweils zwischen 200 cm und 700 cm in 10-cm-Schritten frei gewählt werden. Das gibt dir völlige Flexibilität beim Design deiner Pergola – genau nach deinen Anforderungen." },
+                  { q: "Kann ich die Pergola selbst montieren?", a: "Ja! Auch die Luxus-Pergola nutzt das bewährte SnapFIT™-System für einen einfachen Aufbau. Du erhältst eine detaillierte Anleitung und Zugang zur Montage-App. Bei Bedarf kannst du einen professionellen Montageservice anfragen." },
                 ].map((item, i) => {
                   const isOpen = openFaq === i;
+                  const bgColor = "bg-[#344148]";
                   return (
-                    <div
-                      key={item.q}
-                      className={`group rounded-2xl border transition-all duration-300 cursor-pointer ${
-                        isOpen
-                          ? "border-[#82B2CA]/30 bg-[#82B2CA]/5 shadow-lg shadow-[#82B2CA]/10"
-                          : "border-zinc-100 bg-white hover:border-zinc-200 hover:shadow-md"
-                      }`}
-                      onClick={() => setOpenFaq(isOpen ? null : i)}
-                    >
-                      <button className="w-full text-left px-6 py-5 flex items-center gap-4">
-                        <span
-                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-bold transition-all duration-300 ${
-                            isOpen
-                              ? "bg-[#344148] text-white shadow-md shadow-[#344148]/20"
-                              : "bg-zinc-100 text-zinc-400 group-hover:bg-zinc-200 group-hover:text-zinc-600"
-                          }`}
-                        >
+                    <div key={item.q} className="rounded-xl border border-stone-200 bg-white hover:shadow-lg transition-shadow overflow-hidden">
+                      <button type="button" onClick={() => setOpenFaq(isOpen ? null : i)} className="flex w-full items-center gap-4 px-5 py-4 text-left">
+                        <div className={`flex-shrink-0 w-10 h-10 rounded-lg ${bgColor} flex items-center justify-center text-white font-bold text-sm`}>
                           {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <span className={`flex-1 font-semibold leading-6 transition-colors duration-300 ${isOpen ? "text-[#344148]" : "text-zinc-900"}`}>
-                          {item.q}
-                        </span>
-                        <span
-                          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
-                            isOpen
-                              ? "bg-[#344148] text-white rotate-180"
-                              : "bg-zinc-100 text-zinc-400 group-hover:bg-zinc-200"
-                          }`}
-                        >
-                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                          </svg>
-                        </span>
+                        </div>
+                        <span className="text-sm font-semibold text-zinc-900 flex-1">{item.q}</span>
+                        <span className={`flex-shrink-0 text-lg text-zinc-400 transition-transform ${isOpen ? "rotate-180" : ""}`}>▼</span>
                       </button>
-                      <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                          isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-                        }`}
-                      >
-                        <div className="px-6 pb-6 pl-20 text-zinc-600 leading-7" dangerouslySetInnerHTML={{ __html: item.a }} />
-                      </div>
+                      {isOpen && <p className="px-5 pb-4 text-sm leading-6 text-zinc-600">{item.a}</p>}
                     </div>
                   );
                 })}
               </div>
               <div className="flex flex-col gap-4">
                 {[
-                  { q: "Wie wird der Preis berechnet?", a: "Der Preis berechnet sich nach der <strong>gewählten Fläche (m²)</strong> zuzüglich <strong>optionale Extras wie Seitenelemente, Zubehör und Montageart</strong>. Du siehst den finalen Preis sofort während der Konfiguration – keine versteckten Kosten." },
-                  { q: "Wie lange dauert die Lieferung?", a: "Die Luxus-Pergola wird <strong>individuell für dich produziert</strong>. Die Lieferzeit beträgt in der Regel <strong>4–6 Wochen</strong>. Ab 1.000 € Bestellwert ist die Lieferung <strong>kostenlos</strong>. Express-Optionen verfügbar." },
-                  { q: "Ist eine Baugenehmigung erforderlich?", a: "Das hängt vom <strong>Bundesland und der Größe</strong> ab. Nutze unseren <strong>kostenlosen Baugenehmigungscheck</strong>, um die exakten Anforderungen für deinen Standort zu prüfen. Unser Team berät dich gerne weiter." },
+                  { q: "Wie wird der Preis berechnet?", a: "Der Preis berechnet sich nach der gewählten Fläche (m²) zuzüglich optionale Extras wie Seitenelemente, Zubehör und Montageart. Du siehst den finalen Preis sofort während der Konfiguration – keine versteckten Kosten." },
+                  { q: "Wie lange dauert die Lieferung?", a: "Die Luxus-Pergola wird individuell für dich produziert. Die Lieferzeit beträgt in der Regel 4–6 Wochen. Ab 1.000 € Bestellwert ist die Lieferung kostenlos. Express-Optionen verfügbar." },
+                  { q: "Ist eine Baugenehmigung erforderlich?", a: "Das hängt vom Bundesland und der Größe ab. Nutze unseren kostenlosen Baugenehmigungscheck, um die exakten Anforderungen für deinen Standort zu prüfen. Unser Team berät dich gerne weiter." },
                 ].map((item, i) => {
-                  const isOpen = openFaq === (i + 3);
+                  const isOpen = openFaq === i + 3;
+                  const bgColor = "bg-[#344148]";
                   return (
-                    <div
-                      key={item.q}
-                      className={`group rounded-2xl border transition-all duration-300 cursor-pointer ${
-                        isOpen
-                          ? "border-[#82B2CA]/30 bg-[#82B2CA]/5 shadow-lg shadow-[#82B2CA]/10"
-                          : "border-zinc-100 bg-white hover:border-zinc-200 hover:shadow-md"
-                      }`}
-                      onClick={() => setOpenFaq(isOpen ? null : (i + 3))}
-                    >
-                      <button className="w-full text-left px-6 py-5 flex items-center gap-4">
-                        <span
-                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-bold transition-all duration-300 ${
-                            isOpen
-                              ? "bg-[#344148] text-white shadow-md shadow-[#344148]/20"
-                              : "bg-zinc-100 text-zinc-400 group-hover:bg-zinc-200 group-hover:text-zinc-600"
-                          }`}
-                        >
+                    <div key={item.q} className="rounded-xl border border-stone-200 bg-white hover:shadow-lg transition-shadow overflow-hidden">
+                      <button type="button" onClick={() => setOpenFaq(isOpen ? null : i + 3)} className="flex w-full items-center gap-4 px-5 py-4 text-left">
+                        <div className={`flex-shrink-0 w-10 h-10 rounded-lg ${bgColor} flex items-center justify-center text-white font-bold text-sm`}>
                           {String(i + 4).padStart(2, "0")}
-                        </span>
-                        <span className={`flex-1 font-semibold leading-6 transition-colors duration-300 ${isOpen ? "text-[#344148]" : "text-zinc-900"}`}>
-                          {item.q}
-                        </span>
-                        <span
-                          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
-                            isOpen
-                              ? "bg-[#344148] text-white rotate-180"
-                              : "bg-zinc-100 text-zinc-400 group-hover:bg-zinc-200"
-                          }`}
-                        >
-                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                          </svg>
-                        </span>
+                        </div>
+                        <span className="text-sm font-semibold text-zinc-900 flex-1">{item.q}</span>
+                        <span className={`flex-shrink-0 text-lg text-zinc-400 transition-transform ${isOpen ? "rotate-180" : ""}`}>▼</span>
                       </button>
-                      <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                          isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-                        }`}
-                      >
-                        <div className="px-6 pb-6 pl-20 text-zinc-600 leading-7" dangerouslySetInnerHTML={{ __html: item.a }} />
-                      </div>
+                      {isOpen && <p className="px-5 pb-4 text-sm leading-6 text-zinc-600">{item.a}</p>}
                     </div>
                   );
                 })}
