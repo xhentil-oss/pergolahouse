@@ -1,15 +1,19 @@
-import ikonaMajtas from "@/assets/ikona-majtas.png";
-import ikonaDjathtas from "@/assets/ikona-djathtas.png";
-import ikonaPerball from "@/assets/ikona-perball.png";
-import ikonaMbrapa from "@/assets/ikona-mbrapa.png";
-import ikonaThjesht from "@/assets/ikona-thjesht.png";
-import ikonaMuri from "@/assets/ikona-muri.png";
+
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
 import { FeatureTicker } from "@/sections/FeatureTicker";
 import { useCart } from "@/context/CartContext";
+// Removed unused imports from previous implementation
+import icon18 from "@/assets/icon18.jpeg";
+import icon6 from "@/assets/icon6.jpeg";
+import icon4 from "@/assets/icon4.jpeg";
+import icon11 from "@/assets/icon11.jpeg";
+import icon13 from "@/assets/icon13.jpeg";
+import icon1 from "@/assets/icon1.jpeg";
+import { Pergola3DViewer } from "@/components/Pergola3DViewer";
+
 import photo1 from "../assets/image-pergola.png";
 import photo2 from "../assets/image-light.png";
 import photo3 from "../assets/Photo (26).png";
@@ -17,15 +21,6 @@ import photo4 from "../assets/pergola-glass.png";
 import photo5 from "../assets/pergola-glass-guillot.png";
 import photo6 from "../assets/zip-screen-pergola.png";
 
-import icon17 from "@/assets/icon17.jpeg";
-import icon18 from "@/assets/icon18.jpeg";
-import icon10 from "@/assets/icon10.jpeg";
-import icon13 from "@/assets/icon13.jpeg";
-import icon6 from "@/assets/icon6.jpeg";
-import icon4 from "@/assets/icon4.jpeg";
-import icon1 from "@/assets/icon1.jpeg";
-
-/* ─── image gallery ─── */
 const gallery = [
   { src: photo1, alt: "Elegante Pergola – moderne minimaliste, ditë" },
   { src: photo2, alt: "Elegante Pergola – moderne minimaliste, natë" },
@@ -35,7 +30,6 @@ const gallery = [
   { src: photo6, alt: "Elegante Pergola – klasik, pranë pishinës" },
 ];
 
-/* ─── variants ─── */
 const colorOptions = [
   { label: "White 9016 T", color: "#E8E4DF", hint: "Verkehrsweiß – hell und minimalistisch" },
   { label: "Ivory 1015 T", color: "#D9C87A", hint: "Heller Elfenbeinton – warm und einladend" },
@@ -44,26 +38,27 @@ const colorOptions = [
   { label: "Black 9005 T", color: "#0A0A0D", hint: "Tiefschwarz – markant und modern" },
 ];
 
-const sizeOptions = [
-  { label: "3x3m", price: 3990 },
-  { label: "3x4m", price: 4390 },
-  { label: "3x5m", price: 4790 },
-  { label: "3x6m", price: 5190 },
-  { label: "4x4m", price: 5390 },
-  { label: "4x5m", price: 5790 },
-  { label: "4x6m", price: 6190 },
-];
+const breiteRange = { min: 1000, max: 7000, step: 1 };
+const laengeRange = { min: 1000, max: 7000, step: 1 };
+const hoeheRange = { min: 1000, max: 3500, step: 1 };
+const pricePerSqm = 445;
 
+import ikonaThjesht from "@/assets/ikona-thjesht.png";
+import ikonaMuri from "@/assets/ikona-muri.png";
 const mountOptions = [
   { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
   { label: "Wandmontage", img: ikonaMuri, surcharge: 240 },
 ];
 
+import ikonaMajtas from "@/assets/ikona-majtas.png";
+import ikonaDjathtas from "@/assets/ikona-djathtas.png";
+import ikonaPerball from "@/assets/ikona-perball.png";
+import ikonaMbrapa from "@/assets/ikona-mbrapa.png";
 const sideOptions = [
-  { key: "left", label: "Links", sizeLabel: "3m Seite", img: ikonaMajtas },
-  { key: "right", label: "Rechts", sizeLabel: "3m Seite", img: ikonaDjathtas },
-  { key: "front", label: "Vorne", sizeLabel: "3m Seite", img: ikonaPerball },
-  { key: "back", label: "Hinten", sizeLabel: "3m Seite", img: ikonaMbrapa },
+  { key: "left", label: "Links", sizeLabel: "Seite", img: ikonaMajtas },
+  { key: "right", label: "Rechts", sizeLabel: "Seite", img: ikonaDjathtas },
+  { key: "front", label: "Vorne", sizeLabel: "Seite", img: ikonaPerball },
+  { key: "back", label: "Hinten", sizeLabel: "Seite", img: ikonaMbrapa },
 ];
 
 const sideTypeChoices = [
@@ -80,20 +75,15 @@ const accessoryOptions = [
   { label: "Smart Steuerung", description: "Intelligente Steuerung per App – Lamellen, Licht und Heizung.", price: 399 },
 ];
 
-
-
-/* ─── feature story ─── */
 const featureStory = [
-  { title: "Drehbare Lamellen", icon: icon18 },
-  { title: "Motorisiertes Dach", icon: icon13 },
-  { title: "Regenschutz", icon: icon6 },
-  { title: "Windbeständig", icon: icon4 },
-  { title: "Smartphone-Steuerung", icon: icon1 },
-  { title: "Regen- & Windsensor", icon: icon10 },
-  { title: "LED & RGB Beleuchtung", icon: icon17 },
+  { image: icon18 },
+  { image: icon6 },
+  { image: icon4 },
+  { image: icon11 },
+  { image: icon13 },
+  { image: icon1 },
 ];
 
-/* ─── service cards ─── */
 const serviceCards = [
   { icon: "star", title: "Premium Qualität", text: "Hochwertige Materialien und Verarbeitung für langfristige Zufriedenheit" },
   { icon: "shield", title: "10 Jahre Garantie", text: "Umfassender Schutz und volle Sicherheit für Ihre Investition" },
@@ -101,11 +91,8 @@ const serviceCards = [
   { icon: "sparkle", title: "Modernes Design", text: "Zeitlose Ästhetik und innovative Technologie vereint" },
 ];
 
-/* ─── helpers ─── */
 const formatPrice = (n: number) =>
   new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n);
-
-
 
 const Stars = ({ count }: { count: number }) => (
   <span className="inline-flex gap-0.5 text-[#82B2CA]">
@@ -117,14 +104,14 @@ const Stars = ({ count }: { count: number }) => (
   </span>
 );
 
-/* ─────────────────────────────────────────────── */
 export const ElegantePergolaPage = () => {
   const { addToCart } = useCart();
-  /* state */
   const [activeImage, setActiveImage] = useState(0);
   const [descExpanded, setDescExpanded] = useState(false);
   const [selectedColor, setSelectedColor] = useState(colorOptions[0].label);
-  const [selectedSize, setSelectedSize] = useState(sizeOptions[0].label);
+  const [breite, setBreite] = useState(3395);
+  const [laenge, setLaenge] = useState(2330);
+  const [hoehe, setHoehe] = useState(1441);
   const [selectedMount, setSelectedMount] = useState(mountOptions[0].label);
   const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
   const [showAccessories, setShowAccessories] = useState(false);
@@ -162,14 +149,17 @@ export const ElegantePergolaPage = () => {
   }, []);
 
   /* price calculation */
-  const sizeData = sizeOptions.find((o) => o.label === selectedSize) ?? sizeOptions[0];
+  const sqm = (breite / 1000) * (laenge / 1000);
+  const basePrice = Math.round(sqm * pricePerSqm);
   const mountData = mountOptions.find((o) => o.label === selectedMount) ?? mountOptions[0];
   const sideTotal = Object.values(sides).reduce((sum, v) => {
     const choice = sideTypeChoices.find((c) => c.value === v);
     return sum + (choice?.price ?? 0);
   }, 0);
   const accTotal = accessoryOptions.filter((o) => selectedAccessories.includes(o.label)).reduce((s, o) => s + o.price, 0);
-  const finalPrice = sizeData.price + mountData.surcharge + sideTotal + accTotal;
+  const finalPrice = basePrice + mountData.surcharge + sideTotal + accTotal;
+
+  const sizeLabel = `${breite}x${laenge}x${hoehe}mm`;
 
   const toggleAccessory = (label: string) =>
     setSelectedAccessories((c) => (c.includes(label) ? c.filter((x) => x !== label) : [...c, label]));
@@ -189,12 +179,12 @@ export const ElegantePergolaPage = () => {
       productName: "Elegante Pergola",
       image: gallery[0].src,
       color: selectedColor,
-      size: selectedSize,
+      size: sizeLabel,
       mount: selectedMount,
       mountSurcharge: mountData.surcharge,
       sides: cartSides,
       accessories: cartAccessories,
-      basePrice: sizeData.price,
+      basePrice,
       totalPrice: finalPrice,
     });
   };
@@ -241,9 +231,9 @@ export const ElegantePergolaPage = () => {
 
               {/* feature highlights */}
               <div className="mt-5 grid grid-cols-4 gap-2">
-                {featureStory.map((item) => (
-                  <div key={item.title} className="overflow-hidden rounded-[20px] border border-stone-200 bg-stone-50 transition hover:border-[#82B2CA]/40 hover:shadow-sm">
-                    <img src={item.icon} alt={item.title} className="w-full object-cover" />
+                {featureStory.map((item, i) => (
+                  <div key={i} className="overflow-hidden rounded-[20px] border border-stone-200 bg-stone-50 transition hover:border-[#82B2CA]/40 hover:shadow-sm">
+                    <img src={item.image} alt="Feature" className="w-full object-cover" />
                   </div>
                 ))}
               </div>
@@ -297,19 +287,112 @@ export const ElegantePergolaPage = () => {
                   <button type="button" className="mt-1 text-xs font-semibold text-zinc-900 underline underline-offset-2">Welche Farbe ist die passende?</button>
                 </div>
 
-                {/* Size */}
+                {/* Custom Size – Breite / Länge / Höhe in mm */}
                 <div>
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="text-sm font-semibold text-zinc-700">Größe<span className="text-zinc-400">.</span> <span className="font-normal text-zinc-500">Passende Größe auswählen</span></span>
+                  <div className="mb-2">
+                    <span className="text-sm font-semibold text-zinc-700">Größe<span className="text-zinc-400">.</span> <span className="font-normal text-zinc-500">Wähle die genaue Größe</span></span>
                   </div>
-                  <div className="grid grid-cols-4 gap-2">
-                    {sizeOptions.map((s) => (
-                      <button key={s.label} type="button" onClick={() => setSelectedSize(s.label)} className={`rounded-xl border-2 py-2.5 text-center text-sm font-semibold transition ${selectedSize === s.label ? "border-zinc-900 bg-zinc-900 text-white" : "border-stone-200 text-zinc-700 hover:border-stone-400"}`}>
-                        {s.label}
-                      </button>
-                    ))}
+                  <div className="space-y-5 rounded-xl border border-stone-200 bg-white p-5">
+                    {/* Breite */}
+                    <div>
+                      <label className="mb-2 flex items-center gap-1 text-sm font-semibold text-[#82B2CA]">
+                        Breite
+                        <svg className="h-4 w-4 text-[#82B2CA]" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" /><text x="10" y="14" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="bold">i</text></svg>
+                      </label>
+                      <div className="flex items-center gap-4">
+                        <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
+                          {breite}mm
+                        </div>
+                        <div className="relative w-full">
+                          <input
+                            type="range"
+                            min={breiteRange.min}
+                            max={breiteRange.max}
+                            step={breiteRange.step}
+                            value={breite}
+                            onChange={(e) => setBreite(Number(e.target.value))}
+                            className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
+                            style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #e7e5e4 ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #e7e5e4 100%)` }}
+                          />
+                          {/* Marker for 3170mm */}
+                          <div
+                            className="absolute top-1/2 -translate-y-1/2 h-6 w-0.5 bg-[#B91C1C]"
+                            style={{ left: `${((3170 - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%` }}
+                          >
+                            <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-[#B91C1C] whitespace-nowrap">3170mm</span>
+                          </div>
+                        </div>
+                      </div>
+                      {breite >= 3170 && (
+                        <div className="mt-2 text-xs text-[#B91C1C] font-semibold">
+                          Maximale Modulbreite für eine Pergola ist 3170mm. Bei größeren Breiten wird ein weiteres Modul hinzugefügt.
+                        </div>
+                      )}
+                    </div>
+                    {/* Länge */}
+                    <div>
+                      <label className="mb-2 flex items-center gap-1 text-sm font-semibold text-[#82B2CA]">
+                        Länge
+                        <svg className="h-4 w-4 text-[#82B2CA]" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" /><text x="10" y="14" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="bold">i</text></svg>
+                      </label>
+                      <div className="flex items-center gap-4">
+                        <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
+                          {laenge}mm
+                        </div>
+                        <div className="relative w-full">
+                          <input
+                            type="range"
+                            min={laengeRange.min}
+                            max={laengeRange.max}
+                            step={laengeRange.step}
+                            value={laenge}
+                            onChange={(e) => setLaenge(Number(e.target.value))}
+                            className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
+                            style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #e7e5e4 ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #e7e5e4 100%)` }}
+                          />
+                          {/* Marker for 2830mm */}
+                          <div
+                            className="absolute top-1/2 -translate-y-1/2 h-6 w-0.5 bg-[#B91C1C]"
+                            style={{ left: `${((2830 - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%` }}
+                          >
+                            <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-[#B91C1C] whitespace-nowrap">2830mm</span>
+                          </div>
+                        </div>
+                      </div>
+                      {laenge >= 2830 && (
+                        <div className="mt-2 text-xs text-[#B91C1C] font-semibold">
+                          Maximale Modullänge für eine Pergola ist 2830mm. Bei größeren Längen wird ein weiteres Modul hinzugefügt.
+                        </div>
+                      )}
+                    </div>
+                    {/* Höhe */}
+                    <div>
+                      <label className="mb-2 flex items-center gap-1 text-sm font-semibold text-[#82B2CA]">
+                        Höhe
+                        <svg className="h-4 w-4 text-[#82B2CA]" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" /><text x="10" y="14" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="bold">i</text></svg>
+                      </label>
+                      <div className="flex items-center gap-4">
+                        <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
+                          {hoehe}mm
+                        </div>
+                        <input
+                          type="range"
+                          min={hoeheRange.min}
+                          max={hoeheRange.max}
+                          step={hoeheRange.step}
+                          value={hoehe}
+                          onChange={(e) => setHoehe(Number(e.target.value))}
+                          className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
+                          style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((hoehe - hoeheRange.min) / (hoeheRange.max - hoeheRange.min)) * 100}%, #e7e5e4 ${((hoehe - hoeheRange.min) / (hoeheRange.max - hoeheRange.min)) * 100}%, #e7e5e4 100%)` }}
+                        />
+                      </div>
+                    </div>
+                    {/* Summary */}
+                    <div className="flex items-center justify-between rounded-lg bg-stone-50 px-3 py-2 text-sm">
+                      <span className="text-zinc-500">Fläche</span>
+                      <span className="font-bold text-zinc-900">{sqm.toFixed(1)} m²</span>
+                    </div>
                   </div>
-                  <button type="button" className="mt-2 text-xs font-semibold text-zinc-900 underline underline-offset-2">Richtige Größe wählen</button>
                 </div>
 
                 {/* Mount type */}
