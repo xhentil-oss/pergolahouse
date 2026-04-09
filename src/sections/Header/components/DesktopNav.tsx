@@ -18,22 +18,30 @@ export const DesktopNav = () => {
           { label: "Elegante Pergola", href: "/products/pergola-s3" },
           { label: "Luxus-Pergola", href: "/products/pergola-custom-design" },
           { label: "Preiswerte Pergola", href: "/products/preiswerte-pergola" },
-          { label: "Pergola Maßanfertigung", href: "/products/pergola-massanfertigung" },
-          { label: "Wintergärten", href: "/collections/wintergarten-1" },
         ]}
       />
-      <NavItem
-        label="Zubehör"
-        href="/collections/pergola-zubehoer"
-        dropdownItems={[
-          { label: "Screen Rollos", href: "/products/screen-rollo" },
-          { label: "Glaswände", href: "/products/glaswande" },
-          { label: "LEDs", href: "/products/led-stripes" },
-          { label: "Wärmelampe", href: "/products/waermelampe" },
-          { label: "Carports", href: "/collections/carports" },
-          { label: "Zip-Screens", href: "/collections/zip-screens" },
-        ]}
-      />
+      
+      <Link
+        to="/collections/wintergarten-1"
+        className="rounded-lg px-3 py-2 text-sm font-medium tracking-wide transition-colors hover:bg-zinc-50"
+        style={{ color: '#344148' }}
+      >
+        Wintergarden
+      </Link>
+      <Link
+        to="/collections/carports"
+        className="rounded-lg px-3 py-2 text-sm font-medium tracking-wide transition-colors hover:bg-zinc-50"
+        style={{ color: '#344148' }}
+      >
+        Carports
+      </Link>
+      <Link
+        to="/collections/zip-screens"
+        className="rounded-lg px-3 py-2 text-sm font-medium tracking-wide transition-colors hover:bg-zinc-50"
+        style={{ color: '#344148' }}
+      >
+        Zip-Screen
+      </Link>
       <Link
         to="/pages/ueber-uns"
         className="rounded-lg px-3 py-2 text-sm font-medium tracking-wide transition-colors hover:bg-zinc-50"
