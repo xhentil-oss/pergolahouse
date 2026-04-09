@@ -1,0 +1,206 @@
+﻿import { Header } from "@/sections/Header";
+import { Footer } from "@/sections/Footer";
+import { FeatureTicker } from "@/sections/FeatureTicker";
+import { FAQ } from "@/sections/FAQ";
+import { Link } from "react-router-dom";
+import photo2 from "@/assets/Photo (2).png";
+import photo3 from "@/assets/Photo (3).png";
+import photo4 from "@/assets/Photo (4).png";
+import photo5 from "@/assets/Photo (5).png";
+import photo6 from "@/assets/Photo (6).png";
+import photo7 from "@/assets/Photo (7).png";
+import photo8 from "@/assets/Photo (8).png";
+import photo9 from "@/assets/Photo (9).png";
+import heroBg from "@/assets/Photo (1).png";
+
+const products = [
+  {
+    href: "/products/pergola-s3",
+    imageSrc: photo2,
+    imageAlt: "Pergola S3",
+    badge: "Manuelles Modell",
+    name: "Pergola S3",
+    price: "3.990 €",
+    roofType: "Manuelles Lamellendach",
+    windResistance: "Windfest bis 100km/h",
+    stars: 4.8,
+    reviews: 1240,
+  },
+  {
+    href: "/products/sundream-s3",
+    imageSrc: photo3,
+    imageAlt: "Sundream S3",
+    badge: "Beliebtestes Modell",
+    name: "Sundream S3",
+    price: "5.290 €",
+    roofType: "Elektrisches Lamellendach",
+    windResistance: "Bis zu 120km/h (Sturm)",
+    stars: 4.9,
+    reviews: 876,
+  },
+  {
+    href: "/products/skydance-s3",
+    imageSrc: photo4,
+    imageAlt: "Skydance S3",
+    badge: "Unser Premium-Modell",
+    name: "Skydance S3",
+    price: "7.290 €",
+    roofType: "Elektrische LED-Lamellen",
+    windResistance: "Bis zu 140km/h (Orkan)",
+    stars: 4.9,
+    reviews: 532,
+  },
+  {
+    href: "/products/pergola-custom-design",
+    imageSrc: photo5,
+    imageAlt: "Maßanfertigung S3",
+    badge: "Individuelle Maße",
+    name: "Maßanfertigung S3",
+    price: "9.694 €",
+    roofType: "Elektrisches Lamellendach",
+    windResistance: "Bis zu 120km/h (Sturm)",
+    stars: 4.8,
+    reviews: 321,
+  },
+  {
+    href: "/products/pergola-s3",
+    imageSrc: photo6,
+    imageAlt: "Pergola S3 Anthrazit",
+    badge: "Neu",
+    name: "Pergola S3 Anthrazit",
+    price: "4.100 €",
+    roofType: "Manuelles Lamellendach",
+    windResistance: "Windfest bis 100km/h",
+    stars: 4.7,
+    reviews: 210,
+  },
+  {
+    href: "/products/sundream-s3",
+    imageSrc: photo7,
+    imageAlt: "Sundream S3 Weiß",
+    badge: "Bestseller",
+    name: "Sundream S3 Weiß",
+    price: "5.490 €",
+    roofType: "Elektrisches Lamellendach",
+    windResistance: "Bis zu 120km/h (Sturm)",
+    stars: 4.8,
+    reviews: 645,
+  },
+  {
+    href: "/products/skydance-s3",
+    imageSrc: photo8,
+    imageAlt: "Skydance S3 Schwarz",
+    badge: "Premium",
+    name: "Skydance S3 Schwarz",
+    price: "7.490 €",
+    roofType: "Elektrische LED-Lamellen",
+    windResistance: "Bis zu 140km/h (Orkan)",
+    stars: 5.0,
+    reviews: 189,
+  },
+  {
+    href: "/products/pergola-custom-design",
+    imageSrc: photo9,
+    imageAlt: "Maßanfertigung Premium",
+    badge: "Auf Maß",
+    name: "Maßanfertigung Premium",
+    price: "10.200 €",
+    roofType: "Elektrisches Lamellendach",
+    windResistance: "Bis zu 120km/h (Sturm)",
+    stars: 4.9,
+    reviews: 98,
+  },
+];
+
+const StarRating = ({ stars }: { stars: number }) => {
+  return (
+    <div className="flex items-center gap-1">
+      {[1, 2, 3, 4, 5].map((i) => (
+        <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill={i <= Math.round(stars) ? "#f59e0b" : "#d1d5db"}>
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+      ))}
+      <span className="text-neutral-500 text-xs ml-1">({stars.toFixed(1)})</span>
+    </div>
+  );
+};
+
+export const CollectionsPage = () => {
+  return (
+    <div className="relative text-neutral-900 bg-white overflow-x-hidden font-inter_tight">
+      <Header />
+      <main role="main">
+        {/* Hero Banner */}
+        <div className="relative min-h-[360px] md:min-h-[460px] py-14 md:py-20 text-center flex items-center justify-center px-4">
+          <img src={heroBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-black/55" />
+          <div className="relative z-10 max-w-3xl mx-auto">
+            <p className="text-[#82B2CA] text-sm font-semibold uppercase tracking-widest mb-3">Finaler Abverkauf</p>
+            <h1 className="text-white text-4xl md:text-6xl font-semibold leading-tight mb-4">
+              Unsere Pergolen
+            </h1>
+            <p className="text-white/80 text-lg max-w-xl mx-auto">
+              Serie 3 - Entdecke alle Modelle und finde deine perfekte Pergola.
+            </p>
+          </div>
+        </div>
+
+        {/* Ticker */}
+        <FeatureTicker backgroundColorClass="bg-[#344148]" />
+
+        {/* Product Grid */}
+        <section className="max-w-[1440px] mx-auto px-4 md:px-16 py-16 md:py-24">
+          {/* Filter bar */}
+          <div className="flex items-center justify-between mb-10 border-b border-neutral-200 pb-6">
+            <p className="text-neutral-500 text-sm">{products.length} Produkte</p>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-neutral-600 font-medium">Sortieren:</span>
+              <select className="text-sm border border-neutral-200 rounded-md px-3 py-1.5 bg-white focus:outline-none focus:ring-1 focus:ring-zinc-400">
+                <option>Empfohlen</option>
+                <option>Preis: aufsteigend</option>
+                <option>Preis: absteigend</option>
+                <option>Bestseller</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Grid */}
+          <ul className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            {products.map((p) => (
+              <li key={p.name} className="flex flex-col group">
+                <Link to={p.href} className="block overflow-hidden rounded-2xl mb-4 relative">
+                  <img
+                    src={p.imageSrc}
+                    alt={p.imageAlt}
+                    className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <span className="absolute top-3 left-3 bg-white text-zinc-900 text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm">
+                    {p.badge}
+                  </span>
+                </Link>
+                <div className="flex flex-col flex-1 text-center gap-1">
+                  <h2 className="text-zinc-900 font-semibold text-lg leading-tight">{p.name}</h2>
+                  <StarRating stars={p.stars} />
+                  <p className="text-neutral-500 text-sm">{p.roofType}</p>
+                  <p className="text-neutral-400 text-xs">{p.windResistance}</p>
+                  <div className="flex items-center justify-center gap-2 mt-2 flex-wrap">
+                    <span className="text-zinc-900 font-semibold text-base">{p.price}</span>
+                  </div>
+                  <Link
+                    to={p.href}
+                    className="mt-3 block text-white hover:opacity-90 transition-colors font-medium text-sm py-3 px-4 rounded-xl border border-[#344148]"
+                    style={{ backgroundColor: '#344148' }}
+                  >
+                    Jetzt kaufen →
+                  </Link>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+        <FAQ />
+      </main>
+      <Footer />
+    </div>
+  );
+};

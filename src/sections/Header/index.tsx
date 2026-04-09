@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HeaderLogo } from "@/sections/Header/components/HeaderLogo";
 import { DesktopNav } from "@/sections/Header/components/DesktopNav";
 import { HeaderActions } from "@/sections/Header/components/HeaderActions";
@@ -6,24 +6,39 @@ import { MobileMenu } from "@/sections/Header/components/MobileMenu";
 
 export const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky bg-white min-h-[56px] z-40 top-0 shadow-sm">
-      <div className="relative border-zinc-300 border-b border-solid">
-        <div className="items-center flex justify-between max-w-[1440px] mx-auto px-4 py-3 md:px-16 md:py-2">
-          {/* Hamburger */}
-          <button
-            onClick={() => setMobileOpen(true)}
-            aria-label="Menu"
-            className="block h-6 w-6 md:hidden"
-          >
-            <img src="https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-2.svg" alt="Menu" className="h-6 w-6" />
-          </button>
+    <header
+      className={`sticky top-0 z-40 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/95 backdrop-blur-xl shadow-lg shadow-black/5"
+          : "bg-white"
+      }`}
+    >
+      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-3 md:px-12 lg:px-16">
+        {/* Hamburger */}
+        <button
+          onClick={() => setMobileOpen(true)}
+          aria-label="Menu"
+          className="flex h-10 w-10 items-center justify-center rounded-lg transition-colors hover:bg-zinc-100 md:hidden"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#344148" strokeWidth="2" strokeLinecap="round">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
 
-          <HeaderLogo />
-          <DesktopNav />
-          <HeaderActions />
-        </div>
+        <HeaderLogo />
+        <DesktopNav />
+        <HeaderActions />
       </div>
 
       {/* Mobile Menu Overlay */}

@@ -1,6 +1,6 @@
 export type ColorSwatch = {
-  src: string;
-  alt: string;
+  color: string;
+  label: string;
 };
 
 export type ProductCardProps = {
@@ -24,107 +24,83 @@ export type ProductCardProps = {
 
 export const ProductCard = (props: ProductCardProps) => {
   return (
-    <li className="items-center box-border caret-transparent gap-x-6 flex flex-col h-full gap-y-6">
-      <div className="box-border caret-transparent gap-x-6 flex flex-col justify-between min-h-[544px] min-w-[auto] gap-y-6 w-full">
-        <div className="box-border caret-transparent gap-x-6 flex flex-col min-h-[auto] min-w-[auto] gap-y-6">
-          <div className="items-center box-border caret-transparent gap-x-6 flex flex-col justify-center min-h-[auto] min-w-[auto] gap-y-6 w-full">
-            <a
-              href={props.productUrl}
-              aria-label={props.productAriaLabel}
-              className="box-border caret-transparent block min-h-[auto] min-w-[auto] w-full overflow-hidden rounded-xl"
-            >
+    <div className="group h-full flex flex-col bg-white rounded-2xl overflow-hidden border border-stone-200/80 hover:border-[#82B2CA]/30 hover:shadow-xl hover:shadow-[#82B2CA]/5 transition-all duration-300">
+      {/* Image */}
+      <a href={props.productUrl} aria-label={props.productAriaLabel} className="relative block overflow-hidden">
+        <div className="aspect-[4/3] overflow-hidden">
+          <img
+            src={props.imageSrc}
+            alt={props.imageAlt}
+            className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        </div>
+        {/* Model badge */}
+        <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-[#344148] text-[11px] font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full">
+          {props.modelLabel}
+        </span>
+        {/* Savings badge */}
+        <span className="absolute top-3 right-3 bg-[#344148] text-white text-[11px] font-bold uppercase px-2.5 py-1.5 rounded-full">
+          {props.savingsText}
+        </span>
+      </a>
+
+      {/* Content */}
+      <div className="flex flex-col flex-1 p-5">
+        {/* Name + Price */}
+        <div className="mb-3">
+          <h3 className="text-lg font-semibold text-[#344148] mb-1.5">{props.productName}</h3>
+          <div className={props.priceWrapperClass}>
+            <span className="text-lg font-bold text-[#344148]">{props.currentPrice}</span>
+            <span className="text-sm text-neutral-400 line-through">{props.originalPrice}</span>
+          </div>
+        </div>
+
+        {/* Specs */}
+        <div className="space-y-1.5 mb-4">
+          <div className="flex items-center gap-2 text-sm text-neutral-600">
+            <svg className="h-3.5 w-3.5 text-[#82B2CA] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {props.roofType}
+          </div>
+          <div className="flex items-center gap-2 text-sm text-neutral-600">
+            <svg className="h-3.5 w-3.5 text-[#82B2CA] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {props.windResistance}
+          </div>
+        </div>
+
+        {/* Color swatches */}
+        {props.colorSwatches && props.colorSwatches.length > 0 && (
+          <div className="flex items-center gap-1.5 mb-4">
+            {props.colorSwatches.map((swatch, i) => (
               <div
-                className={`relative aspect-[272_/_204] bg-cover box-border caret-transparent max-w-[368px] w-full md:aspect-[544_/_408] ${props.imageContainerClass}`}
-              >
-                <picture className="box-border caret-transparent block h-full max-w-full w-full">
-                  <img
-                    src={props.imageSrc}
-                    alt={props.imageAlt}
-                    className="aspect-[auto_375_/_281] box-border caret-transparent h-full max-w-full object-cover w-full"
-                  />
-                </picture>
-              </div>
-            </a>
-            <div className="items-center box-border caret-transparent gap-x-2 flex flex-col min-h-[auto] min-w-[auto] gap-y-2">
-              <div className="box-border caret-transparent min-h-[auto] min-w-[auto] text-center">
-                <div className="text-yellow-800 text-sm font-semibold box-border caret-transparent leading-[18px] min-h-[18px]">
-                  {props.modelLabel}
-                </div>
-                <h3 className="text-black text-2xl font-semibold box-border caret-transparent leading-7">
-                  {props.productName}
-                </h3>
-              </div>
-              <div className="box-border caret-transparent min-h-[auto] min-w-[auto]">
-                <span className={props.priceWrapperClass}>
-                  <div className="font-medium items-end box-border caret-transparent gap-x-1 flex leading-5 min-h-[auto] min-w-[auto] gap-y-1 p-1">
-                    {props.currentPrice}
-                  </div>
-                  <span className="text-amber-500 font-medium box-border caret-transparent block leading-5 min-h-[auto] min-w-[auto] line-through">
-                    {props.originalPrice}
-                  </span>
-                  <div className="text-green-500 font-medium bg-emerald-100 box-border caret-transparent leading-5 min-h-[auto] min-w-[auto] uppercase p-1 rounded-md">
-                    {props.savingsText}
-                  </div>
-                </span>
-              </div>
-            </div>
+                key={i}
+                title={swatch.label}
+                className="h-5 w-5 rounded-full ring-1 ring-stone-300/60 shadow-sm"
+                style={{ backgroundColor: swatch.color }}
+              />
+            ))}
+            <span className="text-xs text-neutral-400 ml-1">{props.colorSwatches.length} Farben</span>
           </div>
-          <div className="items-center box-border caret-transparent gap-x-1 flex flex-col justify-center min-h-[auto] min-w-[auto] gap-y-1 text-center">
-            <div className="relative box-border caret-transparent gap-x-2 gap-y-2 flex min-h-[auto] min-w-[auto]">
-              {props.colorSwatches &&
-                props.colorSwatches.map((swatch, index) => (
-                  <div
-                    key={index}
-                    className="relative box-border caret-transparent flex min-h-[auto] min-w-[auto] overflow-hidden rounded-xl after:accent-auto after:shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.05)_0px_0px_0px_0px_inset,rgba(0,0,0,0.48)_0px_0px_2px_0px_inset,rgba(0,0,0,0.02)_0px_-5px_10px_0px_inset] after:box-border after:caret-transparent after:text-neutral-900 after:block after:text-base after:not-italic after:normal-nums after:font-normal after:tracking-[normal] after:leading-6 after:list-outside after:list-none after:pointer-events-auto after:absolute after:text-center after:no-underline after:indent-[0px] after:normal-case after:visible after:rounded-xl after:border-separate after:inset-0 after:font-ui_sans_serif"
-                  >
-                    <img
-                      src={swatch.src}
-                      alt={swatch.alt}
-                      className="aspect-[auto_20_/_20] box-border caret-transparent max-w-full min-h-[auto] min-w-[auto] w-5 rounded-xl"
-                    />
-                  </div>
-                ))}
-            </div>
-            <div className="text-sm font-semibold box-border caret-transparent leading-[18px] min-h-[auto] min-w-[auto]">
-              {props.roofType}
-            </div>
-            <div className="text-neutral-500 text-sm box-border caret-transparent leading-[18px] min-h-[auto] min-w-[auto]">
-              <p className="box-border caret-transparent">
-                {props.windResistance}
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="box-border caret-transparent gap-x-3 flex flex-col min-h-[auto] min-w-[auto] gap-y-3">
-          <div className="box-border caret-transparent block min-h-[auto] min-w-[auto]">
-            <div className="box-border caret-transparent">
-              <div className="items-center box-border caret-transparent gap-x-1 flex justify-center gap-y-1 text-center">
-                <img
-                  src="https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-19.svg"
-                  alt="Icon"
-                  className="box-border caret-transparent h-[13px] w-4"
-                />
-                <div className="text-neutral-500 text-sm box-border caret-transparent gap-x-0.5 flex leading-[18px] min-h-[auto] min-w-[auto] gap-y-0.5 text-left">
-                  <span className="box-border caret-transparent block min-h-[auto] min-w-[auto]">
-                    {props.interestedCount}
-                  </span>
-                  Interessenten online
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="items-center box-border caret-transparent gap-x-2 flex flex-col min-h-[auto] min-w-[auto] gap-y-2 w-full border-neutral-100 pb-6 border-b border-solid">
-          <a
-            href={props.productUrl}
-            aria-label={props.buyButtonAriaLabel}
-            className="text-white font-medium items-center bg-green-700 box-border caret-transparent flex justify-center leading-5 max-h-12 min-h-[auto] min-w-[auto] text-center w-full border border-green-800 p-4 rounded-md border-solid"
-          >
-            Jetzt kaufen →
-          </a>
-        </div>
+        )}
+
+        {/* Spacer */}
+        <div className="flex-1" />
+
+        {/* CTA */}
+        <a
+          href={props.productUrl}
+          aria-label={props.buyButtonAriaLabel}
+          className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-semibold transition-all duration-200 bg-[#344148] text-white hover:bg-[#2a353b]"
+        >
+          Jetzt entdecken
+          <svg className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
       </div>
-      <div className="items-center box-border caret-transparent gap-x-6 hidden flex-col justify-center gap-y-6 w-full"></div>
-    </li>
+    </div>
   );
 };

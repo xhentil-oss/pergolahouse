@@ -1,153 +1,212 @@
-import { useRef } from "react";
-import { ProductCard } from "@/sections/ProductSlider/components/ProductCard";
+﻿import { ProductCard } from "@/sections/ProductSlider/components/ProductCard";
+import { useRef, useState, useEffect } from "react";
+import photo2 from "@/assets/Photo (2).png";
+import photo3 from "@/assets/Photo (3).png";
+import photo4 from "@/assets/Photo (4).png";
+import photo5 from "@/assets/Photo (5).png";
+import photo6 from "@/assets/Photo (6).png";
+import photo7 from "@/assets/Photo (7).png";
+
+const toKebab = (str) => str.toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
 const products = [
   {
-    productUrl: "/products/pergolux-pergola-s3",
-    productAriaLabel: "Pergola S3",
+    productUrl: `/products/${toKebab("Elegante Pergola")}`,
+    productAriaLabel: "Elegante Pergola",
     imageContainerClass: "",
-    imageSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/85.jpg",
-    imageAlt: "PERGOLUX Pergola S3",
-    modelLabel: "Manuelles Modell",
-    productName: "Pergola S3",
+    imageSrc: photo2,
+    imageAlt: "Elegante Pergola",
+    productName: "Elegante Pergola",
     currentPrice: "2.589 €",
     originalPrice: "3.990 €",
     savingsText: "35% sparen",
     colorSwatches: [
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/129.png", alt: "anthrazit" },
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/107.png", alt: "weiss" },
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/131.png", alt: "schwarz" },
+      { color: "#2D3436", label: "Gray 7016 T" },
+      { color: "#F1EDE5", label: "White 9016 T" },
+      { color: "#0A0A0A", label: "Black 9005 T" },
+      { color: "#8E9499", label: "Gray 7046 T" },
+      { color: "#D4BC6A", label: "Ivory 1015 T" },
     ],
     roofType: "Manuelles Lamellendach",
     windResistance: "Windfest bis 100km/h",
     interestedCount: "5030",
-    buyButtonAriaLabel: "Jetzt kaufen – Pergola S3",
+    buyButtonAriaLabel: "Mehr sehen – Elegante Pergola",
   },
   {
-    productUrl: "/products/pergolux-sundream-s3",
-    productAriaLabel: "Sundream S3",
+    productUrl: `/products/${toKebab("Luxus-Pergola")}`,
+    productAriaLabel: "Luxus-Pergola",
     imageContainerClass: "",
-    imageSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/121.jpg",
-    imageAlt: "PERGOLUX Sundream S3",
-    modelLabel: "Beliebtestes Modell",
-    productName: "Sundream S3",
+    imageSrc: photo3,
+    imageAlt: "Luxus-Pergola",
+    productName: "Luxus-Pergola",
     currentPrice: "3.429 €",
     originalPrice: "5.290 €",
     savingsText: "35% sparen",
     colorSwatches: [
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/129.png", alt: "anthrazit" },
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/107.png", alt: "weiss" },
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/131.png", alt: "schwarz" },
+      { color: "#2D3436", label: "Gray 7016 T" },
+      { color: "#F1EDE5", label: "White 9016 T" },
+      { color: "#0A0A0A", label: "Black 9005 T" },
+      { color: "#8E9499", label: "Gray 7046 T" },
+      { color: "#D4BC6A", label: "Ivory 1015 T" },
     ],
     roofType: "Elektrisches Lamellendach",
     windResistance: "Bis zu 120km/h (Sturm)",
     interestedCount: "3270",
-    buyButtonAriaLabel: "Jetzt kaufen – Sundream S3",
+    buyButtonAriaLabel: "Jetzt kaufen – Luxus-Pergola",
   },
   {
-    productUrl: "/products/pergolux-skydance-s3",
-    productAriaLabel: "Skydance S3",
+    productUrl: `/products/${toKebab("Preiswerte Pergola")}`,
+    productAriaLabel: "Preiswerte Pergola",
     imageContainerClass: "",
-    imageSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/91.jpg",
-    imageAlt: "PERGOLUX Skydance S3",
-    modelLabel: "Unser Premium-Modell",
-    productName: "Skydance S3",
+    imageSrc: photo4,
+    imageAlt: "Preiswerte Pergola",
+    productName: "Preiswerte Pergola",
     currentPrice: "5.099 €",
     originalPrice: "7.290 €",
     savingsText: "30% sparen",
     colorSwatches: [
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/129.png", alt: "anthrazit" },
-      { src: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/107.png", alt: "weiss" },
+      { color: "#2D3436", label: "Gray 7016 T" },
+      { color: "#F1EDE5", label: "White 9016 T" },
+      { color: "#0A0A0A", label: "Black 9005 T" },
+      { color: "#8E9499", label: "Gray 7046 T" },
+      { color: "#D4BC6A", label: "Ivory 1015 T" },
     ],
     roofType: "Elektrische LED-Lamellen",
     windResistance: "Bis zu 140km/h (Orkan)",
     interestedCount: "2399",
-    buyButtonAriaLabel: "Jetzt kaufen – Skydance S3",
+    buyButtonAriaLabel: "Jetzt kaufen – Preiswerte Pergola",
   },
   {
-    productUrl: "/products/pergola-custom-design",
-    productAriaLabel: "Maßanfertigung S3",
+    productUrl: "/collections/wintergarten-1",
+    productAriaLabel: "Wintergärten",
     imageContainerClass: "",
-    imageSrc: "https://c.animaapp.com/mnd2jbm7kw8tP/assets/87.jpg",
-    imageAlt: "PERGOLUX Maßanfertigung S3",
-    modelLabel: "Individuelle Maße",
-    productName: "Maßanfertigung S3",
+    imageSrc: photo5,
+    imageAlt: "Wintergärten",
+    productName: "Wintergärten",
     currentPrice: "6.785 €",
     originalPrice: "9.694 €",
     savingsText: "30% sparen",
-    colorSwatches: [],
+    colorSwatches: [
+      { color: "#2D3436", label: "Gray 7016 T" },
+      { color: "#F1EDE5", label: "White 9016 T" },
+      { color: "#0A0A0A", label: "Black 9005 T" },
+      { color: "#8E9499", label: "Gray 7046 T" },
+      { color: "#D4BC6A", label: "Ivory 1015 T" },
+    ],
     roofType: "Elektrisches Lamellendach",
     windResistance: "Bis zu 120km/h (Sturm)",
     interestedCount: "2232",
-    buyButtonAriaLabel: "Jetzt kaufen – Maßanfertigung S3",
+    buyButtonAriaLabel: "Jetzt kaufen – Wintergärten",
+  },
+  {
+    productUrl: "/products/pergola-massanfertigung",
+    productAriaLabel: "Pergola Maßanfertigung",
+    imageContainerClass: "",
+    imageSrc: photo6,
+    imageAlt: "Pergola Maßanfertigung",
+    productName: "Pergola Maßanfertigung",
+    currentPrice: "4.899 €",
+    originalPrice: "6.990 €",
+    savingsText: "30% sparen",
+    colorSwatches: [
+      { color: "#2D3436", label: "Gray 7016 T" },
+      { color: "#F1EDE5", label: "White 9016 T" },
+      { color: "#0A0A0A", label: "Black 9005 T" },
+      { color: "#8E9499", label: "Gray 7046 T" },
+      { color: "#D4BC6A", label: "Ivory 1015 T" },
+    ],
+    roofType: "Individuelle Maße & Ausstattung",
+    windResistance: "Bis zu 120km/h (Sturm)",
+    interestedCount: "1120",
+    buyButtonAriaLabel: "Jetzt kaufen – Pergola Maßanfertigung",
   },
 ];
 
 export const ProductSlider = () => {
-  const scrollRef = useRef<HTMLUListElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 10);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
+  };
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    checkScroll();
+    el.addEventListener("scroll", checkScroll, { passive: true });
+    window.addEventListener("resize", checkScroll);
+    return () => {
+      el.removeEventListener("scroll", checkScroll);
+      window.removeEventListener("resize", checkScroll);
+    };
+  }, []);
 
   const scroll = (dir: "left" | "right") => {
-    if (!scrollRef.current) return;
-    const amount = 380;
-    scrollRef.current.scrollBy({ left: dir === "right" ? amount : -amount, behavior: "smooth" });
+    const el = scrollRef.current;
+    if (!el) return;
+    const cardWidth = el.querySelector("li")?.offsetWidth ?? 300;
+    el.scrollBy({ left: dir === "right" ? cardWidth + 24 : -(cardWidth + 24), behavior: "smooth" });
   };
 
   return (
-    <div className="bg-neutral-100">
-      <div className="py-16 md:py-[120px]">
-        <div className="flex flex-col gap-10">
-          {/* Header row */}
-          <div className="max-w-[1440px] mx-auto px-4 md:px-16 w-full flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <h2 className="text-zinc-900 text-[32px] font-semibold leading-10 md:text-5xl md:leading-[58px]">
-              Serie 3 Modelle
+    <section className="bg-white py-16 md:py-24 overflow-hidden">
+      <div className="mx-auto max-w-[1440px] px-4 md:px-16">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14">
+          <div>
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[#82B2CA] mb-2">
+              Unsere Kollektion
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-[#344148]">
+              Pergola Modelle
             </h2>
-            <div className="flex items-center gap-3">
-              <div className="h-8 w-8 rounded-full overflow-hidden shrink-0">
-                <img src="https://c.animaapp.com/mnd7yb7cX3zmke/assets/103.png" alt="" className="h-full w-full object-cover" />
-              </div>
-              <div className="text-zinc-900 font-medium flex flex-col leading-5">
-                <span>Finde deine Pergola</span>
-                <a href="/collections/unsere-pergolen" className="text-blue-800 font-semibold text-sm hover:underline">
-                  Modelle vergleichen →
-                </a>
-              </div>
-            </div>
           </div>
-
-          {/* Slider */}
-          <div className="relative">
-            <ul
-              ref={scrollRef}
-              className="flex gap-4 overflow-x-auto scroll-smooth px-4 md:px-16 pb-4 snap-x snap-mandatory"
-              style={{ scrollbarWidth: "none" }}
+          <div className="flex items-center gap-4">
+            <a
+              href="/collections/unsere-pergolen"
+              className="text-sm font-semibold text-[#344148] hover:text-[#82B2CA] transition-colors"
             >
-              {products.map((p) => (
-                <li key={p.productName} className="shrink-0 snap-start w-[280px] md:w-[340px]">
-                  <ProductCard {...p} priceWrapperClass="items-center gap-x-1 flex flex-wrap justify-center gap-y-1" />
-                </li>
-              ))}
-            </ul>
-
-            {/* Nav buttons */}
-            <div className="hidden md:flex justify-end gap-3 pt-8 pr-16">
+              Alle Modelle ansehen &rarr;
+            </a>
+            <div className="hidden md:flex items-center gap-2">
               <button
+                type="button"
                 onClick={() => scroll("left")}
-                aria-label="Previous"
-                className="bg-zinc-200 hover:bg-zinc-300 p-3 rounded-full transition-colors"
+                disabled={!canScrollLeft}
+                className={`flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 ${canScrollLeft ? "border-[#344148]/20 bg-white hover:bg-[#344148] hover:text-white hover:border-[#344148] text-[#344148]" : "border-stone-200 bg-stone-100 text-stone-300 cursor-not-allowed"}`}
+                aria-label="Zurück scrollen"
               >
-                <svg width="10" height="17" viewBox="0 0 10 17" fill="none"><path d="M8.5 1L1.5 8.5L8.5 16" stroke="#666" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
               </button>
               <button
+                type="button"
                 onClick={() => scroll("right")}
-                aria-label="Next"
-                className="bg-zinc-200 hover:bg-zinc-300 p-3 rounded-full transition-colors"
+                disabled={!canScrollRight}
+                className={`flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 ${canScrollRight ? "border-[#344148]/20 bg-white hover:bg-[#344148] hover:text-white hover:border-[#344148] text-[#344148]" : "border-stone-200 bg-stone-100 text-stone-300 cursor-not-allowed"}`}
+                aria-label="Weiter scrollen"
               >
-                <svg width="10" height="17" viewBox="0 0 10 17" fill="none"><path d="M1.5 1L8.5 8.5L1.5 16" stroke="#666" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
               </button>
             </div>
           </div>
         </div>
+
+        {/* Scrollable cards */}
+        <div ref={scrollRef} className="overflow-x-auto scrollbar-hide scroll-smooth -mx-4 px-4 md:-mx-0 md:px-0">
+          <ul className="flex gap-5 md:gap-6 w-max list-none p-0 m-0">
+            {products.map((p) => (
+              <li key={p.productName} className="w-[280px] md:w-[310px] shrink-0">
+                <ProductCard {...p} priceWrapperClass="items-center gap-x-1.5 flex flex-wrap gap-y-1" />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };

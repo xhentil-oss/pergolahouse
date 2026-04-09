@@ -1,49 +1,53 @@
+import { Link } from "react-router-dom";
 import { NavItem } from "@/sections/Header/components/NavItem";
 
 export const DesktopNav = () => {
   return (
-    <nav className="items-center gap-x-1 hidden md:flex">
-      <a
-        href="/collections/unsere-pergolen"
-        className="text-amber-500 font-semibold items-center gap-x-1 flex leading-5 mr-2"
+    <nav className="hidden items-center gap-x-0.5 md:flex">
+      <Link
+        to="/"
+        className="rounded-lg px-3 py-2 text-sm font-medium tracking-wide transition-colors hover:bg-zinc-50"
+        style={{ color: '#344148' }}
       >
-        <img src="https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-3.svg" alt="" className="h-4 w-4" />
-        Sale
-      </a>
+        Startseite
+      </Link>
       <NavItem
         label="Pergolen"
         href="/collections/unsere-pergolen"
         dropdownItems={[
-          { label: "PERGOLUX Pergola S3", href: "/products/pergolux-pergola-s3" },
-          { label: "PERGOLUX Sundream S3", href: "/products/pergolux-sundream-s3" },
-          { label: "PERGOLUX Skydance S3", href: "/products/pergolux-skydance-s3" },
-          { label: "Maßanfertigung S3", href: "/products/pergola-custom-design" },
-          { label: "Alle anzeigen →", href: "/collections/unsere-pergolen" },
-        ]}
-      />
-      <NavItem
-        label="Wintergarten"
-        href="/collections/wintergarten-1"
-        dropdownItems={[
-          { label: "Glasdach Wintergarten", href: "/collections/wintergarten-1" },
-          { label: "Alle anzeigen →", href: "/collections/wintergarten-1" },
+          { label: "Elegante Pergola", href: "/products/pergola-s3" },
+          { label: "Luxus-Pergola", href: "/products/pergola-custom-design" },
+          { label: "Preiswerte Pergola", href: "/products/preiswerte-pergola" },
+          { label: "Pergola Maßanfertigung", href: "/products/pergola-massanfertigung" },
+          { label: "Wintergärten", href: "/collections/wintergarten-1" },
         ]}
       />
       <NavItem
         label="Zubehör"
         href="/collections/pergola-zubehoer"
         dropdownItems={[
-          { label: "Screen Rollos", href: "/collections/pergola-zubehoer" },
-          { label: "Glaswände", href: "/collections/pergola-zubehoer" },
-          { label: "Lamellenwände", href: "/collections/pergola-zubehoer" },
-          { label: "LEDs", href: "/collections/pergola-zubehoer" },
-          { label: "S3 Wärmelampe", href: "/collections/pergola-zubehoer" },
-          { label: "Alle anzeigen →", href: "/collections/pergola-zubehoer" },
+          { label: "Screen Rollos", href: "/products/screen-rollo" },
+          { label: "Glaswände", href: "/products/glaswande" },
+          { label: "LEDs", href: "/products/led-stripes" },
+          { label: "Wärmelampe", href: "/products/waermelampe" },
+          { label: "Carports", href: "/collections/carports" },
+          { label: "Zip-Screens", href: "/collections/zip-screens" },
         ]}
       />
-      <a href="/pages/showroom-3-0" className="font-semibold leading-5 mr-2 hover:text-zinc-600 transition-colors">Showroom</a>
-      <a href="/pages/ueber-uns" className="font-semibold leading-5 mr-2 hover:text-zinc-600 transition-colors">Über uns</a>
-      <a href="https://support.pergolux.de/hc/de" className="font-semibold leading-5 mr-2 hover:text-zinc-600 transition-colors">Hilfecenter</a>
+      <Link
+        to="/pages/ueber-uns"
+        className="rounded-lg px-3 py-2 text-sm font-medium tracking-wide transition-colors hover:bg-zinc-50"
+        style={{ color: '#344148' }}
+      >
+        Über uns
+      </Link>
+      <Link
+        to="/contact"
+        className="rounded-lg px-3 py-2 text-sm font-medium tracking-wide transition-colors hover:bg-zinc-50"
+        style={{ color: '#344148' }}
+      >
+        Kontakt
+      </Link>
     </nav>
   );
 };

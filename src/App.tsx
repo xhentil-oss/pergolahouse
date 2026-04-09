@@ -1,53 +1,44 @@
-import { useState } from "react";
-import { CookieBanner } from "@/components/CookieBanner";
-import { AnnouncementBar } from "@/sections/AnnouncementBar";
-import { Header } from "@/sections/Header";
-import { Hero } from "@/sections/Hero";
-import { FeatureTicker } from "@/sections/FeatureTicker";
-import { BrandLogos } from "@/sections/BrandLogos";
-import { ProductSlider } from "@/sections/ProductSlider";
-import { FeatureSlider } from "@/sections/FeatureSlider";
-import { VideoSlider } from "@/sections/VideoSlider";
-import { BenefitsGrid } from "@/sections/BenefitsGrid";
-import { PermitCheck } from "@/sections/PermitCheck";
-import { ReviewsSlider } from "@/sections/ReviewsSlider";
-import { FAQ } from "@/sections/FAQ";
-import { Footer } from "@/sections/Footer";
-import { TrustBadge } from "@/components/TrustBadge";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HomePage } from "@/pages/HomePage";
+import { CollectionsPage } from "@/pages/CollectionsPage";
+import { UeberUnsPage } from "@/pages/UeberUnsPage";
+import { ContactPage } from "./pages/ContactPage";
+import { ElegantePergolaPage } from "@/pages/ElegantePergolaPage";
+import { LuxusPergolaPage } from "@/pages/LuxusPergolaPage";
+import { PreiswertePergolaPage } from "@/pages/PreiswertePergolaPage";
+import { PergolaManfertigungPage } from "@/pages/PergolaManfertigungPage";
+import { WintergartenPage } from "@/pages/WintergartenPage";
+import { CarportsPage } from "@/pages/CarportsPage";
+import { ZipScreensPage } from "@/pages/ZipScreensPage";
+import { ScreenRolloPage } from "@/pages/ScreenRolloPage";
+import { GlaswandePage } from "@/pages/GlaswandePage";
+import { LEDStripesPage } from "@/pages/LEDStripesPage";
+import { WaermelampePage } from "@/pages/WaermelampePage";
+import { CartProvider } from "@/context/CartContext";
 
 export const App = () => {
-  const [cookieAccepted, setCookieAccepted] = useState(false);
-
   return (
-    <div className="relative text-neutral-900 bg-white overflow-x-hidden font-inter_tight">
-      {!cookieAccepted && <CookieBanner onAccept={() => setCookieAccepted(true)} />}
-      <AnnouncementBar />
-      <Header />
-      <main role="main">
-        <Hero />
-        <FeatureTicker />
-        <BrandLogos />
-        <ProductSlider />
-        <FeatureSlider />
-        <VideoSlider />
-        <BenefitsGrid />
-        <PermitCheck />
-        <ReviewsSlider />
-        <FAQ />
-        <FeatureTicker
-          backgroundColorClass="bg-zinc-900"
-          items={[
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-13.svg", iconClassName: "h-6 w-6", text: "Sicher in extremen Wetterbedingungen" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-14.svg", iconClassName: "h-[23px] w-6", text: "Gratis Lieferung ab 1.000 €" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-15.svg", iconClassName: "h-4 w-5", text: "Video-Anleitungen" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-16.svg", iconClassName: "h-[18px] w-[15px]", text: "iOS und Android App" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-17.svg", iconClassName: "h-[21px] w-[22px]", text: "Sonnenschutz" },
-            { iconSrc: "https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-18.svg", iconClassName: "h-[21px] w-[22px]", text: "Hohe Schneelast" },
-          ]}
-        />
-      </main>
-      <Footer />
-      <TrustBadge />
-    </div>
+    <BrowserRouter>
+      <CartProvider>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/collections/unsere-pergolen" element={<CollectionsPage />} />
+        <Route path="/products/pergola-s3" element={<ElegantePergolaPage />} />
+        <Route path="/products/pergola-custom-design" element={<LuxusPergolaPage />} />
+        <Route path="/products/preiswerte-pergola" element={<PreiswertePergolaPage />} />
+        <Route path="/products/pergola-massanfertigung" element={<PergolaManfertigungPage />} />
+        <Route path="/collections/wintergarten-1" element={<WintergartenPage />} />
+        <Route path="/collections/carports" element={<CarportsPage />} />
+        <Route path="/collections/zip-screens" element={<ZipScreensPage />} />
+        <Route path="/products/screen-rollo" element={<ScreenRolloPage />} />
+        <Route path="/products/glaswande" element={<GlaswandePage />} />
+        <Route path="/products/led-stripes" element={<LEDStripesPage />} />
+        <Route path="/products/waermelampe" element={<WaermelampePage />} />
+        <Route path="/pages/ueber-uns" element={<UeberUnsPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="*" element={<HomePage />} />
+      </Routes>
+      </CartProvider>
+    </BrowserRouter>
   );
 };
