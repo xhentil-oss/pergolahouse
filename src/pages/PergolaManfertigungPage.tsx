@@ -16,14 +16,20 @@ import icon1 from "@/assets/icon1.jpeg";
 import { Pergola3DViewer } from "@/components/Pergola3DViewer";
 
 /* ─── image gallery ─── */
+import photo1 from "../assets/image-pergola.png";
+import photo2 from "../assets/image-light.png";
+import photo3 from "../assets/Photo (26).png";
+import photo4 from "../assets/pergola-glass.png";
+import photo5 from "../assets/pergola-glass-guillot.png";
+import photo6 from "../assets/zip-screen-pergola.png";
+
 const gallery = [
-  { src: pergolaImg, alt: "Pergola Maßanfertigung" },
-  { src: photo18, alt: "Pergola Maßanfertigung – Ansicht 2" },
-  { src: photo26, alt: "Pergola Maßanfertigung – Ansicht 3" },
-  { src: "https://pergolux.de/cdn/shop/files/Background_2925695b-1454-42a8-a462-afa20b8f07be.png?crop=center&height=900&v=1746170598&width=1200", alt: "Pergola Maßanfertigung – Outdoor-Bereich" },
-  { src: "https://pergolux.de/cdn/shop/files/S3_Stronger_than_ever5.png?crop=center&height=900&v=1745831741&width=1200", alt: "Aluminium-Detailansicht" },
-  { src: "https://pergolux.de/cdn/shop/files/effortless-assembly_a659fcec-e1e2-42e3-8b42-98495d7574a5.png?crop=center&height=900&v=1742387411&width=1200", alt: "Montage mit App-Anleitung" },
-  { src: "https://pergolux.de/cdn/shop/files/norway.png?crop=center&height=900&v=1742387411&width=1200", alt: "Norwegisches Design" },
+  { src: photo1, alt: "Elegante Pergola – moderne minimaliste, ditë" },
+  { src: photo2, alt: "Elegante Pergola – moderne minimaliste, natë" },
+  { src: photo3, alt: "Elegante Pergola – LED RGB pranë pishinës" },
+  { src: photo4, alt: "Elegante Pergola – me xhama, ambient kopshti" },
+  { src: photo5, alt: "Elegante Pergola – me xhama, ambient relaksues" },
+  { src: photo6, alt: "Elegante Pergola – klasik, pranë pishinës" },
 ];
 
 /* ─── variants ─── */
@@ -43,16 +49,22 @@ const hoeheRange = { min: 1000, max: 3500, step: 1 };
 /* Price per m² for custom sizes */
 const pricePerSqm = 445;
 
+import ikonaThjesht from "@/assets/ikona-thjesht.png";
+import ikonaMuri from "@/assets/ikona-muri.png";
 const mountOptions = [
-  { label: "Freistehend", img: "https://pergolux.de/cdn/shop/files/freestanding_3957b877-f36f-45a0-986e-6f439f8f5f9c.png?crop=center&height=49&v=1746194687&width=66", surcharge: 0 },
-  { label: "Wandmontage", img: "https://pergolux.de/cdn/shop/files/wallmounted.png?crop=center&height=49&v=1746193904&width=66", surcharge: 240 },
+  { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
+  { label: "Wandmontage", img: ikonaMuri, surcharge: 240 },
 ];
 
+import ikonaMajtas from "@/assets/ikona-majtas.png";
+import ikonaDjathtas from "@/assets/ikona-djathtas.png";
+import ikonaPerball from "@/assets/ikona-perball.png";
+import ikonaMbrapa from "@/assets/ikona-mbrapa.png";
 const sideOptions = [
-  { key: "left", label: "Links", sizeLabel: "Seite", img: "https://pergolux.de/cdn/shop/files/sm-left.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "right", label: "Rechts", sizeLabel: "Seite", img: "https://pergolux.de/cdn/shop/files/sm-right.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "front", label: "Vorne", sizeLabel: "Seite", img: "https://pergolux.de/cdn/shop/files/sm-front.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "back", label: "Hinten", sizeLabel: "Seite", img: "https://pergolux.de/cdn/shop/files/sm-back.png?crop=center&height=68&v=1752586043&width=109" },
+  { key: "left", label: "Links", sizeLabel: "Seite", img: ikonaMajtas },
+  { key: "right", label: "Rechts", sizeLabel: "Seite", img: ikonaDjathtas },
+  { key: "front", label: "Vorne", sizeLabel: "Seite", img: ikonaPerball },
+  { key: "back", label: "Hinten", sizeLabel: "Seite", img: ikonaMbrapa },
 ];
 
 const sideTypeChoices = [
@@ -69,13 +81,6 @@ const accessoryOptions = [
   { label: "Smart Steuerung", description: "Intelligente Steuerung per App – Lamellen, Licht und Heizung.", price: 399 },
 ];
 
-/* ─── trust badges ─── */
-const trustBadges = [
-  { icon: "https://pergolux.de/cdn/shop/files/Shield_Check_54616393-e1cb-420b-80ab-1ce83c5de17f.png?crop=center&height=54&v=1752586038&width=54", label: "10 Jahre Garantie" },
-  { icon: "https://pergolux.de/cdn/shop/files/Bill_Check.png?crop=center&height=48&v=1753781502&width=48", label: "Rechnungskauf" },
-  { icon: "https://pergolux.de/cdn/shop/files/Confetti_198c4952-7307-43f9-8286-78ba45318c28.png?crop=center&height=46&v=1752586038&width=46", label: "+100.000 Kunden" },
-  { icon: "https://pergolux.de/cdn/shop/files/Home_cef2a425-ad3f-4844-ae3d-e17d79c3ee77.png?crop=center&height=48&v=1757669933&width=48", label: "Wertsteigerung" },
-];
 
 /* ─── feature story (icon-based) ─── */
 const featureStory = [
@@ -212,7 +217,6 @@ export const PergolaManfertigungPage = () => {
               {/* breadcrumb */}
               <div className="mb-3 hidden items-center gap-2 text-sm text-zinc-400 md:flex">
                 <Link to="/" className="hover:text-zinc-900">Startseite</Link><span>/</span>
-                <Link to="/collections/unsere-pergolen" className="hover:text-zinc-900">Pergolen</Link><span>/</span>
                 <span className="text-zinc-700">Pergola Maßanfertigung</span>
               </div>
 
@@ -342,17 +346,31 @@ export const PergolaManfertigungPage = () => {
                         <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
                           {breite}mm
                         </div>
-                        <input
-                          type="range"
-                          min={breiteRange.min}
-                          max={breiteRange.max}
-                          step={breiteRange.step}
-                          value={breite}
-                          onChange={(e) => setBreite(Number(e.target.value))}
-                          className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
-                          style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #e7e5e4 ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #e7e5e4 100%)` }}
-                        />
+                        <div className="relative w-full">
+                          <input
+                            type="range"
+                            min={breiteRange.min}
+                            max={breiteRange.max}
+                            step={breiteRange.step}
+                            value={breite}
+                            onChange={(e) => setBreite(Number(e.target.value))}
+                            className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
+                            style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #e7e5e4 ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #e7e5e4 100%)` }}
+                          />
+                          {/* Marker for 3170mm */}
+                          <div
+                            className="absolute top-1/2 -translate-y-1/2 h-6 w-0.5 bg-[#B91C1C]"
+                            style={{ left: `${((3170 - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%` }}
+                          >
+                            <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-[#B91C1C] whitespace-nowrap">3170mm</span>
+                          </div>
+                        </div>
                       </div>
+                      {breite >= 3170 && (
+                        <div className="mt-2 text-xs text-[#B91C1C] font-semibold">
+                          Maximale Modulbreite für eine Pergola ist 3170mm. Bei größeren Breiten wird ein weiteres Modul hinzugefügt.
+                        </div>
+                      )}
                     </div>
 
                     {/* Länge */}
@@ -365,17 +383,31 @@ export const PergolaManfertigungPage = () => {
                         <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
                           {laenge}mm
                         </div>
-                        <input
-                          type="range"
-                          min={laengeRange.min}
-                          max={laengeRange.max}
-                          step={laengeRange.step}
-                          value={laenge}
-                          onChange={(e) => setLaenge(Number(e.target.value))}
-                          className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
-                          style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #e7e5e4 ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #e7e5e4 100%)` }}
-                        />
+                        <div className="relative w-full">
+                          <input
+                            type="range"
+                            min={laengeRange.min}
+                            max={laengeRange.max}
+                            step={laengeRange.step}
+                            value={laenge}
+                            onChange={(e) => setLaenge(Number(e.target.value))}
+                            className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
+                            style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #e7e5e4 ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #e7e5e4 100%)` }}
+                          />
+                          {/* Marker for 2830mm */}
+                          <div
+                            className="absolute top-1/2 -translate-y-1/2 h-6 w-0.5 bg-[#B91C1C]"
+                            style={{ left: `${((2830 - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%` }}
+                          >
+                            <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-[#B91C1C] whitespace-nowrap">2830mm</span>
+                          </div>
+                        </div>
                       </div>
+                      {laenge >= 2830 && (
+                        <div className="mt-2 text-xs text-[#B91C1C] font-semibold">
+                          Maximale Modullänge për një Pergola është 2830mm. Për më shumë gjatësi do të fillojë një modul i ri.
+                        </div>
+                      )}
                     </div>
 
                     {/* Höhe */}
@@ -477,15 +509,7 @@ export const PergolaManfertigungPage = () => {
                   )}
                 </div>
 
-                {/* ── Trust badges row ── */}
-                <div className="grid grid-cols-4 gap-2">
-                  {trustBadges.map((b) => (
-                    <div key={b.label} className="flex flex-col items-center gap-1.5 rounded-xl border border-stone-200 p-3 text-center">
-                      <img src={b.icon} alt={b.label} className="h-8 w-8 object-contain" />
-                      <span className="text-[11px] font-semibold leading-tight text-zinc-700">{b.label}</span>
-                    </div>
-                  ))}
-                </div>
+
 
                 {/* ── CTA buttons ── */}
                 <div ref={ctaRef} className="grid gap-3 sm:grid-cols-2">

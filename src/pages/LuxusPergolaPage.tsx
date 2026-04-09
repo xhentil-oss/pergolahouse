@@ -16,14 +16,20 @@ import icon17 from "@/assets/icon17.jpeg";
 import icon18 from "@/assets/icon18.jpeg";
 
 /* ─── image gallery ─── */
+import photo1 from "../assets/image-pergola.png";
+import photo2 from "../assets/image-light.png";
+import photo3 from "../assets/Photo (26).png";
+import photo4 from "../assets/pergola-glass.png";
+import photo5 from "../assets/pergola-glass-guillot.png";
+import photo6 from "../assets/zip-screen-pergola.png";
+
 const gallery = [
-  { src: pergolaImg, alt: " " },
-  { src: photo18, alt: "Luxus-Pergola – Ansicht 2" },
-  { src: photo26, alt: "Luxus-Pergola – Ansicht 3" },
-  { src: "https://pergolux.de/cdn/shop/files/Background_2925695b-1454-42a8-a462-afa20b8f07be.png?crop=center&height=900&v=1746170598&width=1200", alt: "Luxus-Pergola – Outdoor-Bereich" },
-  { src: "https://pergolux.de/cdn/shop/files/S3_Stronger_than_ever5.png?crop=center&height=900&v=1745831741&width=1200", alt: "Aluminium-Detailansicht" },
-  { src: "https://pergolux.de/cdn/shop/files/effortless-assembly_a659fcec-e1e2-42e3-8b42-98495d7574a5.png?crop=center&height=900&v=1742387411&width=1200", alt: "Montage mit App-Anleitung" },
-  { src: "https://pergolux.de/cdn/shop/files/norway.png?crop=center&height=900&v=1742387411&width=1200", alt: "Norwegisches Design" },
+  { src: photo1, alt: "Elegante Pergola – moderne minimaliste, ditë" },
+  { src: photo2, alt: "Elegante Pergola – moderne minimaliste, natë" },
+  { src: photo3, alt: "Elegante Pergola – LED RGB pranë pishinës" },
+  { src: photo4, alt: "Elegante Pergola – me xhama, ambient kopshti" },
+  { src: photo5, alt: "Elegante Pergola – me xhama, ambient relaksues" },
+  { src: photo6, alt: "Elegante Pergola – klasik, pranë pishinës" },
 ];
 
 /* ─── variants ─── */
@@ -45,16 +51,22 @@ const sizeOptions = [
   { label: "4x6m", price: 5489, originalPrice: 7890 },
 ];
 
+import ikonaThjesht from "@/assets/ikona-thjesht.png";
+import ikonaMuri from "@/assets/ikona-muri.png";
 const mountOptions = [
-  { label: "Freistehend", img: "https://pergolux.de/cdn/shop/files/freestanding_3957b877-f36f-45a0-986e-6f439f8f5f9c.png?crop=center&height=49&v=1746194687&width=66", surcharge: 0 },
-  { label: "Wandmontage", img: "https://pergolux.de/cdn/shop/files/wallmounted.png?crop=center&height=49&v=1746193904&width=66", surcharge: 240 },
+  { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
+  { label: "Wandmontage", img: ikonaMuri, surcharge: 240 },
 ];
 
+import ikonaMajtas from "@/assets/ikona-majtas.png";
+import ikonaDjathtas from "@/assets/ikona-djathtas.png";
+import ikonaPerball from "@/assets/ikona-perball.png";
+import ikonaMbrapa from "@/assets/ikona-mbrapa.png";
 const sideOptions = [
-  { key: "left", label: "Links", sizeLabel: "Seite", img: "https://pergolux.de/cdn/shop/files/sm-left.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "right", label: "Rechts", sizeLabel: "Seite", img: "https://pergolux.de/cdn/shop/files/sm-right.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "front", label: "Vorne", sizeLabel: "Seite", img: "https://pergolux.de/cdn/shop/files/sm-front.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "back", label: "Hinten", sizeLabel: "Seite", img: "https://pergolux.de/cdn/shop/files/sm-back.png?crop=center&height=68&v=1752586043&width=109" },
+  { key: "left", label: "Links", sizeLabel: "Seite", img: ikonaMajtas },
+  { key: "right", label: "Rechts", sizeLabel: "Seite", img: ikonaDjathtas },
+  { key: "front", label: "Vorne", sizeLabel: "Seite", img: ikonaPerball },
+  { key: "back", label: "Hinten", sizeLabel: "Seite", img: ikonaMbrapa },
 ];
 
 const sideTypeChoices = [
@@ -86,23 +98,6 @@ const featureStory = [
 const formatPrice = (n: number) =>
   new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n);
 
-const createTargetDate = () => {
-  const d = new Date();
-  d.setDate(d.getDate() + 6);
-  d.setHours(d.getHours() + 10);
-  return d;
-};
-
-const getRemainingTime = (target: Date) => {
-  const diff = Math.max(target.getTime() - Date.now(), 0);
-  const pad = (n: number) => String(n).padStart(2, "0");
-  return {
-    days: pad(Math.floor(diff / 864e5)),
-    hours: pad(Math.floor((diff / 36e5) % 24)),
-    minutes: pad(Math.floor((diff / 6e4) % 60)),
-    seconds: pad(Math.floor((diff / 1e3) % 60)),
-  };
-};
 
 const Stars = ({ count }: { count: number }) => (
   <span className="inline-flex gap-0.5 text-[#82B2CA]">
@@ -126,18 +121,13 @@ export const LuxusPergolaPage = () => {
   const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
   const [showAccessories, setShowAccessories] = useState(false);
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
-  const [saleDeadline] = useState(createTargetDate);
-  const [remainingTime, setRemainingTime] = useState(() => getRemainingTime(saleDeadline));
+  // Removed sale/coundown logic
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showStickyBar, setShowStickyBar] = useState(false);
   const ctaRef = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
 
-  /* countdown */
-  useEffect(() => {
-    const id = setInterval(() => setRemainingTime(getRemainingTime(saleDeadline)), 1000);
-    return () => clearInterval(id);
-  }, [saleDeadline]);
+
 
   /* sticky bar on mobile */
   useEffect(() => {
@@ -175,8 +165,7 @@ export const LuxusPergolaPage = () => {
   }, 0);
   const accTotal = accessoryOptions.filter((o) => selectedAccessories.includes(o.label)).reduce((s, o) => s + o.price, 0);
   const finalPrice = sizeData.price + mountData.surcharge + sideTotal + accTotal;
-  const originalPrice = sizeData.originalPrice + mountData.surcharge + sideTotal + accTotal;
-  const savings = originalPrice - finalPrice;
+  // Removed originalPrice and savings (no longer needed)
 
   const toggleAccessory = (label: string) =>
     setSelectedAccessories((c) => (c.includes(label) ? c.filter((x) => x !== label) : [...c, label]));
@@ -219,7 +208,6 @@ export const LuxusPergolaPage = () => {
               {/* breadcrumb */}
               <div className="mb-3 hidden items-center gap-2 text-sm text-zinc-400 md:flex">
                 <Link to="/" className="hover:text-zinc-900">Startseite</Link><span>/</span>
-                <Link to="/collections/unsere-pergolen" className="hover:text-zinc-900">Pergolen</Link><span>/</span>
                 <span className="text-zinc-700">Luxus-Pergola</span>
               </div>
 
@@ -278,21 +266,12 @@ export const LuxusPergolaPage = () => {
                 </button>
               </div>
 
-              {/* ── price & sale ── */}
+              {/* ── price ── */}
               <div className="mt-5 rounded-2xl bg-zinc-950 p-4 text-white md:p-5">
                 <div className="flex items-baseline gap-3">
                   <span className="text-3xl font-semibold">{formatPrice(finalPrice)}</span>
-                  <span className="text-base text-white/50 line-through">{formatPrice(originalPrice)}</span>
                 </div>
-                <div className="mt-3 flex flex-wrap items-center gap-2">
-                  <span className="rounded-md bg-[#82B2CA] px-2.5 py-1 text-xs font-bold text-zinc-900">{formatPrice(savings)} SPAREN</span>
-                  <span className="text-xs text-white/70">Sale endet in {remainingTime.days}t : {remainingTime.hours}h : {remainingTime.minutes}m : {remainingTime.seconds}s</span>
-                </div>
-                <ul className="mt-3 space-y-1 text-sm text-white/80">
-                  <li>• Bis zu 35 % Rabatt auf Pergolen</li>
-                  <li>• Bis zu 35 % Rabatt auf Seitenwände</li>
-                  <li>• Bis zu 35 % Rabatt auf zusätzliches Zubehör</li>
-                </ul>
+                <p className="mt-3 text-sm text-white/70">Kostenlose Lieferung ab 1.000 € Bestellwert</p>
               </div>
 
               {/* ── Configurator sections ── */}
@@ -544,7 +523,7 @@ export const LuxusPergolaPage = () => {
         <div className="flex items-center gap-3">
           <div className="flex-1">
             <div className="text-lg font-bold text-zinc-950">{formatPrice(finalPrice)}</div>
-            <div className="text-xs text-zinc-500 line-through">{formatPrice(originalPrice)}</div>
+
           </div>
           <button type="button" onClick={handleAddToCart} className="rounded-xl px-6 py-3 text-sm font-bold text-white transition hover:opacity-90" style={{ backgroundColor: '#344148' }}>
             In den Warenkorb

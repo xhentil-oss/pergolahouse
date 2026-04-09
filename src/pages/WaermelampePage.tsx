@@ -20,23 +20,7 @@ const colorOptions = [
   { label: "Weiß", color: "#E8E4DF", img: "https://pergolux.de/cdn/shop/files/white.png?crop=center&height=38&v=1747228887&width=38", hint: "Verkehrsweiß – hell und minimalistisch" },
 ];
 
-/* ─── highlights ─── */
-const highlights = [
-  { title: "Sofortige & direkte Wärme", text: "Infrarot-Technologie liefert effiziente Wärme – genau dort, wo du sie brauchst." },
-  { title: "SnapFIT™ – Einfache Montage", text: "Einfach in die Regenrinne einklicken, ausrichten, fertig. Bei Bedarf flexibel umpositionierbar." },
-  { title: "Angenehmes Licht", text: "Das speziell entwickelte warmgelbe Licht sorgt für eine entspannte, gemütliche Atmosphäre – ganz ohne grelle Helligkeit." },
-  { title: "Nahtlose Integration", text: "Wählbar in Weiß oder Anthrazitgrau – perfekt abgestimmt auf deine Pergola." },
-  { title: "Langlebige Leistung", text: "Für bis zu 5.000 Heizstunden ausgelegt – für viele Jahre zuverlässige Wärme." },
-  { title: "Wetterfest & IPX5", text: "Ideal für den ganzjährigen Einsatz im Freien – wetterbeständig und robust." },
-];
 
-/* ─── trust badges ─── */
-const trustBadges = [
-  { icon: "https://pergolux.de/cdn/shop/files/Shield_Check_54616393-e1cb-420b-80ab-1ce83c5de17f.png?crop=center&height=54&v=1752586038&width=54", label: "10 Jahre Garantie" },
-  { icon: "https://pergolux.de/cdn/shop/files/Bill_Check.png?crop=center&height=48&v=1753781502&width=48", label: "Rechnungskauf" },
-  { icon: "https://pergolux.de/cdn/shop/files/Confetti_198c4952-7307-43f9-8286-78ba45318c28.png?crop=center&height=46&v=1752586038&width=46", label: "+100.000 Kunden" },
-  { icon: "https://pergolux.de/cdn/shop/files/Home_cef2a425-ad3f-4844-ae3d-e17d79c3ee77.png?crop=center&height=48&v=1757669933&width=48", label: "Wertsteigerung" },
-];
 
 /* ─── service cards ─── */
 const serviceCards = [
@@ -134,7 +118,6 @@ export const WaermelampePage = () => {
             <div className="w-full lg:w-[56%]">
               <div className="mb-3 hidden items-center gap-2 text-sm text-zinc-400 md:flex">
                 <Link to="/" className="hover:text-zinc-900">Startseite</Link><span>/</span>
-                <Link to="/collections/pergola-zubehoer" className="hover:text-zinc-900">Zubehör</Link><span>/</span>
                 <span className="text-zinc-700">Comfort Wärmelampe</span>
               </div>
 
@@ -159,14 +142,6 @@ export const WaermelampePage = () => {
                 ))}
               </div>
 
-              <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {highlights.map((item) => (
-                  <div key={item.title} className="rounded-xl border border-stone-200 bg-stone-50 p-4">
-                    <h4 className="text-sm font-bold text-zinc-900">{item.title}</h4>
-                    <p className="mt-1.5 line-clamp-3 text-xs leading-5 text-zinc-500">{item.text}</p>
-                  </div>
-                ))}
-              </div>
             </div>
 
             {/* ── Right column: configurator ── */}
@@ -226,15 +201,6 @@ export const WaermelampePage = () => {
                   </ul>
                 </div>
 
-                {/* Trust badges */}
-                <div className="flex flex-wrap justify-center gap-4 rounded-xl bg-stone-50 py-3">
-                  {trustBadges.map((b, i) => (
-                    <div key={i} className="flex items-center gap-2">
-                      <img src={b.icon} alt="" className="h-6 w-6 object-contain" />
-                      <span className="text-xs font-medium text-zinc-700">{b.label}</span>
-                    </div>
-                  ))}
-                </div>
 
                 {/* CTA buttons */}
                 <div ref={ctaRef} className="space-y-3">

@@ -6,13 +6,19 @@ import { FeatureTicker } from "@/sections/FeatureTicker";
 import { useCart } from "@/context/CartContext";
 
 /* ─── image gallery ─── */
+import pergolaImg from "../assets/image-pergola.png";
+import lightImg from "../assets/image-light.png";
+import photo26Img from "../assets/Photo (26).png";
+import glassImg from "../assets/pergola-glass.png";
+import glassGuillotImg from "../assets/pergola-glass-guillot.png";
+import zipScreenImg from "../assets/zip-screen-pergola.png";
 const gallery = [
-  { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/Sundream_3x4_Screens-4x3.jpg?v=1711543068", alt: "Zip-Screen an Pergola – Hauptansicht" },
-  { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/PSC_AC_ANT_600_ZIP_02.jpg?v=1723556288", alt: "Zip-Screen Anthrazit – Detail" },
-  { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/ANTRACITE_5mSCREEN_ed7c811d-a98f-4873-b0c1-114f0f566658.png?v=1747734954", alt: "Zip-Screen Anthrazit 5m" },
-  { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/BLACK_3mSCREEN_fb9bd088-6469-4520-b7ea-91432e336cbf.png?v=1747734992", alt: "Zip-Screen Schwarz 3m" },
-  { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/Group_73.png?v=1749220146", alt: "Zip-Screen Weiß – Seitenansicht" },
-  { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/White_5m_f359b606-9a43-43b4-96a4-61f7e9f4e0f4.png?v=1750923131", alt: "Zip-Screen Weiß 5m" },
+  { src: pergolaImg, alt: "Pergola Moderne" },
+  { src: lightImg, alt: "LED Beleuchtung" },
+  { src: photo26Img, alt: "Pergola mit Zip-Screen" },
+  { src: glassImg, alt: "Pergola mit Glasschiebetüren" },
+  { src: glassGuillotImg, alt: "Pergola mit Guillotine-Glas" },
+  { src: zipScreenImg, alt: "Zip-Screen Pergola" },
 ];
 
 /* ─── color options ─── */
@@ -30,23 +36,6 @@ const sizeOptions = [
   { label: "6m", price: 2850 },
 ];
 
-/* ─── highlights ─── */
-const highlights = [
-  { title: "ZIP-Führungssystem", text: "Das Gewebe wird seitlich in Alu-Schienen geführt – kein Flattern, keine Lücken, auch bei Wind." },
-  { title: "Motorisiert", text: "Bequeme Bedienung per Fernbedienung oder Smart-Home-Integration – stufenlos hoch- und runterfahrbar." },
-  { title: "Sonnen- & Sichtschutz", text: "Blockiert bis zu 95 % der UV-Strahlung und bietet zuverlässigen Sichtschutz von außen." },
-  { title: "Windbeständig", text: "Dank ZIP-Technik stabil bei Windgeschwindigkeiten bis 80 km/h – auch bei Böen kein Flattern." },
-  { title: "Insektenschutz", text: "Das feinmaschige Gewebe hält Mücken und Insekten fern – für ungestörte Abende im Freien." },
-  { title: "Wetterfest & langlebig", text: "Pulverbeschichtetes Aluminium und UV-beständiges Textilgewebe trotzen jedem Wetter." },
-];
-
-/* ─── trust badges ─── */
-const trustBadges = [
-  { icon: "https://pergolux.de/cdn/shop/files/Shield_Check_54616393-e1cb-420b-80ab-1ce83c5de17f.png?crop=center&height=54&v=1752586038&width=54", label: "10 Jahre Garantie" },
-  { icon: "https://pergolux.de/cdn/shop/files/Bill_Check.png?crop=center&height=48&v=1753781502&width=48", label: "Rechnungskauf" },
-  { icon: "https://pergolux.de/cdn/shop/files/Confetti_198c4952-7307-43f9-8286-78ba45318c28.png?crop=center&height=46&v=1752586038&width=46", label: "+100.000 Kunden" },
-  { icon: "https://pergolux.de/cdn/shop/files/Home_cef2a425-ad3f-4844-ae3d-e17d79c3ee77.png?crop=center&height=48&v=1757669933&width=48", label: "Wertsteigerung" },
-];
 
 /* ─── service cards ─── */
 const serviceCards = [
@@ -146,7 +135,6 @@ export const ZipScreensPage = () => {
             <div className="w-full lg:w-[56%]">
               <div className="mb-3 hidden items-center gap-2 text-sm text-zinc-400 md:flex">
                 <Link to="/" className="hover:text-zinc-900">Startseite</Link><span>/</span>
-                <Link to="/collections/pergola-zubehoer" className="hover:text-zinc-900">Zubehör</Link><span>/</span>
                 <span className="text-zinc-700">Zip-Screen</span>
               </div>
 
@@ -171,14 +159,6 @@ export const ZipScreensPage = () => {
                 ))}
               </div>
 
-              <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {highlights.map((item) => (
-                  <div key={item.title} className="rounded-xl border border-stone-200 bg-stone-50 p-4">
-                    <h4 className="text-sm font-bold text-zinc-900">{item.title}</h4>
-                    <p className="mt-1.5 line-clamp-3 text-xs leading-5 text-zinc-500">{item.text}</p>
-                  </div>
-                ))}
-              </div>
             </div>
 
             {/* ── Right column: configurator ── */}
@@ -239,20 +219,8 @@ export const ZipScreensPage = () => {
                       </button>
                     ))}
                   </div>
-                  <p className="mt-2 rounded-lg bg-[#82B2CA]/10 p-2.5 text-xs leading-5 text-[#344148]">
-                    <strong>ACHTUNG:</strong> Zip-Screens sind mit allen Modellen der Serien 2 und 3 kompatibel, jedoch nicht mit den Modellen der Serie 1. Bei Pergola-Modellen mit 6 m Länge (mit Mittelpfosten) werden zwei 3 m Zip-Screens benötigt.
-                  </p>
                 </div>
 
-                {/* Trust badges */}
-                <div className="flex flex-wrap justify-center gap-4 rounded-xl bg-stone-50 py-3">
-                  {trustBadges.map((b, i) => (
-                    <div key={i} className="flex items-center gap-2">
-                      <img src={b.icon} alt="" className="h-6 w-6 object-contain" />
-                      <span className="text-xs font-medium text-zinc-700">{b.label}</span>
-                    </div>
-                  ))}
-                </div>
 
                 {/* CTA buttons */}
                 <div ref={ctaRef} className="space-y-3">

@@ -1,29 +1,38 @@
+import ikonaMajtas from "@/assets/ikona-majtas.png";
+import ikonaDjathtas from "@/assets/ikona-djathtas.png";
+import ikonaPerball from "@/assets/ikona-perball.png";
+import ikonaMbrapa from "@/assets/ikona-mbrapa.png";
+import ikonaThjesht from "@/assets/ikona-thjesht.png";
+import ikonaMuri from "@/assets/ikona-muri.png";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
 import { FeatureTicker } from "@/sections/FeatureTicker";
 import { useCart } from "@/context/CartContext";
-import pergolaImg from "@/assets/pergola.png";
-import photo18 from "@/assets/Photo (18).png";
-import photo26 from "@/assets/Photo (26).png";
-import icon1 from "@/assets/icon1.jpeg";
-import icon4 from "@/assets/icon4.jpeg";
-import icon6 from "@/assets/icon6.jpeg";
-import icon11 from "@/assets/icon11.jpeg";
+import photo1 from "../assets/image-pergola.png";
+import photo2 from "../assets/image-light.png";
+import photo3 from "../assets/Photo (26).png";
+import photo4 from "../assets/pergola-glass.png";
+import photo5 from "../assets/pergola-glass-guillot.png";
+import photo6 from "../assets/zip-screen-pergola.png";
+
 import icon17 from "@/assets/icon17.jpeg";
 import icon18 from "@/assets/icon18.jpeg";
 import icon10 from "@/assets/icon10.jpeg";
+import icon13 from "@/assets/icon13.jpeg";
+import icon6 from "@/assets/icon6.jpeg";
+import icon4 from "@/assets/icon4.jpeg";
+import icon1 from "@/assets/icon1.jpeg";
 
 /* ─── image gallery ─── */
 const gallery = [
-  { src: pergolaImg, alt: "Elegante Pergola" },
-  { src: photo18, alt: "Elegante Pergola – Ansicht 2" },
-  { src: photo26, alt: "Elegante Pergola – Ansicht 3" },
-  { src: "https://pergolux.de/cdn/shop/files/Background_2925695b-1454-42a8-a462-afa20b8f07be.png?crop=center&height=900&v=1746170598&width=1200", alt: "Elegante Pergola – Outdoor-Bereich" },
-  { src: "https://pergolux.de/cdn/shop/files/S3_Stronger_than_ever5.png?crop=center&height=900&v=1745831741&width=1200", alt: "Aluminium-Detailansicht" },
-  { src: "https://pergolux.de/cdn/shop/files/effortless-assembly_a659fcec-e1e2-42e3-8b42-98495d7574a5.png?crop=center&height=900&v=1742387411&width=1200", alt: "Montage mit App-Anleitung" },
-  { src: "https://pergolux.de/cdn/shop/files/norway.png?crop=center&height=900&v=1742387411&width=1200", alt: "Norwegisches Design" },
+  { src: photo1, alt: "Elegante Pergola – moderne minimaliste, ditë" },
+  { src: photo2, alt: "Elegante Pergola – moderne minimaliste, natë" },
+  { src: photo3, alt: "Elegante Pergola – LED RGB pranë pishinës" },
+  { src: photo4, alt: "Elegante Pergola – me xhama, ambient kopshti" },
+  { src: photo5, alt: "Elegante Pergola – me xhama, ambient relaksues" },
+  { src: photo6, alt: "Elegante Pergola – klasik, pranë pishinës" },
 ];
 
 /* ─── variants ─── */
@@ -46,15 +55,15 @@ const sizeOptions = [
 ];
 
 const mountOptions = [
-  { label: "Freistehend", img: "https://pergolux.de/cdn/shop/files/freestanding_3957b877-f36f-45a0-986e-6f439f8f5f9c.png?crop=center&height=49&v=1746194687&width=66", surcharge: 0 },
-  { label: "Wandmontage", img: "https://pergolux.de/cdn/shop/files/wallmounted.png?crop=center&height=49&v=1746193904&width=66", surcharge: 240 },
+  { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
+  { label: "Wandmontage", img: ikonaMuri, surcharge: 240 },
 ];
 
 const sideOptions = [
-  { key: "left", label: "Links", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-left.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "right", label: "Rechts", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-right.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "front", label: "Vorne", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-front.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "back", label: "Hinten", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-back.png?crop=center&height=68&v=1752586043&width=109" },
+  { key: "left", label: "Links", sizeLabel: "3m Seite", img: ikonaMajtas },
+  { key: "right", label: "Rechts", sizeLabel: "3m Seite", img: ikonaDjathtas },
+  { key: "front", label: "Vorne", sizeLabel: "3m Seite", img: ikonaPerball },
+  { key: "back", label: "Hinten", sizeLabel: "3m Seite", img: ikonaMbrapa },
 ];
 
 const sideTypeChoices = [
@@ -71,24 +80,17 @@ const accessoryOptions = [
   { label: "Smart Steuerung", description: "Intelligente Steuerung per App – Lamellen, Licht und Heizung.", price: 399 },
 ];
 
-/* ─── trust badges ─── */
-const trustBadges = [
-  { icon: "https://pergolux.de/cdn/shop/files/Shield_Check_54616393-e1cb-420b-80ab-1ce83c5de17f.png?crop=center&height=54&v=1752586038&width=54", label: "10 Jahre Garantie" },
-  { icon: "https://pergolux.de/cdn/shop/files/Bill_Check.png?crop=center&height=48&v=1753781502&width=48", label: "Rechnungskauf" },
-  { icon: "https://pergolux.de/cdn/shop/files/Confetti_198c4952-7307-43f9-8286-78ba45318c28.png?crop=center&height=46&v=1752586038&width=46", label: "+100.000 Kunden" },
-  { icon: "https://pergolux.de/cdn/shop/files/Home_cef2a425-ad3f-4844-ae3d-e17d79c3ee77.png?crop=center&height=48&v=1757669933&width=48", label: "Wertsteigerung" },
-];
 
 
 /* ─── feature story ─── */
 const featureStory = [
-  { title: "Drehbare Lamellen", text: "Lamellen von 0° bis 120° stufenlos verstellbar – für perfekte Kontrolle über Licht, Schatten und Belüftung.", icon: icon18 },
-  { title: "Regenschutz", text: "Integrierter Wasserablauf mit einer Kapazität von bis zu 120 l/m²/h – zuverlässiger Schutz bei jedem Wetter.", icon: icon6 },
-  { title: "Windbeständig", text: "Geprüft und zertifiziert für Windgeschwindigkeiten bis 224 km/h – stabiler Halt auch bei stürmischem Wetter.", icon: icon4 },
-  { title: "Schneelast", text: "Belastbar bis 120 kg/m² Schneelast – robust und sicher auch in den härtesten Wintermonaten.", icon: icon11 },
-  { title: "Smartphone-Steuerung", text: "Bequeme Bedienung per App – Lamellen, Beleuchtung und Sensoren jederzeit und überall steuern.", icon: icon1 },
-  { title: "LED & RGB Beleuchtung", text: "Integrierte Lichtoptionen für stimmungsvolle Abende – warmweiß oder RGB-Farbwechsel nach Wunsch.", icon: icon17 },
-  { title: "Regen- & Windsensor", text: "Automatische Reaktion auf Wetteränderungen – deine Pergola schließt sich bei Regen oder starkem Wind.", icon: icon10 },
+  { title: "Drehbare Lamellen", icon: icon18 },
+  { title: "Motorisiertes Dach", icon: icon13 },
+  { title: "Regenschutz", icon: icon6 },
+  { title: "Windbeständig", icon: icon4 },
+  { title: "Smartphone-Steuerung", icon: icon1 },
+  { title: "Regen- & Windsensor", icon: icon10 },
+  { title: "LED & RGB Beleuchtung", icon: icon17 },
 ];
 
 /* ─── service cards ─── */
@@ -210,7 +212,6 @@ export const ElegantePergolaPage = () => {
               {/* breadcrumb */}
               <div className="mb-3 hidden items-center gap-2 text-sm text-zinc-400 md:flex">
                 <Link to="/" className="hover:text-zinc-900">Startseite</Link><span>/</span>
-                <Link to="/collections/unsere-pergolen" className="hover:text-zinc-900">Pergolen</Link><span>/</span>
                 <span className="text-zinc-700">Elegante Pergola</span>
               </div>
 
@@ -380,15 +381,7 @@ export const ElegantePergolaPage = () => {
                   )}
                 </div>
 
-                {/* ── Trust badges row ── */}
-                <div className="grid grid-cols-4 gap-2">
-                  {trustBadges.map((b) => (
-                    <div key={b.label} className="flex flex-col items-center gap-1.5 rounded-xl border border-stone-200 p-3 text-center">
-                      <img src={b.icon} alt={b.label} className="h-8 w-8 object-contain" />
-                      <span className="text-[11px] font-semibold leading-tight text-zinc-700">{b.label}</span>
-                    </div>
-                  ))}
-                </div>
+
 
                 {/* ── CTA buttons ── */}
                 <div ref={ctaRef} className="grid gap-3 sm:grid-cols-2">

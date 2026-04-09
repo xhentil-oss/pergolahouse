@@ -30,38 +30,20 @@ const sizeOptions = [
 ];
 
 /* ─── Aufbau Variante ─── */
+import schiebeverglasung from "../assets/ikona-xham.png";
+import guillotineVerglasung from "../assets/ikona-xham-02.png";
 const variantOptions = [
   {
-    label: "Schiebeglas ohne Rahmen",
-    img: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/ANTRACITE_3mGLASS_FRAMELESS_0146d282-f083-4f22-9d4d-5a39b72be85d_1.png?v=1757423713",
+    label: "Schiebeverglasung",
+    img: schiebeverglasung,
   },
   {
-    label: "Schiebeglas mit Rahmen",
-    img: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/ANTRACITE_3mGLASS_FRAMED_e6f2a76a-e9a3-409e-bd86-2ad01a8d2e29.png?v=1750923375",
-  },
-  {
-    label: "Fixverglasung",
-    img: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/ANTRACITE_3mGLASS_FIXED_f2516b36-b9f9-4366-bade-d32573b13e4d.png?v=1750923375",
+    label: "Guillotine-Verglasung",
+    img: guillotineVerglasung,
   },
 ];
 
-/* ─── highlights ─── */
-const highlights = [
-  { title: "Sicherheitsglas", text: "Robustes gehärtetes Glas – 10 mm rahmenlos, 8 mm gerahmt – für dauerhafte Beständigkeit." },
-  { title: "Entwässerungssystem", text: "Durchdachte Ablauflöcher verhindern, dass sich Wasser in den Führungsschienen sammelt." },
-  { title: "Schiebemechanismus", text: "Integrierte Bürstendichtung für sanftes Gleiten und zusätzlichen Windschutz." },
-  { title: "Wetterfest & langlebig", text: "Für alle Jahreszeiten konzipiert – hält Wind, Regen und Temperaturschwankungen stand." },
-  { title: "Nahtlose Integration", text: "Perfekt abgestimmt auf Pergolen – für ein modernes, aufgeräumtes Gesamtbild." },
-  { title: "Ganzjähriger Komfort", text: "Schützt zuverlässig vor Wind und Regen bei hellem, offenem Raumgefühl." },
-];
 
-/* ─── trust badges ─── */
-const trustBadges = [
-  { icon: "https://pergolux.de/cdn/shop/files/Shield_Check_54616393-e1cb-420b-80ab-1ce83c5de17f.png?crop=center&height=54&v=1752586038&width=54", label: "10 Jahre Garantie" },
-  { icon: "https://pergolux.de/cdn/shop/files/Bill_Check.png?crop=center&height=48&v=1753781502&width=48", label: "Rechnungskauf" },
-  { icon: "https://pergolux.de/cdn/shop/files/Confetti_198c4952-7307-43f9-8286-78ba45318c28.png?crop=center&height=46&v=1752586038&width=46", label: "+100.000 Kunden" },
-  { icon: "https://pergolux.de/cdn/shop/files/Home_cef2a425-ad3f-4844-ae3d-e17d79c3ee77.png?crop=center&height=48&v=1757669933&width=48", label: "Wertsteigerung" },
-];
 
 /* ─── service cards ─── */
 const serviceCards = [
@@ -162,7 +144,6 @@ export const GlaswandePage = () => {
             <div className="w-full lg:w-[56%]">
               <div className="mb-3 hidden items-center gap-2 text-sm text-zinc-400 md:flex">
                 <Link to="/" className="hover:text-zinc-900">Startseite</Link><span>/</span>
-                <Link to="/collections/pergola-zubehoer" className="hover:text-zinc-900">Zubehör</Link><span>/</span>
                 <span className="text-zinc-700">Glaswände</span>
               </div>
 
@@ -187,14 +168,7 @@ export const GlaswandePage = () => {
                 ))}
               </div>
 
-              <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {highlights.map((item) => (
-                  <div key={item.title} className="rounded-xl border border-stone-200 bg-stone-50 p-4">
-                    <h4 className="text-sm font-bold text-zinc-900">{item.title}</h4>
-                    <p className="mt-1.5 line-clamp-3 text-xs leading-5 text-zinc-500">{item.text}</p>
-                  </div>
-                ))}
-              </div>
+
             </div>
 
             {/* ── Right column: configurator ── */}
@@ -272,20 +246,8 @@ export const GlaswandePage = () => {
                   </div>
                 </div>
 
-                {/* Compatibility warning */}
-                <p className="rounded-lg bg-[#82B2CA]/10 p-2.5 text-xs leading-5 text-[#344148]">
-                  <strong>ACHTUNG:</strong> Diese Glaswände sind mit allen Modellen der Serie 3 sowie der Serie 2 ab August 2023 kompatibel – nicht jedoch mit Modellen der Serie 1. Für Pergola- und Sundream-Modelle mit 6 m Länge (inkl. Mittelpfosten) werden zwei Glaswände à 3 m benötigt.
-                </p>
 
-                {/* Trust badges */}
-                <div className="flex flex-wrap justify-center gap-4 rounded-xl bg-stone-50 py-3">
-                  {trustBadges.map((b, i) => (
-                    <div key={i} className="flex items-center gap-2">
-                      <img src={b.icon} alt="" className="h-6 w-6 object-contain" />
-                      <span className="text-xs font-medium text-zinc-700">{b.label}</span>
-                    </div>
-                  ))}
-                </div>
+                {/* Trust badges removed */}
 
                 {/* CTA buttons */}
                 <div ref={ctaRef} className="space-y-3">

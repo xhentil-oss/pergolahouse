@@ -1,3 +1,18 @@
+import photo1 from "../assets/image-pergola.png";
+import photo2 from "../assets/image-light.png";
+import photo3 from "../assets/Photo (26).png";
+import photo4 from "../assets/pergola-glass.png";
+import photo5 from "../assets/pergola-glass-guillot.png";
+import photo6 from "../assets/zip-screen-pergola.png";
+
+const gallery = [
+  { src: photo1, alt: "Elegante Pergola – moderne minimaliste, ditë" },
+  { src: photo2, alt: "Elegante Pergola – moderne minimaliste, natë" },
+  { src: photo3, alt: "Elegante Pergola – LED RGB pranë pishinës" },
+  { src: photo4, alt: "Elegante Pergola – me xhama, ambient kopshti" },
+  { src: photo5, alt: "Elegante Pergola – me xhama, ambient relaksues" },
+  { src: photo6, alt: "Elegante Pergola – klasik, pranë pishinës" },
+];
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "@/sections/Header";
@@ -14,17 +29,6 @@ import icon11 from "@/assets/icon11.jpeg";
 import icon17 from "@/assets/icon17.jpeg";
 import icon18 from "@/assets/icon18.jpeg";
 import icon10 from "@/assets/icon10.jpeg";
-
-/* ─── image gallery ─── */
-const gallery = [
-  { src: pergolaImg, alt: "Wintergarten" },
-  { src: photo18, alt: "Wintergarten – Ansicht 2" },
-  { src: photo26, alt: "Wintergarten – Ansicht 3" },
-  { src: "https://pergolux.de/cdn/shop/files/Background_2925695b-1454-42a8-a462-afa20b8f07be.png?crop=center&height=900&v=1746170598&width=1200", alt: "Wintergarten – Außenbereich" },
-  { src: "https://pergolux.de/cdn/shop/files/S3_Stronger_than_ever5.png?crop=center&height=900&v=1745831741&width=1200", alt: "Aluminium-Detailansicht" },
-  { src: "https://pergolux.de/cdn/shop/files/effortless-assembly_a659fcec-e1e2-42e3-8b42-98495d7574a5.png?crop=center&height=900&v=1742387411&width=1200", alt: "Montage mit App-Anleitung" },
-  { src: "https://pergolux.de/cdn/shop/files/norway.png?crop=center&height=900&v=1742387411&width=1200", alt: "Norwegisches Design" },
-];
 
 /* ─── variants ─── */
 const colorOptions = [
@@ -45,16 +49,22 @@ const sizeOptions = [
   { label: "4x6m", price: 10390 },
 ];
 
+import ikonaThjesht from "@/assets/ikona-thjesht.png";
+import ikonaMuri from "@/assets/ikona-muri.png";
 const mountOptions = [
-  { label: "Freistehend", img: "https://pergolux.de/cdn/shop/files/freestanding_3957b877-f36f-45a0-986e-6f439f8f5f9c.png?crop=center&height=49&v=1746194687&width=66", surcharge: 0 },
-  { label: "Wandmontage", img: "https://pergolux.de/cdn/shop/files/wallmounted.png?crop=center&height=49&v=1746193904&width=66", surcharge: 240 },
+  { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
+  { label: "Wandmontage", img: ikonaMuri, surcharge: 240 },
 ];
 
+import ikonaMajtas from "@/assets/ikona-majtas.png";
+import ikonaDjathtas from "@/assets/ikona-djathtas.png";
+import ikonaPerball from "@/assets/ikona-perball.png";
+import ikonaMbrapa from "@/assets/ikona-mbrapa.png";
 const sideOptions = [
-  { key: "left", label: "Links", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-left.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "right", label: "Rechts", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-right.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "front", label: "Vorne", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-front.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "back", label: "Hinten", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-back.png?crop=center&height=68&v=1752586043&width=109" },
+  { key: "left", label: "Links", sizeLabel: "3m Seite", img: ikonaMajtas },
+  { key: "right", label: "Rechts", sizeLabel: "3m Seite", img: ikonaDjathtas },
+  { key: "front", label: "Vorne", sizeLabel: "3m Seite", img: ikonaPerball },
+  { key: "back", label: "Hinten", sizeLabel: "3m Seite", img: ikonaMbrapa },
 ];
 
 const sideTypeChoices = [
@@ -71,13 +81,6 @@ const accessoryOptions = [
   { label: "Smart Steuerung", description: "Intelligente Steuerung per App – Lamellen, Licht und Heizung.", price: 399 },
 ];
 
-/* ─── trust badges ─── */
-const trustBadges = [
-  { icon: "https://pergolux.de/cdn/shop/files/Shield_Check_54616393-e1cb-420b-80ab-1ce83c5de17f.png?crop=center&height=54&v=1752586038&width=54", label: "10 Jahre Garantie" },
-  { icon: "https://pergolux.de/cdn/shop/files/Bill_Check.png?crop=center&height=48&v=1753781502&width=48", label: "Rechnungskauf" },
-  { icon: "https://pergolux.de/cdn/shop/files/Confetti_198c4952-7307-43f9-8286-78ba45318c28.png?crop=center&height=46&v=1752586038&width=46", label: "+100.000 Kunden" },
-  { icon: "https://pergolux.de/cdn/shop/files/Home_cef2a425-ad3f-4844-ae3d-e17d79c3ee77.png?crop=center&height=48&v=1757669933&width=48", label: "Wertsteigerung" },
-];
 
 
 /* ─── feature story (icon-based) ─── */
@@ -210,7 +213,6 @@ export const WintergartenPage = () => {
               {/* breadcrumb */}
               <div className="mb-3 hidden items-center gap-2 text-sm text-zinc-400 md:flex">
                 <Link to="/" className="hover:text-zinc-900">Startseite</Link><span>/</span>
-                <Link to="/collections/unsere-pergolen" className="hover:text-zinc-900">Pergolen</Link><span>/</span>
                 <span className="text-zinc-700">Wintergarten</span>
               </div>
 
@@ -380,15 +382,7 @@ export const WintergartenPage = () => {
                   )}
                 </div>
 
-                {/* ── Trust badges row ── */}
-                <div className="grid grid-cols-4 gap-2">
-                  {trustBadges.map((b) => (
-                    <div key={b.label} className="flex flex-col items-center gap-1.5 rounded-xl border border-stone-200 p-3 text-center">
-                      <img src={b.icon} alt={b.label} className="h-8 w-8 object-contain" />
-                      <span className="text-[11px] font-semibold leading-tight text-zinc-700">{b.label}</span>
-                    </div>
-                  ))}
-                </div>
+
 
                 {/* ── CTA buttons ── */}
                 <div ref={ctaRef} className="grid gap-3 sm:grid-cols-2">

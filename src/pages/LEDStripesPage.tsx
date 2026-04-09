@@ -10,7 +10,6 @@ const gallery = [
   { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/PERGOLUXPergola-Series3-Image53.jpg?v=1743753723", alt: "LED S3 – RGB Beleuchtung" },
   { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/PERGOLUXPergola-Series3-Image56.jpg?v=1743753723", alt: "LED S3 – Ambiente" },
   { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/Group_7_bef87dfe-c2ba-4a22-b13d-4d04689d5018.jpg?v=1746620787", alt: "LED S3 – Warmweiß" },
-
 ];
 
 /* ─── Variante (RGB / Warmweiß) ─── */
@@ -31,34 +30,21 @@ const sizeOptions = [
 ];
 
 /* ─── Aufbau Variante ─── */
+import freistehendIcon from "../assets/ikona-thjesht.png";
+import wandmontageIcon from "../assets/ikona-muri.png";
+
 const mountOptions = [
   {
     label: "Freistehend",
-    img: "https://pergolux.de/cdn/shop/files/freestanding_3957b877-f36f-45a0-986e-6f439f8f5f9c.png?crop=center&height=49&v=1746194687&width=66",
+    img: freistehendIcon,
   },
   {
     label: "Wandmontage",
-    img: "https://pergolux.de/cdn/shop/files/wallmounted.png?crop=center&height=49&v=1746193904&width=66",
+    img: wandmontageIcon,
   },
 ];
 
-/* ─── highlights ─── */
-const highlights = [
-  { title: "Wetterfest & langlebig", text: "Speziell für Pergolen entwickelt – robust, elegant und ohne sichtbare Kabel." },
-  { title: "SnapFIT™-Montage", text: "LED-Streifen einfach in das Rinnensystem einklicken und mit wenigen Handgriffen fixieren." },
-  { title: "RGB-Farben", text: "Vollständig anpassbar für unendliche Gestaltungsmöglichkeiten und jede Stimmung." },
-  { title: "Warmweiß (3000K)", text: "Sanftes, goldenes Licht für gemütliche Abende auf der Terrasse." },
-  { title: "Smart Home", text: "Kompatibel mit Google Home, Amazon Alexa & Co. – volle Kontrolle per App." },
-  { title: "Fernbedienung", text: "Sofortiger Zugriff auf Helligkeit und Lichtmodi – bequem vom Sofa aus." },
-];
 
-/* ─── trust badges ─── */
-const trustBadges = [
-  { icon: "https://pergolux.de/cdn/shop/files/Shield_Check_54616393-e1cb-420b-80ab-1ce83c5de17f.png?crop=center&height=54&v=1752586038&width=54", label: "10 Jahre Garantie" },
-  { icon: "https://pergolux.de/cdn/shop/files/Bill_Check.png?crop=center&height=48&v=1753781502&width=48", label: "Rechnungskauf" },
-  { icon: "https://pergolux.de/cdn/shop/files/Confetti_198c4952-7307-43f9-8286-78ba45318c28.png?crop=center&height=46&v=1752586038&width=46", label: "+100.000 Kunden" },
-  { icon: "https://pergolux.de/cdn/shop/files/Home_cef2a425-ad3f-4844-ae3d-e17d79c3ee77.png?crop=center&height=48&v=1757669933&width=48", label: "Wertsteigerung" },
-];
 
 /* ─── service cards ─── */
 const serviceCards = [
@@ -159,7 +145,6 @@ export const LEDStripesPage = () => {
             <div className="w-full lg:w-[56%]">
               <div className="mb-3 hidden items-center gap-2 text-sm text-zinc-400 md:flex">
                 <Link to="/" className="hover:text-zinc-900">Startseite</Link><span>/</span>
-                <Link to="/collections/pergola-zubehoer" className="hover:text-zinc-900">Zubehör</Link><span>/</span>
                 <span className="text-zinc-700">LED S3</span>
               </div>
 
@@ -184,14 +169,6 @@ export const LEDStripesPage = () => {
                 ))}
               </div>
 
-              <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {highlights.map((item) => (
-                  <div key={item.title} className="rounded-xl border border-stone-200 bg-stone-50 p-4">
-                    <h4 className="text-sm font-bold text-zinc-900">{item.title}</h4>
-                    <p className="mt-1.5 line-clamp-3 text-xs leading-5 text-zinc-500">{item.text}</p>
-                  </div>
-                ))}
-              </div>
             </div>
 
             {/* ── Right column: configurator ── */}
@@ -268,15 +245,6 @@ export const LEDStripesPage = () => {
                   </div>
                 </div>
 
-                {/* Trust badges */}
-                <div className="flex flex-wrap justify-center gap-4 rounded-xl bg-stone-50 py-3">
-                  {trustBadges.map((b, i) => (
-                    <div key={i} className="flex items-center gap-2">
-                      <img src={b.icon} alt="" className="h-6 w-6 object-contain" />
-                      <span className="text-xs font-medium text-zinc-700">{b.label}</span>
-                    </div>
-                  ))}
-                </div>
 
                 {/* CTA buttons */}
                 <div ref={ctaRef} className="space-y-3">

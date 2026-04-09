@@ -30,23 +30,7 @@ const sizeOptions = [
   { label: "6m", price: 1639 },
 ];
 
-/* ─── highlights ─── */
-const highlights = [
-  { title: "Maximaler Komfort", text: "Effektiver Sonnen- und Sichtschutz mit stilvollem Design – ideal für moderne Außenbereiche." },
-  { title: "SnapFIT™-Montage", text: "Rüsten Sie Ihre Pergola schnell und unkompliziert auf: einklicken, befestigen, genießen." },
-  { title: "Sicht- & Sonnenschutz", text: "Schützen Sie sich vor neugierigen Blicken und schädlicher UV-Strahlung – für angenehme Temperaturen." },
-  { title: "ZIP-Lock-System", text: "Das Netz bleibt straff – dank innovativer ZIP-Führung in den Seitenschienen. Kein Flattern, keine Lücken." },
-  { title: "Höhenverstellbar", text: "Regulieren Sie Licht, Schatten und Luftzirkulation nach Ihren Bedürfnissen – ganz einfach per Hand." },
-  { title: "Wetterfest & langlebig", text: "Pulverbeschichtetes Aluminium und robustes Textilgewebe trotzen Sonne und Wetter." },
-];
 
-/* ─── trust badges ─── */
-const trustBadges = [
-  { icon: "https://pergolux.de/cdn/shop/files/Shield_Check_54616393-e1cb-420b-80ab-1ce83c5de17f.png?crop=center&height=54&v=1752586038&width=54", label: "10 Jahre Garantie" },
-  { icon: "https://pergolux.de/cdn/shop/files/Bill_Check.png?crop=center&height=48&v=1753781502&width=48", label: "Rechnungskauf" },
-  { icon: "https://pergolux.de/cdn/shop/files/Confetti_198c4952-7307-43f9-8286-78ba45318c28.png?crop=center&height=46&v=1752586038&width=46", label: "+100.000 Kunden" },
-  { icon: "https://pergolux.de/cdn/shop/files/Home_cef2a425-ad3f-4844-ae3d-e17d79c3ee77.png?crop=center&height=48&v=1757669933&width=48", label: "Wertsteigerung" },
-];
 
 /* ─── service cards ─── */
 const serviceCards = [
@@ -144,7 +128,6 @@ export const ScreenRolloPage = () => {
             <div className="w-full lg:w-[56%]">
               <div className="mb-3 hidden items-center gap-2 text-sm text-zinc-400 md:flex">
                 <Link to="/" className="hover:text-zinc-900">Startseite</Link><span>/</span>
-                <Link to="/collections/pergola-zubehoer" className="hover:text-zinc-900">Zubehör</Link><span>/</span>
                 <span className="text-zinc-700">Screen-Rollo</span>
               </div>
 
@@ -169,14 +152,7 @@ export const ScreenRolloPage = () => {
                 ))}
               </div>
 
-              <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {highlights.map((item) => (
-                  <div key={item.title} className="rounded-xl border border-stone-200 bg-stone-50 p-4">
-                    <h4 className="text-sm font-bold text-zinc-900">{item.title}</h4>
-                    <p className="mt-1.5 line-clamp-3 text-xs leading-5 text-zinc-500">{item.text}</p>
-                  </div>
-                ))}
-              </div>
+
             </div>
 
             {/* ── Right column: configurator ── */}
@@ -237,20 +213,9 @@ export const ScreenRolloPage = () => {
                       </button>
                     ))}
                   </div>
-                  <p className="mt-2 rounded-lg bg-[#82B2CA]/10 p-2.5 text-xs leading-5 text-[#344148]">
-                    <strong>ACHTUNG:</strong> Diese Screen-Rollos sind mit allen Modellen der Serien 2 und 3 kompatibel, jedoch nicht mit den Modellen der Serie 1. Bei Pergola-Modellen mit 6 m Länge (mit Mittelpfosten) werden zwei 3 m Screens benötigt.
-                  </p>
                 </div>
 
-                {/* Trust badges */}
-                <div className="flex flex-wrap justify-center gap-4 rounded-xl bg-stone-50 py-3">
-                  {trustBadges.map((b, i) => (
-                    <div key={i} className="flex items-center gap-2">
-                      <img src={b.icon} alt="" className="h-6 w-6 object-contain" />
-                      <span className="text-xs font-medium text-zinc-700">{b.label}</span>
-                    </div>
-                  ))}
-                </div>
+
 
                 {/* CTA buttons */}
                 <div ref={ctaRef} className="space-y-3">
