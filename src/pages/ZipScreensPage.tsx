@@ -6,13 +6,19 @@ import { FeatureTicker } from "@/sections/FeatureTicker";
 import { useCart } from "@/context/CartContext";
 
 /* ─── image gallery ─── */
+import pergolaImg from "../assets/image-pergola.png";
+import lightImg from "../assets/image-light.png";
+import photo26Img from "../assets/Photo (26).png";
+import glassImg from "../assets/pergola-glass.png";
+import glassGuillotImg from "../assets/pergola-glass-guillot.png";
+import zipScreenImg from "../assets/zip-screen-pergola.png";
 const gallery = [
-  { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/Sundream_3x4_Screens-4x3.jpg?v=1711543068", alt: "Zip-Screen an Pergola – Hauptansicht" },
-  { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/PSC_AC_ANT_600_ZIP_02.jpg?v=1723556288", alt: "Zip-Screen Anthrazit – Detail" },
-  { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/ANTRACITE_5mSCREEN_ed7c811d-a98f-4873-b0c1-114f0f566658.png?v=1747734954", alt: "Zip-Screen Anthrazit 5m" },
-  { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/BLACK_3mSCREEN_fb9bd088-6469-4520-b7ea-91432e336cbf.png?v=1747734992", alt: "Zip-Screen Schwarz 3m" },
-  { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/Group_73.png?v=1749220146", alt: "Zip-Screen Weiß – Seitenansicht" },
-  { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/White_5m_f359b606-9a43-43b4-96a4-61f7e9f4e0f4.png?v=1750923131", alt: "Zip-Screen Weiß 5m" },
+  { src: pergolaImg, alt: "Pergola Moderne" },
+  { src: lightImg, alt: "LED Beleuchtung" },
+  { src: photo26Img, alt: "Pergola mit Zip-Screen" },
+  { src: glassImg, alt: "Pergola mit Glasschiebetüren" },
+  { src: glassGuillotImg, alt: "Pergola mit Guillotine-Glas" },
+  { src: zipScreenImg, alt: "Zip-Screen Pergola" },
 ];
 
 /* ─── color options ─── */
@@ -24,52 +30,19 @@ const colorOptions = [
 
 /* ─── size options ─── */
 const sizeOptions = [
-  { label: "3m", price: 899, originalPrice: 1390 },
-  { label: "4m", price: 1099, originalPrice: 1690 },
-  { label: "5m", price: 1549, originalPrice: 2390 },
-  { label: "6m", price: 1849, originalPrice: 2850 },
+  { label: "3m", price: 1390 },
+  { label: "4m", price: 1690 },
+  { label: "5m", price: 2390 },
+  { label: "6m", price: 2850 },
 ];
 
-/* ─── highlights ─── */
-const highlights = [
-  { title: "ZIP-Führungssystem", text: "Das Gewebe wird seitlich in Alu-Schienen geführt – kein Flattern, keine Lücken, auch bei Wind." },
-  { title: "Motorisiert", text: "Bequeme Bedienung per Fernbedienung oder Smart-Home-Integration – stufenlos hoch- und runterfahrbar." },
-  { title: "Sonnen- & Sichtschutz", text: "Blockiert bis zu 95 % der UV-Strahlung und bietet zuverlässigen Sichtschutz von außen." },
-  { title: "Windbeständig", text: "Dank ZIP-Technik stabil bei Windgeschwindigkeiten bis 80 km/h – auch bei Böen kein Flattern." },
-  { title: "Insektenschutz", text: "Das feinmaschige Gewebe hält Mücken und Insekten fern – für ungestörte Abende im Freien." },
-  { title: "Wetterfest & langlebig", text: "Pulverbeschichtetes Aluminium und UV-beständiges Textilgewebe trotzen jedem Wetter." },
-];
-
-/* ─── trust badges ─── */
-const trustBadges = [
-  { icon: "https://pergolux.de/cdn/shop/files/Shield_Check_54616393-e1cb-420b-80ab-1ce83c5de17f.png?crop=center&height=54&v=1752586038&width=54", label: "10 Jahre Garantie" },
-  { icon: "https://pergolux.de/cdn/shop/files/Bill_Check.png?crop=center&height=48&v=1753781502&width=48", label: "Rechnungskauf" },
-  { icon: "https://pergolux.de/cdn/shop/files/Confetti_198c4952-7307-43f9-8286-78ba45318c28.png?crop=center&height=46&v=1752586038&width=46", label: "+100.000 Kunden" },
-  { icon: "https://pergolux.de/cdn/shop/files/Home_cef2a425-ad3f-4844-ae3d-e17d79c3ee77.png?crop=center&height=48&v=1757669933&width=48", label: "Wertsteigerung" },
-];
-
-/* ─── reviews ─── */
-const reviewCards = [
-  { name: "Thomas Ziegenbein", rating: 5, image: "https://pergolux.de/cdn/shop/files/PERGOLUX_Story_6_88a3e853-e322-4f21-ab7a-60175e9204a0.jpg?crop=center&format=pjpg&height=456&v=1741620042&width=289", quote: "Die Zip-Screens sind fantastisch! Kein Flattern bei Wind und die motorisierte Bedienung ist ein Traum." },
-  { name: "Gisela Kleber", rating: 5, image: "https://pergolux.de/cdn/shop/files/SCR-20250326-njsp.jpg?crop=center&format=pjpg&height=456&v=1745919383&width=289", quote: "Endlich keine Mücken mehr auf der Terrasse! Die Zip-Screens halten alles draußen und sehen dabei toll aus." },
-  { name: "Dieter T.", rating: 5, image: "https://pergolux.de/cdn/shop/files/SCR-20250326-nftx.jpg?crop=center&format=pjpg&height=456&v=1745919383&width=289", quote: "Netter Kontakt, schnelle Lieferung, gute Ware. Die motorisierte Bedienung funktioniert einwandfrei." },
-  { name: "Sabine", rating: 4, image: "https://pergolux.de/cdn/shop/files/SCR-20250326-ngon.jpg?crop=center&format=pjpg&height=456&v=1745919382&width=289", quote: "Sehr gute Qualität. Die ZIP-Führung hält das Gewebe wirklich komplett straff – selbst bei stärkerem Wind." },
-  { name: "Sven D.", rating: 5, image: "https://pergolux.de/cdn/shop/files/SCR-20250326-nhcv_e75cd03d-8413-4832-ba66-57a9befd2997.jpg?crop=center&format=pjpg&height=456&v=1745919503&width=289", quote: "Top Qualität. Der Sichtschutz ist perfekt und die Fernbedienung macht die Bedienung super bequem." },
-  { name: "Martin Bayer", rating: 5, image: "https://pergolux.de/cdn/shop/files/SCR-20250326-nhot.jpg?crop=center&format=pjpg&height=456&v=1745919476&width=289", quote: "Ein sehr gutes Upgrade für unsere Pergola. Die Materialien sind hochwertig und die Verarbeitung tadellos." },
-];
 
 /* ─── service cards ─── */
 const serviceCards = [
-  { icon: "https://pergolux.de/cdn/shop/files/showroom.png?crop=center&height=51&v=1752586038&width=51", title: "Showroom", text: "Finde einen in deiner Nähe" },
-  { icon: "https://pergolux.de/cdn/shop/files/Sledgehammer_3984b0e5-e932-44e2-b41b-4719568216c6.png?crop=center&height=72&v=1758108706&width=72", title: "Einfache Montage", text: "Benötigst du Hilfe bei der Installation?" },
-  { icon: "https://pergolux.de/cdn/shop/files/delivery_628ce087-8faa-4b89-8d4e-0484def8bf68.png?crop=center&height=74&v=1752586038&width=74", title: "Schnelle Lieferung", text: "Ab 1.000 € kostenlos, verschiedene Optionen." },
-  { icon: "https://pergolux.de/cdn/shop/files/expert-advice.png?crop=center&height=74&v=1752586039&width=74", title: "Expertenberatung", text: "Kontaktiere uns jederzeit bei Fragen." },
-];
-
-const bottomTrustBadges = [
-  { icon: "https://pergolux.de/cdn/shop/files/Confetti_198c4952-7307-43f9-8286-78ba45318c28.png?crop=center&height=46&v=1752586038&width=46", title: "+100.000 zufriedene Kunden", text: "Über 100.000 zufriedene Kunden sprechen für die hohe Qualität." },
-  { icon: "https://pergolux.de/cdn/shop/files/Cup_Star_7ee97793-32f0-4e9f-a94d-92c9ffa17b95.png?crop=center&height=66&v=1752586038&width=66", title: "Hochwertige Zip-Screens", text: "Mehrfach ausgezeichnet für Qualität und Langlebigkeit." },
-  { icon: "https://pergolux.de/cdn/shop/files/weather.png?crop=center&height=74&v=1752586039&width=74", title: "Für alle Wetterbedingungen", text: "Genießen Sie Ihren Außenbereich das ganze Jahr über." },
+  { icon: "star", title: "Premium Qualität", text: "Hochwertige Materialien und Verarbeitung für langfristige Zufriedenheit" },
+  { icon: "shield", title: "10 Jahre Garantie", text: "Umfassender Schutz und volle Sicherheit für Ihre Investition" },
+  { icon: "lock", title: "Sichere Produkte", text: "Geprüftes Handwerk und zertifizierte Sicherheitsstandards" },
+  { icon: "sparkle", title: "Modernes Design", text: "Zeitlose Ästhetik und innovative Technologie vereint" },
 ];
 
 /* ─── FAQ ─── */
@@ -86,23 +59,7 @@ const faqItems = [
 const formatPrice = (n: number) =>
   new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n);
 
-const createTargetDate = () => {
-  const d = new Date();
-  d.setDate(d.getDate() + 6);
-  d.setHours(d.getHours() + 10);
-  return d;
-};
 
-const getRemainingTime = (target: Date) => {
-  const diff = Math.max(target.getTime() - Date.now(), 0);
-  const pad = (n: number) => String(n).padStart(2, "0");
-  return {
-    days: pad(Math.floor(diff / 864e5)),
-    hours: pad(Math.floor((diff / 36e5) % 24)),
-    minutes: pad(Math.floor((diff / 6e4) % 60)),
-    seconds: pad(Math.floor((diff / 1e3) % 60)),
-  };
-};
 
 const Stars = ({ count }: { count: number }) => (
   <span className="inline-flex gap-0.5 text-[#82B2CA]">
@@ -121,18 +78,10 @@ export const ZipScreensPage = () => {
   const [descExpanded, setDescExpanded] = useState(false);
   const [selectedColor, setSelectedColor] = useState(colorOptions[0].label);
   const [selectedSize, setSelectedSize] = useState(sizeOptions[0].label);
-  const [saleDeadline] = useState(createTargetDate);
-  const [remainingTime, setRemainingTime] = useState(() => getRemainingTime(saleDeadline));
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [reviewPage, setReviewPage] = useState(0);
   const [showStickyBar, setShowStickyBar] = useState(false);
   const ctaRef = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const id = setInterval(() => setRemainingTime(getRemainingTime(saleDeadline)), 1000);
-    return () => clearInterval(id);
-  }, [saleDeadline]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([e]) => setShowStickyBar(!e.isIntersecting), { threshold: 0 });
@@ -158,8 +107,6 @@ export const ZipScreensPage = () => {
 
   const sizeData = sizeOptions.find((s) => s.label === selectedSize) ?? sizeOptions[0];
   const finalPrice = sizeData.price;
-  const originalPrice = sizeData.originalPrice;
-  const savings = originalPrice - finalPrice;
 
   const handleAddToCart = () => {
     addToCart({
@@ -176,10 +123,6 @@ export const ZipScreensPage = () => {
     });
   };
 
-  const reviewsPerPage = 3;
-  const pagedReviews = reviewCards.slice(reviewPage * reviewsPerPage, (reviewPage + 1) * reviewsPerPage);
-  const totalReviewPages = Math.ceil(reviewCards.length / reviewsPerPage);
-
   return (
     <div className="relative overflow-x-hidden bg-white font-inter_tight text-neutral-900">
       <Header />
@@ -192,7 +135,6 @@ export const ZipScreensPage = () => {
             <div className="w-full lg:w-[56%]">
               <div className="mb-3 hidden items-center gap-2 text-sm text-zinc-400 md:flex">
                 <Link to="/" className="hover:text-zinc-900">Startseite</Link><span>/</span>
-                <Link to="/collections/pergola-zubehoer" className="hover:text-zinc-900">Zubehör</Link><span>/</span>
                 <span className="text-zinc-700">Zip-Screen</span>
               </div>
 
@@ -217,14 +159,6 @@ export const ZipScreensPage = () => {
                 ))}
               </div>
 
-              <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {highlights.map((item) => (
-                  <div key={item.title} className="rounded-xl border border-stone-200 bg-stone-50 p-4">
-                    <h4 className="text-sm font-bold text-zinc-900">{item.title}</h4>
-                    <p className="mt-1.5 line-clamp-3 text-xs leading-5 text-zinc-500">{item.text}</p>
-                  </div>
-                ))}
-              </div>
             </div>
 
             {/* ── Right column: configurator ── */}
@@ -246,20 +180,12 @@ export const ZipScreensPage = () => {
                 </button>
               </div>
 
-              {/* ── price & sale ── */}
+              {/* ── price ── */}
               <div className="mt-5 rounded-2xl bg-zinc-950 p-4 text-white md:p-5">
                 <div className="flex items-baseline gap-3">
                   <span className="text-3xl font-semibold">{formatPrice(finalPrice)}</span>
-                  <span className="text-base text-white/50 line-through">{formatPrice(originalPrice)}</span>
                 </div>
-                <div className="mt-3 flex flex-wrap items-center gap-2">
-                  <span className="rounded-md bg-[#82B2CA] px-2.5 py-1 text-xs font-bold text-zinc-900">{formatPrice(savings)} SPAREN</span>
-                  <span className="text-xs text-white/70">Sale endet in {remainingTime.days}t : {remainingTime.hours}h : {remainingTime.minutes}m : {remainingTime.seconds}s</span>
-                </div>
-                <ul className="mt-3 space-y-1 text-sm text-white/80">
-                  <li>• Bis zu 35 % Rabatt auf Zubehör</li>
-                  <li>• Kostenlose Lieferung ab 1.000 € Bestellwert</li>
-                </ul>
+                <p className="mt-3 text-sm text-white/70">Kostenlose Lieferung ab 1.000 € Bestellwert</p>
               </div>
 
               {/* ── Configurator sections ── */}
@@ -293,20 +219,8 @@ export const ZipScreensPage = () => {
                       </button>
                     ))}
                   </div>
-                  <p className="mt-2 rounded-lg bg-[#82B2CA]/10 p-2.5 text-xs leading-5 text-[#344148]">
-                    <strong>ACHTUNG:</strong> Zip-Screens sind mit allen Modellen der Serien 2 und 3 kompatibel, jedoch nicht mit den Modellen der Serie 1. Bei Pergola-Modellen mit 6 m Länge (mit Mittelpfosten) werden zwei 3 m Zip-Screens benötigt.
-                  </p>
                 </div>
 
-                {/* Trust badges */}
-                <div className="flex flex-wrap justify-center gap-4 rounded-xl bg-stone-50 py-3">
-                  {trustBadges.map((b, i) => (
-                    <div key={i} className="flex items-center gap-2">
-                      <img src={b.icon} alt="" className="h-6 w-6 object-contain" />
-                      <span className="text-xs font-medium text-zinc-700">{b.label}</span>
-                    </div>
-                  ))}
-                </div>
 
                 {/* CTA buttons */}
                 <div ref={ctaRef} className="space-y-3">
@@ -325,53 +239,18 @@ export const ZipScreensPage = () => {
 
         <FeatureTicker />
 
-        {/* ── Social proof ── */}
+        {/* ── Contact CTA ── */}
         <section className="bg-zinc-950 py-10 text-center text-white md:py-14">
-          <p className="text-sm uppercase tracking-widest text-white/50">Folge uns</p>
-          <h2 className="mt-2 text-2xl font-bold md:text-3xl">Inspiration & Erfahrungen</h2>
-          <p className="mx-auto mt-2 max-w-md text-sm text-white/60">Entdecke beeindruckende Projekte unserer Kunden auf Instagram und YouTube.</p>
+          <p className="text-sm uppercase tracking-widest text-[#82B2CA]">über 100.000 zufriedene kunden weltweit</p>
+          <h2 className="mt-2 text-2xl font-bold md:text-3xl">Haben Sie noch Fragen?</h2>
+          <p className="mx-auto mt-2 max-w-md text-sm text-white/70">Unser Kundenservice-Team steht Ihnen gerne zur Verfügung. Kontaktieren Sie uns für eine persönliche Beratung.</p>
           <div className="mt-6 flex justify-center gap-5">
-            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-full bg-white/10 px-5 py-2.5 text-sm font-semibold transition hover:bg-white/20">
-              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" /></svg>
-              Instagram
+            <a href="/contact" className="rounded-full border-2 border-white px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white hover:text-zinc-950">
+              Kontaktieren Sie uns
             </a>
-            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-full bg-white/10 px-5 py-2.5 text-sm font-semibold transition hover:bg-white/20">
-              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
-              YouTube
+            <a href="tel:+49123456789" className="rounded-full bg-[#82B2CA] px-5 py-2.5 text-sm font-semibold text-zinc-950 transition hover:bg-[#6fa1b8]">
+              Anrufen
             </a>
-          </div>
-        </section>
-
-        {/* ── Reviews ── */}
-        <section className="bg-stone-50 py-12 md:py-16">
-          <div className="mx-auto max-w-[1440px] px-4 md:px-16">
-            <div className="mb-8 text-center">
-              <p className="text-sm font-semibold uppercase tracking-widest text-zinc-400">Kundenstimmen</p>
-              <h2 className="mt-2 text-2xl font-bold text-zinc-900 md:text-3xl">Was unsere Kunden sagen</h2>
-              <div className="mt-3 flex items-center justify-center gap-2">
-                <Stars count={5} />
-                <span className="text-sm font-medium text-zinc-600">4.86 / 5 – basierend auf 387 Bewertungen</span>
-              </div>
-            </div>
-            <div className="grid gap-6 md:grid-cols-3">
-              {pagedReviews.map((r) => (
-                <div key={r.name} className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
-                  <img src={r.image} alt={r.name} className="h-52 w-full object-cover" />
-                  <div className="p-5">
-                    <Stars count={r.rating} />
-                    <p className="mt-2 text-sm leading-relaxed text-zinc-600">"{r.quote}"</p>
-                    <p className="mt-3 text-xs font-semibold text-zinc-900">{r.name}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            {totalReviewPages > 1 && (
-              <div className="mt-6 flex justify-center gap-2">
-                {Array.from({ length: totalReviewPages }).map((_, i) => (
-                  <button key={i} type="button" onClick={() => setReviewPage(i)} className={`h-2.5 rounded-full transition-all ${reviewPage === i ? "w-6 bg-zinc-900" : "w-2.5 bg-zinc-300"}`} />
-                ))}
-              </div>
-            )}
           </div>
         </section>
 
@@ -380,46 +259,127 @@ export const ZipScreensPage = () => {
           <div className="mx-auto max-w-[1440px] px-4 md:px-16">
             <h2 className="mb-8 text-center text-2xl font-bold text-zinc-900 md:text-3xl">Die beste Wahl für Ihr Zuhause</h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {serviceCards.map((c) => (
-                <div key={c.title} className="flex flex-col items-center rounded-2xl border border-stone-200 bg-stone-50 p-6 text-center">
-                  <img src={c.icon} alt="" className="mb-3 h-12 w-12 object-contain" />
-                  <h3 className="text-sm font-bold text-zinc-900">{c.title}</h3>
-                  <p className="mt-1 text-xs text-zinc-500">{c.text}</p>
-                </div>
-              ))}
+              {serviceCards.map((c) => {
+                const getIcon = (iconType: string) => {
+                  switch(iconType) {
+                    case 'star':
+                      return <svg className="h-12 w-12 text-zinc-700" fill="currentColor" viewBox="0 0 24 24" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>;
+                    case 'shield':
+                      return <svg className="h-12 w-12 text-zinc-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
+                    case 'lock':
+                      return <svg className="h-12 w-12 text-zinc-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm6-10V7a3 3 0 00-6 0v4a3 3 0 006 0z" /></svg>;
+                    case 'sparkle':
+                      return <svg className="h-12 w-12 text-zinc-700" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 7.26L23 12l-8 .74L12 20l-3-7.26L1 12l8-.74L12 2z" /></svg>;
+                    default:
+                      return null;
+                  }
+                };
+                return (
+                  <div key={c.title} className="flex flex-col items-center rounded-2xl border border-stone-200 bg-stone-50 p-6 text-center">
+                    {getIcon(c.icon)}
+                    <h3 className="mt-4 text-sm font-bold text-zinc-900">{c.title}</h3>
+                    <p className="mt-1 text-xs text-zinc-500">{c.text}</p>
+                  </div>
+                );
+              })}
             </div>
-          </div>
-        </section>
-
-        {/* ── Bottom trust badges ── */}
-        <section className="bg-stone-50 py-10 md:py-14">
-          <div className="mx-auto grid max-w-[1440px] gap-6 px-4 sm:grid-cols-3 md:px-16">
-            {bottomTrustBadges.map((b) => (
-              <div key={b.title} className="flex flex-col items-center text-center">
-                <img src={b.icon} alt="" className="mb-3 h-12 w-12 object-contain" />
-                <h3 className="text-sm font-bold text-zinc-900">{b.title}</h3>
-                <p className="mt-1 text-xs text-zinc-500">{b.text}</p>
-              </div>
-            ))}
           </div>
         </section>
 
         <FeatureTicker />
 
         {/* ── FAQ ── */}
-        <section className="bg-white py-12 md:py-16">
-          <div className="mx-auto max-w-3xl px-4 md:px-16">
-            <h2 className="mb-8 text-center text-2xl font-bold text-zinc-900 md:text-3xl">Häufig gestellte Fragen</h2>
-            <div className="divide-y divide-stone-200">
-              {faqItems.map((item, i) => (
-                <div key={i}>
-                  <button type="button" className="flex w-full items-center justify-between py-4 text-left" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
-                    <span className="text-sm font-semibold text-zinc-900 md:text-base">{item.q}</span>
-                    <svg className={`ml-4 h-5 w-5 shrink-0 text-zinc-400 transition-transform ${openFaq === i ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path d="M19 9l-7 7-7-7" /></svg>
-                  </button>
-                  {openFaq === i && <p className="pb-4 text-sm leading-relaxed text-zinc-600">{item.a}</p>}
-                </div>
-              ))}
+        <section className="relative overflow-hidden bg-gradient-to-b from-zinc-50 to-white">
+          {/* decorative blobs */}
+          <div className="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-[#82B2CA]/20 blur-[100px]" />
+          <div className="pointer-events-none absolute -right-40 bottom-20 h-80 w-80 rounded-full bg-[#82B2CA]/15 blur-[100px]" />
+
+          <div className="relative max-w-[1440px] mx-auto px-4 py-16 md:px-16 md:py-[120px]">
+            {/* header */}
+            <div className="text-center mb-14">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#82B2CA]/10 border border-[#82B2CA]/30 px-4 py-1.5 mb-5">
+                <svg className="h-4 w-4 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+                </svg>
+                <span className="text-sm font-semibold text-[#82B2CA]">Häufig gestellte Fragen</span>
+              </div>
+              <h2 className="text-zinc-900 text-[32px] font-bold leading-10 md:text-5xl md:leading-[58px]">
+                Hast du noch Fragen?
+              </h2>
+              <p className="mx-auto mt-4 max-w-lg text-zinc-500 text-base md:text-lg">
+                Hier findest du Antworten auf die häufigsten Fragen zu deinem Zip-Screen.
+              </p>
+            </div>
+
+            {/* FAQ grid – 2 columns on desktop */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-5xl mx-auto">
+              <div className="flex flex-col gap-4">
+                {faqItems.slice(0, 3).map((item, i) => {
+                  const isOpen = openFaq === i;
+                  return (
+                    <button key={i} type="button" onClick={() => setOpenFaq(isOpen ? null : i)} className="text-left">
+                      <div className="rounded-xl border border-zinc-200 bg-white p-5 transition-all hover:border-zinc-300">
+                        <div className="flex items-start gap-4">
+                          <span className="h-10 w-10 shrink-0 flex items-center justify-center rounded-xl text-sm font-bold transition-all bg-[#344148] text-white">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                          <div className="flex-1">
+                            <h3 className={`text-base font-semibold transition-colors ${
+                              isOpen ? "text-zinc-900" : "text-zinc-700"
+                            }`}>
+                              {item.q}
+                            </h3>
+                            {isOpen && (
+                              <p className="mt-3 text-sm leading-relaxed text-zinc-600">
+                                {item.a}
+                              </p>
+                            )}
+                          </div>
+                          <span className={`mt-1 text-xl transition-transform ${
+                            isOpen ? "rotate-180" : ""
+                          }`}>
+                            ▼
+                          </span>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="flex flex-col gap-4">
+                {faqItems.slice(3).map((item, i) => {
+                  const idx = i + 3;
+                  const isOpen = openFaq === idx;
+                  return (
+                    <button key={idx} type="button" onClick={() => setOpenFaq(isOpen ? null : idx)} className="text-left">
+                      <div className="rounded-xl border border-zinc-200 bg-white p-5 transition-all hover:border-zinc-300">
+                        <div className="flex items-start gap-4">
+                          <span className="h-10 w-10 shrink-0 flex items-center justify-center rounded-xl text-sm font-bold transition-all bg-[#344148] text-white">
+                            {String(idx + 1).padStart(2, "0")}
+                          </span>
+                          <div className="flex-1">
+                            <h3 className={`text-base font-semibold transition-colors ${
+                              isOpen ? "text-zinc-900" : "text-zinc-700"
+                            }`}>
+                              {item.q}
+                            </h3>
+                            {isOpen && (
+                              <p className="mt-3 text-sm leading-relaxed text-zinc-600">
+                                {item.a}
+                              </p>
+                            )}
+                          </div>
+                          <span className={`mt-1 text-xl transition-transform ${
+                            isOpen ? "rotate-180" : ""
+                          }`}>
+                            ▼
+                          </span>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>

@@ -1,3 +1,18 @@
+import photo1 from "../assets/image-pergola.png";
+import photo2 from "../assets/image-light.png";
+import photo3 from "../assets/Photo (26).png";
+import photo4 from "../assets/pergola-glass.png";
+import photo5 from "../assets/pergola-glass-guillot.png";
+import photo6 from "../assets/zip-screen-pergola.png";
+
+const gallery = [
+  { src: photo1, alt: "Elegante Pergola – moderne minimaliste, ditë" },
+  { src: photo2, alt: "Elegante Pergola – moderne minimaliste, natë" },
+  { src: photo3, alt: "Elegante Pergola – LED RGB pranë pishinës" },
+  { src: photo4, alt: "Elegante Pergola – me xhama, ambient kopshti" },
+  { src: photo5, alt: "Elegante Pergola – me xhama, ambient relaksues" },
+  { src: photo6, alt: "Elegante Pergola – klasik, pranë pishinës" },
+];
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "@/sections/Header";
@@ -15,17 +30,6 @@ import icon17 from "@/assets/icon17.jpeg";
 import icon18 from "@/assets/icon18.jpeg";
 import icon10 from "@/assets/icon10.jpeg";
 
-/* ─── image gallery ─── */
-const gallery = [
-  { src: pergolaImg, alt: "Wintergarten" },
-  { src: photo18, alt: "Wintergarten – Ansicht 2" },
-  { src: photo26, alt: "Wintergarten – Ansicht 3" },
-  { src: "https://pergolux.de/cdn/shop/files/Background_2925695b-1454-42a8-a462-afa20b8f07be.png?crop=center&height=900&v=1746170598&width=1200", alt: "Wintergarten – Außenbereich" },
-  { src: "https://pergolux.de/cdn/shop/files/S3_Stronger_than_ever5.png?crop=center&height=900&v=1745831741&width=1200", alt: "Aluminium-Detailansicht" },
-  { src: "https://pergolux.de/cdn/shop/files/effortless-assembly_a659fcec-e1e2-42e3-8b42-98495d7574a5.png?crop=center&height=900&v=1742387411&width=1200", alt: "Montage mit App-Anleitung" },
-  { src: "https://pergolux.de/cdn/shop/files/norway.png?crop=center&height=900&v=1742387411&width=1200", alt: "Norwegisches Design" },
-];
-
 /* ─── variants ─── */
 const colorOptions = [
   { label: "White 9016 T", color: "#E8E4DF", hint: "Verkehrsweiß – hell und minimalistisch" },
@@ -36,25 +40,31 @@ const colorOptions = [
 ];
 
 const sizeOptions = [
-  { label: "3x3m", price: 4289, originalPrice: 6490 },
-  { label: "3x4m", price: 4789, originalPrice: 7190 },
-  { label: "3x5m", price: 5289, originalPrice: 7890 },
-  { label: "3x6m", price: 5789, originalPrice: 8590 },
-  { label: "4x4m", price: 5989, originalPrice: 8990 },
-  { label: "4x5m", price: 6489, originalPrice: 9690 },
-  { label: "4x6m", price: 6989, originalPrice: 10390 },
+  { label: "3x3m", price: 6490 },
+  { label: "3x4m", price: 7190 },
+  { label: "3x5m", price: 7890 },
+  { label: "3x6m", price: 8590 },
+  { label: "4x4m", price: 8990 },
+  { label: "4x5m", price: 9690 },
+  { label: "4x6m", price: 10390 },
 ];
 
+import ikonaThjesht from "@/assets/ikona-thjesht.png";
+import ikonaMuri from "@/assets/ikona-muri.png";
 const mountOptions = [
-  { label: "Freistehend", img: "https://pergolux.de/cdn/shop/files/freestanding_3957b877-f36f-45a0-986e-6f439f8f5f9c.png?crop=center&height=49&v=1746194687&width=66", surcharge: 0 },
-  { label: "Wandmontage", img: "https://pergolux.de/cdn/shop/files/wallmounted.png?crop=center&height=49&v=1746193904&width=66", surcharge: 240 },
+  { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
+  { label: "Wandmontage", img: ikonaMuri, surcharge: 240 },
 ];
 
+import ikonaMajtas from "@/assets/ikona-majtas.png";
+import ikonaDjathtas from "@/assets/ikona-djathtas.png";
+import ikonaPerball from "@/assets/ikona-perball.png";
+import ikonaMbrapa from "@/assets/ikona-mbrapa.png";
 const sideOptions = [
-  { key: "left", label: "Links", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-left.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "right", label: "Rechts", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-right.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "front", label: "Vorne", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-front.png?crop=center&height=68&v=1752586042&width=109" },
-  { key: "back", label: "Hinten", sizeLabel: "3m Seite", img: "https://pergolux.de/cdn/shop/files/sm-back.png?crop=center&height=68&v=1752586043&width=109" },
+  { key: "left", label: "Links", sizeLabel: "3m Seite", img: ikonaMajtas },
+  { key: "right", label: "Rechts", sizeLabel: "3m Seite", img: ikonaDjathtas },
+  { key: "front", label: "Vorne", sizeLabel: "3m Seite", img: ikonaPerball },
+  { key: "back", label: "Hinten", sizeLabel: "3m Seite", img: ikonaMbrapa },
 ];
 
 const sideTypeChoices = [
@@ -71,13 +81,6 @@ const accessoryOptions = [
   { label: "Smart Steuerung", description: "Intelligente Steuerung per App – Lamellen, Licht und Heizung.", price: 399 },
 ];
 
-/* ─── trust badges ─── */
-const trustBadges = [
-  { icon: "https://pergolux.de/cdn/shop/files/Shield_Check_54616393-e1cb-420b-80ab-1ce83c5de17f.png?crop=center&height=54&v=1752586038&width=54", label: "10 Jahre Garantie" },
-  { icon: "https://pergolux.de/cdn/shop/files/Bill_Check.png?crop=center&height=48&v=1753781502&width=48", label: "Rechnungskauf" },
-  { icon: "https://pergolux.de/cdn/shop/files/Confetti_198c4952-7307-43f9-8286-78ba45318c28.png?crop=center&height=46&v=1752586038&width=46", label: "+100.000 Kunden" },
-  { icon: "https://pergolux.de/cdn/shop/files/Home_cef2a425-ad3f-4844-ae3d-e17d79c3ee77.png?crop=center&height=48&v=1757669933&width=48", label: "Wertsteigerung" },
-];
 
 
 /* ─── feature story (icon-based) ─── */
@@ -91,52 +94,19 @@ const featureStory = [
   { image: icon10 },
 ];
 
-/* ─── reviews ─── */
-const reviewCards = [
-  { name: "Stefanie Groß", rating: 5, image: "https://pergolux.de/cdn/shop/files/PERGOLUX_Story_6_88a3e853-e322-4f21-ab7a-60175e9204a0.jpg?crop=center&format=pjpg&height=456&v=1741620042&width=289", quote: "Wir sind sehr zufrieden mit unserer Pergola! Die Bestellung war unkompliziert, und der Support war fantastisch." },
-  { name: "Markus Hoppe", rating: 5, image: "https://pergolux.de/cdn/shop/files/SCR-20250326-njsp.jpg?crop=center&format=pjpg&height=456&v=1745919383&width=289", quote: "Wir haben unsere Pergola heute aufgebaut! Es hat alles wunderbar funktioniert! Ein Rundum perfektes Produkt!" },
-  { name: "Rainer Stuhlberger", rating: 5, image: "https://pergolux.de/cdn/shop/files/SCR-20250326-nftx.jpg?crop=center&format=pjpg&height=456&v=1745919383&width=289", quote: "Eine der hochwertigsten, durchdachtesten und schönsten Sachen, die ich aufgebaut habe. Einfach top!" },
-  { name: "Kirsten Güther", rating: 5, image: "https://pergolux.de/cdn/shop/files/SCR-20250326-ngon.jpg?crop=center&format=pjpg&height=456&v=1745919382&width=289", quote: "Kein Vergleich zu unserer Pergola davor!! Sieht super aus und ist auch noch gut verarbeitet! MEEEGA!!" },
-  { name: "Silvia Renner", rating: 5, image: "https://pergolux.de/cdn/shop/files/SCR-20250326-nhcv_e75cd03d-8413-4832-ba66-57a9befd2997.jpg?crop=center&format=pjpg&height=456&v=1745919503&width=289", quote: "Die Farbe passt perfekt zum Haus! Lieferzeit war top, Kundenservice sehr nett! Ein sehr gutes Produkt." },
-  { name: "Hoffmann", rating: 4, image: "https://pergolux.de/cdn/shop/files/SCR-20250326-nhot.jpg?crop=center&format=pjpg&height=456&v=1745919476&width=289", quote: "Die Pergola hat alle Erwartungen erfüllt. Der Zeitansatz von 5 Stunden ist realistisch." },
-  { name: "Andreas Wolf", rating: 5, image: "https://pergolux.de/cdn/shop/files/SCR-20250326-nitw.jpg?crop=center&format=pjpg&height=456&v=1745919475&width=289", quote: "Sehr zufrieden mit unserer maßgefertigten Pergola. Hochwertig, toll verarbeitet, ohne einen einzigen Kratzer." },
-];
-
 /* ─── service cards ─── */
 const serviceCards = [
-  { icon: "https://pergolux.de/cdn/shop/files/showroom.png?crop=center&height=51&v=1752586038&width=51", title: "Showroom", text: "Finde einen in deiner Nähe", link: "/pages/showroom-3-0" },
-  { icon: "https://pergolux.de/cdn/shop/files/Sledgehammer_3984b0e5-e932-44e2-b41b-4719568216c6.png?crop=center&height=72&v=1758108706&width=72", title: "Einfache Montage", text: "Benötigst du Hilfe bei der Installation?" },
-  { icon: "https://pergolux.de/cdn/shop/files/delivery_628ce087-8faa-4b89-8d4e-0484def8bf68.png?crop=center&height=74&v=1752586038&width=74", title: "Schnelle Lieferung", text: "Ab 1.000 € kostenlos, verschiedene Optionen." },
-  { icon: "https://pergolux.de/cdn/shop/files/expert-advice.png?crop=center&height=74&v=1752586039&width=74", title: "Expertenberatung", text: "Kontaktiere uns jederzeit bei Fragen." },
-];
-
-const bottomTrustBadges = [
-  { icon: "https://pergolux.de/cdn/shop/files/Confetti_198c4952-7307-43f9-8286-78ba45318c28.png?crop=center&height=46&v=1752586038&width=46", title: "+100.000 zufriedene Kunden", text: "Über 100.000 zufriedene Kunden sprechen für die hohe Qualität." },
-  { icon: "https://pergolux.de/cdn/shop/files/Cup_Star_7ee97793-32f0-4e9f-a94d-92c9ffa17b95.png?crop=center&height=66&v=1752586038&width=66", title: "Hochwertige Wintergärten", text: "Mehrfach ausgezeichnet für Qualität und Langlebigkeit." },
-  { icon: "https://pergolux.de/cdn/shop/files/weather.png?crop=center&height=74&v=1752586039&width=74", title: "Für alle Wetterbedingungen", text: "Genieße deinen Außenbereich das ganze Jahr über." },
+  { icon: "star", title: "Premium Qualität", text: "Hochwertige Materialien und Verarbeitung für langfristige Zufriedenheit" },
+  { icon: "shield", title: "10 Jahre Garantie", text: "Umfassender Schutz und volle Sicherheit für Ihre Investition" },
+  { icon: "lock", title: "Sichere Produkte", text: "Geprüftes Handwerk und zertifizierte Sicherheitsstandards" },
+  { icon: "sparkle", title: "Modernes Design", text: "Zeitlose Ästhetik und innovative Technologie vereint" },
 ];
 
 /* ─── helpers ─── */
 const formatPrice = (n: number) =>
   new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n);
 
-const createTargetDate = () => {
-  const d = new Date();
-  d.setDate(d.getDate() + 6);
-  d.setHours(d.getHours() + 10);
-  return d;
-};
 
-const getRemainingTime = (target: Date) => {
-  const diff = Math.max(target.getTime() - Date.now(), 0);
-  const pad = (n: number) => String(n).padStart(2, "0");
-  return {
-    days: pad(Math.floor(diff / 864e5)),
-    hours: pad(Math.floor((diff / 36e5) % 24)),
-    minutes: pad(Math.floor((diff / 6e4) % 60)),
-    seconds: pad(Math.floor((diff / 1e3) % 60)),
-  };
-};
 
 const Stars = ({ count }: { count: number }) => (
   <span className="inline-flex gap-0.5 text-[#82B2CA]">
@@ -160,19 +130,10 @@ export const WintergartenPage = () => {
   const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
   const [showAccessories, setShowAccessories] = useState(false);
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
-  const [saleDeadline] = useState(createTargetDate);
-  const [remainingTime, setRemainingTime] = useState(() => getRemainingTime(saleDeadline));
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [reviewPage, setReviewPage] = useState(0);
   const [showStickyBar, setShowStickyBar] = useState(false);
   const ctaRef = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
-
-  /* countdown */
-  useEffect(() => {
-    const id = setInterval(() => setRemainingTime(getRemainingTime(saleDeadline)), 1000);
-    return () => clearInterval(id);
-  }, [saleDeadline]);
 
   /* sticky bar on mobile */
   useEffect(() => {
@@ -210,8 +171,6 @@ export const WintergartenPage = () => {
   }, 0);
   const accTotal = accessoryOptions.filter((o) => selectedAccessories.includes(o.label)).reduce((s, o) => s + o.price, 0);
   const finalPrice = sizeData.price + mountData.surcharge + sideTotal + accTotal;
-  const originalPrice = sizeData.originalPrice + mountData.surcharge + sideTotal + accTotal;
-  const savings = originalPrice - finalPrice;
 
   const toggleAccessory = (label: string) =>
     setSelectedAccessories((c) => (c.includes(label) ? c.filter((x) => x !== label) : [...c, label]));
@@ -241,10 +200,6 @@ export const WintergartenPage = () => {
     });
   };
 
-  const reviewsPerPage = 3;
-  const pagedReviews = reviewCards.slice(reviewPage * reviewsPerPage, (reviewPage + 1) * reviewsPerPage);
-  const totalReviewPages = Math.ceil(reviewCards.length / reviewsPerPage);
-
   return (
     <div className="relative overflow-x-hidden bg-white font-inter_tight text-neutral-900">
       <Header />
@@ -258,7 +213,6 @@ export const WintergartenPage = () => {
               {/* breadcrumb */}
               <div className="mb-3 hidden items-center gap-2 text-sm text-zinc-400 md:flex">
                 <Link to="/" className="hover:text-zinc-900">Startseite</Link><span>/</span>
-                <Link to="/collections/unsere-pergolen" className="hover:text-zinc-900">Pergolen</Link><span>/</span>
                 <span className="text-zinc-700">Wintergarten</span>
               </div>
 
@@ -317,21 +271,12 @@ export const WintergartenPage = () => {
                 </button>
               </div>
 
-              {/* ── price & sale ── */}
+              {/* ── price ── */}
               <div className="mt-5 rounded-2xl bg-zinc-950 p-4 text-white md:p-5">
                 <div className="flex items-baseline gap-3">
                   <span className="text-3xl font-semibold">{formatPrice(finalPrice)}</span>
-                  <span className="text-base text-white/50 line-through">{formatPrice(originalPrice)}</span>
                 </div>
-                <div className="mt-3 flex flex-wrap items-center gap-2">
-                  <span className="rounded-md bg-[#82B2CA] px-2.5 py-1 text-xs font-bold text-zinc-900">{formatPrice(savings)} SPAREN</span>
-                  <span className="text-xs text-white/70">Sale endet in {remainingTime.days}t : {remainingTime.hours}h : {remainingTime.minutes}m : {remainingTime.seconds}s</span>
-                </div>
-                <ul className="mt-3 space-y-1 text-sm text-white/80">
-                  <li>• Bis zu 35 % Rabatt auf Wintergärten</li>
-                  <li>• Bis zu 35 % Rabatt auf Seitenwände</li>
-                  <li>• Bis zu 35 % Rabatt auf zusätzliches Zubehör</li>
-                </ul>
+                <p className="mt-3 text-sm text-white/70">Kostenlose Lieferung ab 1.000 € Bestellwert</p>
               </div>
 
               {/* ── Configurator sections ── */}
@@ -437,15 +382,7 @@ export const WintergartenPage = () => {
                   )}
                 </div>
 
-                {/* ── Trust badges row ── */}
-                <div className="grid grid-cols-4 gap-2">
-                  {trustBadges.map((b) => (
-                    <div key={b.label} className="flex flex-col items-center gap-1.5 rounded-xl border border-stone-200 p-3 text-center">
-                      <img src={b.icon} alt={b.label} className="h-8 w-8 object-contain" />
-                      <span className="text-[11px] font-semibold leading-tight text-zinc-700">{b.label}</span>
-                    </div>
-                  ))}
-                </div>
+
 
                 {/* ── CTA buttons ── */}
                 <div ref={ctaRef} className="grid gap-3 sm:grid-cols-2">
@@ -465,99 +402,50 @@ export const WintergartenPage = () => {
         {/* ── Ticker ── */}
         <FeatureTicker backgroundColorClass="bg-[#344148]" />
 
-        {/* ── Social proof ── */}
-        <section className="bg-zinc-950 py-12 text-center text-white md:py-16">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#82B2CA]">Über 100.000 zufriedene Kunden weltweit</p>
-          <h2 className="mx-auto mt-3 max-w-xl text-3xl font-semibold md:text-4xl">Folge uns für mehr</h2>
-          <div className="mt-5 flex items-center justify-center gap-4">
-            <a href="#" target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/30 px-5 py-2 text-sm font-semibold transition hover:bg-white hover:text-zinc-900">Instagram</a>
-            <a href="https://www.youtube.com/channel/UChFl3vWUBB0M5y4egNpDvsw" target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/30 px-5 py-2 text-sm font-semibold transition hover:bg-white hover:text-zinc-900">YouTube</a>
-          </div>
-        </section>
-
-        {/* ── Reviews slider ── */}
-        <section className="bg-stone-50 py-12 md:py-20">
-          <div className="mx-auto max-w-[1440px] px-4 md:px-16">
-            <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500">Kundenbewertungen</p>
-                <h2 className="mt-2 text-2xl font-semibold text-zinc-950 md:text-3xl">Was Kundinnen und Kunden sagen</h2>
-              </div>
-              <div className="text-right">
-                <span className="text-2xl font-semibold text-zinc-950">4.85</span><span className="text-sm text-zinc-500"> von 5</span>
-                <div className="mt-0.5 text-xs text-zinc-500">Basierend auf 919 Bewertungen</div>
-              </div>
-            </div>
-
-            {/* star distribution */}
-            <div className="mb-8 flex flex-wrap gap-3">
-              {[{ s: 5, n: 785 }, { s: 4, n: 127 }, { s: 3, n: 6 }, { s: 2, n: 1 }, { s: 1, n: 0 }].map((row) => (
-                <div key={row.s} className="flex items-center gap-2">
-                  <Stars count={row.s} />
-                  <div className="h-2 w-20 overflow-hidden rounded-full bg-stone-200"><div className="h-full rounded-full bg-[#82B2CA]" style={{ width: `${(row.n / 919) * 100}%` }} /></div>
-                  <span className="text-xs text-zinc-500">{row.n}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* cards */}
-            <div className="grid gap-4 md:grid-cols-3">
-              {pagedReviews.map((r) => (
-                <article key={r.name} className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
-                  <img src={r.image} alt={r.name} className="aspect-[5/3] w-full object-cover" />
-                  <div className="p-5">
-                    <Stars count={r.rating} />
-                    <p className="mt-3 text-sm leading-6 text-zinc-700">{r.quote}</p>
-                    <div className="mt-4 flex items-center gap-2 text-xs text-zinc-500">
-                      <span className="font-semibold text-zinc-800">{r.name}</span>
-                      <span className="rounded bg-[#82B2CA]/10 px-1.5 py-0.5 text-[10px] font-bold text-[#82B2CA]">Verifiziert</span>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-            {/* pagination */}
-            {totalReviewPages > 1 && (
-              <div className="mt-6 flex items-center justify-center gap-2">
-                {Array.from({ length: totalReviewPages }, (_, i) => (
-                  <button key={i} type="button" onClick={() => setReviewPage(i)} className={`h-8 w-8 rounded-full text-sm font-semibold transition ${reviewPage === i ? "bg-[#344148] text-white" : "bg-stone-200 text-zinc-600 hover:bg-stone-300"}`}>{i + 1}</button>
-                ))}
-              </div>
-            )}
+        {/* ── Contact CTA ── */}
+        <section className="bg-zinc-950 py-10 text-center text-white md:py-14">
+          <p className="text-sm uppercase tracking-widest text-[#82B2CA]">über 100.000 zufriedene kunden weltweit</p>
+          <h2 className="mt-2 text-2xl font-bold md:text-3xl">Haben Sie noch Fragen?</h2>
+          <p className="mx-auto mt-2 max-w-md text-sm text-white/70">Unser Kundenservice-Team steht Ihnen gerne zur Verfügung. Kontaktieren Sie uns für eine persönliche Beratung.</p>
+          <div className="mt-6 flex justify-center gap-5">
+            <a href="/contact" className="rounded-full border-2 border-white px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white hover:text-zinc-950">
+              Kontaktieren Sie uns
+            </a>
+            <a href="tel:+49123456789" className="rounded-full bg-[#82B2CA] px-5 py-2.5 text-sm font-semibold text-zinc-950 transition hover:bg-[#6fa1b8]">
+              Anrufen
+            </a>
           </div>
         </section>
 
         {/* ── Die beste Wahl ── */}
-        <section className="bg-white py-10 md:py-16">
+        <section className="bg-white py-12 md:py-16">
           <div className="mx-auto max-w-[1440px] px-4 md:px-16">
-            <div className="mb-6 text-center">
-              <h2 className="text-2xl font-semibold text-zinc-950 md:text-3xl">Die beste Wahl für deinen Wintergarten</h2>
-              <p className="mt-2 text-sm text-zinc-500">Hast du Fragen? <Link to="/contact" className="font-semibold text-zinc-900 underline underline-offset-2">Kundenservice kontaktieren</Link></p>
+            <h2 className="mb-8 text-center text-2xl font-bold text-zinc-900 md:text-3xl">Die beste Wahl für Ihr Zuhause</h2>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {serviceCards.map((c) => {
+                const getIcon = (iconType: string) => {
+                  switch(iconType) {
+                    case 'star':
+                      return <svg className="h-12 w-12 text-zinc-700" fill="currentColor" viewBox="0 0 24 24" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>;
+                    case 'shield':
+                      return <svg className="h-12 w-12 text-zinc-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
+                    case 'lock':
+                      return <svg className="h-12 w-12 text-zinc-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm6-10V7a3 3 0 00-6 0v4a3 3 0 006 0z" /></svg>;
+                    case 'sparkle':
+                      return <svg className="h-12 w-12 text-zinc-700" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 7.26L23 12l-8 .74L12 20l-3-7.26L1 12l8-.74L12 2z" /></svg>;
+                    default:
+                      return null;
+                  }
+                };
+                return (
+                  <div key={c.title} className="flex flex-col items-center rounded-2xl border border-stone-200 bg-stone-50 p-6 text-center">
+                    {getIcon(c.icon)}
+                    <h3 className="mt-4 text-sm font-bold text-zinc-900">{c.title}</h3>
+                    <p className="mt-1 text-xs text-zinc-500">{c.text}</p>
+                  </div>
+                );
+              })}
             </div>
-            {/* service cards */}
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {serviceCards.map((card) => (
-                <div key={card.title} className="flex flex-col items-center rounded-2xl border border-stone-200 p-6 text-center">
-                  <img src={card.icon} alt={card.title} className="mb-3 h-12 w-12 object-contain" />
-                  <h3 className="text-sm font-bold text-zinc-900">{card.title}</h3>
-                  <p className="mt-1 text-xs leading-5 text-zinc-500">{card.text}</p>
-                  {card.link && <Link to={card.link} className="mt-2 text-xs font-semibold text-[#82B2CA] underline underline-offset-2">Mehr erfahren</Link>}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── Bottom trust badges ── */}
-        <section className="border-t border-stone-200 bg-stone-50 py-10 md:py-16">
-          <div className="mx-auto grid max-w-[1440px] gap-4 px-4 sm:grid-cols-3 md:px-16">
-            {bottomTrustBadges.map((b) => (
-              <div key={b.title} className="flex flex-col items-center rounded-2xl border border-stone-200 bg-white p-6 text-center shadow-sm">
-                <img src={b.icon} alt={b.title} className="mb-3 h-12 w-12 object-contain" />
-                <h3 className="text-sm font-bold text-zinc-900">{b.title}</h3>
-                <p className="mt-1 text-xs leading-5 text-zinc-500">{b.text}</p>
-              </div>
-            ))}
           </div>
         </section>
 
@@ -565,29 +453,72 @@ export const WintergartenPage = () => {
         <FeatureTicker backgroundColorClass="bg-[#344148]" />
 
         {/* ── FAQ ── */}
-        <section className="border-t border-stone-200 bg-stone-50 py-12 md:py-20">
-          <div className="mx-auto max-w-[900px] px-4 md:px-16">
-            <h2 className="mb-6 text-2xl font-semibold text-zinc-950 md:text-3xl">Häufige Fragen</h2>
-            <div className="space-y-2">
-              {[
-                { q: "Ist der Wintergarten für ganzjährige Nutzung geeignet?", a: "Ja. Die Konstruktion aus 6063-T5 Aluminium mit rundum geschlossener Verglasung ist auf dauerhafte Nutzung im Außenbereich ausgelegt und bietet ganzjährigen Wetterschutz." },
-                { q: "Kann ich den Wintergarten selbst montieren?", a: "Ja. Der Wintergarten ist für einen unkomplizierten Aufbau konzipiert. Wenn du möchtest, kannst du zusätzlich einen Montageservice anfragen." },
-                { q: "Wie funktioniert die Belüftung?", a: "Die drehbaren Lamellen im Dach lassen sich stufenlos verstellen, sodass du Luftzirkulation, Licht und Schatten flexibel regulieren kannst." },
-                { q: "Kann ich später Zubehör hinzufügen?", a: "Ja. LED-Beleuchtung, Heizung, Smart Steuerung und weitere Seitenelemente lassen sich jederzeit ergänzen." },
-                { q: "Wie wird der Wintergarten geliefert?", a: "Der Wintergarten wird per Spedition in mehreren Paketen geliefert. Ab 1.000 € Bestellwert ist die Lieferung kostenlos." },
-                { q: "Ist eine Baugenehmigung erforderlich?", a: "Das hängt vom Bundesland und der Größe ab. Nutze unseren Baugenehmigungscheck, um die Anforderungen für deinen Standort zu prüfen." },
-              ].map((item, i) => {
-                const isOpen = openFaq === i;
-                return (
-                  <div key={item.q} className="rounded-xl border border-stone-200 bg-white">
-                    <button type="button" onClick={() => setOpenFaq(isOpen ? null : i)} className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
-                      <span className="text-sm font-semibold text-zinc-900">{item.q}</span>
-                      <span className="text-lg text-zinc-400">{isOpen ? "−" : "+"}</span>
-                    </button>
-                    {isOpen && <p className="px-5 pb-4 text-sm leading-6 text-zinc-600">{item.a}</p>}
-                  </div>
-                );
-              })}
+        <section className="relative overflow-hidden bg-gradient-to-b from-zinc-50 to-white">
+          {/* decorative blobs */}
+          <div className="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-[#82B2CA]/20 blur-[100px]" />
+          <div className="pointer-events-none absolute -right-40 bottom-20 h-80 w-80 rounded-full bg-[#82B2CA]/15 blur-[100px]" />
+
+          <div className="relative max-w-[1440px] mx-auto px-4 py-16 md:px-16 md:py-[120px]">
+            {/* header */}
+            <div className="text-center mb-14">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#82B2CA]/10 border border-[#82B2CA]/30 px-4 py-1.5 mb-5">
+                <svg className="h-4 w-4 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+                </svg>
+                <span className="text-sm font-semibold text-[#82B2CA]">Häufig gestellte Fragen</span>
+              </div>
+              <h2 className="text-zinc-900 text-[32px] font-bold leading-10 md:text-5xl md:leading-[58px]">
+                Hast du noch Fragen?
+              </h2>
+              <p className="mx-auto mt-4 max-w-lg text-zinc-500 text-base md:text-lg">
+                Hier findest du Antworten auf die häufigsten Fragen zum Wintergarten.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-5xl mx-auto">
+              <div className="flex flex-col gap-4">
+                {[
+                  { q: "Ist der Wintergarten für ganzjährige Nutzung geeignet?", a: "Ja. Die Konstruktion aus 6063-T5 Aluminium mit rundum geschlossener Verglasung ist auf dauerhafte Nutzung im Außenbereich ausgelegt und bietet ganzjährigen Wetterschutz." },
+                  { q: "Kann ich den Wintergarten selbst montieren?", a: "Ja. Der Wintergarten ist für einen unkomplizierten Aufbau konzipiert. Wenn du möchtest, kannst du zusätzlich einen Montageservice anfragen." },
+                  { q: "Wie funktioniert die Belüftung?", a: "Die drehbaren Lamellen im Dach lassen sich stufenlos verstellen, sodass du Luftzirkulation, Licht und Schatten flexibel regulieren kannst." },
+                ].map((item, i) => {
+                  const isOpen = openFaq === i;
+                  const bgColor = "bg-[#344148]";
+                  return (
+                    <div key={item.q} className="rounded-xl border border-stone-200 bg-white hover:shadow-lg transition-shadow overflow-hidden">
+                      <button type="button" onClick={() => setOpenFaq(isOpen ? null : i)} className="flex w-full items-center gap-4 px-5 py-4 text-left">
+                        <div className={`flex-shrink-0 w-10 h-10 rounded-lg ${bgColor} flex items-center justify-center text-white font-bold text-sm`}>
+                          {String(i + 1).padStart(2, "0")}
+                        </div>
+                        <span className="text-sm font-semibold text-zinc-900 flex-1">{item.q}</span>
+                        <span className={`flex-shrink-0 text-lg text-zinc-400 transition-transform ${isOpen ? "rotate-180" : ""}`}>▼</span>
+                      </button>
+                      {isOpen && <p className="px-5 pb-4 text-sm leading-6 text-zinc-600">{item.a}</p>}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="flex flex-col gap-4">
+                {[
+                  { q: "Kann ich später Zubehör hinzufügen?", a: "Ja. LED-Beleuchtung, Heizung, Smart Steuerung und weitere Seitenelemente lassen sich jederzeit ergänzen." },
+                  { q: "Wie wird der Wintergarten geliefert?", a: "Der Wintergarten wird per Spedition in mehreren Paketen geliefert. Ab 1.000 € Bestellwert ist die Lieferung kostenlos." },
+                  { q: "Ist eine Baugenehmigung erforderlich?", a: "Das hängt vom Bundesland und der Größe ab. Nutze unseren Baugenehmigungscheck, um die Anforderungen für deinen Standort zu prüfen." },
+                ].map((item, i) => {
+                  const isOpen = openFaq === i + 3;
+                  const bgColor = "bg-[#344148]";
+                  return (
+                    <div key={item.q} className="rounded-xl border border-stone-200 bg-white hover:shadow-lg transition-shadow overflow-hidden">
+                      <button type="button" onClick={() => setOpenFaq(isOpen ? null : i + 3)} className="flex w-full items-center gap-4 px-5 py-4 text-left">
+                        <div className={`flex-shrink-0 w-10 h-10 rounded-lg ${bgColor} flex items-center justify-center text-white font-bold text-sm`}>
+                          {String(i + 4).padStart(2, "0")}
+                        </div>
+                        <span className="text-sm font-semibold text-zinc-900 flex-1">{item.q}</span>
+                        <span className={`flex-shrink-0 text-lg text-zinc-400 transition-transform ${isOpen ? "rotate-180" : ""}`}>▼</span>
+                      </button>
+                      {isOpen && <p className="px-5 pb-4 text-sm leading-6 text-zinc-600">{item.a}</p>}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>
@@ -599,7 +530,7 @@ export const WintergartenPage = () => {
         <div className="flex items-center gap-3">
           <div className="flex-1">
             <div className="text-lg font-bold text-zinc-950">{formatPrice(finalPrice)}</div>
-            <div className="text-xs text-zinc-500 line-through">{formatPrice(originalPrice)}</div>
+            <div className="text-xs text-zinc-500">inkl. Versand</div>
           </div>
           <button type="button" onClick={handleAddToCart} className="rounded-xl px-6 py-3 text-sm font-bold text-white transition hover:opacity-90" style={{ backgroundColor: '#344148' }}>
             In den Warenkorb

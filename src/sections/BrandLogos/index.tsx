@@ -39,14 +39,14 @@ const uspCards = [
 
 export const BrandLogos = () => {
   return (
-    <section className="bg-stone-50 py-16 md:py-24">
+    <section className="bg-black py-16 md:py-24">
       <div className="mx-auto max-w-[1440px] px-4 md:px-16">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
           <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[#82B2CA] mb-3">
-            Warum Pergolux?
+            Warum Pergola Haus?
           </span>
-          <h2 className="text-3xl md:text-4xl font-semibold text-[#344148]">
+          <h2 className="text-3xl md:text-4xl font-semibold text-[#82B2CA]">
             Was uns auszeichnet
           </h2>
         </div>
@@ -56,20 +56,20 @@ export const BrandLogos = () => {
           {uspCards.map((card, i) => (
             <div
               key={i}
-              className="group relative bg-white rounded-2xl p-8 border border-stone-200/80 hover:border-[#82B2CA]/40 transition-all duration-300 hover:shadow-lg hover:shadow-[#82B2CA]/5 hover:-translate-y-1"
+              className="group relative bg-black rounded-2xl p-8 border border-[#82B2CA]/40 hover:border-[#82B2CA] transition-all duration-300 hover:shadow-lg hover:shadow-[#82B2CA]/20 hover:-translate-y-1"
             >
               {/* Icon */}
-              <div className="mb-5 inline-flex items-center justify-center w-14 h-14 rounded-xl bg-[#344148]/5 text-[#82B2CA] group-hover:bg-[#82B2CA]/10 group-hover:scale-110 transition-all duration-300">
-                {card.icon}
+              <div className="mb-5 inline-flex items-center justify-center w-14 h-14 rounded-xl bg-[#82B2CA]/10 text-[#82B2CA] group-hover:bg-[#82B2CA]/20 group-hover:scale-110 transition-all duration-300">
+                {React.cloneElement(card.icon as React.ReactElement, { stroke: '#82B2CA' })}
               </div>
 
               {/* Title */}
-              <h3 className="text-lg font-semibold text-[#344148] mb-2">
+              <h3 className="text-lg font-semibold text-[#82B2CA] mb-2">
                 {card.title}
               </h3>
 
               {/* Description */}
-              <p className="text-sm leading-relaxed text-neutral-500">
+              <p className="text-sm leading-relaxed text-[#82B2CA] opacity-80">
                 {card.description}
               </p>
 

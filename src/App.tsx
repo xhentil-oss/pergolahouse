@@ -10,10 +10,6 @@ import { PergolaManfertigungPage } from "@/pages/PergolaManfertigungPage";
 import { WintergartenPage } from "@/pages/WintergartenPage";
 import { CarportsPage } from "@/pages/CarportsPage";
 import { ZipScreensPage } from "@/pages/ZipScreensPage";
-import { ScreenRolloPage } from "@/pages/ScreenRolloPage";
-import { GlaswandePage } from "@/pages/GlaswandePage";
-import { LEDStripesPage } from "@/pages/LEDStripesPage";
-import { WaermelampePage } from "@/pages/WaermelampePage";
 import { CartProvider } from "@/context/CartContext";
 
 export const App = () => {
@@ -30,10 +26,6 @@ export const App = () => {
         <Route path="/collections/wintergarten-1" element={<WintergartenPage />} />
         <Route path="/collections/carports" element={<CarportsPage />} />
         <Route path="/collections/zip-screens" element={<ZipScreensPage />} />
-        <Route path="/products/screen-rollo" element={<ScreenRolloPage />} />
-        <Route path="/products/glaswande" element={<GlaswandePage />} />
-        <Route path="/products/led-stripes" element={<LEDStripesPage />} />
-        <Route path="/products/waermelampe" element={<WaermelampePage />} />
         <Route path="/pages/ueber-uns" element={<UeberUnsPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<HomePage />} />

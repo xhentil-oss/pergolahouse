@@ -1,30 +1,27 @@
 ﻿import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
+import { Wrench, Sparkles, Shield } from "lucide-react";
 import photo10 from "@/assets/Photo (10).png";
 import photo11 from "@/assets/Photo (11).png";
 import photo12 from "@/assets/Photo (12).png";
+import photo13 from "@/assets/Photo (13).png";
 import heroBg from "@/assets/Photo (1).png";
 
 const values = [
   {
-    icon: "🔧",
+    icon: Wrench,
     title: "Einfache Selbstmontage",
     text: "Schritt-für-Schritt Anleitungen & Video-Tutorials – kein Fachmann nötig.",
   },
   {
-    icon: "⭐",
+    icon: Sparkles,
     title: "Premium Aluminium",
     text: "Pulverbeschichtetes Aluminium – rostfrei, langlebig & pflegeleicht.",
   },
   {
-    icon: "🔒",
+    icon: Shield,
     title: "Bis zu 10 Jahre Garantie",
     text: "Sorgenfrei genießen – mit unserer erweiterten Herstellergarantie.",
-  },
-  {
-    icon: "📞",
-    title: "Persönliche Beratung",
-    text: "Unsere Experten helfen dir bei Planung, Auswahl & allen Fragen.",
   },
 ];
 
@@ -47,21 +44,13 @@ export const UeberUnsPage = () => {
           {/* Overlay */}
           <div className="absolute inset-0 bg-black/60 z-[1]" />
           <div className="relative z-10">
-          <p className="text-[#82B2CA] text-sm font-semibold uppercase tracking-widest mb-4">Von Norwegen in die Welt</p>
+          <p className="text-[#82B2CA] text-sm font-semibold uppercase tracking-widest mb-4">Über uns</p>
           <h1 className="text-white text-4xl md:text-6xl font-semibold leading-tight max-w-3xl mx-auto mb-6">
-            Gebaut auf skandinavischen Werten stellen wir Sie an erste Stelle
+            Mit Leidenschaft für deine Träume
           </h1>
           <p className="text-white/70 text-lg max-w-2xl mx-auto">
-            Den Kunden an erster Stelle zu setzen, treibt alles, was wir tun, mit Herz und Leidenschaft an.
-            Mit einem großartigen Team, das sich auf 14 Länder erstreckt, bieten wir Unterstützung, die wirklich von Herzen kommt.
+            Seit über 10 Jahren bringen wir Premium-Pergolen nach Deutschland und Europa – mit skandinavischer Qualität, persönlicher Beratung und fairen Preisen.
           </p>
-          <a
-            href="/pages/career"
-            className="inline-block mt-8 hover:opacity-90 transition-colors text-white font-semibold px-8 py-4 rounded-xl text-base"
-            style={{ backgroundColor: '#344148' }}
-          >
-            Werde ein Pergonaut →
-          </a>
           </div>
         </div>
 
@@ -88,6 +77,12 @@ export const UeberUnsPage = () => {
               Immer mehr Menschen träumen davon, ihre Terrasse aufzuwerten. Nicht nur, um einen erhöhten Nutzwert zu erzielen oder den Garten ästhetischer zu gestalten – sondern vor allem, um unvergessliche Momente mit Freunden und Liebsten zu verbringen.
             </p>
             <p className="text-neutral-600 leading-relaxed mb-4">
+              Bei pergola Haus verstehen wir diese Träume, weil wir sie selbst haben. Jede Pergola, die wir gestalten, ist mehr als nur ein Produkt – sie ist ein Versprechen. Ein Versprechen, dass dein Garten zum Ort der Entspannung wird, an dem Familien zusammenkommen, Freunde lachen und Erinnerungen entstehen.
+            </p>
+            <p className="text-neutral-600 leading-relaxed mb-4">
+              Unsere Pergolen sind robust genug für Sturm und Regen, elegant genug für deine schönsten Momente, und pflegeleicht genug, damit du dich entspannen kannst – nicht deine Terrasse warten musst. Mit hochwertigen Materialien, modernem Design und gewissenhafter Verarbeitung schaffen wir Lösungen, die Jahrzehnte halten.
+            </p>
+            <p className="text-neutral-600 leading-relaxed mb-4">
               Was wir bei uns noch mehr lieben als den Traum selbst, ist diesen zu verwirklichen! Wir liefern großartige Produkte für den Außenbereich, die von hoher Qualität und in einer mehr als fairen Preisklasse erhältlich sind.
             </p>
             <p className="text-zinc-900 font-semibold text-lg">
@@ -95,11 +90,10 @@ export const UeberUnsPage = () => {
             </p>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <img src={photo10} alt="Unser Team" className="w-full rounded-2xl object-cover aspect-[3/4]" />
-            <div className="flex flex-col gap-4">
-              <img src={photo11} alt="Produktion" className="w-full rounded-2xl object-cover aspect-square" />
-              <img src={photo12} alt="Qualität" className="w-full rounded-2xl object-cover aspect-square" />
-            </div>
+            <img src={photo10} alt="Unser Team" className="w-full rounded-2xl object-cover aspect-square" />
+            <img src={photo11} alt="Produktion" className="w-full rounded-2xl object-cover aspect-square" />
+            <img src={photo12} alt="Qualität" className="w-full rounded-2xl object-cover aspect-square" />
+            <img src={photo13} alt="Design" className="w-full rounded-2xl object-cover aspect-square" />
           </div>
         </section>
 
@@ -140,28 +134,33 @@ export const UeberUnsPage = () => {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {values.map((v) => (
-              <div key={v.title} className="bg-neutral-50 rounded-2xl p-8 text-center">
-                <div className="text-4xl mb-4">{v.icon}</div>
-                <h3 className="text-zinc-900 text-xl font-semibold mb-3">{v.title}</h3>
-                <p className="text-neutral-600 leading-relaxed text-sm">{v.text}</p>
-              </div>
-            ))}
+            {values.map((v) => {
+              const IconComponent = v.icon;
+              return (
+                <div key={v.title} className="bg-neutral-50 rounded-2xl p-8 text-center">
+                  <div className="flex justify-center mb-4">
+                    <IconComponent size={40} className="text-[#82B2CA]" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-zinc-900 text-xl font-semibold mb-3">{v.title}</h3>
+                  <p className="text-neutral-600 leading-relaxed text-sm">{v.text}</p>
+                </div>
+              );
+            })}
           </div>
         </section>
 
         {/* CTA */}
         <div className="bg-[#344148] py-20 text-center px-4">
-          <h2 className="text-white text-3xl md:text-5xl font-semibold mb-4">Werde Teil unseres Teams</h2>
+          <h2 className="text-white text-3xl md:text-5xl font-semibold mb-4">Du brauchst eine Pergola-Idee?</h2>
           <p className="text-white/70 text-lg max-w-xl mx-auto mb-8">
-            Wir wachsen stetig und suchen leidenschaftliche Menschen, die gemeinsam mit uns Träume verwirklichen.
+            Lass dich von unseren Experten inspirieren. Wir helfen dir, die perfekte Pergola für deinen Garten zu finden – von der Planung bis zur Umsetzung.
           </p>
           <a
-            href="/pages/career"
+            href="/contact"
             className="inline-block hover:opacity-90 transition-colors text-white font-semibold px-8 py-4 rounded-xl text-base"
-            style={{ backgroundColor: '#344148' }}
+            style={{ backgroundColor: '#82B2CA' }}
           >
-            Werde ein Pergonaut →
+            Kontaktiere uns jetzt →
           </a>
         </div>
 

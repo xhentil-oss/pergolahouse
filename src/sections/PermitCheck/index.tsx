@@ -9,7 +9,7 @@ const germanStates = [
 
 export const PermitCheck = () => {
   return (
-    <section className="py-16 md:py-[120px]" style={{ backgroundColor: '#344148' }}>
+    <section className="bg-white py-16 md:py-[120px]">
       <div className="max-w-[1440px] mx-auto px-4 md:px-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           {/* Left: Text and Button */}
@@ -18,18 +18,18 @@ export const PermitCheck = () => {
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
               Kostenlose Beratung
             </div>
-            <h2 className="text-white text-2xl md:text-4xl font-semibold leading-9 md:leading-[44px] mb-5">
+            <h2 className="text-[#344148] text-2xl md:text-4xl font-semibold leading-9 md:leading-[44px] mb-5">
               Vereinbare jetzt eine kostenlose Beratung mit unseren Experten!
             </h2>
-            <p className="text-neutral-400 text-base md:text-lg font-medium leading-6 md:leading-7">
+            <p className="text-neutral-600 text-base md:text-lg font-medium leading-6 md:leading-7">
               Hast du Fragen zu Pergolen, Materialien oder Montage? Unser Team steht dir unverbindlich zur Verfügung. Buche ein kurzes Gespräch und erhalte professionelle Tipps für dein Projekt.
             </p>
             <div className="flex items-center gap-4 mt-8">
-              <div className="flex items-center gap-2 text-neutral-400 text-sm">
+              <div className="flex items-center gap-2 text-neutral-500 text-sm">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="#82B2CA"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                 Kostenlos & unverbindlich
               </div>
-              <div className="flex items-center gap-2 text-neutral-400 text-sm">
+              <div className="flex items-center gap-2 text-neutral-500 text-sm">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="#82B2CA"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                 Experten-Tipps
               </div>
