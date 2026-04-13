@@ -59,15 +59,15 @@ const benefits = [
 
 export const BenefitsGrid = () => {
   return (
-    <section className="bg-stone-50 py-16 md:py-24 border-t border-stone-200/60">
+    <section className="bg-black py-16 md:py-24 border-t border-[#82B2CA]/30">
       <div className="mx-auto max-w-[1440px] px-4 md:px-16">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12 md:mb-16">
           <div>
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[#82B2CA] mb-2">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-white mb-2">
               Deine Vorteile
             </span>
-            <h2 className="text-3xl md:text-4xl font-semibold text-[#344148] max-w-md">
+            <h2 className="text-3xl md:text-4xl font-semibold text-white max-w-md">
               Die beste Wahl für deine Pergola
             </h2>
           </div>
@@ -78,26 +78,26 @@ export const BenefitsGrid = () => {
           {benefits.map((b, i) => (
             <div
               key={i}
-              className="group relative bg-white rounded-2xl p-7 border border-stone-200/80 hover:border-[#82B2CA]/30 transition-all duration-300 hover:shadow-lg hover:shadow-[#82B2CA]/5 hover:-translate-y-0.5"
+              className="group relative bg-black rounded-2xl p-7 border border-[#82B2CA]/40 hover:border-[#82B2CA] transition-all duration-300 hover:shadow-lg hover:shadow-[#82B2CA]/10 hover:-translate-y-0.5"
             >
               {/* Icon */}
-              <div className="mb-5 inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#344148] text-white">
-                {b.icon}
+
+              <div className="mb-5 inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#82B2CA]/10 text-[#82B2CA]">
+                {React.cloneElement(b.icon as React.ReactElement, { stroke: '#82B2CA' })}
               </div>
 
               {/* Title */}
-              <h3 className="text-lg font-semibold text-[#344148] mb-2 leading-snug">
+              <h3 className="text-lg font-semibold text-white mb-2 leading-snug">
                 {b.title}
               </h3>
 
               {/* Description */}
-              <p className="text-sm leading-relaxed text-neutral-500 mb-1">
+              <p className="text-sm leading-relaxed text-white opacity-80 mb-1">
                 {b.description}
               </p>
 
-
               {/* Bottom accent */}
-              <div className="absolute bottom-0 left-7 right-7 h-0.5 bg-[#344148] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              <div className="absolute bottom-0 left-7 right-7 h-0.5 bg-[#82B2CA] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
             </div>
           ))}
         </div>

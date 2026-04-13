@@ -99,15 +99,15 @@ const products = [
     buyButtonAriaLabel: "Jetzt kaufen – Wintergärten",
   },
   {
-    productUrl: "/products/pergola-massanfertigung",
-    productAriaLabel: "Pergola Maßanfertigung",
+    productUrl: `/products/${toKebab("Carports")}`,
+    productAriaLabel: "Carports",
     imageContainerClass: "",
-    imageSrc: photo6,
-    imageAlt: "Pergola Maßanfertigung",
-    productName: "Pergola Maßanfertigung",
-    currentPrice: "4.899 €",
-    originalPrice: "6.990 €",
-    savingsText: "30% sparen",
+    imageSrc: photo7,
+    imageAlt: "Carports",
+    productName: "Carports",
+    currentPrice: "3.999 €",
+    originalPrice: "5.499 €",
+    savingsText: "27% sparen",
     colorSwatches: [
       { color: "#2D3436", label: "Gray 7016 T" },
       { color: "#F1EDE5", label: "White 9016 T" },
@@ -115,10 +115,32 @@ const products = [
       { color: "#8E9499", label: "Gray 7046 T" },
       { color: "#D4BC6A", label: "Ivory 1015 T" },
     ],
-    roofType: "Individuelle Maße & Ausstattung",
-    windResistance: "Bis zu 120km/h (Sturm)",
-    interestedCount: "1120",
-    buyButtonAriaLabel: "Jetzt kaufen – Pergola Maßanfertigung",
+    roofType: "Aluminium & Stahl",
+    windResistance: "Bis zu 100km/h",
+    interestedCount: "1500",
+    buyButtonAriaLabel: "Jetzt kaufen – Carports",
+  },
+  {
+    productUrl: `/products/${toKebab("Zip-Screens")}`,
+    productAriaLabel: "Zip-Screens",
+    imageContainerClass: "",
+    imageSrc: photo6,
+    imageAlt: "Zip-Screens",
+    productName: "Zip-Screens",
+    currentPrice: "1.299 €",
+    originalPrice: "1.799 €",
+    savingsText: "28% sparen",
+    colorSwatches: [
+      { color: "#2D3436", label: "Gray 7016 T" },
+      { color: "#F1EDE5", label: "White 9016 T" },
+      { color: "#0A0A0A", label: "Black 9005 T" },
+      { color: "#8E9499", label: "Gray 7046 T" },
+      { color: "#D4BC6A", label: "Ivory 1015 T" },
+    ],
+    roofType: "Textil & Aluminium",
+    windResistance: "Bis zu 80km/h",
+    interestedCount: "900",
+    buyButtonAriaLabel: "Jetzt kaufen – Zip-Screens",
   },
 ];
 
@@ -140,67 +162,82 @@ export const ProductSlider = () => {
     checkScroll();
     el.addEventListener("scroll", checkScroll, { passive: true });
     window.addEventListener("resize", checkScroll);
+
+    // Autoscroll logic
+    let autoScrollInterval = setInterval(() => {
+      if (!el) return;
+      const cardWidth = el.querySelector("li")?.offsetWidth ?? 490;
+      // If at end, scroll to start
+      if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 10) {
+        el.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        el.scrollBy({ left: cardWidth + 24, behavior: "smooth" });
+      }
+    }, 3000);
+
     return () => {
       el.removeEventListener("scroll", checkScroll);
       window.removeEventListener("resize", checkScroll);
+      clearInterval(autoScrollInterval);
     };
   }, []);
 
   const scroll = (dir: "left" | "right") => {
     const el = scrollRef.current;
     if (!el) return;
-    const cardWidth = el.querySelector("li")?.offsetWidth ?? 300;
-    el.scrollBy({ left: dir === "right" ? cardWidth + 24 : -(cardWidth + 24), behavior: "smooth" });
+    const cardWidth = el.querySelector("li")?.offsetWidth ?? 340;
+    el.scrollBy({ left: dir === "right" ? cardWidth + 32 : -(cardWidth + 32), behavior: "smooth" });
   };
 
   return (
-    <section className="bg-white py-16 md:py-24 overflow-hidden">
+    <section className="bg-[#181818] py-20 md:py-28 overflow-hidden border-t border-[#232323]">
       <div className="mx-auto max-w-[1440px] px-4 md:px-16">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14">
-          <div>
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[#82B2CA] mb-2">
-              Unsere Kollektion
-            </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-[#344148]">
-              Pergola Modelle
-            </h2>
-          </div>
-          <div className="flex items-center gap-4">
-            <a
-              href="/collections/unsere-pergolen"
-              className="text-sm font-semibold text-[#344148] hover:text-[#82B2CA] transition-colors"
+        <div className="flex items-center justify-between mb-14">
+          <h2
+            className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-2"
+            style={{ fontFamily: 'LEMONMILK, sans-serif', fontWeight: 500 }}
+          >
+            Entdecke unsere
+            <br />
+            exklusiven Pergola-Modelle
+          </h2>
+          <div className="flex gap-6 md:gap-8">
+            <button
+              type="button"
+              onClick={() => scroll("left")}
+              disabled={!canScrollLeft}
+              className={`flex h-14 w-14 items-center justify-center bg-[#82B2CA] text-white transition-all duration-200 rotate-45 ${!canScrollLeft ? "opacity-40 cursor-not-allowed" : "hover:bg-[#5fa0b8]"}`}
+              aria-label="Zurück scrollen"
+              style={{ outline: 'none', border: 'none' }}
             >
-              Alle Modelle ansehen &rarr;
-            </a>
-            <div className="hidden md:flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => scroll("left")}
-                disabled={!canScrollLeft}
-                className={`flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 ${canScrollLeft ? "border-[#344148]/20 bg-white hover:bg-[#344148] hover:text-white hover:border-[#344148] text-[#344148]" : "border-stone-200 bg-stone-100 text-stone-300 cursor-not-allowed"}`}
-                aria-label="Zurück scrollen"
-              >
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-              </button>
-              <button
-                type="button"
-                onClick={() => scroll("right")}
-                disabled={!canScrollRight}
-                className={`flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 ${canScrollRight ? "border-[#344148]/20 bg-white hover:bg-[#344148] hover:text-white hover:border-[#344148] text-[#344148]" : "border-stone-200 bg-stone-100 text-stone-300 cursor-not-allowed"}`}
-                aria-label="Weiter scrollen"
-              >
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
-              </button>
-            </div>
+              <span className="rotate-[-45deg]">
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => scroll("right")}
+              disabled={!canScrollRight}
+              className={`flex h-14 w-14 items-center justify-center bg-[#82B2CA] text-white transition-all duration-200 rotate-45 ${!canScrollRight ? "opacity-40 cursor-not-allowed" : "hover:bg-[#5fa0b8]"}`}
+              aria-label="Weiter scrollen"
+              style={{ outline: 'none', border: 'none' }}
+            >
+              <span className="rotate-[-45deg]">
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
+            </button>
           </div>
         </div>
-
         {/* Scrollable cards */}
-        <div ref={scrollRef} className="overflow-x-auto scrollbar-hide scroll-smooth -mx-4 px-4 md:-mx-0 md:px-0">
-          <ul className="flex gap-5 md:gap-6 w-max list-none p-0 m-0">
+        <div ref={scrollRef} className="overflow-x-auto scrollbar-hide scroll-smooth px-0">
+          <ul className="flex gap-10 md:gap-14 w-full list-none p-0 m-0" style={{ minWidth: '100%' }}>
             {products.map((p) => (
-              <li key={p.productName} className="w-[280px] md:w-[310px] shrink-0">
+              <li key={p.productName} className="w-[490px] shrink-0">
                 <ProductCard {...p} priceWrapperClass="items-center gap-x-1.5 flex flex-wrap gap-y-1" />
               </li>
             ))}

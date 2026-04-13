@@ -1,77 +1,68 @@
 
-const reviews = [
+
+const items = [
   {
-    imageSrc: "/src/assets/Photo%20(1).png",
-    imageAlt: "Pergola im Garten",
-    reviewerName: "Lena Schneider",
-    reviewText: "Die Pergola ist ein absoluter Hingucker in unserem Garten. Die Qualität ist hervorragend und die Montage war unkompliziert. Wir genießen jetzt jeden Sommertag draußen!",
-    rating: 5,
+    number: '01.',
+    title: 'Elegante Pergola',
+    description: 'Exklusive Aluminium-Pergola mit drehbaren Lamellen, integriertem Wasserablauf und modernem Design. Bietet optimalen Schutz und Komfort für anspruchsvolle Außenbereiche – optional mit LED, Sensoren und Glas- oder Zip-Systemen.',
+    link: '/ElegantePergola',
   },
   {
-    imageSrc: "/src/assets/Photo%20(2).png",
-    imageAlt: "Pergola mit LED-Beleuchtung",
-    reviewerName: "Johannes Weber",
-    reviewText: "Super Service und tolle Beratung! Die Lieferung erfolgte schnell und die Pergola entspricht genau unseren Vorstellungen. Sehr empfehlenswert!",
-    rating: 5,
+    number: '02.',
+    title: 'Luxus-Pergola',
+    description: 'Luxus-Pergola aus Aluminium mit komplett einfahrbaren und drehbaren Lamellen für maximalen Komfort und Raumgefühl. Dach lässt sich vollständig öffnen, bietet flexiblen Schutz und individuelle Lichtsteuerung. Optional mit LED, Sensoren und Glas- oder Zip-Systemen.',
+    link: '/LuxusPergola',
   },
   {
-    imageSrc: "/src/assets/Photo%20(3).png",
-    imageAlt: "Pergola am Haus",
-    reviewerName: "Sabine Müller",
-    reviewText: "Wir sind begeistert von der Stabilität und dem modernen Design. Auch bei Regenwetter können wir die Terrasse nutzen. Danke für die tolle Umsetzung!",
-    rating: 5,
+    number: '03.',
+    title: 'Preiswerte Pergola',
+    description: 'Preiswerte Aluminium-Pergola im Kit-System: moderne Optik, zuverlässiger Schutz und einfache Montage zum attraktiven Preis. Ideal für stilvolle Außenbereiche mit effizienter Planung.',
+    link: '/PreiswertePergola',
   },
   {
-    imageSrc: "/src/assets/Photo%20(4).png",
-    imageAlt: "Pergola auf der Terrasse",
-    reviewerName: "Thomas Fischer",
-    reviewText: "Die Investition hat sich gelohnt. Die Pergola ist hochwertig verarbeitet und sieht einfach klasse aus. Der Kundenservice war jederzeit erreichbar.",
-    rating: 5,
+    number: '04.',
+    title: 'Wintergärten',
+    description: 'Wintergarten aus Aluminium und Glas mit festem Glasdach: lichtdurchflutete Räume, moderner Look und zuverlässiger Wetterschutz. Optional mit Schiebe-, Guillotine- oder Zip-Systemen und Automatisierung.',
+    link: '/Wintergarten',
   },
   {
-    imageSrc: "/src/assets/Photo%20(5).png",
-    imageAlt: "Weiße Pergola auf einer Terrasse",
-    reviewerName: "Katrin Hoffmann",
-    reviewText: "Wir haben lange nach einer passenden Lösung gesucht und hier gefunden. Die Pergola passt perfekt zu unserem Haus und die Nachbarn sind auch begeistert.",
-    rating: 5,
+    number: '05.',
+    title: 'Carports',
+    description: 'Carport aus Aluminium mit isolierten Sandwichpaneelen: langlebig, pflegeleicht und wetterfest. Schützt Fahrzeuge zuverlässig und bietet optional LED, Sensoren und smarte Steuerung.',
+    link: '/Carports',
   },
   {
-    imageSrc: "/src/assets/Photo%20(6).png",
-    imageAlt: "Pergola mit Glasgeländer",
-    reviewerName: "Michael Braun",
-    reviewText: "Sehr gute Qualität und ein schönes Design. Die Montageanleitung war verständlich und alles hat auf Anhieb gepasst. Gerne wieder!",
-    rating: 4,
+    number: '06.',
+    title: 'Zip-Screens',
+    description: 'Zip-Screen-System für effektiven Sonnen-, Sicht- und Windschutz: robust, modern und vielseitig für Pergolen, Fassaden und Glasdächer. Optional mit Motor, Fernbedienung und vielen Stoffvarianten.',
+    link: '/ZipScreens',
   },
 ];
 
 export const ReviewsSlider = () => {
   return (
-    <section className="bg-neutral-100 py-16 md:py-[120px]">
+    <section className="bg-[#232323] py-20 md:py-[120px]">
       <div className="max-w-[1440px] mx-auto px-4 md:px-16">
-        <h2 className="text-zinc-900 text-3xl md:text-5xl font-bold mb-12 text-center">Was unsere Kunden über uns sagen</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {reviews.map((review, i) => (
-            <div key={i} className="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center border border-zinc-100 hover:shadow-2xl transition-shadow">
-              <img
-                src={review.imageSrc}
-                alt={review.imageAlt}
-                className="w-20 h-20 rounded-full object-cover mb-4 border-4 border-[#82B2CA] shadow"
-              />
-              <div className="flex items-center gap-1 mb-2">
-                {Array.from({ length: 5 }).map((_, idx) => (
-                  <svg
-                    key={idx}
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill={idx < review.rating ? "#FFD700" : "#E5E7EB"}
-                  >
-                    <polygon points="10,1 12.59,7.36 19.51,7.64 14,12.14 15.82,18.99 10,15.27 4.18,18.99 6,12.14 0.49,7.64 7.41,7.36" />
-                  </svg>
-                ))}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12">
+          <h2 className="text-white text-3xl md:text-5xl font-extrabold leading-tight mb-6 md:mb-0">
+            Wir bieten Experten<br className="hidden md:block" /> für Ihr Projekt
+          </h2>
+        </div>
+        <div className="divide-y divide-[#444]">
+          {items.map((item, i) => (
+            <div key={i} className="flex flex-col md:flex-row items-center py-8 md:py-10 gap-6 md:gap-0 relative">
+              <div className="flex items-center w-full md:w-1/4">
+                <span className="text-4xl md:text-5xl font-extrabold text-white mr-6 md:mr-10 min-w-[70px]">{item.number}</span>
+                <span className="text-lg md:text-xl font-bold text-white uppercase tracking-wide">{item.title}</span>
               </div>
-              <p className="text-zinc-800 text-base font-medium mb-4">“{review.reviewText}”</p>
-              <span className="text-[#82B2CA] font-semibold text-lg">{review.reviewerName}</span>
+              <div className="flex-1 text-neutral-300 text-base md:text-lg font-medium md:pl-8 w-full md:w-auto">
+                {item.description}
+              </div>
+              <div className="flex-shrink-0 mt-6 md:mt-0 md:ml-10">
+                <a href={item.link} className="flex items-center justify-center w-14 h-14 rounded-full bg-[#bdb68c] hover:bg-[#cfc89e] transition-colors">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#232323" strokeWidth="2"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                </a>
+              </div>
             </div>
           ))}
         </div>

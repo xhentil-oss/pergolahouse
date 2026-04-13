@@ -59,6 +59,10 @@ module.exports = {
         "inter_tight": ["Inter Tight", "ui-sans-serif", "system-ui", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"]
       },
       keyframes: {
+                heroTextIn: {
+                  from: { opacity: "0", transform: "translateX(-60px)" },
+                  to: { opacity: "1", transform: "translateX(0)" },
+                },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -67,10 +71,16 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        heroZoom: {
+          from: { transform: "scale(1.1)", opacity: "0" },
+          to: { transform: "scale(1)", opacity: "1" },
+        },
       },
       animation: {
+          heroTextIn: "heroTextIn 1s cubic-bezier(0.22, 1, 0.36, 1)",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "heroZoom": "heroZoom 1.2s cubic-bezier(0.22, 1, 0.36, 1)",
       },
     },
     container: { center: true, padding: "2rem", screens: { "2xl": "1400px" } },

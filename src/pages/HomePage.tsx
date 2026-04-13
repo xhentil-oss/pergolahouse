@@ -1,10 +1,13 @@
+
+
 import { useState } from "react";
 import { Header } from "@/sections/Header";
 import { Hero } from "@/sections/Hero";
-import { FeatureTicker } from "@/sections/FeatureTicker";
 import { BrandLogos } from "@/sections/BrandLogos";
+import { FeatureTicker } from "@/sections/FeatureTicker";
 import { ProductSlider } from "@/sections/ProductSlider";
 import { FeatureSlider } from "@/sections/FeatureSlider";
+import { DesignServices } from "@/sections/DesignServices";
 import { BenefitsGrid } from "@/sections/BenefitsGrid";
 import { PermitCheck } from "@/sections/PermitCheck";
 import { ReviewsSlider } from "@/sections/ReviewsSlider";
@@ -20,16 +23,13 @@ export const HomePage = () => {
       <main role="main">
         <Hero />
         <FeatureTicker />
-        <BrandLogos />
+        <DesignServices />
         <ProductSlider />
         <FeatureSlider />
         <BenefitsGrid />
         <PermitCheck />
         <ReviewsSlider />
         <FAQ />
-        <FeatureTicker
-          backgroundColorClass="bg-[#344148]"
-        />
       </main>
       <Footer />
     </div>
