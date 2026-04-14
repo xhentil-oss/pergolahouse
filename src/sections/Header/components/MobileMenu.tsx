@@ -9,18 +9,18 @@ const navGroups = [
   {
     label: "Pergolen",
     items: [
-      { label: "Pergola S3", href: "/products/pergola-s3" },
+      { label: "Pergola S3", href: "/pergola/elegante-pergola" },
       { label: "Sundream S3", href: "/products/sundream-s3" },
       { label: "Skydance S3", href: "/products/skydance-s3" },
-      { label: "Maßanfertigung S3", href: "/products/pergola-custom-design" },
-      { label: "Alle anzeigen", href: "/collections/unsere-pergolen" },
+      { label: "Maßanfertigung S3", href: "/pergola/luxus-pergola" },
+      { label: "Alle anzeigen", href: "/pergola/elegante-pergola" },
     ],
   },
   {
     label: "Wintergarten",
     items: [
-      { label: "Glasdach Wintergarten", href: "/collections/wintergarten-1" },
-      { label: "Alle anzeigen", href: "/collections/wintergarten-1" },
+      { label: "Glasdach Wintergarten", href: "/wintergarten" },
+      { label: "Alle anzeigen", href: "/wintergarten" },
     ],
   },
   {
@@ -55,7 +55,7 @@ export const MobileMenu = ({ onClose }: MobileMenuProps) => {
           </button>
         </div>
         <nav className="flex-1 px-5 py-4 space-y-1">
-          <Link to="/collections/unsere-pergolen" className="flex items-center gap-1 font-semibold py-3 border-b border-zinc-100" style={{ color: '#82B2CA' }}>
+          <Link to="/pergola/elegante-pergola" className="flex items-center gap-1 font-semibold py-3 border-b border-zinc-100" style={{ color: '#82B2CA' }}>
             <img src="https://c.animaapp.com/mnd7yb7cX3zmke/assets/icon-3.svg" alt="" className="h-4 w-4" />
             Sale
           </Link>
@@ -80,8 +80,8 @@ export const MobileMenu = ({ onClose }: MobileMenuProps) => {
             </div>
           ))}
           {[
-            { label: "Showroom", href: "/pages/showroom-3-0" },
-            { label: "Über uns", href: "/pages/ueber-uns" },
+            { label: "Showroom", href: "/showroom" },
+            { label: "Über uns", href: "/ueber-uns" },
             { label: "Contact", href: "/contact" },
           ].map((item) => (
             <Link key={item.label} to={item.href} className="block font-semibold py-3 border-b border-zinc-100">
@@ -91,7 +91,7 @@ export const MobileMenu = ({ onClose }: MobileMenuProps) => {
         </nav>
         <div className="px-5 pb-6">
           <a
-            href="/collections/unsere-pergolen"
+            href="/pergola/elegante-pergola"
             className="block text-center text-white bg-zinc-900 font-medium px-4 py-3 rounded-md w-full"
           >
             Modelle entdecken

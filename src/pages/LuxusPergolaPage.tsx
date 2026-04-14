@@ -43,12 +43,12 @@ import photo5 from "../assets/pergola-glass-guillot.png";
 import photo6 from "../assets/zip-screen-pergola.png";
 
 const gallery = [
-  { src: photo1, alt: "Luxus Pergola – moderne minimaliste, ditë" },
-  { src: photo2, alt: "Luxus Pergola – moderne minimaliste, natë" },
-  { src: photo3, alt: "Luxus Pergola – LED RGB pranë pishinës" },
-  { src: photo4, alt: "Luxus Pergola – me xhama, ambient kopshti" },
-  { src: photo5, alt: "Luxus Pergola – me xhama, ambient relaksues" },
-  { src: photo6, alt: "Luxus Pergola – klasik, pranë pishinës" },
+  { src: photo1, alt: "Luxus-Pergola – modernes minimalistisches Design, Tag" },
+  { src: photo2, alt: "Luxus-Pergola – modernes minimalistisches Design, Nacht" },
+  { src: photo3, alt: "Luxus-Pergola – LED RGB am Pool" },
+  { src: photo4, alt: "Luxus-Pergola – mit Glaswänden, Gartenatmosphäre" },
+  { src: photo5, alt: "Luxus-Pergola – mit Glaswänden, Entspannungsbereich" },
+  { src: photo6, alt: "Luxus-Pergola – klassisch, am Pool" },
 ];
 
 const colorOptions = [

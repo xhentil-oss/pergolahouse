@@ -1,167 +1,328 @@
-﻿import { Header } from "@/sections/Header";
+import { useEffect, useRef, useState } from "react";
+import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
-import { Wrench, Sparkles, Shield } from "lucide-react";
+import heroPergola from "@/assets/image-pergola.png";
 import photo10 from "@/assets/Photo (10).png";
 import photo11 from "@/assets/Photo (11).png";
 import photo12 from "@/assets/Photo (12).png";
 import photo13 from "@/assets/Photo (13).png";
-import heroBg from "@/assets/Photo (1).png";
+import photo14 from "@/assets/Photo (14).png";
+import video1 from "@/assets/Photo 1 (1).webm";
 
-const values = [
-  {
-    icon: Wrench,
-    title: "Einfache Selbstmontage",
-    text: "Schritt-für-Schritt Anleitungen & Video-Tutorials – kein Fachmann nötig.",
-  },
-  {
-    icon: Sparkles,
-    title: "Premium Aluminium",
-    text: "Pulverbeschichtetes Aluminium – rostfrei, langlebig & pflegeleicht.",
-  },
-  {
-    icon: Shield,
-    title: "Bis zu 10 Jahre Garantie",
-    text: "Sorgenfrei genießen – mit unserer erweiterten Herstellergarantie.",
-  },
-];
+function useFadeIn(threshold = 0.15) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return { ref, visible };
+}
 
 const stats = [
   { value: "100.000+", label: "Zufriedene Kunden" },
-  { value: "14", label: "Länder" },
+  { value: "14", label: "Länder europaweit" },
   { value: "10+", label: "Jahre Erfahrung" },
-  { value: "4,79 ★", label: "Durchschnittsbewertung" },
+  { value: "4,79 ★", label: "Kundenbewertung" },
+];
+
+const pillars = [
+  {
+    number: "01",
+    title: "Qualität ohne Kompromisse",
+    text: "Jede Pergola wird aus pulverbeschichtetem Aluminium gefertigt – korrosionsbeständig, langlebig und wartungsarm. Premium-Material für Premium-Ansprüche.",
+  },
+  {
+    number: "02",
+    title: "Design mit Charakter",
+    text: "Unsere Strukturen entstehen am Schnittpunkt von skandinavischer Ästhetik und zeitlosem Minimalismus. Jede Linie hat einen Grund.",
+  },
+  {
+    number: "03",
+    title: "Service, der überzeugt",
+    text: "Von der ersten Beratung bis zur Lieferung – wir sind täglich von 8 bis 22 Uhr für Sie da. Persönlich, kompetent, zuverlässig.",
+  },
 ];
 
 export const UeberUnsPage = () => {
+  const statsRef = useFadeIn();
+  const manifestoRef = useFadeIn(0.1);
+  const storyRef = useFadeIn(0.08);
+  const pillarsRef = useFadeIn(0.1);
+  const mosaicRef = useFadeIn(0.05);
+  const ctaRef = useFadeIn(0.2);
+
   return (
     <div className="relative text-neutral-900 bg-white overflow-x-hidden font-inter_tight">
       <Header />
       <main role="main">
 
-        {/* Hero */}
-        <div className="relative min-h-[540px] md:min-h-[620px] py-20 md:py-32 text-center px-4">
-          <img src={heroBg} alt="" className="absolute inset-0 w-full h-full object-cover object-top" />
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black/60 z-[1]" />
-          <div className="relative z-10">
-          <p className="text-[#82B2CA] text-sm font-semibold uppercase tracking-widest mb-4">Über uns</p>
-          <h1 className="text-white text-4xl md:text-6xl font-semibold leading-tight max-w-3xl mx-auto mb-6">
-            Mit Leidenschaft für deine Träume
-          </h1>
-          <p className="text-white/70 text-lg max-w-2xl mx-auto">
-            Seit über 10 Jahren bringen wir Premium-Pergolen nach Deutschland und Europa – mit skandinavischer Qualität, persönlicher Beratung und fairen Preisen.
-          </p>
-          </div>
-        </div>
+        {/* ── Hero: compact ── */}
+        <section className="relative h-[52vh] min-h-[360px] max-h-[480px] flex items-center">
+          <img
+            src={heroPergola}
+            alt="Pergola Haus – Premium Pergolen"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-black/50" />
 
-        {/* Stats */}
-        <div className="bg-white border-b border-neutral-100">
-          <div className="max-w-[1440px] mx-auto px-4 md:px-16 py-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {stats.map((s) => (
-              <div key={s.label}>
-                <p className="text-zinc-900 text-3xl md:text-4xl font-bold">{s.value}</p>
-                <p className="text-neutral-500 text-sm mt-1">{s.label}</p>
+          <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-16">
+            <p
+              className="text-[#82B2CA] text-xs font-semibold uppercase tracking-[0.3em] mb-4"
+              style={{ animation: "heroTextIn 1s cubic-bezier(0.22,1,0.36,1) both" }}
+            >
+              Über uns
+            </p>
+            <h1
+              className="font-lemonmilk text-4xl sm:text-5xl md:text-6xl text-white leading-none max-w-2xl"
+              style={{ animation: "heroTextIn 1s 0.12s cubic-bezier(0.22,1,0.36,1) both" }}
+            >
+              Außenräume,<br />neu gedacht.
+            </h1>
+            <p
+              className="mt-4 text-white/55 text-sm md:text-base max-w-sm leading-relaxed"
+              style={{ animation: "heroTextIn 1s 0.26s cubic-bezier(0.22,1,0.36,1) both" }}
+            >
+              Seit über 10 Jahren verwandeln wir Außenbereiche in Orte, an denen Erinnerungen entstehen.
+            </p>
+          </div>
+        </section>
+
+        {/* ── Stats ── */}
+        <div
+          ref={statsRef.ref}
+          className={`bg-[#344148] transition-all duration-700 ${statsRef.visible ? "opacity-100" : "opacity-0"}`}
+        >
+          <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-14 grid grid-cols-2 md:grid-cols-4">
+            {stats.map((s, i) => (
+              <div
+                key={s.label}
+                className={`py-8 md:py-0 text-center ${i !== 0 ? "border-l border-white/10" : ""}`}
+              >
+                <p className="font-lemonmilk text-3xl md:text-4xl text-white">{s.value}</p>
+                <p className="mt-2 text-white/40 text-xs tracking-widest uppercase">{s.label}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Mission */}
-        <section className="max-w-[1440px] mx-auto px-4 md:px-16 py-20 md:py-32 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <div>
-            <p className="text-[#82B2CA] text-sm font-semibold uppercase tracking-widest mb-4">Mit Liebe hergestellt, mit Sorgfalt geliefert</p>
-            <h2 className="text-zinc-900 text-3xl md:text-5xl font-semibold leading-tight mb-6">
-              Wir machen Träume möglich
-            </h2>
-            <p className="text-neutral-600 leading-relaxed mb-4">
-              Immer mehr Menschen träumen davon, ihre Terrasse aufzuwerten. Nicht nur, um einen erhöhten Nutzwert zu erzielen oder den Garten ästhetischer zu gestalten – sondern vor allem, um unvergessliche Momente mit Freunden und Liebsten zu verbringen.
+        {/* ── Manifesto ── */}
+        <div
+          ref={manifestoRef.ref}
+          className={`py-24 md:py-40 px-6 md:px-16 max-w-[1440px] mx-auto transition-all duration-1000 ${
+            manifestoRef.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          <p className="text-[#82B2CA] text-xs font-semibold uppercase tracking-[0.3em] mb-8">
+            Unser Versprechen
+          </p>
+          <h2 className="font-lemonmilk text-4xl md:text-6xl lg:text-[4.25rem] text-[#344148] leading-tight max-w-5xl">
+            Wir bauen keine Pergolen.{" "}
+            <span className="text-[#82B2CA]">Wir schaffen Räume.</span>
+          </h2>
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
+            <p className="text-neutral-500 leading-[1.85] text-base">
+              Immer mehr Menschen träumen davon, ihre Terrasse aufzuwerten – nicht nur für mehr Nutzwert, sondern für unvergessliche Momente mit Familie und Freunden. Wir verstehen diese Träume, weil wir sie selbst haben.
             </p>
-            <p className="text-neutral-600 leading-relaxed mb-4">
-              Bei pergola Haus verstehen wir diese Träume, weil wir sie selbst haben. Jede Pergola, die wir gestalten, ist mehr als nur ein Produkt – sie ist ein Versprechen. Ein Versprechen, dass dein Garten zum Ort der Entspannung wird, an dem Familien zusammenkommen, Freunde lachen und Erinnerungen entstehen.
-            </p>
-            <p className="text-neutral-600 leading-relaxed mb-4">
-              Unsere Pergolen sind robust genug für Sturm und Regen, elegant genug für deine schönsten Momente, und pflegeleicht genug, damit du dich entspannen kannst – nicht deine Terrasse warten musst. Mit hochwertigen Materialien, modernem Design und gewissenhafter Verarbeitung schaffen wir Lösungen, die Jahrzehnte halten.
-            </p>
-            <p className="text-neutral-600 leading-relaxed mb-4">
-              Was wir bei uns noch mehr lieben als den Traum selbst, ist diesen zu verwirklichen! Wir liefern großartige Produkte für den Außenbereich, die von hoher Qualität und in einer mehr als fairen Preisklasse erhältlich sind.
-            </p>
-            <p className="text-zinc-900 font-semibold text-lg">
-              Unsere Vision: Wir machen Träume möglich!
+            <p className="text-neutral-500 leading-[1.85] text-base">
+              Jede Pergola, die wir gestalten, ist mehr als ein Produkt – sie ist ein Versprechen. Ein Versprechen, dass Ihr Garten zum Ort der Entspannung wird, an dem Erinnerungen entstehen.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            <img src={photo10} alt="Unser Team" className="w-full rounded-2xl object-cover aspect-square" />
-            <img src={photo11} alt="Produktion" className="w-full rounded-2xl object-cover aspect-square" />
-            <img src={photo12} alt="Qualität" className="w-full rounded-2xl object-cover aspect-square" />
-            <img src={photo13} alt="Design" className="w-full rounded-2xl object-cover aspect-square" />
-          </div>
-        </section>
+        </div>
 
-        {/* Our approach */}
-        <section className="bg-neutral-50 py-20 md:py-32">
-          <div className="max-w-[1440px] mx-auto px-4 md:px-16 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div className="order-2 md:order-1">
+        {/* ── Story: Image + Text ── */}
+        <div
+          ref={storyRef.ref}
+          className={`pb-24 md:pb-32 px-6 md:px-16 max-w-[1440px] mx-auto transition-all duration-1000 ${
+            storyRef.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* images */}
+            <div className="relative">
               <img
                 src={photo10}
-                alt="Beratung"
-                className="w-full rounded-2xl object-cover aspect-[4/3]"
+                alt="Pergola Haus"
+                className="w-full rounded-3xl object-cover aspect-[3/4]"
               />
+              <div className="absolute -bottom-6 -right-3 md:-right-8 w-[42%] rounded-2xl overflow-hidden border-4 border-white shadow-2xl">
+                <img src={photo12} alt="Pergola Detail" className="w-full aspect-square object-cover" />
+              </div>
             </div>
-            <div className="order-1 md:order-2">
-              <p className="text-[#82B2CA] text-sm font-semibold uppercase tracking-widest mb-4">Mehr als ein Jahrzehnt Erfahrung</p>
-              <h2 className="text-zinc-900 text-3xl md:text-5xl font-semibold leading-tight mb-6">
-                Wir gehen die Dinge anders an
+
+            {/* text */}
+            <div className="pt-12 lg:pt-0 pb-10 lg:pb-0">
+              <p className="text-[#82B2CA] text-xs font-semibold uppercase tracking-[0.3em] mb-6">
+                Unsere Geschichte
+              </p>
+              <h2 className="font-lemonmilk text-3xl md:text-5xl text-[#344148] leading-tight mb-8">
+                Vom Traum<br />zur Wirklichkeit
               </h2>
-              <p className="text-neutral-600 leading-relaxed mb-4">
-                Mit persönlicher Beratung, norwegischem Design und blitzschneller Lieferung lassen jedes Jahr tausende Gartenträume wahr werden.
+              <div className="space-y-5 text-neutral-500 leading-[1.85] text-sm md:text-base">
+                <p>
+                  Mit persönlicher Beratung, skandinavischem Design und blitzschneller Lieferung lassen wir jedes Jahr tausende Gartenträume wahr werden – in 14 Ländern europaweit.
+                </p>
+                <p>
+                  Unsere Pergolen sind robust genug für Sturm und Regen, elegant genug für Ihre schönsten Momente – und pflegeleicht genug, damit Sie sich einfach entspannen können.
+                </p>
+                <p>
+                  Mit hochwertigen Materialien, modernem Design und gewissenhafter Verarbeitung schaffen wir Lösungen, die Jahrzehnte halten.
+                </p>
+              </div>
+              <div className="mt-10 pt-8 border-t border-neutral-100 grid grid-cols-3 gap-4">
+                {[
+                  { v: "10+", l: "Jahre" },
+                  { v: "10 J.", l: "Garantie" },
+                  { v: "4,79★", l: "Bewertung" },
+                ].map((item) => (
+                  <div key={item.l} className="text-center">
+                    <p className="font-lemonmilk text-xl text-[#344148]">{item.v}</p>
+                    <p className="text-xs text-neutral-400 mt-1">{item.l}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Cinematic video strip ── */}
+        <section className="relative overflow-hidden h-[45vh] md:h-[55vh]">
+          <video
+            src={video1}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/55" />
+          <div className="relative z-10 h-full flex items-center justify-center text-center px-6">
+            <div>
+              <p className="text-[#82B2CA] text-xs font-semibold uppercase tracking-[0.3em] mb-5">
+                Seit über 10 Jahren
               </p>
-              <p className="text-neutral-600 leading-relaxed mb-4">
-                Wir wissen, dass es für manche Kunden schwierig sein kann, online zu shoppen, und dass sie sich vielleicht unsicher sind, ob ein Produkt wirklich passt. Deshalb bieten wir täglich von 8 bis 22 Uhr persönliche Beratung an.
-              </p>
-              <p className="text-neutral-600 leading-relaxed">
-                Als Outdoor-Möbelexperten mit Wurzeln in Norwegen sind wir sowohl qualitäts- als auch preisbewusst. Mit über 10 Jahren Erfahrung in der Branche haben wir ein exklusives Produkt entwickelt, das das Budget nicht sprengt.
-              </p>
+              <h2 className="font-lemonmilk text-3xl md:text-5xl lg:text-6xl text-white leading-tight">
+                Qualität, die man sieht.<br />
+                <span className="text-white/55">Langlebigkeit, die man spürt.</span>
+              </h2>
             </div>
           </div>
         </section>
 
-        {/* Values */}
-        <section className="max-w-[1440px] mx-auto px-4 md:px-16 py-20 md:py-32">
-          <div className="text-center mb-14">
-            <p className="text-[#82B2CA] text-sm font-semibold uppercase tracking-widest mb-4">Unsere Werte und unser Versprechen</p>
-            <h2 className="text-zinc-900 text-3xl md:text-5xl font-semibold leading-tight">
-              Wir erfüllen Träume
+        {/* ── Pillars ── */}
+        <div
+          ref={pillarsRef.ref}
+          className={`bg-[#344148] py-24 md:py-32 transition-all duration-1000 ${
+            pillarsRef.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          <div className="max-w-[1440px] mx-auto px-6 md:px-16">
+            <div className="mb-16">
+              <p className="text-[#82B2CA] text-xs font-semibold uppercase tracking-[0.3em] mb-5">
+                Was uns antreibt
+              </p>
+              <h2 className="font-lemonmilk text-3xl md:text-5xl text-white leading-tight max-w-xl">
+                Drei Prinzipien.<br />Ein Anspruch.
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10">
+              {pillars.map((p) => (
+                <div
+                  key={p.number}
+                  className="bg-[#344148] p-10 md:p-12 group hover:bg-white/5 transition-colors duration-300"
+                >
+                  <p className="font-lemonmilk text-5xl text-white/10 mb-8 group-hover:text-[#82B2CA]/30 transition-colors duration-300">
+                    {p.number}
+                  </p>
+                  <h3 className="text-white text-lg font-semibold mb-4">{p.title}</h3>
+                  <p className="text-white/40 text-sm leading-relaxed">{p.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Photo mosaic ── */}
+        <div
+          ref={mosaicRef.ref}
+          className={`py-24 md:py-32 px-6 md:px-16 max-w-[1440px] mx-auto transition-all duration-1000 ${
+            mosaicRef.visible ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <div className="mb-12">
+            <p className="text-[#82B2CA] text-xs font-semibold uppercase tracking-[0.3em] mb-4">Unsere Welt</p>
+            <h2 className="font-lemonmilk text-3xl md:text-5xl text-[#344148] leading-tight">
+              Schönheit in jedem Detail
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {values.map((v) => {
-              const IconComponent = v.icon;
-              return (
-                <div key={v.title} className="bg-neutral-50 rounded-2xl p-8 text-center">
-                  <div className="flex justify-center mb-4">
-                    <IconComponent size={40} className="text-[#82B2CA]" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="text-zinc-900 text-xl font-semibold mb-3">{v.title}</h3>
-                  <p className="text-neutral-600 leading-relaxed text-sm">{v.text}</p>
-                </div>
-              );
-            })}
+          <div className="grid grid-cols-12 grid-rows-2 gap-3 h-[420px] md:h-[560px]">
+            <div className="col-span-7 row-span-2 overflow-hidden rounded-3xl">
+              <img
+                src={photo14}
+                alt="Pergola"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+            <div className="col-span-5 overflow-hidden rounded-3xl">
+              <img
+                src={photo11}
+                alt="Pergola Detail"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+            <div className="col-span-5 overflow-hidden rounded-3xl">
+              <img
+                src={photo13}
+                alt="Pergola Design"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </div>
           </div>
-        </section>
+        </div>
 
-        {/* CTA */}
-        <div className="bg-[#344148] py-20 text-center px-4">
-          <h2 className="text-white text-3xl md:text-5xl font-semibold mb-4">Du brauchst eine Pergola-Idee?</h2>
-          <p className="text-white/70 text-lg max-w-xl mx-auto mb-8">
-            Lass dich von unseren Experten inspirieren. Wir helfen dir, die perfekte Pergola für deinen Garten zu finden – von der Planung bis zur Umsetzung.
+        {/* ── CTA ── */}
+        <div
+          ref={ctaRef.ref}
+          className={`py-24 md:py-40 px-6 text-center transition-all duration-1000 ${
+            ctaRef.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <p className="text-[#82B2CA] text-xs font-semibold uppercase tracking-[0.3em] mb-6">
+            Bereit für Ihren Traumgarten?
           </p>
-          <a
-            href="/contact"
-            className="inline-block hover:opacity-90 transition-colors text-white font-semibold px-8 py-4 rounded-xl text-base"
-            style={{ backgroundColor: '#82B2CA' }}
-          >
-            Kontaktiere uns jetzt →
-          </a>
+          <h2 className="font-lemonmilk text-4xl md:text-6xl lg:text-7xl text-[#344148] leading-tight max-w-3xl mx-auto">
+            Ihr Projekt.<br />Unsere Leidenschaft.
+          </h2>
+          <p className="mt-8 text-neutral-400 max-w-md mx-auto text-base leading-[1.85]">
+            Lassen Sie sich von unseren Experten persönlich beraten. Täglich von 8 bis 22 Uhr – wir freuen uns auf Sie.
+          </p>
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="/kontakt"
+              className="inline-block font-semibold px-10 py-4 rounded-full text-white text-sm tracking-wide transition-opacity hover:opacity-80"
+              style={{ backgroundColor: "#344148" }}
+            >
+              Jetzt beraten lassen
+            </a>
+            <a
+              href="/pergola/elegante-pergola"
+              className="inline-block font-semibold px-10 py-4 rounded-full text-sm tracking-wide border-2 transition-all hover:bg-[#344148] hover:text-white"
+              style={{ borderColor: "#344148", color: "#344148" }}
+            >
+              Modelle entdecken
+            </a>
+          </div>
         </div>
 
       </main>

@@ -1,41 +1,41 @@
-
+import { Link } from "react-router-dom";
 
 const items = [
   {
     number: '01.',
     title: 'Elegante Pergola',
     description: 'Exklusive Aluminium-Pergola mit drehbaren Lamellen, integriertem Wasserablauf und modernem Design. Bietet optimalen Schutz und Komfort für anspruchsvolle Außenbereiche – optional mit LED, Sensoren und Glas- oder Zip-Systemen.',
-    link: '/ElegantePergola',
+    link: '/pergola/elegante-pergola',
   },
   {
     number: '02.',
     title: 'Luxus-Pergola',
     description: 'Luxus-Pergola aus Aluminium mit komplett einfahrbaren und drehbaren Lamellen für maximalen Komfort und Raumgefühl. Dach lässt sich vollständig öffnen, bietet flexiblen Schutz und individuelle Lichtsteuerung. Optional mit LED, Sensoren und Glas- oder Zip-Systemen.',
-    link: '/LuxusPergola',
+    link: '/pergola/luxus-pergola',
   },
   {
     number: '03.',
     title: 'Preiswerte Pergola',
     description: 'Preiswerte Aluminium-Pergola im Kit-System: moderne Optik, zuverlässiger Schutz und einfache Montage zum attraktiven Preis. Ideal für stilvolle Außenbereiche mit effizienter Planung.',
-    link: '/PreiswertePergola',
+    link: '/pergola/preiswerte-pergola',
   },
   {
     number: '04.',
     title: 'Wintergärten',
     description: 'Wintergarten aus Aluminium und Glas mit festem Glasdach: lichtdurchflutete Räume, moderner Look und zuverlässiger Wetterschutz. Optional mit Schiebe-, Guillotine- oder Zip-Systemen und Automatisierung.',
-    link: '/Wintergarten',
+    link: '/wintergarten',
   },
   {
     number: '05.',
     title: 'Carports',
     description: 'Carport aus Aluminium mit isolierten Sandwichpaneelen: langlebig, pflegeleicht und wetterfest. Schützt Fahrzeuge zuverlässig und bietet optional LED, Sensoren und smarte Steuerung.',
-    link: '/Carports',
+    link: '/carports',
   },
   {
     number: '06.',
     title: 'Zip-Screens',
     description: 'Zip-Screen-System für effektiven Sonnen-, Sicht- und Windschutz: robust, modern und vielseitig für Pergolen, Fassaden und Glasdächer. Optional mit Motor, Fernbedienung und vielen Stoffvarianten.',
-    link: '/ZipScreens',
+    link: '/zip-screens',
   },
 ];
 
@@ -59,9 +59,14 @@ export const ReviewsSlider = () => {
                 {item.description}
               </div>
               <div className="flex-shrink-0 mt-6 md:mt-0 md:ml-10">
-                <a href={item.link} className="flex items-center justify-center w-14 h-14 rounded-full bg-[#bdb68c] hover:bg-[#cfc89e] transition-colors">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#232323" strokeWidth="2"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-                </a>
+                <Link
+                  to={item.link}
+                  className="flex items-center justify-center w-14 h-14 rounded-full bg-[#82B2CA] hover:bg-[#6ea0b7] transition-colors"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </Link>
               </div>
             </div>
           ))}

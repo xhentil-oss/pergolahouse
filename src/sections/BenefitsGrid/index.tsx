@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const benefits = [
   {
@@ -58,10 +58,30 @@ const benefits = [
 ];
 
 export const BenefitsGrid = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [visibleCount, setVisibleCount] = useState(0);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          benefits.forEach((_, i) => {
+            setTimeout(() => setVisibleCount((v) => Math.max(v, i + 1)), i * 100);
+          });
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <section className="bg-black py-16 md:py-24 border-t border-[#82B2CA]/30">
       <div className="mx-auto max-w-[1440px] px-4 md:px-16">
-        {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12 md:mb-16">
           <div>
             <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-white mb-2">
@@ -73,31 +93,21 @@ export const BenefitsGrid = () => {
           </div>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div ref={containerRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {benefits.map((b, i) => (
             <div
               key={i}
-              className="group relative bg-black rounded-2xl p-7 border border-[#82B2CA]/40 hover:border-[#82B2CA] transition-all duration-300 hover:shadow-lg hover:shadow-[#82B2CA]/10 hover:-translate-y-0.5"
+              className={`group relative bg-black rounded-2xl p-7 border border-[#82B2CA]/40
+                hover:border-[#82B2CA] transition-all duration-500
+                hover:shadow-lg hover:shadow-[#82B2CA]/10 hover:-translate-y-1
+                ${visibleCount > i ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
             >
-              {/* Icon */}
-
               <div className="mb-5 inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#82B2CA]/10 text-[#82B2CA]">
-                {React.cloneElement(b.icon as React.ReactElement, { stroke: '#82B2CA' })}
+                {React.cloneElement(b.icon as React.ReactElement, { stroke: "#82B2CA" })}
               </div>
-
-              {/* Title */}
-              <h3 className="text-lg font-semibold text-white mb-2 leading-snug">
-                {b.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-sm leading-relaxed text-white opacity-80 mb-1">
-                {b.description}
-              </p>
-
-              {/* Bottom accent */}
-              <div className="absolute bottom-0 left-7 right-7 h-0.5 bg-[#82B2CA] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              <h3 className="text-lg font-semibold text-white mb-2 leading-snug">{b.title}</h3>
+              <p className="text-sm leading-relaxed text-white/60">{b.description}</p>
+              <div className="absolute bottom-0 left-7 right-7 h-0.5 bg-[#82B2CA] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
             </div>
           ))}
         </div>

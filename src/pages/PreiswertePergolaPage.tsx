@@ -22,12 +22,12 @@ import photo5 from "../assets/pergola-glass-guillot.png";
 import photo6 from "../assets/zip-screen-pergola.png";
 
 const gallery = [
-  { src: photo1, alt: "Elegante Pergola – moderne minimaliste, ditë" },
-  { src: photo2, alt: "Elegante Pergola – moderne minimaliste, natë" },
-  { src: photo3, alt: "Elegante Pergola – LED RGB pranë pishinës" },
-  { src: photo4, alt: "Elegante Pergola – me xhama, ambient kopshti" },
-  { src: photo5, alt: "Elegante Pergola – me xhama, ambient relaksues" },
-  { src: photo6, alt: "Elegante Pergola – klasik, pranë pishinës" },
+  { src: photo1, alt: "Preiswerte Pergola – modernes minimalistisches Design, Tag" },
+  { src: photo2, alt: "Preiswerte Pergola – modernes minimalistisches Design, Nacht" },
+  { src: photo3, alt: "Preiswerte Pergola – LED RGB am Pool" },
+  { src: photo4, alt: "Preiswerte Pergola – mit Glaswänden, Gartenatmosphäre" },
+  { src: photo5, alt: "Preiswerte Pergola – mit Glaswänden, Entspannungsbereich" },
+  { src: photo6, alt: "Preiswerte Pergola – klassisch, am Pool" },
 ];
 
 /* ─── variants ─── */

@@ -1,16 +1,13 @@
+import logo from "@/assets/pergola-transparent.png";
+
 export const FooterBrand = () => {
   return (
     <div className="flex flex-col gap-6">
       <a href="/">
         <img
-          src="https://c.animaapp.com/mnd7yb7cX3zmke/assets/90.png"
-          alt="Logo"
-          className="h-8 object-contain brightness-0 invert"
-          onError={(e) => {
-            const el = e.target as HTMLImageElement;
-            el.style.display = "none";
-            el.parentElement!.innerHTML = '<span class="text-white text-2xl font-bold tracking-widest">PERGOLA</span>';
-          }}
+          src={logo}
+          alt="Pergolux Logo"
+          className="h-20 object-contain"
         />
       </a>
       <p className="text-neutral-400 text-sm leading-6 max-w-[220px]">

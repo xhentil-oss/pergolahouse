@@ -6,12 +6,12 @@ import photo5 from "../assets/pergola-glass-guillot.png";
 import photo6 from "../assets/zip-screen-pergola.png";
 
 const gallery = [
-  { src: photo1, alt: "Elegante Pergola – moderne minimaliste, ditë" },
-  { src: photo2, alt: "Elegante Pergola – moderne minimaliste, natë" },
-  { src: photo3, alt: "Elegante Pergola – LED RGB pranë pishinës" },
-  { src: photo4, alt: "Elegante Pergola – me xhama, ambient kopshti" },
-  { src: photo5, alt: "Elegante Pergola – me xhama, ambient relaksues" },
-  { src: photo6, alt: "Elegante Pergola – klasik, pranë pishinës" },
+  { src: photo1, alt: "Wintergarten – modernes minimalistisches Design, Tag" },
+  { src: photo2, alt: "Wintergarten – modernes minimalistisches Design, Nacht" },
+  { src: photo3, alt: "Wintergarten – LED RGB am Pool" },
+  { src: photo4, alt: "Wintergarten – mit Glaswänden, Gartenatmosphäre" },
+  { src: photo5, alt: "Wintergarten – mit Glaswänden, Entspannungsbereich" },
+  { src: photo6, alt: "Wintergarten – klassisch, am Pool" },
 ];
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";

@@ -4,9 +4,6 @@ import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
 import { FeatureTicker } from "@/sections/FeatureTicker";
 import { useCart } from "@/context/CartContext";
-import pergolaImg from "@/assets/pergola.png";
-import photo18 from "@/assets/Photo (18).png";
-import photo26 from "@/assets/Photo (26).png";
 import icon18 from "@/assets/icon18.jpeg";
 import icon6 from "@/assets/icon6.jpeg";
 import icon4 from "@/assets/icon4.jpeg";
@@ -24,12 +21,12 @@ import photo5 from "../assets/pergola-glass-guillot.png";
 import photo6 from "../assets/zip-screen-pergola.png";
 
 const gallery = [
-  { src: photo1, alt: "Elegante Pergola – moderne minimaliste, ditë" },
-  { src: photo2, alt: "Elegante Pergola – moderne minimaliste, natë" },
-  { src: photo3, alt: "Elegante Pergola – LED RGB pranë pishinës" },
-  { src: photo4, alt: "Elegante Pergola – me xhama, ambient kopshti" },
-  { src: photo5, alt: "Elegante Pergola – me xhama, ambient relaksues" },
-  { src: photo6, alt: "Elegante Pergola – klasik, pranë pishinës" },
+  { src: photo1, alt: "Pergola Maßanfertigung – modernes minimalistisches Design, Tag" },
+  { src: photo2, alt: "Pergola Maßanfertigung – modernes minimalistisches Design, Nacht" },
+  { src: photo3, alt: "Pergola Maßanfertigung – LED RGB am Pool" },
+  { src: photo4, alt: "Pergola Maßanfertigung – mit Glaswänden, Gartenatmosphäre" },
+  { src: photo5, alt: "Pergola Maßanfertigung – mit Glaswänden, Entspannungsbereich" },
+  { src: photo6, alt: "Pergola Maßanfertigung – klassisch, am Pool" },
 ];
 
 /* ─── variants ─── */
@@ -405,7 +402,7 @@ export const PergolaManfertigungPage = () => {
                       </div>
                       {laenge >= 2830 && (
                         <div className="mt-2 text-xs text-[#B91C1C] font-semibold">
-                          Maximale Modullänge për një Pergola është 2830mm. Për më shumë gjatësi do të fillojë një modul i ri.
+                          Maximale Modullänge für eine Pergola ist 2830mm. Bei größeren Längen wird ein weiteres Modul hinzugefügt.
                         </div>
                       )}
                     </div>
