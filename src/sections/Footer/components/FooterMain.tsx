@@ -11,19 +11,19 @@ export const FooterMain = () => {
             <FooterLinks
               title="Produkte"
               links={[
-                { href: "/products/pergola-s3", label: "Pergola S3" },
-                { href: "/products/sundream-s3", label: "Sundream S3" },
-                { href: "/products/skydance-s3", label: "Skydance S3" },
-                { href: "/products/pergola-custom-design", label: "Maßanfertigung S3" },
-                { href: "/collections/wintergarten-1", label: "Wintergarten" },
-                { href: "/collections/pergola-zubehoer", label: "Zubehör" },
+                { href: "/pergola/elegante-pergola", label: "Elegante Pergola" },
+                { href: "/pergola/luxus-pergola", label: "Luxus-Pergola" },
+                { href: "/pergola/preiswerte-pergola", label: "Preiswerte Pergola" },
+                { href: "/pergola/massanfertigung", label: "Massanfertigung" },
+                { href: "/wintergarten", label: "Wintergärten" },
+                { href: "/carports", label: "Carports" },
               ]}
             />
             <FooterLinks
-              title="Unternehmen"
+              title="Unternehmen" 
               links={[
-                { href: "/pages/ueber-uns", label: "Über uns" },
-                { href: "/pages/showroom-3-0", label: "Showroom" },
+                { href: "/ueber-uns", label: "Über uns" },
+                { href: "/showroom", label: "Showroom" },
                 { href: "/blogs/blogeintrag", label: "Blog" },
                 { href: "/pages/career", label: "Karriere" },
                 { href: "/contact", label: "Contact" },

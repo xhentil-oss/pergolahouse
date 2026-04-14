@@ -140,9 +140,9 @@ export const Hero = () => {
             >
               {slides[active].desc}
             </p>
-            <a
+            <Link
               ref={btnRef}
-              href="#"
+              to="/pergola/elegante-pergola"
               className="inline-flex items-center px-10 py-4 rounded bg-[#82B2CA] text-black font-bold text-lg shadow hover:bg-[#5fa0b8] transition-colors"
               style={{ opacity: 0 }}
             >
@@ -150,7 +150,7 @@ export const Hero = () => {
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       {/* Slider dots funksionale */}

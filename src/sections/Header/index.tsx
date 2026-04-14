@@ -18,12 +18,13 @@ export const Header = () => {
     <header
       className={`sticky top-0 z-40 transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-xl shadow-lg shadow-black/5"
-          : "bg-white"
+          ? "bg-white/95 backdrop-blur-xl shadow-md shadow-black/5 border-b border-transparent"
+          : "bg-white border-b border-zinc-100"
       }`}
     >
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-3 md:px-12 lg:px-16">
-        {/* Hamburger */}
+      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-0 md:px-12 lg:px-16" style={{ minHeight: 72 }}>
+
+        {/* Hamburger - mobile only */}
         <button
           onClick={() => setMobileOpen(true)}
           aria-label="Menu"
@@ -36,12 +37,18 @@ export const Header = () => {
           </svg>
         </button>
 
+        {/* Logo */}
         <HeaderLogo />
-        <DesktopNav />
+
+        {/* Nav - centered */}
+        <div className="flex-1 hidden md:flex justify-center">
+          <DesktopNav />
+        </div>
+
+        {/* Actions */}
         <HeaderActions />
       </div>
 
-      {/* Mobile Menu Overlay */}
       {mobileOpen && <MobileMenu onClose={() => setMobileOpen(false)} />}
     </header>
   );

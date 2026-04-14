@@ -22,12 +22,12 @@ import photo5 from "../assets/pergola-glass-guillot.png";
 import photo6 from "../assets/zip-screen-pergola.png";
 
 const gallery = [
-  { src: photo1, alt: "Elegante Pergola – moderne minimaliste, ditë" },
-  { src: photo2, alt: "Elegante Pergola – moderne minimaliste, natë" },
-  { src: photo3, alt: "Elegante Pergola – LED RGB pranë pishinës" },
-  { src: photo4, alt: "Elegante Pergola – me xhama, ambient kopshti" },
-  { src: photo5, alt: "Elegante Pergola – me xhama, ambient relaksues" },
-  { src: photo6, alt: "Elegante Pergola – klasik, pranë pishinës" },
+  { src: photo1, alt: "Elegante Pergola – modernes minimalistisches Design, Tag" },
+  { src: photo2, alt: "Elegante Pergola – modernes minimalistisches Design, Nacht" },
+  { src: photo3, alt: "Elegante Pergola – LED RGB am Pool" },
+  { src: photo4, alt: "Elegante Pergola – mit Glaswänden, Gartenatmosphäre" },
+  { src: photo5, alt: "Elegante Pergola – mit Glaswänden, Entspannungsbereich" },
+  { src: photo6, alt: "Elegante Pergola – klassisch, am Pool" },
 ];
 
 const colorOptions = [
@@ -68,12 +68,44 @@ const sideTypeChoices = [
   { value: "guillotine", label: "Guillotine-Verglasung", price: 1199 },
 ];
 
-const accessoryOptions = [
-  { label: "LED Warmweiß", description: "Warmweißes Licht für gemütliche Abende unter der Pergola.", price: 329 },
-  { label: "LED RGB", description: "Farbwechsel-Beleuchtung für individuelle Stimmungen und Akzente.", price: 449 },
-  { label: "Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühleren Tagen.", price: 549 },
-  { label: "Smart Steuerung", description: "Intelligente Steuerung per App – Lamellen, Licht und Heizung.", price: 399 },
+const accessoryCategories = [
+  {
+    key: "beleuchtung",
+    label: "Beleuchtung",
+    icon: "💡",
+    items: [
+      { label: "Warmweißes Licht", description: "Warmes Ambiente-Licht für gemütliche Abende.", price: 329 },
+      { label: "Kaltweiß Licht", description: "Klares, modernes Kaltweiß-Licht für die Pergola.", price: 299 },
+      { label: "RGB-Beleuchtung", description: "Farbwechsel-Beleuchtung für individuelle Stimmungen.", price: 449 },
+      { label: "Perimeter-Beleuchtung", description: "Umlaufende Beleuchtung – dekorativer Premium-Effekt.", price: 389 },
+      { label: "Spot-Beleuchtung", description: "Fokussierte Beleuchtung – integrierte Spots in der Struktur.", price: 279 },
+    ],
+  },
+  {
+    key: "sensoren",
+    label: "Sensoren",
+    icon: "📡",
+    items: [
+      { label: "Windsensor", description: "Schließt die Lamellen automatisch bei starkem Wind.", price: 249 },
+      { label: "Regensensor", description: "Schließt die Lamellen automatisch bei Regen.", price: 219 },
+      { label: "Schneesensor", description: "Automatischer Schutz gegen Schnee und Lasteinwirkungen.", price: 239 },
+      { label: "Sonnensensor", description: "Regelt die Lamellen automatisch je nach Sonneneinstrahlung.", price: 229 },
+      { label: "Solar-System", description: "Optionales Solarsystem für den Motor – ideal ohne Stromanschluss.", price: 699 },
+    ],
+  },
+  {
+    key: "heizung",
+    label: "Heizung & Komfort",
+    icon: "🔥",
+    items: [
+      { label: "Infrarot-Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühlen Tagen.", price: 549 },
+      { label: "Integrierte Steckdosen", description: "Elektrische Steckdosen, integriert in die Pergola-Pfosten.", price: 199 },
+      { label: "Soundsystem", description: "Integrierbares Soundsystem – Musik überall unter der Pergola.", price: 599 },
+    ],
+  },
 ];
+
+const accessoryOptions = accessoryCategories.flatMap((c) => c.items);
 
 const featureStory = [
   { image: icon18 },
@@ -84,11 +116,138 @@ const featureStory = [
   { image: icon1 },
 ];
 
-const serviceCards = [
-  { icon: "star", title: "Premium Qualität", text: "Hochwertige Materialien und Verarbeitung für langfristige Zufriedenheit" },
-  { icon: "shield", title: "10 Jahre Garantie", text: "Umfassender Schutz und volle Sicherheit für Ihre Investition" },
-  { icon: "lock", title: "Sichere Produkte", text: "Geprüftes Handwerk und zertifizierte Sicherheitsstandards" },
-  { icon: "sparkle", title: "Modernes Design", text: "Zeitlose Ästhetik und innovative Technologie vereint" },
+const addonItems = [
+  {
+    title: "Warmweißes Licht",
+    subtitle: "Warmes Ambiente-Licht",
+    icon: (
+      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+      </svg>
+    ),
+    color: "#F59E0B",
+  },
+  {
+    title: "Kaltweiß Licht",
+    subtitle: "Klares weißes Licht",
+    icon: (
+      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+      </svg>
+    ),
+    color: "#E2E8F0",
+  },
+  {
+    title: "RGB-Beleuchtung",
+    subtitle: "Farbwechsel & Stimmungslicht",
+    icon: (
+      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+      </svg>
+    ),
+    color: "#8B5CF6",
+  },
+  {
+    title: "Perimeter-Beleuchtung",
+    subtitle: "Umlaufende Randbeleuchtung",
+    icon: (
+      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h18M3 3v18M3 21h18M21 3v18" />
+      </svg>
+    ),
+    color: "#82B2CA",
+  },
+  {
+    title: "Spot-Beleuchtung",
+    subtitle: "Integrierte Spots",
+    icon: (
+      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m1.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+      </svg>
+    ),
+    color: "#FCD34D",
+  },
+  {
+    title: "Infrarot-Heizung",
+    subtitle: "Wärme für kühle Tage",
+    icon: (
+      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
+      </svg>
+    ),
+    color: "#EF4444",
+  },
+  {
+    title: "Integrierte Steckdosen",
+    subtitle: "Strom direkt an der Pergola",
+    icon: (
+      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
+    color: "#10B981",
+  },
+  {
+    title: "Soundsystem",
+    subtitle: "Musik überall unter der Pergola",
+    icon: (
+      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+      </svg>
+    ),
+    color: "#6366F1",
+  },
+  {
+    title: "Windsensor",
+    subtitle: "Automatisch bei Windstärke",
+    icon: (
+      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2" />
+      </svg>
+    ),
+    color: "#06B6D4",
+  },
+  {
+    title: "Regensensor",
+    subtitle: "Automatisch bei Regen",
+    icon: (
+      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+      </svg>
+    ),
+    color: "#3B82F6",
+  },
+  {
+    title: "Schneesensor",
+    subtitle: "Schutz bei Schneefall",
+    icon: (
+      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v18M3 12h18M5.636 5.636l12.728 12.728M18.364 5.636L5.636 18.364" />
+      </svg>
+    ),
+    color: "#BAE6FD",
+  },
+  {
+    title: "Sonnensensor",
+    subtitle: "Automatisch bei Sonneneinstrahlung",
+    icon: (
+      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+      </svg>
+    ),
+    color: "#F59E0B",
+  },
+  {
+    title: "Solar-System",
+    subtitle: "Für Standorte ohne Stromanschluss",
+    icon: (
+      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+      </svg>
+    ),
+    color: "#84CC16",
+  },
 ];
 
 const formatPrice = (n: number) =>
@@ -115,6 +274,7 @@ export const ElegantePergolaPage = () => {
   const [selectedMount, setSelectedMount] = useState(mountOptions[0].label);
   const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
   const [showAccessories, setShowAccessories] = useState(false);
+  const [activeAccCategory, setActiveAccCategory] = useState("beleuchtung");
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showStickyBar, setShowStickyBar] = useState(false);
@@ -195,288 +355,310 @@ export const ElegantePergolaPage = () => {
       <main role="main">
 
         {/* ── Product hero ── */}
-        <section className="bg-white">
-          <div className="mx-auto flex max-w-[1440px] flex-col gap-8 px-4 py-4 md:px-16 lg:flex-row lg:items-start lg:gap-12 lg:py-8">
-            {/* Gallery */}
-            <div className="w-full lg:w-[56%]">
-              {/* breadcrumb */}
-              <div className="mb-3 hidden items-center gap-2 text-sm text-zinc-400 md:flex">
-                <Link to="/" className="hover:text-zinc-900">Startseite</Link><span>/</span>
-                <span className="text-zinc-700">Elegante Pergola</span>
-              </div>
+        <section style={{ backgroundColor: '#344148' }}>
+          {/* breadcrumb */}
+          <div className="mx-auto max-w-[1440px] px-5 pt-6 md:px-12 lg:px-16">
+            <div className="hidden items-center gap-2 text-sm text-white/40 md:flex">
+              <Link to="/" className="hover:text-white transition-colors">Startseite</Link>
+              <span>/</span>
+              <span className="text-white/70">Elegante Pergola</span>
+            </div>
+          </div>
 
-              {/* main image + swipe */}
-              <div ref={galleryRef} className="relative overflow-hidden rounded-2xl bg-stone-100 md:rounded-3xl">
-                <img
-                  src={gallery[activeImage].src}
-                  alt={gallery[activeImage].alt}
-                  className="aspect-square w-full object-cover md:aspect-[4/3] md:h-[520px]"
-                />
-                {/* dot indicators mobile */}
-                <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5 md:hidden">
-                  {gallery.map((_, i) => (
-                    <button key={i} type="button" onClick={() => setActiveImage(i)} className={`h-2 rounded-full transition-all ${activeImage === i ? "w-5 bg-white" : "w-2 bg-white/50"}`} />
+          <div className="mx-auto flex max-w-[1440px] flex-col gap-6 px-5 pb-10 pt-4 md:px-12 lg:flex-row lg:items-start lg:gap-8 lg:px-16 lg:pb-16">
+
+            {/* ── LEFT: Gallery ── */}
+            <div className="w-full lg:w-[58%]">
+              <div className="flex gap-3">
+                {/* Vertical thumbnail strip */}
+                <div className="hidden flex-col gap-2 md:flex">
+                  {gallery.map((img, i) => (
+                    <button
+                      key={img.src}
+                      type="button"
+                      onClick={() => setActiveImage(i)}
+                      className={`h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 transition-all ${activeImage === i ? "border-[#82B2CA] opacity-100" : "border-transparent opacity-50 hover:opacity-80"}`}
+                    >
+                      <img src={img.src} alt={img.alt} className="h-full w-full object-cover" />
+                    </button>
                   ))}
                 </div>
-              </div>
 
-              {/* thumbnail strip desktop */}
-              <div className="mt-3 hidden gap-2 md:grid md:grid-cols-4">
-                {gallery.map((img, i) => (
-                  <button key={img.src} type="button" onClick={() => setActiveImage(i)} className={`overflow-hidden rounded-xl border-2 transition ${activeImage === i ? "border-zinc-900" : "border-transparent hover:border-stone-300"}`}>
-                    <img src={img.src} alt={img.alt} className="h-24 w-full object-cover" />
-                  </button>
-                ))}
-              </div>
-
-              {/* feature highlights */}
-              <div className="mt-5 grid grid-cols-4 gap-2">
-                {featureStory.map((item, i) => (
-                  <div key={i} className="overflow-hidden rounded-[20px] border border-stone-200 bg-stone-50 transition hover:border-[#82B2CA]/40 hover:shadow-sm">
-                    <img src={item.image} alt="Feature" className="w-full object-cover" />
+                {/* Main image + icons below */}
+                <div className="flex flex-1 flex-col gap-2">
+                  <div ref={galleryRef} className="relative overflow-hidden rounded-2xl">
+                    <img
+                      src={gallery[activeImage].src}
+                      alt={gallery[activeImage].alt}
+                      className="aspect-[4/3] w-full object-cover md:h-[480px]"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setActiveImage((p) => Math.max(p - 1, 0))}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/60"
+                    >
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveImage((p) => Math.min(p + 1, gallery.length - 1))}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/60"
+                    >
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                    </button>
+                    <div className="absolute bottom-3 right-3 rounded-full bg-black/50 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+                      {activeImage + 1} / {gallery.length}
+                    </div>
+                    <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5 md:hidden">
+                      {gallery.map((_, i) => (
+                        <button key={i} type="button" onClick={() => setActiveImage(i)} className={`h-1.5 rounded-full transition-all ${activeImage === i ? "w-5 bg-white" : "w-1.5 bg-white/40"}`} />
+                      ))}
+                    </div>
                   </div>
-                ))}
+
+                  {/* Feature icons — same width as image above */}
+                  <div className="grid grid-cols-3 gap-2">
+                    {featureStory.map((item, i) => (
+                      <div key={i} className="overflow-hidden rounded-xl border border-white/10 bg-white/5">
+                        <img src={item.image} alt="Feature" className="w-full object-cover" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* ── Right column: configurator ── */}
-            <div className="w-full lg:sticky lg:top-20 lg:w-[44%]">
-              {/* reviews badge */}
-              <div className="mb-2 flex items-center gap-2">
-                <Stars count={5} />
-                <span className="text-sm font-medium text-zinc-600">919 Bewertungen</span>
-              </div>
+            {/* ── RIGHT: Configurator card ── */}
+            <div className="w-full lg:sticky lg:top-20 lg:w-[42%]">
+              <div className="rounded-3xl bg-white p-6 shadow-2xl md:p-7">
 
-              <h1 className="text-3xl font-semibold tracking-tight text-zinc-950 md:text-4xl">Elegante Pergola</h1>
-              <h3 className="mt-1 text-lg font-semibold text-zinc-700">Unser Original, jetzt noch besser!</h3>
-
-              {/* expandable description */}
-              <div className="relative mt-3">
-                <p className={`text-sm leading-6 text-zinc-600 ${!descExpanded ? "line-clamp-3" : ""}`}>
-                  Die elegante Pergola ist ein exklusives Aluminium-Pergolasystem mit drehbaren Lamellen, integriertem Wasserablauf und hoher Widerstandsfähigkeit gegenüber Witterungseinflüssen. Sie vereint modernes Design, eine präzise Licht- und Belüftungssteuerung sowie zuverlässigen Schutz vor Sonne, Regen und Schnee zu einer stilvollen Lösung für anspruchsvolle Außenbereiche. Optional ist sie mit LED-Beleuchtung, Regen- und Windsensoren, Smartphone-Steuerung sowie seitlichen Glas- oder Zip-Systemen erhältlich.
-                </p>
-                <button type="button" onClick={() => setDescExpanded(!descExpanded)} className="mt-1 text-sm font-semibold text-zinc-900 underline underline-offset-2">
-                  {descExpanded ? "Weniger anzeigen" : "Mehr anzeigen"}
-                </button>
-              </div>
-
-              {/* ── price ── */}
-              <div className="mt-5 rounded-2xl bg-zinc-950 p-4 text-white md:p-5">
-                <div className="flex items-baseline gap-3">
-                  <span className="text-3xl font-semibold">{formatPrice(finalPrice)}</span>
-                </div>
-                <p className="mt-3 text-sm text-white/70">Kostenloser Versand ab 1.000 € Bestellwert</p>
-              </div>
-
-              {/* ── Configurator sections ── */}
-              <div className="mt-5 space-y-5">
-                {/* Color */}
-                <div>
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="text-sm font-semibold text-zinc-700">Farbe<span className="text-zinc-400">.</span> <span className="font-normal text-zinc-500">Gewünschte Farbe auswählen</span></span>
+                {/* reviews + badge */}
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <Stars count={5} />
+                    <span className="text-xs text-zinc-500">919 Bewertungen</span>
                   </div>
-                  <div className="flex flex-wrap gap-3">
-                    {colorOptions.map((c) => (
-                      <button key={c.label} type="button" onClick={() => setSelectedColor(c.label)} className={`flex flex-col items-center gap-1.5 rounded-xl border-2 px-3 py-2 transition ${selectedColor === c.label ? "border-zinc-900" : "border-stone-200 hover:border-stone-400"}`}>
-                        <div className="h-8 w-8 rounded-full border border-stone-200" style={{ backgroundColor: c.color }} />
-                        <span className="text-xs font-medium text-zinc-700">{c.label}</span>
-                      </button>
-                    ))}
-                  </div>
-                  <p className="mt-2 text-xs text-zinc-500">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
-                  <button type="button" className="mt-1 text-xs font-semibold text-zinc-900 underline underline-offset-2">Welche Farbe ist die passende?</button>
+                  <span className="rounded-full bg-[#82B2CA]/15 px-3 py-1 text-xs font-semibold text-[#82B2CA]">
+                    Bestseller
+                  </span>
                 </div>
 
-                {/* Custom Size – Breite / Länge / Höhe in mm */}
-                <div>
-                  <div className="mb-2">
-                    <span className="text-sm font-semibold text-zinc-700">Größe<span className="text-zinc-400">.</span> <span className="font-normal text-zinc-500">Wähle die genaue Größe</span></span>
+                {/* title */}
+                <h1 className="font-lemonmilk text-2xl font-bold leading-tight text-[#344148] md:text-3xl">
+                  Elegante Pergola
+                </h1>
+                <p className="mt-1 text-sm text-zinc-500">Unser Original, jetzt noch besser!</p>
+
+                {/* description */}
+                <div className="mt-3 border-t border-stone-100 pt-3">
+                  <p className={`text-xs leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
+                    Die elegante Pergola ist ein exklusives Aluminium-Pergolasystem mit drehbaren Lamellen, integriertem Wasserablauf und hoher Widerstandsfähigkeit gegenüber Witterungseinflüssen.
+                  </p>
+                  <button type="button" onClick={() => setDescExpanded(!descExpanded)} className="mt-0.5 text-xs font-semibold text-[#344148] underline underline-offset-2">
+                    {descExpanded ? "Weniger" : "Mehr anzeigen"}
+                  </button>
+                </div>
+
+                {/* price */}
+                <div ref={ctaRef} className="mt-4 flex items-center justify-between rounded-2xl px-4 py-3" style={{ backgroundColor: '#344148' }}>
+                  <div>
+                    <p className="text-xs text-white/50">Gesamtpreis</p>
+                    <span className="font-lemonmilk text-2xl font-bold text-white">{formatPrice(finalPrice)}</span>
                   </div>
-                  <div className="space-y-5 rounded-xl border border-stone-200 bg-white p-5">
-                    {/* Breite */}
-                    <div>
-                      <label className="mb-2 flex items-center gap-1 text-sm font-semibold text-[#82B2CA]">
-                        Breite
-                        <svg className="h-4 w-4 text-[#82B2CA]" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" /><text x="10" y="14" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="bold">i</text></svg>
-                      </label>
-                      <div className="flex items-center gap-4">
-                        <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
-                          {breite}mm
+                  <p className="text-right text-[10px] leading-4 text-white/40">Kostenloser<br />Versand ab 1.000 €</p>
+                </div>
+
+                {/* ── Configurator sections ── */}
+                <div className="mt-5 space-y-5">
+
+                  {/* Color */}
+                  <div>
+                    <p className="mb-2.5 text-xs font-bold uppercase tracking-widest text-zinc-400">Farbe</p>
+                    <div className="flex flex-wrap gap-2">
+                      {colorOptions.map((c) => (
+                        <button
+                          key={c.label}
+                          type="button"
+                          onClick={() => setSelectedColor(c.label)}
+                          className={`flex items-center gap-2 rounded-full border-2 px-3 py-1.5 text-xs font-medium transition-all ${selectedColor === c.label ? "border-[#344148] bg-[#344148] text-white" : "border-stone-200 text-zinc-600 hover:border-zinc-400"}`}
+                        >
+                          <div className="h-4 w-4 rounded-full border border-white/30 shadow-sm" style={{ backgroundColor: c.color }} />
+                          {c.label}
+                        </button>
+                      ))}
+                    </div>
+                    <p className="mt-1.5 text-xs text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
+                  </div>
+
+                  {/* Size */}
+                  <div>
+                    <p className="mb-2.5 text-xs font-bold uppercase tracking-widest text-zinc-400">Größe</p>
+                    <div className="space-y-4 rounded-2xl bg-[#344148]/5 p-4">
+                      {/* Breite */}
+                      <div>
+                        <div className="mb-1.5 flex items-center justify-between">
+                          <span className="text-xs font-semibold text-[#344148]">Breite</span>
+                          <span className="rounded-lg bg-white px-2.5 py-1 text-xs font-bold text-[#344148] shadow-sm border border-stone-200">{breite} mm</span>
                         </div>
-                        <div className="relative w-full">
-                          <input
-                            type="range"
-                            min={breiteRange.min}
-                            max={breiteRange.max}
-                            step={breiteRange.step}
-                            value={breite}
-                            onChange={(e) => setBreite(Number(e.target.value))}
-                            className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
-                            style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #e7e5e4 ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #e7e5e4 100%)` }}
+                        <div className="relative">
+                          <input type="range" min={breiteRange.min} max={breiteRange.max} step={breiteRange.step} value={breite} onChange={(e) => setBreite(Number(e.target.value))}
+                            className="h-1.5 w-full cursor-pointer appearance-none rounded-full [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow"
+                            style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #d6d3d1 ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #d6d3d1 100%)` }}
                           />
-                          {/* Marker for 3170mm */}
-                          <div
-                            className="absolute top-1/2 -translate-y-1/2 h-6 w-0.5 bg-[#B91C1C]"
-                            style={{ left: `${((3170 - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%` }}
-                          >
-                            <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-[#B91C1C] whitespace-nowrap">3170mm</span>
+                          <div className="absolute top-1/2 -translate-y-1/2 h-5 w-px bg-red-500" style={{ left: `${((3170 - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%` }}>
+                            <span className="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] font-bold text-red-500 whitespace-nowrap">3170</span>
                           </div>
                         </div>
+                        {breite >= 3170 && <p className="mt-1 text-[10px] text-red-500">Maximale Modulbreite – weiteres Modul wird hinzugefügt.</p>}
                       </div>
-                      {breite >= 3170 && (
-                        <div className="mt-2 text-xs text-[#B91C1C] font-semibold">
-                          Maximale Modulbreite für eine Pergola ist 3170mm. Bei größeren Breiten wird ein weiteres Modul hinzugefügt.
+                      {/* Länge */}
+                      <div>
+                        <div className="mb-1.5 flex items-center justify-between">
+                          <span className="text-xs font-semibold text-[#344148]">Länge</span>
+                          <span className="rounded-lg bg-white px-2.5 py-1 text-xs font-bold text-[#344148] shadow-sm border border-stone-200">{laenge} mm</span>
                         </div>
-                      )}
-                    </div>
-                    {/* Länge */}
-                    <div>
-                      <label className="mb-2 flex items-center gap-1 text-sm font-semibold text-[#82B2CA]">
-                        Länge
-                        <svg className="h-4 w-4 text-[#82B2CA]" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" /><text x="10" y="14" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="bold">i</text></svg>
-                      </label>
-                      <div className="flex items-center gap-4">
-                        <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
-                          {laenge}mm
-                        </div>
-                        <div className="relative w-full">
-                          <input
-                            type="range"
-                            min={laengeRange.min}
-                            max={laengeRange.max}
-                            step={laengeRange.step}
-                            value={laenge}
-                            onChange={(e) => setLaenge(Number(e.target.value))}
-                            className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
-                            style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #e7e5e4 ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #e7e5e4 100%)` }}
+                        <div className="relative">
+                          <input type="range" min={laengeRange.min} max={laengeRange.max} step={laengeRange.step} value={laenge} onChange={(e) => setLaenge(Number(e.target.value))}
+                            className="h-1.5 w-full cursor-pointer appearance-none rounded-full [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow"
+                            style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #d6d3d1 ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #d6d3d1 100%)` }}
                           />
-                          {/* Marker for 2830mm */}
-                          <div
-                            className="absolute top-1/2 -translate-y-1/2 h-6 w-0.5 bg-[#B91C1C]"
-                            style={{ left: `${((2830 - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%` }}
-                          >
-                            <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-[#B91C1C] whitespace-nowrap">2830mm</span>
+                          <div className="absolute top-1/2 -translate-y-1/2 h-5 w-px bg-red-500" style={{ left: `${((2830 - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%` }}>
+                            <span className="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] font-bold text-red-500 whitespace-nowrap">2830</span>
                           </div>
                         </div>
+                        {laenge >= 2830 && <p className="mt-1 text-[10px] text-red-500">Maximale Modullänge – weiteres Modul wird hinzugefügt.</p>}
                       </div>
-                      {laenge >= 2830 && (
-                        <div className="mt-2 text-xs text-[#B91C1C] font-semibold">
-                          Maximale Modullänge für eine Pergola ist 2830mm. Bei größeren Längen wird ein weiteres Modul hinzugefügt.
+                      {/* Höhe */}
+                      <div>
+                        <div className="mb-1.5 flex items-center justify-between">
+                          <span className="text-xs font-semibold text-[#344148]">Höhe</span>
+                          <span className="rounded-lg bg-white px-2.5 py-1 text-xs font-bold text-[#344148] shadow-sm border border-stone-200">{hoehe} mm</span>
                         </div>
-                      )}
-                    </div>
-                    {/* Höhe */}
-                    <div>
-                      <label className="mb-2 flex items-center gap-1 text-sm font-semibold text-[#82B2CA]">
-                        Höhe
-                        <svg className="h-4 w-4 text-[#82B2CA]" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" /><text x="10" y="14" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="bold">i</text></svg>
-                      </label>
-                      <div className="flex items-center gap-4">
-                        <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
-                          {hoehe}mm
-                        </div>
-                        <input
-                          type="range"
-                          min={hoeheRange.min}
-                          max={hoeheRange.max}
-                          step={hoeheRange.step}
-                          value={hoehe}
-                          onChange={(e) => setHoehe(Number(e.target.value))}
-                          className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
-                          style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((hoehe - hoeheRange.min) / (hoeheRange.max - hoeheRange.min)) * 100}%, #e7e5e4 ${((hoehe - hoeheRange.min) / (hoeheRange.max - hoeheRange.min)) * 100}%, #e7e5e4 100%)` }}
+                        <input type="range" min={hoeheRange.min} max={hoeheRange.max} step={hoeheRange.step} value={hoehe} onChange={(e) => setHoehe(Number(e.target.value))}
+                          className="h-1.5 w-full cursor-pointer appearance-none rounded-full [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow"
+                          style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((hoehe - hoeheRange.min) / (hoeheRange.max - hoeheRange.min)) * 100}%, #d6d3d1 ${((hoehe - hoeheRange.min) / (hoeheRange.max - hoeheRange.min)) * 100}%, #d6d3d1 100%)` }}
                         />
                       </div>
-                    </div>
-                    {/* Summary */}
-                    <div className="flex items-center justify-between rounded-lg bg-stone-50 px-3 py-2 text-sm">
-                      <span className="text-zinc-500">Fläche</span>
-                      <span className="font-bold text-zinc-900">{sqm.toFixed(1)} m²</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Mount type */}
-                <div>
-                  <div className="mb-2">
-                    <span className="text-sm font-semibold text-zinc-700">Aufbau Variante<span className="text-zinc-400">.</span> <span className="font-normal text-zinc-500">Wähle zwischen freistehend und Wandmontage</span></span>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3">
-                    {mountOptions.map((m) => (
-                      <button key={m.label} type="button" onClick={() => setSelectedMount(m.label)} className={`flex flex-col items-center gap-2 rounded-xl border-2 p-3 transition ${selectedMount === m.label ? "border-zinc-900 bg-zinc-50" : "border-stone-200 hover:border-stone-400"}`}>
-                        <img src={m.img} alt={m.label} className="h-10 object-contain" />
-                        <span className="text-sm font-semibold text-zinc-800">{m.label}</span>
-                      </button>
-                    ))}
-                  </div>
-                  <button type="button" className="mt-2 text-xs font-semibold text-zinc-900 underline underline-offset-2">Welche Variante ist die passende?</button>
-                </div>
-
-                {/* ── Side elements configurator ── */}
-                <div>
-                  <div className="mb-2">
-                    <span className="text-sm font-semibold text-zinc-700">Seitenelemente<span className="text-zinc-400">.</span> <span className="font-normal text-zinc-500">Wähle passende Glaswände oder Screen Rollos.</span></span>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                    {sideOptions.map((side) => (
-                      <div key={side.key} className="flex flex-col items-center gap-2 rounded-xl border border-stone-200 p-3">
-                        <img src={side.img} alt={side.label} className="h-14 object-contain" />
-                        <span className="text-xs font-medium text-zinc-600">{side.sizeLabel}</span>
-                        <select
-                          value={sides[side.key]}
-                          onChange={(e) => setSides((prev) => ({ ...prev, [side.key]: e.target.value }))}
-                          className="w-full rounded-lg border border-stone-200 bg-white px-2 py-1.5 text-xs text-zinc-700 focus:border-zinc-900 focus:outline-none"
-                        >
-                          {sideTypeChoices.map((choice) => (
-                            <option key={choice.value} value={choice.value}>
-                              {choice.label}{choice.price ? ` (+${formatPrice(choice.price)})` : ""}
-                            </option>
-                          ))}
-                        </select>
+                      {/* area summary */}
+                      <div className="flex items-center justify-between rounded-xl bg-white px-3 py-2 shadow-sm">
+                        <span className="text-xs text-zinc-400">Gesamtfläche</span>
+                        <span className="text-sm font-bold text-[#344148]">{sqm.toFixed(1)} m²</span>
                       </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* ── Accessories (collapsible) ── */}
-                <div>
-                  <button type="button" onClick={() => setShowAccessories(!showAccessories)} className="flex w-full items-center justify-between rounded-xl border border-stone-200 px-4 py-3 text-left text-sm font-semibold text-zinc-700 transition hover:bg-stone-50">
-                    <span>Optionales Zubehör</span>
-                    <span className="text-zinc-400">{showAccessories ? "Ausblenden ▲" : "Zubehör anzeigen ▼"}</span>
-                  </button>
-                  {showAccessories && (
-                    <div className="mt-3 space-y-2">
-                      {accessoryOptions.map((acc) => {
-                        const active = selectedAccessories.includes(acc.label);
-                        return (
-                          <button key={acc.label} type="button" onClick={() => toggleAccessory(acc.label)} className={`flex w-full items-center justify-between gap-3 rounded-xl border-2 p-3 text-left transition ${active ? "border-[#344148] bg-[#82B2CA]/10" : "border-stone-200 hover:border-stone-400"}`}>
-                            <div>
-                              <div className="text-sm font-semibold text-zinc-900">{acc.label}</div>
-                              <div className="text-xs text-zinc-500">{acc.description}</div>
-                            </div>
-                            <div className="shrink-0 text-right">
-                              <div className="text-sm font-semibold">+{formatPrice(acc.price)}</div>
-                              <div className={`text-xs font-bold ${active ? "text-[#82B2CA]" : "text-zinc-400"}`}>{active ? "✓" : "+"}</div>
-                            </div>
-                          </button>
-                        );
-                      })}
                     </div>
-                  )}
-                </div>
+                  </div>
 
+                  {/* Mount */}
+                  <div>
+                    <p className="mb-2.5 text-xs font-bold uppercase tracking-widest text-zinc-400">Aufbau</p>
+                    <div className="grid grid-cols-2 gap-2">
+                      {mountOptions.map((m) => (
+                        <button key={m.label} type="button" onClick={() => setSelectedMount(m.label)}
+                          className={`flex flex-col items-center gap-2 rounded-xl border-2 p-3 transition-all ${selectedMount === m.label ? "border-[#344148] bg-[#344148]/5" : "border-stone-200 hover:border-zinc-300"}`}>
+                          <img src={m.img} alt={m.label} className="h-9 object-contain" />
+                          <span className={`text-xs font-semibold ${selectedMount === m.label ? "text-[#344148]" : "text-zinc-600"}`}>{m.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
 
+                  {/* Side elements */}
+                  <div>
+                    <p className="mb-2.5 text-xs font-bold uppercase tracking-widest text-zinc-400">Seitenelemente</p>
+                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                      {sideOptions.map((side) => (
+                        <div key={side.key} className="flex flex-col items-center gap-1.5 rounded-xl border border-stone-200 bg-stone-50 p-2.5">
+                          <img src={side.img} alt={side.label} className="h-10 object-contain" />
+                          <span className="text-[10px] font-semibold text-zinc-500">{side.label}</span>
+                          <select value={sides[side.key]} onChange={(e) => setSides((prev) => ({ ...prev, [side.key]: e.target.value }))}
+                            className="w-full rounded-lg border border-stone-200 bg-white px-1.5 py-1 text-[10px] text-zinc-700 focus:border-[#344148] focus:outline-none">
+                            {sideTypeChoices.map((choice) => (
+                              <option key={choice.value} value={choice.value}>
+                                {choice.label}{choice.price ? ` (+${formatPrice(choice.price)})` : ""}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
 
-                {/* ── CTA buttons ── */}
-                <div ref={ctaRef} className="grid gap-3 sm:grid-cols-2">
-                  <button type="button" onClick={handleAddToCart} className="rounded-xl py-3.5 text-center text-sm font-bold text-white transition hover:opacity-90" style={{ backgroundColor: '#344148' }}>
-                    In den Warenkorb – {formatPrice(finalPrice)}
-                  </button>
-                  <a href="tel:+4966141087500" className="flex items-center justify-center gap-2 rounded-xl border border-zinc-900 py-3.5 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-900 hover:text-white">
-                    Beratung anfragen
-                  </a>
+                  {/* Accessories */}
+                  <div>
+                    <button type="button" onClick={() => setShowAccessories(!showAccessories)}
+                      className="flex w-full items-center justify-between rounded-xl border border-stone-200 bg-stone-50 px-4 py-2.5 text-left transition hover:bg-stone-100">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">Optionales Zubehör</span>
+                        {selectedAccessories.length > 0 && (
+                          <span className="rounded-full bg-[#82B2CA] px-2 py-0.5 text-[10px] font-bold text-white">{selectedAccessories.length}</span>
+                        )}
+                      </div>
+                      <svg className={`h-4 w-4 text-zinc-400 transition-transform ${showAccessories ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+
+                    {showAccessories && (
+                      <div className="mt-2">
+                        {/* Category tabs */}
+                        <div className="flex rounded-xl border border-stone-200 bg-stone-50 p-1 gap-1 mb-3">
+                          {accessoryCategories.map((cat) => {
+                            const selectedInCat = cat.items.filter(i => selectedAccessories.includes(i.label)).length;
+                            return (
+                              <button
+                                key={cat.key}
+                                type="button"
+                                onClick={() => setActiveAccCategory(cat.key)}
+                                className={`flex-1 flex items-center justify-center gap-1.5 rounded-lg py-2 text-[10px] font-bold transition-all ${activeAccCategory === cat.key ? "bg-[#344148] text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700"}`}
+                              >
+                                <span>{cat.icon}</span>
+                                <span className="hidden sm:inline">{cat.label}</span>
+                                {selectedInCat > 0 && (
+                                  <span className={`rounded-full px-1.5 text-[9px] font-bold ${activeAccCategory === cat.key ? "bg-white/20 text-white" : "bg-[#82B2CA] text-white"}`}>
+                                    {selectedInCat}
+                                  </span>
+                                )}
+                              </button>
+                            );
+                          })}
+                        </div>
+
+                        {/* Items for active category */}
+                        <div className="space-y-1.5">
+                          {accessoryCategories.find(c => c.key === activeAccCategory)?.items.map((acc) => {
+                            const active = selectedAccessories.includes(acc.label);
+                            return (
+                              <button key={acc.label} type="button" onClick={() => toggleAccessory(acc.label)}
+                                className={`flex w-full items-center justify-between gap-3 rounded-xl border px-3 py-2.5 text-left transition-all ${active ? "border-[#344148] bg-[#344148]/5" : "border-stone-200 hover:border-zinc-300"}`}>
+                                <div className="flex-1 min-w-0">
+                                  <div className={`text-xs font-semibold ${active ? "text-[#344148]" : "text-zinc-800"}`}>{acc.label}</div>
+                                  <div className="text-[10px] text-zinc-400">{acc.description}</div>
+                                </div>
+                                <div className="shrink-0 flex items-center gap-2">
+                                  <span className="text-xs font-bold text-zinc-700">+{formatPrice(acc.price)}</span>
+                                  <div className={`flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold transition ${active ? "bg-[#344148] text-white" : "bg-stone-200 text-zinc-400"}`}>
+                                    {active ? "✓" : "+"}
+                                  </div>
+                                </div>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* CTA */}
+                  <div className="grid gap-2 sm:grid-cols-2 pt-1">
+                    <button type="button" onClick={handleAddToCart}
+                      className="rounded-full py-3 text-center text-sm font-bold text-white transition hover:opacity-90 hover:shadow-lg"
+                      style={{ backgroundColor: '#82B2CA' }}>
+                      In den Warenkorb
+                    </button>
+                    <a href="tel:+4966141087500"
+                      className="flex items-center justify-center gap-2 rounded-full border-2 border-[#344148] py-3 text-sm font-semibold text-[#344148] transition hover:bg-[#344148] hover:text-white">
+                      Beratung anfragen
+                    </a>
+                  </div>
                 </div>
               </div>
-
             </div>
           </div>
         </section>
@@ -495,34 +677,53 @@ export const ElegantePergolaPage = () => {
           </div>
         </section>
 
-        {/* ── Die beste Wahl ── */}
-        <section className="bg-white py-12 md:py-16">
+        {/* ── Opsionet & Aksesoriët ── */}
+        <section className="bg-[#344148] py-16 md:py-24">
           <div className="mx-auto max-w-[1440px] px-4 md:px-16">
-            <h2 className="mb-8 text-center text-2xl font-bold text-zinc-900 md:text-3xl">Die beste Wahl für Ihr Zuhause</h2>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {serviceCards.map((c) => {
-                const getIcon = (iconType: string) => {
-                  switch(iconType) {
-                    case 'star':
-                      return <svg className="h-12 w-12 text-zinc-700" fill="currentColor" viewBox="0 0 24 24" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>;
-                    case 'shield':
-                      return <svg className="h-12 w-12 text-zinc-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
-                    case 'lock':
-                      return <svg className="h-12 w-12 text-zinc-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm6-10V7a3 3 0 00-6 0v4a3 3 0 006 0z" /></svg>;
-                    case 'sparkle':
-                      return <svg className="h-12 w-12 text-zinc-700" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 7.26L23 12l-8 .74L12 20l-3-7.26L1 12l8-.74L12 2z" /></svg>;
-                    default:
-                      return null;
-                  }
-                };
-                return (
-                  <div key={c.title} className="flex flex-col items-center rounded-2xl border border-stone-200 bg-stone-50 p-6 text-center">
-                    {getIcon(c.icon)}
-                    <h3 className="mt-4 text-sm font-bold text-zinc-900">{c.title}</h3>
-                    <p className="mt-1 text-xs text-zinc-500">{c.text}</p>
+            {/* header */}
+            <div className="mb-12 text-center">
+              <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
+                Optionale Ausstattung
+              </span>
+              <h2 className="mt-4 text-3xl font-bold text-white md:text-4xl">Gestalten Sie Ihre Pergola</h2>
+              <p className="mx-auto mt-3 max-w-xl text-sm text-white/50">
+                Wählen Sie die Ausstattung, die zu Ihrem Stil passt — alles direkt in die Struktur integriert.
+              </p>
+            </div>
+
+            {/* grid */}
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {addonItems.map((item) => (
+                <div
+                  key={item.title}
+                  className="group relative flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:shadow-xl hover:-translate-y-0.5"
+                >
+                  {/* icon circle */}
+                  <div
+                    className="flex h-12 w-12 items-center justify-center rounded-xl"
+                    style={{ backgroundColor: `${item.color}18`, color: item.color }}
+                  >
+                    {item.icon}
                   </div>
-                );
-              })}
+                  {/* text */}
+                  <div>
+                    <p className="text-sm font-semibold text-white">{item.title}</p>
+                    <p className="mt-0.5 text-xs text-white/40">{item.subtitle}</p>
+                  </div>
+                  {/* dot accent */}
+                  <div
+                    className="absolute right-4 top-4 h-2 w-2 rounded-full opacity-60"
+                    style={{ backgroundColor: item.color }}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* bottom cta */}
+            <div className="mt-10 flex justify-center">
+              <p className="text-sm text-white/40">
+                Alle Optionen sind während der Bestellung konfigurierbar · Professionelle Montage verfügbar
+              </p>
             </div>
           </div>
         </section>

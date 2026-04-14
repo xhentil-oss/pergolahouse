@@ -72,6 +72,14 @@
   font-style: normal;
 }
 
+/* ── LEMONMILK Font ── */
+@font-face {
+  font-family: 'LEMONMILK';
+  src: url('./src/assets/LEMONMILK-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
 @tailwind base;
 
 /* Hide scrollbar everywhere it's used for sliders */

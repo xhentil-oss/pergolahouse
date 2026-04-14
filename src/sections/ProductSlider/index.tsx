@@ -194,14 +194,18 @@ export const ProductSlider = () => {
       <div className="mx-auto max-w-[1440px] px-4 md:px-16">
         {/* Header */}
         <div className="flex items-center justify-between mb-14">
-          <h2
-            className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-2"
-            style={{ fontFamily: 'LEMONMILK, sans-serif', fontWeight: 500 }}
-          >
-            Entdecke unsere
-            <br />
-            exklusiven Pergola-Modelle
-          </h2>
+          <div>
+            <p className="text-xs tracking-[0.3em] uppercase text-[#82B2CA] mb-3" style={{ fontFamily: 'LEMONMILK, sans-serif', fontWeight: 400 }}>
+              Unsere Kollektion
+            </p>
+            <h2
+              className="text-3xl md:text-4xl text-white leading-snug"
+              style={{ fontFamily: 'LEMONMILK, sans-serif', fontWeight: 400 }}
+            >
+              Exklusive{" "}
+              <span style={{ color: '#82B2CA' }}>Pergola-Modelle</span>
+            </h2>
+          </div>
           <div className="flex gap-6 md:gap-8">
             <button
               type="button"
@@ -235,9 +239,9 @@ export const ProductSlider = () => {
         </div>
         {/* Scrollable cards */}
         <div ref={scrollRef} className="overflow-x-auto scrollbar-hide scroll-smooth px-0">
-          <ul className="flex gap-10 md:gap-14 w-full list-none p-0 m-0" style={{ minWidth: '100%' }}>
+          <ul className="flex gap-10 md:gap-14 w-full list-none p-0 m-0 pb-8" style={{ minWidth: '100%' }}>
             {products.map((p) => (
-              <li key={p.productName} className="w-[490px] shrink-0">
+              <li key={p.productName} className="w-[380px] shrink-0 pb-2">
                 <ProductCard {...p} priceWrapperClass="items-center gap-x-1.5 flex flex-wrap gap-y-1" />
               </li>
             ))}

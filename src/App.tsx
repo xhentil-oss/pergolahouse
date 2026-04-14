@@ -1,6 +1,6 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { HomePage } from "@/pages/HomePage";
-import { CollectionsPage } from "@/pages/CollectionsPage";
 import { UeberUnsPage } from "@/pages/UeberUnsPage";
 import { ContactPage } from "./pages/ContactPage";
 import { ElegantePergolaPage } from "@/pages/ElegantePergolaPage";
@@ -12,24 +12,30 @@ import { CarportsPage } from "@/pages/CarportsPage";
 import { ZipScreensPage } from "@/pages/ZipScreensPage";
 import { CartProvider } from "@/context/CartContext";
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+};
+
 export const App = () => {
   return (
     <BrowserRouter>
       <CartProvider>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/collections/unsere-pergolen" element={<CollectionsPage />} />
-        <Route path="/products/pergola-s3" element={<ElegantePergolaPage />} />
-        <Route path="/products/pergola-custom-design" element={<LuxusPergolaPage />} />
-        <Route path="/products/preiswerte-pergola" element={<PreiswertePergolaPage />} />
-        <Route path="/products/pergola-massanfertigung" element={<PergolaManfertigungPage />} />
-        <Route path="/collections/wintergarten-1" element={<WintergartenPage />} />
-        <Route path="/collections/carports" element={<CarportsPage />} />
-        <Route path="/collections/zip-screens" element={<ZipScreensPage />} />
-        <Route path="/pages/ueber-uns" element={<UeberUnsPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="*" element={<HomePage />} />
-      </Routes>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/pergola/elegante-pergola" element={<ElegantePergolaPage />} />
+          <Route path="/pergola/luxus-pergola" element={<LuxusPergolaPage />} />
+          <Route path="/pergola/preiswerte-pergola" element={<PreiswertePergolaPage />} />
+          <Route path="/pergola/massanfertigung" element={<PergolaManfertigungPage />} />
+          <Route path="/wintergarten" element={<WintergartenPage />} />
+          <Route path="/carports" element={<CarportsPage />} />
+          <Route path="/zip-screens" element={<ZipScreensPage />} />
+          <Route path="/ueber-uns" element={<UeberUnsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<HomePage />} />
+        </Routes>
       </CartProvider>
     </BrowserRouter>
   );
