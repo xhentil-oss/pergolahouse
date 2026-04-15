@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { HomePage } from "@/pages/HomePage";
 import { UeberUnsPage } from "@/pages/UeberUnsPage";
 import { ContactPage } from "./pages/ContactPage";
+import { MontageServicePage } from "@/pages/MontageServicePage";
 import { ElegantePergolaPage } from "@/pages/ElegantePergolaPage";
 import { LuxusPergolaPage } from "@/pages/LuxusPergolaPage";
 import { PreiswertePergolaPage } from "@/pages/PreiswertePergolaPage";
@@ -11,6 +12,8 @@ import { WintergartenPage } from "@/pages/WintergartenPage";
 import { CarportsPage } from "@/pages/CarportsPage";
 import { ZipScreensPage } from "@/pages/ZipScreensPage";
 import { CartProvider } from "@/context/CartContext";
+import { DiscountProvider } from "@/context/DiscountContext";
+import { AdminPage } from "@/pages/AdminPage";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -21,6 +24,7 @@ const ScrollToTop = () => {
 export const App = () => {
   return (
     <BrowserRouter>
+      <DiscountProvider>
       <CartProvider>
         <ScrollToTop />
         <Routes>
@@ -34,9 +38,12 @@ export const App = () => {
           <Route path="/zip-screens" element={<ZipScreensPage />} />
           <Route path="/ueber-uns" element={<UeberUnsPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/montage-service" element={<MontageServicePage />} />
+          <Route path="/admin" element={<AdminPage />} />
           <Route path="*" element={<HomePage />} />
         </Routes>
       </CartProvider>
+      </DiscountProvider>
     </BrowserRouter>
   );
 };

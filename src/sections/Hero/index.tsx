@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { Link } from "react-router-dom";
+import { promotions, formatPromoPrice } from "@/config/promotions";
+import { useDiscounts } from "@/context/DiscountContext";
 // importo fontin custom në stilizim global ose përmes Tailwind plugin
 // import "../../assets/fonts/LEMONMILK-Bold.woff2";
 
@@ -10,6 +12,7 @@ import { Link } from "react-router-dom";
 import Photo1 from "../../assets/image-pergola.png";
 import Photo10 from "../../assets/pergola-glass-guillot.png";
 import Photo11 from "../../assets/image-light.png";
+import Photo12 from "../../assets/Photo (1).png";
 
 // Carousel data me imazhe nga assets
 const slides = [
@@ -27,11 +30,17 @@ const slides = [
     image: Photo11,
     title: "QUALITÄT, DIE ÜBERZEUGT",
     desc: "Unsere Produkte stehen für Langlebigkeit und höchste Verarbeitungsqualität. Verlassen Sie sich auf geprüfte Materialien und präzise Fertigung."
+  },
+  {
+    image: Photo12,
+    title: "ELEGANZ TRIFFT FUNKTION",
+    desc: "Hochwertige Glaslösungen für Ihre Pergola – maximaler Lichteinfall, perfekter Witterungsschutz und zeitloses Design für Ihren Außenbereich."
   }
 ];
 
 
 export const Hero = () => {
+  const { isActive } = useDiscounts();
   const [active, setActive] = useState(0);
   const timeoutRef = useRef(null);
   const imageRef = useRef(null);
@@ -164,10 +173,55 @@ export const Hero = () => {
           />
         ))}
       </div>
-      {/* Shigjetat funksionale */}
-      <div className="absolute right-16 top-1/2 flex flex-col gap-6 z-10">
-        <button onClick={prev} className="w-14 h-14 rounded-full border border-white/60 flex items-center justify-center bg-black/30 text-white text-2xl hover:bg-white/10 transition-colors">←</button>
-        <button onClick={next} className="w-14 h-14 rounded-full border border-white/60 flex items-center justify-center bg-black/30 text-white text-2xl hover:bg-white/10 transition-colors">→</button>
+      {/* Shigjetat — bottom right */}
+      <div className="absolute bottom-10 right-8 flex gap-3 z-10">
+        <button onClick={prev} className="w-10 h-10 rounded-full border border-white/50 flex items-center justify-center bg-black/30 text-white hover:bg-white/10 transition-colors">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button onClick={next} className="w-10 h-10 rounded-full border border-white/50 flex items-center justify-center bg-black/30 text-white hover:bg-white/10 transition-colors">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      {/* Promo cards — right side */}
+      <div className="absolute right-0 top-0 h-full hidden lg:flex flex-col justify-center gap-3 pr-8 pl-4 z-10" style={{ width: 300 }}>
+        {promotions.filter((p) => isActive(p.key)).map((p) => {
+          const discountedPrice = Math.round(p.originalPrice * (1 - p.discountPercent / 100));
+          return (
+            <Link
+              key={p.key}
+              to={p.href}
+              className="group flex flex-col gap-1.5 rounded-2xl px-4 py-3.5 transition-all hover:scale-[1.02]"
+              style={{ backgroundColor: "rgba(0,0,0,0.55)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.1)" }}
+            >
+              {/* Top row: name + badge */}
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-white text-[11px] font-semibold leading-tight" style={{ fontFamily: "LEMONMILK, sans-serif" }}>
+                  {p.label}
+                </span>
+                <span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-bold text-white" style={{ backgroundColor: "#82B2CA" }}>
+                  -{p.discountPercent}%
+                </span>
+              </div>
+              {/* Prices */}
+              <div className="flex items-baseline gap-2">
+                <span className="text-white font-bold text-sm" style={{ fontFamily: "LEMONMILK, sans-serif" }}>
+                  {formatPromoPrice(discountedPrice)}
+                </span>
+                <span className="text-white/40 text-xs line-through">
+                  {formatPromoPrice(p.originalPrice)}
+                </span>
+              </div>
+              {/* Arrow */}
+              <div className="flex items-center gap-1 mt-0.5">
+                <span className="text-[#82B2CA] text-[10px]">Jetzt entdecken</span>
+                <svg className="w-3 h-3 text-[#82B2CA] transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                </svg>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </section>
   );

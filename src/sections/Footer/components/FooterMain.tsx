@@ -14,31 +14,28 @@ export const FooterMain = () => {
                 { href: "/pergola/elegante-pergola", label: "Elegante Pergola" },
                 { href: "/pergola/luxus-pergola", label: "Luxus-Pergola" },
                 { href: "/pergola/preiswerte-pergola", label: "Preiswerte Pergola" },
-                { href: "/pergola/massanfertigung", label: "Massanfertigung" },
                 { href: "/wintergarten", label: "Wintergärten" },
                 { href: "/carports", label: "Carports" },
+                { href: "/zip-screens", label: "Zip Screens" },
               ]}
             />
             <FooterLinks
-              title="Unternehmen" 
+              title="Unternehmen"
               links={[
+                { href: "/", label: "Homepage" },
                 { href: "/ueber-uns", label: "Über uns" },
-                { href: "/showroom", label: "Showroom" },
-                { href: "/blogs/blogeintrag", label: "Blog" },
-                { href: "/pages/career", label: "Karriere" },
-                { href: "/contact", label: "Contact" },
+                { href: "/contact", label: "Kontakt" },
                 { href: "/pages/montageservice-plx-montage-gmbh", label: "Montage Service" },
               ]}
             />
             <FooterLinks
-              title="Service"
+              title="Optionales Zubehör"
               links={[
-                { href: "/policies/terms-of-service", label: "AGB" },
-                { href: "/policies/legal-notice", label: "Impressum" },
-                { href: "/policies/privacy-policy", label: "Datenschutz" },
-                { href: "/policies/refund-policy", label: "Rückerstattungsrichtlinie" },
-                { href: "/pages/10-jahre-garantie", label: "10 Jahre Garantie" },
-                { href: "/pages/liefertermine", label: "Lieferung" },
+                { href: "/zubehoer/beleuchtung", label: "Beleuchtung" },
+                { href: "/zubehoer/heizung", label: "Heizung" },
+                { href: "/zubehoer/sensoren", label: "Sensoren" },
+                { href: "/zubehoer/audiosystem", label: "Audiosystem" },
+                { href: "/zubehoer/solarsystem", label: "Solarsystem" },
               ]}
             />
           </div>
@@ -46,7 +43,15 @@ export const FooterMain = () => {
           {/* Bottom bar */}
           <div className="mt-16 pt-8 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6">
             <p className="text-neutral-500 text-sm">
-              © 2026 Alle Rechte vorbehalten. All rights reserved.
+              © 2026 Alle Rechte vorbehalten. Entwickelt von{" "}
+              <a
+                href="https://bos.al/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-400 hover:text-white transition-colors underline underline-offset-2"
+              >
+                BOS.al
+              </a>
             </p>
             <div className="flex items-center gap-4">
               <a href="#" aria-label="Instagram" className="text-neutral-500 hover:text-white transition-colors">
