@@ -1,4 +1,4 @@
-﻿import { ProductCard } from "@/sections/ProductSlider/components/ProductCard";
+import { ProductCard } from "@/sections/ProductSlider/components/ProductCard";
 import { useRef, useState, useEffect } from "react";
 import photo2 from "@/assets/Photo (2).png";
 import photo3 from "@/assets/Photo (3).png";
@@ -11,7 +11,7 @@ const toKebab = (str) => str.toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, '
 
 const products = [
   {
-    productUrl: `/products/${toKebab("Elegante Pergola")}`,
+    productUrl: `/pergola/elegante-pergola`,
     productAriaLabel: "Elegante Pergola",
     imageContainerClass: "",
     imageSrc: photo2,
@@ -33,7 +33,7 @@ const products = [
     buyButtonAriaLabel: "Mehr sehen – Elegante Pergola",
   },
   {
-    productUrl: `/products/${toKebab("Luxus-Pergola")}`,
+    productUrl: `/pergola/luxus-pergola`,
     productAriaLabel: "Luxus-Pergola",
     imageContainerClass: "",
     imageSrc: photo3,
@@ -55,7 +55,7 @@ const products = [
     buyButtonAriaLabel: "Jetzt kaufen – Luxus-Pergola",
   },
   {
-    productUrl: `/products/${toKebab("Preiswerte Pergola")}`,
+    productUrl: `/pergola/preiswerte-pergola`,
     productAriaLabel: "Preiswerte Pergola",
     imageContainerClass: "",
     imageSrc: photo4,
@@ -77,7 +77,7 @@ const products = [
     buyButtonAriaLabel: "Jetzt kaufen – Preiswerte Pergola",
   },
   {
-    productUrl: "/collections/wintergarten-1",
+    productUrl: "/wintergarten",
     productAriaLabel: "Wintergärten",
     imageContainerClass: "",
     imageSrc: photo5,
@@ -99,7 +99,7 @@ const products = [
     buyButtonAriaLabel: "Jetzt kaufen – Wintergärten",
   },
   {
-    productUrl: `/products/${toKebab("Carports")}`,
+    productUrl: `/carports`,
     productAriaLabel: "Carports",
     imageContainerClass: "",
     imageSrc: photo7,
@@ -121,7 +121,7 @@ const products = [
     buyButtonAriaLabel: "Jetzt kaufen – Carports",
   },
   {
-    productUrl: `/products/${toKebab("Zip-Screens")}`,
+    productUrl: `/zip-screens`,
     productAriaLabel: "Zip-Screens",
     imageContainerClass: "",
     imageSrc: photo6,
@@ -163,11 +163,9 @@ export const ProductSlider = () => {
     el.addEventListener("scroll", checkScroll, { passive: true });
     window.addEventListener("resize", checkScroll);
 
-    // Autoscroll logic
     let autoScrollInterval = setInterval(() => {
       if (!el) return;
       const cardWidth = el.querySelector("li")?.offsetWidth ?? 490;
-      // If at end, scroll to start
       if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 10) {
         el.scrollTo({ left: 0, behavior: "smooth" });
       } else {

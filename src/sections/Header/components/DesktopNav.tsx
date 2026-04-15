@@ -4,12 +4,6 @@ import { NavItem } from "@/sections/Header/components/NavItem";
 export const DesktopNav = () => {
   return (
     <nav className="hidden items-center gap-x-1 md:flex">
-      <Link
-        to="/"
-        className="relative px-3 py-2 text-sm font-medium text-[#344148] transition-colors hover:text-[#82B2CA] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:rounded-full after:bg-[#82B2CA] after:scale-x-0 after:transition-transform hover:after:scale-x-100"
-      >
-        Startseite
-      </Link>
       <NavItem
         label="Pergolen"
         href="/pergola/elegante-pergola"
@@ -48,6 +42,12 @@ export const DesktopNav = () => {
         className="relative px-3 py-2 text-sm font-medium text-[#344148] transition-colors hover:text-[#82B2CA] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:rounded-full after:bg-[#82B2CA] after:scale-x-0 after:transition-transform hover:after:scale-x-100"
       >
         Kontakt
+      </Link>
+      <Link
+        to="/montage-service"
+        className="relative px-3 py-2 text-sm font-medium text-[#344148] transition-colors hover:text-[#82B2CA] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:rounded-full after:bg-[#82B2CA] after:scale-x-0 after:transition-transform hover:after:scale-x-100"
+      >
+        Montage Service
       </Link>
     </nav>
   );

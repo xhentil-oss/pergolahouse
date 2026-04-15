@@ -5,6 +5,8 @@ import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
 import { FeatureTicker } from "@/sections/FeatureTicker";
 import { useCart } from "@/context/CartContext";
+import { getPromotion } from "@/config/promotions";
+import { useDiscounts } from "@/context/DiscountContext";
 // Removed unused imports from previous implementation
 import icon18 from "@/assets/icon18.jpeg";
 import icon6 from "@/assets/icon6.jpeg";
@@ -38,7 +40,7 @@ const colorOptions = [
   { label: "Black 9005 T", color: "#0A0A0D", hint: "Tiefschwarz – markant und modern" },
 ];
 
-const breiteRange = { min: 1000, max: 7000, step: 1 };
+const breiteRange = { min: 1000, max: 5500, step: 1 };
 const laengeRange = { min: 1000, max: 7000, step: 1 };
 const hoeheRange = { min: 1000, max: 3500, step: 1 };
 const pricePerSqm = 445;
@@ -266,6 +268,7 @@ const Stars = ({ count }: { count: number }) => (
 export const ElegantePergolaPage = () => {
   const { addToCart } = useCart();
   const [activeImage, setActiveImage] = useState(0);
+  const [louversOpen] = useState(false);
   const [descExpanded, setDescExpanded] = useState(false);
   const [selectedColor, setSelectedColor] = useState(colorOptions[0].label);
   const [breite, setBreite] = useState(3395);
@@ -317,7 +320,12 @@ export const ElegantePergolaPage = () => {
     return sum + (choice?.price ?? 0);
   }, 0);
   const accTotal = accessoryOptions.filter((o) => selectedAccessories.includes(o.label)).reduce((s, o) => s + o.price, 0);
-  const finalPrice = basePrice + mountData.surcharge + sideTotal + accTotal;
+  const { isActive } = useDiscounts();
+  const elegantePromo = getPromotion("elegante-pergola");
+  const discountFactor = (elegantePromo && isActive("elegante-pergola")) ? (1 - elegantePromo.discountPercent / 100) : 1;
+  const discountedBase = Math.round(basePrice * discountFactor);
+  const finalPrice = discountedBase + mountData.surcharge + sideTotal + accTotal;
+  const originalFinalPrice = basePrice + mountData.surcharge + sideTotal + accTotal;
 
   const sizeLabel = `${breite}x${laenge}x${hoehe}mm`;
 
@@ -372,12 +380,21 @@ export const ElegantePergolaPage = () => {
               <div className="flex gap-3">
                 {/* Vertical thumbnail strip */}
                 <div className="hidden flex-col gap-2 md:flex">
+                  {/* 3D thumbnail */}
+                  <button
+                    type="button"
+                    onClick={() => setActiveImage(0)}
+                    className={`h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 transition-all relative flex items-center justify-center bg-gradient-to-br from-stone-200 to-stone-100 ${activeImage === 0 ? "border-[#82B2CA] opacity-100" : "border-transparent opacity-50 hover:opacity-80"}`}
+                  >
+                    <svg className="h-7 w-7 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" /></svg>
+                    <span className="absolute bottom-1 text-[9px] font-semibold text-zinc-500">3D</span>
+                  </button>
                   {gallery.map((img, i) => (
                     <button
                       key={img.src}
                       type="button"
-                      onClick={() => setActiveImage(i)}
-                      className={`h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 transition-all ${activeImage === i ? "border-[#82B2CA] opacity-100" : "border-transparent opacity-50 hover:opacity-80"}`}
+                      onClick={() => setActiveImage(i + 1)}
+                      className={`h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 transition-all ${activeImage === i + 1 ? "border-[#82B2CA] opacity-100" : "border-transparent opacity-50 hover:opacity-80"}`}
                     >
                       <img src={img.src} alt={img.alt} className="h-full w-full object-cover" />
                     </button>
@@ -387,11 +404,17 @@ export const ElegantePergolaPage = () => {
                 {/* Main image + icons below */}
                 <div className="flex flex-1 flex-col gap-2">
                   <div ref={galleryRef} className="relative overflow-hidden rounded-2xl">
-                    <img
-                      src={gallery[activeImage].src}
-                      alt={gallery[activeImage].alt}
-                      className="aspect-[4/3] w-full object-cover md:h-[480px]"
-                    />
+                    {activeImage === 0 ? (
+                      <div className="aspect-[4/3] w-full md:h-[480px]">
+                        <Pergola3DViewer breite={breite} laenge={laenge} hoehe={hoehe} color={selectedColor} louversOpen={louversOpen} />
+                      </div>
+                    ) : (
+                      <img
+                        src={gallery[activeImage - 1].src}
+                        alt={gallery[activeImage - 1].alt}
+                        className="aspect-[4/3] w-full object-cover md:h-[480px]"
+                      />
+                    )}
                     <button
                       type="button"
                       onClick={() => setActiveImage((p) => Math.max(p - 1, 0))}
@@ -401,16 +424,13 @@ export const ElegantePergolaPage = () => {
                     </button>
                     <button
                       type="button"
-                      onClick={() => setActiveImage((p) => Math.min(p + 1, gallery.length - 1))}
+                      onClick={() => setActiveImage((p) => Math.min(p + 1, gallery.length))}
                       className="absolute right-3 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/60"
                     >
                       <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
                     </button>
-                    <div className="absolute bottom-3 right-3 rounded-full bg-black/50 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-sm">
-                      {activeImage + 1} / {gallery.length}
-                    </div>
                     <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5 md:hidden">
-                      {gallery.map((_, i) => (
+                      {[...Array(gallery.length + 1)].map((_, i) => (
                         <button key={i} type="button" onClick={() => setActiveImage(i)} className={`h-1.5 rounded-full transition-all ${activeImage === i ? "w-5 bg-white" : "w-1.5 bg-white/40"}`} />
                       ))}
                     </div>
@@ -462,7 +482,17 @@ export const ElegantePergolaPage = () => {
                 {/* price */}
                 <div ref={ctaRef} className="mt-4 flex items-center justify-between rounded-2xl px-4 py-3" style={{ backgroundColor: '#344148' }}>
                   <div>
-                    <p className="text-xs text-white/50">Gesamtpreis</p>
+                    <div className="flex items-center gap-2">
+                      <p className="text-xs text-white/50">Gesamtpreis</p>
+                      {elegantePromo?.active && (
+                        <span className="rounded-full px-2 py-0.5 text-[9px] font-bold text-white" style={{ backgroundColor: "#82B2CA" }}>
+                          -{elegantePromo.discountPercent}%
+                        </span>
+                      )}
+                    </div>
+                    {elegantePromo?.active && (
+                      <span className="text-xs text-white/40 line-through">{formatPrice(originalFinalPrice)}</span>
+                    )}
                     <span className="font-lemonmilk text-2xl font-bold text-white">{formatPrice(finalPrice)}</span>
                   </div>
                   <p className="text-right text-[10px] leading-4 text-white/40">Kostenloser<br />Versand ab 1.000 €</p>
@@ -500,16 +530,10 @@ export const ElegantePergolaPage = () => {
                           <span className="text-xs font-semibold text-[#344148]">Breite</span>
                           <span className="rounded-lg bg-white px-2.5 py-1 text-xs font-bold text-[#344148] shadow-sm border border-stone-200">{breite} mm</span>
                         </div>
-                        <div className="relative">
-                          <input type="range" min={breiteRange.min} max={breiteRange.max} step={breiteRange.step} value={breite} onChange={(e) => setBreite(Number(e.target.value))}
-                            className="h-1.5 w-full cursor-pointer appearance-none rounded-full [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow"
-                            style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #d6d3d1 ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #d6d3d1 100%)` }}
-                          />
-                          <div className="absolute top-1/2 -translate-y-1/2 h-5 w-px bg-red-500" style={{ left: `${((3170 - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%` }}>
-                            <span className="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] font-bold text-red-500 whitespace-nowrap">3170</span>
-                          </div>
-                        </div>
-                        {breite >= 3170 && <p className="mt-1 text-[10px] text-red-500">Maximale Modulbreite – weiteres Modul wird hinzugefügt.</p>}
+                        <input type="range" min={breiteRange.min} max={breiteRange.max} step={breiteRange.step} value={breite} onChange={(e) => setBreite(Number(e.target.value))}
+                          className="h-1.5 w-full cursor-pointer appearance-none rounded-full [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow"
+                          style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #d6d3d1 ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #d6d3d1 100%)` }}
+                        />
                       </div>
                       {/* Länge */}
                       <div>
@@ -517,16 +541,10 @@ export const ElegantePergolaPage = () => {
                           <span className="text-xs font-semibold text-[#344148]">Länge</span>
                           <span className="rounded-lg bg-white px-2.5 py-1 text-xs font-bold text-[#344148] shadow-sm border border-stone-200">{laenge} mm</span>
                         </div>
-                        <div className="relative">
-                          <input type="range" min={laengeRange.min} max={laengeRange.max} step={laengeRange.step} value={laenge} onChange={(e) => setLaenge(Number(e.target.value))}
-                            className="h-1.5 w-full cursor-pointer appearance-none rounded-full [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow"
-                            style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #d6d3d1 ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #d6d3d1 100%)` }}
-                          />
-                          <div className="absolute top-1/2 -translate-y-1/2 h-5 w-px bg-red-500" style={{ left: `${((2830 - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%` }}>
-                            <span className="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] font-bold text-red-500 whitespace-nowrap">2830</span>
-                          </div>
-                        </div>
-                        {laenge >= 2830 && <p className="mt-1 text-[10px] text-red-500">Maximale Modullänge – weiteres Modul wird hinzugefügt.</p>}
+                        <input type="range" min={laengeRange.min} max={laengeRange.max} step={laengeRange.step} value={laenge} onChange={(e) => setLaenge(Number(e.target.value))}
+                          className="h-1.5 w-full cursor-pointer appearance-none rounded-full [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow"
+                          style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #d6d3d1 ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #d6d3d1 100%)` }}
+                        />
                       </div>
                       {/* Höhe */}
                       <div>
@@ -538,11 +556,6 @@ export const ElegantePergolaPage = () => {
                           className="h-1.5 w-full cursor-pointer appearance-none rounded-full [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow"
                           style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((hoehe - hoeheRange.min) / (hoeheRange.max - hoeheRange.min)) * 100}%, #d6d3d1 ${((hoehe - hoeheRange.min) / (hoeheRange.max - hoeheRange.min)) * 100}%, #d6d3d1 100%)` }}
                         />
-                      </div>
-                      {/* area summary */}
-                      <div className="flex items-center justify-between rounded-xl bg-white px-3 py-2 shadow-sm">
-                        <span className="text-xs text-zinc-400">Gesamtfläche</span>
-                        <span className="text-sm font-bold text-[#344148]">{sqm.toFixed(1)} m²</span>
                       </div>
                     </div>
                   </div>
