@@ -43,19 +43,12 @@ const faqItems = [
 ];
 
 const addonItems = [
-  { title: "Warmweißes Licht", subtitle: "Warmes Ambiente-Licht", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" /></svg>), color: "#F59E0B" },
-  { title: "Kaltweiß Licht", subtitle: "Klares weißes Licht", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" /></svg>), color: "#E2E8F0" },
-  { title: "RGB-Beleuchtung", subtitle: "Farbwechsel & Stimmungslicht", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>), color: "#8B5CF6" },
-  { title: "Perimeter-Beleuchtung", subtitle: "Umlaufende Randbeleuchtung", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3 3h18M3 3v18M3 21h18M21 3v18" /></svg>), color: "#82B2CA" },
-  { title: "Spot-Beleuchtung", subtitle: "Integrierte Spots", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m1.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>), color: "#FCD34D" },
-  { title: "Infrarot-Heizung", subtitle: "Wärme für kühle Tage", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" /><path strokeLinecap="round" strokeLinejoin="round" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" /></svg>), color: "#EF4444" },
-  { title: "Integrierte Steckdosen", subtitle: "Strom direkt am Screen", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>), color: "#10B981" },
-  { title: "Soundsystem", subtitle: "Musik im Außenbereich", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" /></svg>), color: "#6366F1" },
-  { title: "Windsensor", subtitle: "Automatisch bei Windstärke", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2" /></svg>), color: "#06B6D4" },
-  { title: "Regensensor", subtitle: "Automatisch bei Regen", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>), color: "#3B82F6" },
-  { title: "Schneesensor", subtitle: "Schutz bei Schneefall", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v18M3 12h18M5.636 5.636l12.728 12.728M18.364 5.636L5.636 18.364" /></svg>), color: "#BAE6FD" },
-  { title: "Sonnensensor", subtitle: "Automatisch bei Sonneneinstrahlung", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>), color: "#F59E0B" },
-  { title: "Solar-System", subtitle: "Für Standorte ohne Stromanschluss", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>), color: "#84CC16" },
+  { title: "Warmweißes Licht", subtitle: "Warmes Ambiente-Licht", price: 299, icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" /></svg>), color: "#F59E0B" },
+  { title: "Kaltweiß Licht", subtitle: "Klares weißes Licht", price: 299, icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" /></svg>), color: "#E2E8F0" },
+  { title: "RGB-Beleuchtung", subtitle: "Farbwechsel & Stimmungslicht", price: 399, icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>), color: "#8B5CF6" },
+  { title: "Perimeter-Beleuchtung", subtitle: "Umlaufende Randbeleuchtung", price: 449, icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3 3h18M3 3v18M3 21h18M21 3v18" /></svg>), color: "#82B2CA" },
+  { title: "Spot-Beleuchtung", subtitle: "Integrierte Spots", price: 349, icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m1.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>), color: "#FCD34D" },
+  { title: "Integrierte Steckdosen", subtitle: "Strom direkt am Screen", price: 199, icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>), color: "#10B981" },
 ];
 
 const formatPrice = (n: number) =>
@@ -78,6 +71,7 @@ export const ZipScreensPage = () => {
   const [descExpanded, setDescExpanded] = useState(false);
   const [selectedColor, setSelectedColor] = useState(colorOptions[0].label);
   const [selectedSize, setSelectedSize] = useState(sizeOptions[0].label);
+  const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showStickyBar, setShowStickyBar] = useState(false);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -106,9 +100,16 @@ export const ZipScreensPage = () => {
   }, []);
 
   const sizeData = sizeOptions.find((s) => s.label === selectedSize) ?? sizeOptions[0];
-  const finalPrice = sizeData.price;
+  const accTotal = addonItems.filter((o) => selectedAccessories.includes(o.title)).reduce((s, o) => s + o.price, 0);
+  const finalPrice = sizeData.price + accTotal;
+
+  const toggleAccessory = (title: string) =>
+    setSelectedAccessories((c) => c.includes(title) ? c.filter((x) => x !== title) : [...c, title]);
 
   const handleAddToCart = () => {
+    const cartAccessories = addonItems
+      .filter((o) => selectedAccessories.includes(o.title))
+      .map((o) => ({ label: o.title, price: o.price }));
     addToCart({
       productName: "Zip-Screen",
       image: gallery[0].src,
@@ -117,8 +118,8 @@ export const ZipScreensPage = () => {
       mount: "",
       mountSurcharge: 0,
       sides: [],
-      accessories: [],
-      basePrice: finalPrice,
+      accessories: cartAccessories,
+      basePrice: sizeData.price,
       totalPrice: finalPrice,
     });
   };
@@ -208,7 +209,7 @@ export const ZipScreensPage = () => {
                 {/* description */}
                 <div className="mt-3 border-t border-stone-100 pt-3">
                   <p className={`text-xs leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
-                    Der Zip-Screen ist die Premium-Lösung für Sonnen-, Sicht- und Insektenschutz an Ihrer Pergola. Dank des innovativen ZIP-Führungssystems wird das hochwertige Textilgewebe seitlich in Aluminium-Schienen geführt – für maximale Stabilität und einen lückenlosen Abschluss, selbst bei Wind.
+                    Das Zip-Screen-System ist eine exklusive Beschattungslösung für den Außenbereich, die effektiven Sonnen-, Sicht- und Windschutz mit modernem Design und hoher Funktionalität verbindet. Während das Caribe Zip Screen als vertikales System ideal für seitliche Abschirmungen, Fassaden und Pergolen geeignet ist, wurde das Pacific Zip Screen als horizontales System speziell für Glasdächer, Wintergärten und Überdachungen entwickelt. Beide Systeme überzeugen durch robuste Aluminiumprofile, langlebige Screen-Gewebe und eine stabile Zip-Führung, die den Stoff auch bei Wind sicher in Position hält. Optional sind sie mit Motorisierung, Fernbedienung, verschiedenen Stoff- und Farbvarianten sowie weiteren Komfortlösungen erhältlich.
                   </p>
                   <button type="button" onClick={() => setDescExpanded(!descExpanded)} className="mt-0.5 text-xs font-semibold text-[#344148] underline underline-offset-2">
                     {descExpanded ? "Weniger" : "Mehr anzeigen"}
@@ -216,12 +217,26 @@ export const ZipScreensPage = () => {
                 </div>
 
                 {/* price */}
-                <div ref={ctaRef} className="mt-4 flex items-center justify-between rounded-2xl px-4 py-3" style={{ backgroundColor: '#344148' }}>
-                  <div>
-                    <p className="text-xs text-white/50">Gesamtpreis</p>
-                    <span className="font-lemonmilk text-2xl font-bold text-white">{formatPrice(finalPrice)}</span>
+                <div ref={ctaRef} className="mt-4 rounded-2xl px-4 py-3" style={{ backgroundColor: '#344148' }}>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs text-white/50">Gesamtpreis</p>
+                      <span className="font-lemonmilk text-2xl font-bold text-white">{formatPrice(finalPrice)}</span>
+                    </div>
+                    <p className="text-right text-[10px] leading-4 text-white/40">Kostenloser<br />Versand ab 1.000 €</p>
                   </div>
-                  <p className="text-right text-[10px] leading-4 text-white/40">Kostenloser<br />Versand ab 1.000 €</p>
+                  {accTotal > 0 && (
+                    <div className="mt-2 border-t border-white/10 pt-2 flex items-center justify-between">
+                      <span className="text-[10px] text-white/40">{sizeData.label} Grundpreis</span>
+                      <span className="text-[10px] text-white/40">{formatPrice(sizeData.price)}</span>
+                    </div>
+                  )}
+                  {accTotal > 0 && (
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] text-white/40">{selectedAccessories.length} Zubehör</span>
+                      <span className="text-[10px]" style={{ color: "#82B2CA" }}>+{formatPrice(accTotal)}</span>
+                    </div>
+                  )}
                 </div>
 
                 {/* ── Configurator sections ── */}
@@ -308,34 +323,45 @@ export const ZipScreensPage = () => {
                 Wählen Sie die Ausstattung, die zu Ihrem Stil passt — alles direkt in die Struktur integriert.
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {addonItems.map((item) => (
-                <div
-                  key={item.title}
-                  className="group relative flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:shadow-xl hover:-translate-y-0.5"
-                >
-                  <div
-                    className="flex h-12 w-12 items-center justify-center rounded-xl"
-                    style={{ backgroundColor: `${item.color}18`, color: item.color }}
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+              {addonItems.map((item) => {
+                const selected = selectedAccessories.includes(item.title);
+                return (
+                  <button
+                    key={item.title}
+                    type="button"
+                    onClick={() => toggleAccessory(item.title)}
+                    className={`group relative flex flex-col gap-3 rounded-2xl border p-5 text-left transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl ${selected ? "border-[#82B2CA] bg-[#82B2CA]/10" : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10"}`}
                   >
-                    {item.icon}
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-white">{item.title}</p>
-                    <p className="mt-0.5 text-xs text-white/40">{item.subtitle}</p>
-                  </div>
-                  <div
-                    className="absolute right-4 top-4 h-2 w-2 rounded-full opacity-60"
-                    style={{ backgroundColor: item.color }}
-                  />
-                </div>
-              ))}
+                    <div
+                      className="flex h-12 w-12 items-center justify-center rounded-xl"
+                      style={{ backgroundColor: `${item.color}18`, color: item.color }}
+                    >
+                      {item.icon}
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-semibold text-white">{item.title}</p>
+                      <p className="mt-0.5 text-xs text-white/40">{item.subtitle}</p>
+                      <p className="mt-1.5 text-xs font-bold" style={{ color: "#82B2CA" }}>+{formatPrice(item.price)}</p>
+                    </div>
+                    <div className="absolute right-4 top-4 flex h-5 w-5 items-center justify-center rounded-full border-2 transition-all"
+                      style={{ borderColor: selected ? "#82B2CA" : "rgba(255,255,255,0.2)", backgroundColor: selected ? "#82B2CA" : "transparent" }}>
+                      {selected && (
+                        <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
             </div>
-            <div className="mt-10 flex justify-center">
-              <p className="text-sm text-white/40">
-                Alle Optionen sind während der Bestellung konfigurierbar · Professionelle Montage verfügbar
-              </p>
-            </div>
+            {selectedAccessories.length > 0 && (
+              <div className="mt-6 flex items-center justify-center gap-3">
+                <span className="text-sm text-white/60">{selectedAccessories.length} Zubehör ausgewählt</span>
+                <span className="text-sm font-bold text-white">+{formatPrice(accTotal)}</span>
+              </div>
+            )}
           </div>
         </section>
 
