@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
 import photo2 from "@/assets/Photo (2).png";
@@ -135,11 +136,13 @@ export const HeaderActions = () => {
         </button>
       </div>
 
-      {/* Overlay */}
-      <div
-        className={`fixed inset-0 z-[9998] bg-black/40 backdrop-blur-sm transition-opacity duration-300 ${cartOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
-        onClick={() => setCartOpen(false)}
-      />
+      {/* Overlay + Cart Drawer rendered via portal to escape backdrop-filter containing block */}
+      {createPortal(
+        <>
+        <div
+          className={`fixed inset-0 z-[9998] bg-black/40 transition-opacity duration-300 ${cartOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+          onClick={() => setCartOpen(false)}
+        />
 
       {/* ── Cart Drawer ── */}
       <div
@@ -335,6 +338,7 @@ export const HeaderActions = () => {
           </div>
         )}
       </div>
+      </>, document.body)}
     </>
   );
 };
