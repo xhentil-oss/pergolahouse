@@ -452,17 +452,6 @@ export const ElegantePergolaPage = () => {
             <div className="w-full lg:sticky lg:top-20 lg:w-[42%]">
               <div className="rounded-3xl bg-white p-6 shadow-2xl md:p-7">
 
-                {/* reviews + badge */}
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <Stars count={5} />
-                    <span className="text-xs text-zinc-500">919 Bewertungen</span>
-                  </div>
-                  <span className="rounded-full bg-[#82B2CA]/15 px-3 py-1 text-xs font-semibold text-[#82B2CA]">
-                    Bestseller
-                  </span>
-                </div>
-
                 {/* title */}
                 <h1 className="font-lemonmilk text-2xl font-bold leading-tight text-[#344148] md:text-3xl">
                   Elegante Pergola
@@ -472,7 +461,7 @@ export const ElegantePergolaPage = () => {
                 {/* description */}
                 <div className="mt-3 border-t border-stone-100 pt-3">
                   <p className={`text-xs leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
-                    Die elegante Pergola ist ein exklusives Aluminium-Pergolasystem mit drehbaren Lamellen, integriertem Wasserablauf und hoher Widerstandsfähigkeit gegenüber Witterungseinflüssen.
+                    Die elegante Pergola ist ein exklusives Aluminium-Pergolasystem mit drehbaren Lamellen, integriertem Wasserablauf und hoher Widerstandsfähigkeit gegenüber Witterungseinflüssen. Sie vereint modernes Design, eine präzise Licht- und Belüftungssteuerung sowie zuverlässigen Schutz vor Sonne, Regen und Schnee zu einer stilvollen Lösung für anspruchsvolle Außenbereiche. Optional ist sie mit LED-Beleuchtung, Regen- und Windsensoren, Smartphone-Steuerung sowie seitlichen Glas- oder Zip-Systemen erhältlich.
                   </p>
                   <button type="button" onClick={() => setDescExpanded(!descExpanded)} className="mt-0.5 text-xs font-semibold text-[#344148] underline underline-offset-2">
                     {descExpanded ? "Weniger" : "Mehr anzeigen"}

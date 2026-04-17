@@ -65,7 +65,6 @@ export const CarportsPage = () => {
   const [descExpanded, setDescExpanded] = useState(false);
   const [selectedColor, setSelectedColor] = useState(colorOptions[0].label);
   const [selectedSize, setSelectedSize] = useState(sizeOptions[0].label);
-  const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showStickyBar, setShowStickyBar] = useState(false);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -94,16 +93,7 @@ export const CarportsPage = () => {
   }, []);
 
   const sizeData = sizeOptions.find((s) => s.label === selectedSize) ?? sizeOptions[0];
-  const accTotal = addonItems.filter((o) => selectedAccessories.includes(o.title)).reduce((s, o) => s + o.price, 0);
-  const finalPrice = sizeData.price + accTotal;
-
-  const toggleAccessory = (title: string) =>
-    setSelectedAccessories((c) => c.includes(title) ? c.filter((x) => x !== title) : [...c, title]);
-
   const handleAddToCart = () => {
-    const cartAccessories = addonItems
-      .filter((o) => selectedAccessories.includes(o.title))
-      .map((o) => ({ label: o.title, price: o.price }));
     addToCart({
       productName: "Carport",
       image: gallery[0].src,
@@ -112,9 +102,9 @@ export const CarportsPage = () => {
       mount: "",
       mountSurcharge: 0,
       sides: [],
-      accessories: cartAccessories,
+      accessories: [],
       basePrice: sizeData.price,
-      totalPrice: finalPrice,
+      totalPrice: sizeData.price,
     });
   };
 
@@ -188,17 +178,8 @@ export const CarportsPage = () => {
             <div className="w-full lg:sticky lg:top-20 lg:w-[42%]">
               <div className="rounded-3xl bg-white p-6 shadow-2xl md:p-7">
 
-                {/* reviews + badge */}
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <Stars count={5} />
-                    <span className="text-xs text-zinc-500">312 Bewertungen</span>
-                  </div>
-                  <span className="rounded-full bg-[#82B2CA]/15 px-3 py-1 text-xs font-semibold text-[#82B2CA]">Bestseller</span>
-                </div>
-
                 <h1 className="font-lemonmilk text-2xl font-bold leading-tight text-[#344148] md:text-3xl">Carport</h1>
-                <p className="mt-1 text-sm text-zinc-500">Stilvoller Schutz für Ihr Fahrzeug</p>
+                <p className="mt-1 text-sm text-zinc-500">Zuverlässiger Schutz für Ihre Pergola</p>
 
                 {/* description */}
                 <div className="mt-3 border-t border-stone-100 pt-3">
@@ -215,22 +196,10 @@ export const CarportsPage = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-xs text-white/50">Gesamtpreis</p>
-                      <span className="font-lemonmilk text-2xl font-bold text-white">{formatPrice(finalPrice)}</span>
+                      <span className="font-lemonmilk text-2xl font-bold text-white">{formatPrice(sizeData.price)}</span>
                     </div>
                     <p className="text-right text-[10px] leading-4 text-white/40">Kostenloser<br />Versand ab 1.000 €</p>
                   </div>
-                  {accTotal > 0 && (
-                    <div className="mt-2 border-t border-white/10 pt-2 flex items-center justify-between">
-                      <span className="text-[10px] text-white/40">{sizeData.label} Grundpreis</span>
-                      <span className="text-[10px] text-white/40">{formatPrice(sizeData.price)}</span>
-                    </div>
-                  )}
-                  {accTotal > 0 && (
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] text-white/40">{selectedAccessories.length} Zubehör</span>
-                      <span className="text-[10px]" style={{ color: "#82B2CA" }}>+{formatPrice(accTotal)}</span>
-                    </div>
-                  )}
                 </div>
 
                 {/* ── Configurator sections ── */}
@@ -318,44 +287,28 @@ export const CarportsPage = () => {
               </p>
             </div>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {addonItems.map((item) => {
-                const selected = selectedAccessories.includes(item.title);
-                return (
-                  <button
-                    key={item.title}
-                    type="button"
-                    onClick={() => toggleAccessory(item.title)}
-                    className={`group relative flex flex-col gap-3 rounded-2xl border p-5 text-left transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl ${selected ? "border-[#82B2CA] bg-[#82B2CA]/10" : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10"}`}
+              {addonItems.map((item) => (
+                <div
+                  key={item.title}
+                  className="group relative flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:shadow-xl hover:-translate-y-0.5"
+                >
+                  <div
+                    className="flex h-12 w-12 items-center justify-center rounded-xl"
+                    style={{ backgroundColor: `${item.color}18`, color: item.color }}
                   >
-                    <div
-                      className="flex h-12 w-12 items-center justify-center rounded-xl"
-                      style={{ backgroundColor: `${item.color}18`, color: item.color }}
-                    >
-                      {item.icon}
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm font-semibold text-white">{item.title}</p>
-                      <p className="mt-0.5 text-xs text-white/40">{item.subtitle}</p>
-                      <p className="mt-1.5 text-xs font-bold" style={{ color: "#82B2CA" }}>+{formatPrice(item.price)}</p>
-                    </div>
-                    <div className="absolute right-4 top-4 flex h-5 w-5 items-center justify-center rounded-full border-2 transition-all"
-                      style={{ borderColor: selected ? "#82B2CA" : "rgba(255,255,255,0.2)", backgroundColor: selected ? "#82B2CA" : "transparent" }}>
-                      {selected && (
-                        <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                      )}
-                    </div>
-                  </button>
-                );
-              })}
+                    {item.icon}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-white">{item.title}</p>
+                    <p className="mt-0.5 text-xs text-white/40">{item.subtitle}</p>
+                  </div>
+                  <div
+                    className="absolute right-4 top-4 h-2 w-2 rounded-full opacity-60"
+                    style={{ backgroundColor: item.color }}
+                  />
+                </div>
+              ))}
             </div>
-            {selectedAccessories.length > 0 && (
-              <div className="mt-6 flex items-center justify-center gap-3">
-                <span className="text-sm text-white/60">{selectedAccessories.length} Zubehör ausgewählt</span>
-                <span className="text-sm font-bold text-white">+{formatPrice(accTotal)}</span>
-              </div>
-            )}
           </div>
         </section>
 
@@ -427,7 +380,7 @@ export const CarportsPage = () => {
       <div className={`fixed inset-x-0 bottom-0 z-50 border-t border-stone-200 bg-white px-4 py-3 shadow-[0_-2px_12px_rgba(0,0,0,.08)] transition-transform md:hidden ${showStickyBar ? "translate-y-0" : "translate-y-full"}`}>
         <div className="flex items-center gap-3">
           <div className="flex-1">
-            <div className="text-lg font-bold text-zinc-950">{formatPrice(finalPrice)}</div>
+            <div className="text-lg font-bold text-zinc-950">{formatPrice(sizeData.price)}</div>
             <div className="text-xs text-zinc-500">inkl. Versand</div>
           </div>
           <button type="button" onClick={handleAddToCart} className="rounded-xl px-6 py-3 text-sm font-bold text-white transition hover:opacity-90" style={{ backgroundColor: '#344148' }}>

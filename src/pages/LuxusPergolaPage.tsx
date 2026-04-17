@@ -13,12 +13,44 @@ const sideTypeChoices = [
   { value: "guillotine", label: "Guillotine-Verglasung", price: 1199 },
 ];
 
-const accessoryOptions = [
-  { label: "LED Warmweiß", description: "Warmweißes Licht für gemütliche Abende unter der Pergola.", price: 329 },
-  { label: "LED RGB", description: "Farbwechsel-Beleuchtung für individuelle Stimmungen und Akzente.", price: 449 },
-  { label: "Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühleren Tagen.", price: 549 },
-  { label: "Smart Steuerung", description: "Intelligente Steuerung per App – Lamellen, Licht und Heizung.", price: 399 },
+const accessoryCategories = [
+  {
+    key: "beleuchtung",
+    label: "Beleuchtung",
+    icon: "💡",
+    items: [
+      { label: "Warmweißes Licht", description: "Warmes Ambiente-Licht für gemütliche Abende.", price: 329 },
+      { label: "Kaltweiß Licht", description: "Klares, modernes Kaltweiß-Licht für die Pergola.", price: 299 },
+      { label: "RGB-Beleuchtung", description: "Farbwechsel-Beleuchtung für individuelle Stimmungen.", price: 449 },
+      { label: "Perimeter-Beleuchtung", description: "Umlaufende Beleuchtung – dekorativer Premium-Effekt.", price: 389 },
+      { label: "Spot-Beleuchtung", description: "Fokussierte Beleuchtung – integrierte Spots in der Struktur.", price: 279 },
+    ],
+  },
+  {
+    key: "sensoren",
+    label: "Sensoren",
+    icon: "📡",
+    items: [
+      { label: "Windsensor", description: "Schließt die Lamellen automatisch bei starkem Wind.", price: 249 },
+      { label: "Regensensor", description: "Schließt die Lamellen automatisch bei Regen.", price: 219 },
+      { label: "Schneesensor", description: "Automatischer Schutz gegen Schnee und Lasteinwirkungen.", price: 239 },
+      { label: "Sonnensensor", description: "Regelt die Lamellen automatisch je nach Sonneneinstrahlung.", price: 229 },
+      { label: "Solar-System", description: "Optionales Solarsystem für den Motor – ideal ohne Stromanschluss.", price: 699 },
+    ],
+  },
+  {
+    key: "heizung",
+    label: "Heizung & Komfort",
+    icon: "🔥",
+    items: [
+      { label: "Infrarot-Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühlen Tagen.", price: 549 },
+      { label: "Integrierte Steckdosen", description: "Elektrische Steckdosen, integriert in die Pergola-Pfosten.", price: 199 },
+      { label: "Soundsystem", description: "Integrierbares Soundsystem – Musik überall unter der Pergola.", price: 599 },
+    ],
+  },
 ];
+
+const accessoryOptions = accessoryCategories.flatMap((c) => c.items);
 
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -254,6 +286,7 @@ export const LuxusPergolaPage = () => {
   const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
   const [showAccessories, setShowAccessories] = useState(false);
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
+  const [activeAccCategory, setActiveAccCategory] = useState("beleuchtung");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showStickyBar, setShowStickyBar] = useState(false);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -419,18 +452,11 @@ export const LuxusPergolaPage = () => {
             {/* RIGHT: Configurator card */}
             <div className="w-full lg:sticky lg:top-20 lg:w-[42%]">
               <div className="rounded-3xl bg-white p-6 shadow-2xl md:p-7">
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2">
-                  <Stars count={5} />
-                  <span className="text-xs text-zinc-500">919 Bewertungen</span>
-                </div>
-                <span className="rounded-full bg-[#82B2CA]/15 px-3 py-1 text-xs font-semibold text-[#82B2CA]">Bestseller</span>
-              </div>
               <h1 className="font-lemonmilk text-2xl font-bold leading-tight text-[#344148] md:text-3xl">Luxus Pergola</h1>
               <p className="mt-1 text-sm text-zinc-500">Deine Luxus Pergola – millimetergenau gefertigt</p>
               <div className="mt-3 border-t border-stone-100 pt-3">
                 <p className={`text-xs leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
-                  Die Luxus Pergola ist ein exklusives Aluminium-Pergolasystem mit vollständig einfahrbaren und drehbaren Lamellen, integriertem Wasserablauf und hoher Widerstandsfähigkeit gegenüber Witterungseinflüssen. Optional ist sie mit LED-Beleuchtung, Regen- und Windsensoren sowie seitlichen Glas- oder Zip-Systemen erhältlich.
+                  Die Luxus-Pergola ist ein exklusives Aluminium-Pergolasystem mit vollständig einfahrbaren und drehbaren Lamellen, integriertem Wasserablauf und hoher Widerstandsfähigkeit gegenüber Witterungseinflüssen. Sie schafft elegante Außenräume mit maximalem Komfort und einem besonders großzügigen Raumgefühl, da sich das Dach vollständig öffnen lässt und die Lamellen zusätzlich flexibel gedreht werden können. So ermöglicht sie sowohl optimalen Schutz vor Sonne und Regen als auch eine individuelle Steuerung von Licht, Schatten und Belüftung. Optional ist sie mit LED-Beleuchtung, Regen- und Windsensoren, Smartphone-Steuerung sowie seitlichen Glas- oder Zip-Systemen erhältlich.
                 </p>
                 <button type="button" onClick={() => setDescExpanded(!descExpanded)} className="mt-0.5 text-xs font-semibold text-[#344148] underline underline-offset-2">
                   {descExpanded ? "Weniger" : "Mehr anzeigen"}
@@ -548,25 +574,50 @@ export const LuxusPergolaPage = () => {
                     <svg className={`h-4 w-4 text-zinc-400 transition-transform ${showAccessories ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
                   </button>
                   {showAccessories && (
-                    <div className="mt-2 space-y-1.5">
-                      {accessoryOptions.map((acc) => {
-                        const active = selectedAccessories.includes(acc.label);
-                        return (
-                          <button key={acc.label} type="button" onClick={() => toggleAccessory(acc.label)}
-                            className={`flex w-full items-center justify-between gap-3 rounded-xl border px-3 py-2.5 text-left transition-all ${active ? "border-[#344148] bg-[#344148]/5" : "border-stone-200 hover:border-zinc-300"}`}>
-                            <div className="flex-1 min-w-0">
-                              <div className={`text-xs font-semibold ${active ? "text-[#344148]" : "text-zinc-800"}`}>{acc.label}</div>
-                              <div className="text-[10px] text-zinc-400">{acc.description}</div>
-                            </div>
-                            <div className="shrink-0 flex items-center gap-2">
-                              <span className="text-xs font-bold text-zinc-700">+{formatPrice(acc.price)}</span>
-                              <div className={`flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold transition ${active ? "bg-[#344148] text-white" : "bg-stone-200 text-zinc-400"}`}>
-                                {active ? "✓" : "+"}
+                    <div className="mt-2">
+                      {/* Category tabs */}
+                      <div className="flex rounded-xl border border-stone-200 bg-stone-50 p-1 gap-1 mb-3">
+                        {accessoryCategories.map((cat) => {
+                          const selectedInCat = cat.items.filter(i => selectedAccessories.includes(i.label)).length;
+                          return (
+                            <button
+                              key={cat.key}
+                              type="button"
+                              onClick={() => setActiveAccCategory(cat.key)}
+                              className={`flex-1 flex items-center justify-center gap-1.5 rounded-lg py-2 text-[10px] font-bold transition-all ${activeAccCategory === cat.key ? "bg-[#344148] text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700"}`}
+                            >
+                              <span>{cat.icon}</span>
+                              <span className="hidden sm:inline">{cat.label}</span>
+                              {selectedInCat > 0 && (
+                                <span className={`rounded-full px-1.5 text-[9px] font-bold ${activeAccCategory === cat.key ? "bg-white/20 text-white" : "bg-[#82B2CA] text-white"}`}>
+                                  {selectedInCat}
+                                </span>
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
+                      {/* Items for active category */}
+                      <div className="space-y-1.5">
+                        {accessoryCategories.find(c => c.key === activeAccCategory)?.items.map((acc) => {
+                          const active = selectedAccessories.includes(acc.label);
+                          return (
+                            <button key={acc.label} type="button" onClick={() => toggleAccessory(acc.label)}
+                              className={`flex w-full items-center justify-between gap-3 rounded-xl border px-3 py-2.5 text-left transition-all ${active ? "border-[#344148] bg-[#344148]/5" : "border-stone-200 hover:border-zinc-300"}`}>
+                              <div className="flex-1 min-w-0">
+                                <div className={`text-xs font-semibold ${active ? "text-[#344148]" : "text-zinc-800"}`}>{acc.label}</div>
+                                <div className="text-[10px] text-zinc-400">{acc.description}</div>
                               </div>
-                            </div>
-                          </button>
-                        );
-                      })}
+                              <div className="shrink-0 flex items-center gap-2">
+                                <span className="text-xs font-bold text-zinc-700">+{formatPrice(acc.price)}</span>
+                                <div className={`flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold transition ${active ? "bg-[#344148] text-white" : "bg-stone-200 text-zinc-400"}`}>
+                                  {active ? "✓" : "+"}
+                                </div>
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
                   )}
                 </div>

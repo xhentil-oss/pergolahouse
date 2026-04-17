@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
+import { FAQItem } from "@/sections/FAQ/components/FAQItem";
 import heroImg from "@/assets/Photo (9).png";
 
 const steps = [
@@ -149,6 +149,10 @@ const faqs = [
     q: "Was kostet der Montageservice?",
     a: "Die Montagekosten richten sich nach Modell, Größe und ggf. Sonderwünschen. Nach Ihrer Anfrage erstellen wir ein individuelles und transparentes Angebot.",
   },
+  {
+    q: "Kann ich einen Wunschtermin für die Montage angeben?",
+    a: "Ja, wir stimmen den Montagetermin ganz auf Ihren Zeitplan ab – flexibel auch am Wochenende. Nach Ihrer Anfrage nehmen wir Kontakt auf und vereinbaren gemeinsam einen passenden Termin.",
+  },
 ];
 
 const Stars = ({ count }: { count: number }) => (
@@ -162,7 +166,6 @@ const Stars = ({ count }: { count: number }) => (
 );
 
 export const MontageServicePage = () => {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
     <div className="relative text-neutral-900 bg-white overflow-x-hidden font-inter_tight">
@@ -170,59 +173,19 @@ export const MontageServicePage = () => {
       <main role="main">
 
         {/* ── Hero ── */}
-        <section className="relative isolate overflow-hidden min-h-[460px] md:min-h-[540px] flex items-center justify-center text-center px-4 py-20">
+        <section className="relative isolate overflow-hidden min-h-[380px] md:min-h-[460px] flex items-center justify-center text-center px-4 py-16">
           <img src={heroImg} alt="" className="absolute inset-0 z-0 w-full h-full object-cover object-center" />
-          <div className="absolute inset-0 z-10 bg-zinc-900/55" />
+          <div className="absolute inset-0 z-10 bg-zinc-900/50" />
           <div className="relative z-20 max-w-3xl mx-auto">
-            <span className="inline-block rounded-full border border-[#82B2CA]/50 bg-[#82B2CA]/15 px-4 py-1.5 text-[#82B2CA] text-xs font-semibold uppercase tracking-[0.18em] mb-6">
+            <p className="text-[#82B2CA] text-sm font-semibold uppercase tracking-[0.18em] mb-4">
               Von Planung bis Fertigstellung
-            </span>
-            <h1 className="text-white text-4xl md:text-6xl font-bold leading-tight mb-5" style={{ fontFamily: "LEMONMILK, sans-serif" }}>
+            </p>
+            <h1 className="font-lemonmilk text-white text-3xl md:text-4xl leading-tight mb-4">
               Montage Service
             </h1>
-            <p className="text-white/80 text-base md:text-xl max-w-xl mx-auto mb-8">
+            <p className="text-white/80 text-base md:text-lg">
               Professionelle Installation Ihrer Pergola – schnell, sauber und zuverlässig durch unser zertifiziertes Fachteam.
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-bold text-white transition hover:opacity-90"
-                style={{ backgroundColor: "#82B2CA" }}
-              >
-                Montage anfragen
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </Link>
-              <a
-                href="tel:+4966141087500"
-                className="inline-flex items-center gap-2 rounded-full border border-white/40 px-8 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
-              >
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 6.75z" />
-                </svg>
-                +49 661 4108750
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* ── Stats bar ── */}
-        <section style={{ backgroundColor: "#344148" }}>
-          <div className="max-w-[1440px] mx-auto px-4 md:px-16 py-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-              {[
-                { value: "10+", label: "Jahre Erfahrung" },
-                { value: "2.500+", label: "Montagen abgeschlossen" },
-                { value: "98%", label: "Kundenzufriedenheit" },
-                { value: "48h", label: "Reaktionszeit" },
-              ].map((s) => (
-                <div key={s.label} className="flex flex-col items-center gap-1">
-                  <span className="text-3xl font-bold text-white" style={{ fontFamily: "LEMONMILK, sans-serif" }}>{s.value}</span>
-                  <span className="text-xs text-white/50 uppercase tracking-widest">{s.label}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </section>
 
@@ -393,46 +356,36 @@ export const MontageServicePage = () => {
         </section>
 
         {/* ── FAQ ── */}
-        <section className="max-w-[1440px] mx-auto px-4 md:px-16 py-16 md:py-24">
-          <div className="text-center mb-14">
-            <span className="inline-block rounded-full bg-[#82B2CA]/10 border border-[#82B2CA]/30 px-4 py-1.5 text-[#82B2CA] text-xs font-semibold uppercase tracking-[0.2em] mb-4">
-              FAQ
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-zinc-900">Häufig gestellte Fragen</h2>
-            <p className="mt-3 text-neutral-500 max-w-lg mx-auto text-sm">
-              Hier finden Sie Antworten auf die wichtigsten Fragen rund um unseren Montageservice.
-            </p>
-          </div>
-          <div className="max-w-3xl mx-auto space-y-3">
-            {faqs.map((item, i) => {
-              const isOpen = openFaq === i;
-              return (
-                <div key={i} className="rounded-2xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
-                  <button
-                    type="button"
-                    onClick={() => setOpenFaq(isOpen ? null : i)}
-                    className="flex w-full items-center gap-4 px-6 py-5 text-left hover:bg-zinc-50 transition-colors"
-                  >
-                    <div className="shrink-0 flex h-8 w-8 items-center justify-center rounded-lg text-white text-xs font-bold"
-                      style={{ backgroundColor: "#344148" }}>
-                      {String(i + 1).padStart(2, "0")}
-                    </div>
-                    <span className="flex-1 text-sm font-semibold text-zinc-900">{item.q}</span>
-                    <svg
-                      className={`shrink-0 h-4 w-4 text-neutral-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-                      fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                    </svg>
-                  </button>
-                  {isOpen && (
-                    <div className="px-6 pb-5 pt-1">
-                      <p className="text-sm text-neutral-500 leading-relaxed pl-12">{item.a}</p>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+        <section className="relative overflow-hidden bg-gradient-to-b from-zinc-50 to-white">
+          <div className="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-[#82B2CA]/20 blur-[100px]" />
+          <div className="pointer-events-none absolute -right-40 bottom-20 h-80 w-80 rounded-full bg-[#82B2CA]/15 blur-[100px]" />
+          <div className="relative max-w-[1440px] mx-auto px-4 md:px-16 py-16 md:py-[120px]">
+            <div className="text-center mb-14">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#82B2CA]/10 border border-[#82B2CA]/30 px-4 py-1.5 mb-5">
+                <svg className="h-4 w-4 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+                </svg>
+                <span className="text-sm font-semibold text-[#82B2CA]">Häufig gestellte Fragen</span>
+              </div>
+              <h2 className="text-zinc-900 text-[32px] font-bold leading-10 md:text-5xl md:leading-[58px]">
+                Häufig gestellte Fragen
+              </h2>
+              <p className="mx-auto mt-4 max-w-lg text-zinc-500 text-base md:text-lg">
+                Hier finden Sie Antworten auf die wichtigsten Fragen rund um unseren Montageservice.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-5xl mx-auto">
+              <div className="flex flex-col gap-4">
+                {faqs.slice(0, 3).map((item, i) => (
+                  <FAQItem key={i} number={i + 1} question={item.q} content={<p>{item.a}</p>} />
+                ))}
+              </div>
+              <div className="flex flex-col gap-4">
+                {faqs.slice(3).map((item, i) => (
+                  <FAQItem key={i} number={i + 4} question={item.q} content={<p>{item.a}</p>} />
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 

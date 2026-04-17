@@ -282,12 +282,6 @@ export const PergolaManfertigungPage = () => {
 
             {/* ── Right column: configurator ── */}
             <div className="w-full lg:sticky lg:top-20 lg:w-[44%]">
-              {/* reviews badge */}
-              <div className="mb-2 flex items-center gap-2">
-                <Stars count={5} />
-                <span className="text-sm font-medium text-zinc-600">919 Bewertungen</span>
-              </div>
-
               <h1 className="text-3xl font-semibold tracking-tight text-zinc-950 md:text-4xl">Pergola Maßanfertigung</h1>
               <h3 className="mt-1 text-lg font-semibold text-zinc-700">Deine Pergola nach Maß – millimetergenau gefertigt</h3>
 
