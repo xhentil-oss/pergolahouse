@@ -16,10 +16,10 @@ export const Header = () => {
 
   return (
     <header
-      className={`sticky top-0 z-40 transition-all duration-300 ${
+      className={`sticky top-0 z-40 transition-all duration-300 bg-white ${
         scrolled
-          ? "bg-white/95 backdrop-blur-xl shadow-md shadow-black/5 border-b border-transparent"
-          : "bg-white border-b border-zinc-100"
+          ? "shadow-md shadow-black/5 border-b border-transparent"
+          : "border-b border-zinc-100"
       }`}
     >
       <div className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-0 md:px-12 lg:px-16" style={{ minHeight: 72 }}>

@@ -280,22 +280,13 @@ export const WintergartenPage = () => {
             <div className="w-full lg:sticky lg:top-20 lg:w-[42%]">
               <div className="rounded-3xl bg-white p-6 shadow-2xl md:p-7">
 
-                {/* reviews + badge */}
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <Stars count={5} />
-                    <span className="text-xs text-zinc-500">919 Bewertungen</span>
-                  </div>
-                  <span className="rounded-full bg-[#82B2CA]/15 px-3 py-1 text-xs font-semibold text-[#82B2CA]">Bestseller</span>
-                </div>
-
                 <h1 className="font-lemonmilk text-2xl font-bold leading-tight text-[#344148] md:text-3xl">Wintergarten</h1>
                 <p className="mt-1 text-sm text-zinc-500">Ganzjährig nutzbar, stilvoll geschützt</p>
 
                 {/* description */}
                 <div className="mt-3 border-t border-stone-100 pt-3">
                   <p className={`text-xs leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
-                    Der Wintergarten ist ein hochwertiges Aluminium-System mit drehbaren Lamellen, integriertem Wasserablauf und rundum geschlossener Verglasung. Er verbindet modernes Design mit ganzjährigem Wetterschutz und schafft einen lichtdurchfluteten Wohnraum im Freien.
+                    Der Wintergarten ist ein hochwertiges Aluminium- und Glassystem mit festem Glasdach, integrierter Wasserableitung und moderner, klarer Formensprache. Er schafft helle, offene Räume mit viel Tageslicht und bietet gleichzeitig zuverlässigen Schutz vor Witterungseinflüssen. Optional ist er mit Schiebe-, Guillotine- oder Zip-Systemen sowie weiteren Komfort- und Automatisierungslösungen erhältlich.
                   </p>
                   <button type="button" onClick={() => setDescExpanded(!descExpanded)} className="mt-0.5 text-xs font-semibold text-[#344148] underline underline-offset-2">
                     {descExpanded ? "Weniger" : "Mehr anzeigen"}

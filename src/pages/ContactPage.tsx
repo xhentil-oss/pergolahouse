@@ -33,7 +33,7 @@ export const ContactPage = () => {
           <div className="absolute inset-0 z-10 bg-zinc-900/35" />
           <div className="relative z-20 max-w-3xl mx-auto">
             <p className="text-[#82B2CA] text-sm font-semibold uppercase tracking-[0.18em] mb-4">Wir helfen dir weiter</p>
-            <h1 className="text-white text-4xl md:text-6xl font-semibold leading-tight mb-4">Kontakt</h1>
+            <h1 className="font-lemonmilk text-white text-3xl md:text-4xl leading-tight mb-4">Kontakt</h1>
             <p className="text-white/80 text-base md:text-lg">
               Hast du Fragen zu Modellen, Lieferung oder Montage? Unser Team antwortet schnell und persoenlich.
             </p>

@@ -25,7 +25,7 @@ export const FooterMain = () => {
                 { href: "/", label: "Homepage" },
                 { href: "/ueber-uns", label: "Über uns" },
                 { href: "/contact", label: "Kontakt" },
-                { href: "/pages/montageservice-plx-montage-gmbh", label: "Montage Service" },
+                { href: "/montage-service", label: "Montage Service" },
               ]}
             />
             <FooterLinks
