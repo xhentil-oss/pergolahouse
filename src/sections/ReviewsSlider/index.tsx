@@ -41,29 +41,27 @@ const items = [
 
 export const ReviewsSlider = () => {
   return (
-    <section className="bg-[#232323] py-20 md:py-[120px]">
+    <section className="bg-[#232323] py-14 md:py-[120px]">
       <div className="max-w-[1440px] mx-auto px-4 md:px-16">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12">
-          <h2 className="text-white text-3xl md:text-5xl font-extrabold leading-tight mb-6 md:mb-0">
-            Wir bieten Experten<br className="hidden md:block" /> für Ihr Projekt
+        <div className="mb-8 md:mb-12">
+          <h2 className="text-white text-2xl md:text-5xl font-extrabold leading-tight">
+            Wir bieten Experten für Ihr Projekt
           </h2>
         </div>
         <div className="divide-y divide-[#444]">
           {items.map((item, i) => (
-            <div key={i} className="flex flex-col md:flex-row items-center py-8 md:py-10 gap-6 md:gap-0 relative">
-              <div className="flex items-center w-full md:w-1/4">
-                <span className="text-4xl md:text-5xl font-extrabold text-white mr-6 md:mr-10 min-w-[70px]">{item.number}</span>
-                <span className="text-lg md:text-xl font-bold text-white uppercase tracking-wide">{item.title}</span>
+            <div key={i} className="grid grid-cols-[auto_1fr_auto] md:flex md:flex-row md:items-center py-5 md:py-10 gap-x-4 gap-y-2 md:gap-0 relative">
+              <span className="text-2xl md:text-5xl font-extrabold text-white md:mr-10 md:min-w-[90px] self-center">{item.number}</span>
+              <div className="flex flex-col md:flex-row md:flex-1 md:items-center gap-1 md:gap-0">
+                <span className="text-sm md:text-xl font-bold text-white uppercase tracking-wide md:w-1/3">{item.title}</span>
+                <p className="text-neutral-300 text-sm md:text-lg font-medium md:pl-8 md:flex-1">{item.description}</p>
               </div>
-              <div className="flex-1 text-neutral-300 text-base md:text-lg font-medium md:pl-8 w-full md:w-auto">
-                {item.description}
-              </div>
-              <div className="flex-shrink-0 mt-6 md:mt-0 md:ml-10">
+              <div className="flex-shrink-0 self-center md:ml-10">
                 <Link
                   to={item.link}
-                  className="flex items-center justify-center w-14 h-14 rounded-full bg-[#82B2CA] hover:bg-[#6ea0b7] transition-colors"
+                  className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-full bg-[#82B2CA] hover:bg-[#6ea0b7] transition-colors"
                 >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M5 12h14M13 6l6 6-6 6" />
                   </svg>
                 </Link>

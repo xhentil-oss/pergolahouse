@@ -18,9 +18,9 @@ export const FAQItem = (props: FAQItemProps) => {
       }`}
       onClick={() => setOpen((o) => !o)}
     >
-      <button className="w-full text-left px-6 py-5 flex items-center gap-4">
+      <button className="w-full text-left px-4 py-4 md:px-6 md:py-5 flex items-center gap-3 md:gap-4">
         <span
-          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-bold transition-all duration-300 ${
+          className={`flex h-8 w-8 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-xl text-xs md:text-sm font-bold transition-all duration-300 ${
             open
               ? "bg-[#344148] text-white shadow-md shadow-[#344148]/20"
               : "bg-zinc-100 text-zinc-400 group-hover:bg-zinc-200 group-hover:text-zinc-600"
@@ -28,7 +28,7 @@ export const FAQItem = (props: FAQItemProps) => {
         >
           {String(props.number ?? 0).padStart(2, "0")}
         </span>
-        <span className={`flex-1 font-semibold leading-6 transition-colors duration-300 ${open ? "text-[#344148]" : "text-zinc-900"}`}>
+        <span className={`flex-1 text-sm md:text-base font-semibold leading-5 md:leading-6 transition-colors duration-300 ${open ? "text-[#344148]" : "text-zinc-900"}`}>
           {props.question}
         </span>
         <span
@@ -48,7 +48,7 @@ export const FAQItem = (props: FAQItemProps) => {
           open ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="px-6 pb-6 pl-20 text-zinc-600 leading-7">
+        <div className="px-4 pb-5 md:pl-20 text-zinc-600 text-sm md:text-base leading-7">
           {props.content}
         </div>
       </div>

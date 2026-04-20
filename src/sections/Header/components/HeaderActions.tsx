@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
 import photo2 from "@/assets/Photo (2).png";
 import photo3 from "@/assets/Photo (3).png";
@@ -25,6 +25,7 @@ const formatPrice = (n: number) =>
 
 export const HeaderActions = () => {
   const { items, removeFromCart, updateQuantity, cartOpen, setCartOpen, totalItems, totalPrice } = useCart();
+  const navigate = useNavigate();
   const [modelsOpen, setModelsOpen] = useState(false);
   const modelsRef = useRef<HTMLDivElement>(null);
 
@@ -79,7 +80,7 @@ export const HeaderActions = () => {
                     <h3 className="mt-1 text-2xl font-semibold text-[#344148]">Pergola Modelle</h3>
                   </div>
                 </div>
-                <div className="grid grid-cols-6 gap-4">
+                <div className="grid grid-cols-3 lg:grid-cols-6 gap-4">
                   {modelCards.map((m) => (
                     <Link
                       key={m.url}
@@ -324,6 +325,7 @@ export const HeaderActions = () => {
             </div>
 
             <button
+              onClick={() => { setCartOpen(false); navigate("/kasse"); }}
               className="w-full rounded-full py-4 text-sm font-semibold text-white transition-all hover:opacity-90 hover:shadow-lg"
               style={{ backgroundColor: "#344148" }}
             >

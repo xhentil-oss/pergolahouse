@@ -36,7 +36,7 @@ export const FeatureSlider = () => {
             />
             {/* floating accent badge */}
             <div
-              className={`absolute -bottom-5 -right-5 rounded-2xl px-5 py-3 shadow-lg transition-all duration-1000 delay-300
+              className={`absolute -bottom-5 left-4 rounded-2xl px-5 py-3 shadow-lg transition-all duration-1000 delay-300
                 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
               style={{ backgroundColor: "#344148" }}
             >
@@ -60,13 +60,13 @@ export const FeatureSlider = () => {
           </p>
 
           {/* mini stats row */}
-          <div className="flex items-center gap-8 mb-8 pb-8 border-b border-neutral-100">
+          <div className="flex items-center justify-start gap-12 md:gap-16 mb-8 pb-8 border-b border-neutral-100">
             {[
               { v: "100.000+", l: "Kunden" },
               { v: "14", l: "Länder" },
               { v: "4,79 ★", l: "Bewertung" },
             ].map((s) => (
-              <div key={s.l}>
+              <div key={s.l} className="text-left">
                 <p className="font-lemonmilk text-xl text-[#344148]">{s.v}</p>
                 <p className="text-xs text-neutral-400 mt-0.5">{s.l}</p>
               </div>

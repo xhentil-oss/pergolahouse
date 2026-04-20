@@ -14,6 +14,7 @@ import { ZipScreensPage } from "@/pages/ZipScreensPage";
 import { CartProvider } from "@/context/CartContext";
 import { DiscountProvider } from "@/context/DiscountContext";
 import { AdminPage } from "@/pages/AdminPage";
+import { CheckoutPage } from "@/pages/CheckoutPage";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -40,6 +41,7 @@ export const App = () => {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/montage-service" element={<MontageServicePage />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/kasse" element={<CheckoutPage />} />
           <Route path="*" element={<HomePage />} />
         </Routes>
       </CartProvider>

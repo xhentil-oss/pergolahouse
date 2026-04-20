@@ -100,10 +100,7 @@ export const Hero = () => {
     return () => clearTimeout(timeoutRef.current);
   }, [active]);
 
-  // Funksionet për shigjetat dhe dot-at
   const goTo = (idx) => setActive(idx);
-  const prev = () => setActive((prev) => (prev - 1 + slides.length) % slides.length);
-  const next = () => setActive((prev) => (prev + 1) % slides.length);
 
   return (
     <section
@@ -133,18 +130,18 @@ export const Hero = () => {
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40" style={{zIndex:2}} />
       {/* Content majtas */}
-        <div className="relative z-10 flex flex-col justify-center min-h-[60vh] pl-8 md:pl-24 max-w-3xl">
-          <div className="p-6 md:p-10">
+        <div className="relative z-10 flex flex-col justify-center min-h-[60vh] w-full px-5 md:pl-24 md:pr-8 md:max-w-3xl">
+          <div className="py-6 md:p-10">
             <h1
               ref={titleRef}
-              className="text-white font-extrabold uppercase leading-[1.08] mb-6"
-              style={{ fontFamily: 'LEMONMILK-Bold, sans-serif', fontSize: 'clamp(1.7rem,4vw,3.2rem)', letterSpacing: '0.02em', opacity: 0 }}
+              className="text-white font-extrabold uppercase leading-[1.08] mb-4 md:mb-6"
+              style={{ fontFamily: 'LEMONMILK-Bold, sans-serif', fontSize: 'clamp(1.4rem,5vw,3.2rem)', letterSpacing: '0.02em', opacity: 0 }}
             >
               {slides[active].title}
             </h1>
             <p
               ref={descRef}
-              className="text-white text-lg md:text-2xl font-normal mb-8"
+              className="text-white text-sm md:text-xl font-normal mb-6 md:mb-8 max-w-lg"
               style={{ opacity: 0 }}
             >
               {slides[active].desc}
@@ -152,35 +149,26 @@ export const Hero = () => {
             <Link
               ref={btnRef}
               to="/pergola/elegante-pergola"
-              className="inline-flex items-center px-10 py-4 rounded bg-[#82B2CA] text-black font-bold text-lg shadow hover:bg-[#5fa0b8] transition-colors"
+              className="inline-flex items-center px-6 md:px-10 py-3 md:py-4 rounded bg-[#82B2CA] text-black font-bold text-sm md:text-lg shadow hover:bg-[#5fa0b8] transition-colors"
               style={{ opacity: 0 }}
             >
               Produkte ansehen
-              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+              <svg className="ml-2 w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
             </Link>
           </div>
         </div>
-      {/* Slider dots funksionale */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-3 z-10">
+      {/* Slider dots only */}
+      <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-3 z-10">
         {slides.map((_, idx) => (
           <button
             key={idx}
             onClick={() => goTo(idx)}
-            className={`w-3 h-3 rounded-full border-2 ${active === idx ? 'bg-white/80 border-white' : 'bg-white/30 border-white/50'} transition-all`}
+            className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full border-2 ${active === idx ? 'bg-white/80 border-white' : 'bg-white/30 border-white/50'} transition-all`}
             aria-label={`Gehe zu Slide ${idx+1}`}
           />
         ))}
-      </div>
-      {/* Shigjetat — bottom right */}
-      <div className="absolute bottom-10 right-8 flex gap-3 z-10">
-        <button onClick={prev} className="w-10 h-10 rounded-full border border-white/50 flex items-center justify-center bg-black/30 text-white hover:bg-white/10 transition-colors">
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/></svg>
-        </button>
-        <button onClick={next} className="w-10 h-10 rounded-full border border-white/50 flex items-center justify-center bg-black/30 text-white hover:bg-white/10 transition-colors">
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
-        </button>
       </div>
 
       {/* Promo cards — right side */}

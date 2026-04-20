@@ -7,7 +7,7 @@ export const HeaderLogo = () => {
       <img
         src={pergolaLogo}
         alt="Pergola Haus"
-        className="h-16 w-auto object-contain"
+        className="h-10 md:h-16 w-auto object-contain"
       />
     </Link>
   );

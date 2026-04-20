@@ -188,33 +188,33 @@ export const ProductSlider = () => {
   };
 
   return (
-    <section className="bg-[#181818] py-20 md:py-28 overflow-hidden border-t border-[#232323]">
+    <section className="bg-[#181818] py-14 md:py-28 overflow-hidden border-t border-[#232323]">
       <div className="mx-auto max-w-[1440px] px-4 md:px-16">
         {/* Header */}
-        <div className="flex items-center justify-between mb-14">
+        <div className="flex items-center justify-between mb-8 md:mb-14">
           <div>
-            <p className="text-xs tracking-[0.3em] uppercase text-[#82B2CA] mb-3" style={{ fontFamily: 'LEMONMILK, sans-serif', fontWeight: 400 }}>
+            <p className="text-xs tracking-[0.3em] uppercase text-[#82B2CA] mb-2 md:mb-3" style={{ fontFamily: 'LEMONMILK, sans-serif', fontWeight: 400 }}>
               Unsere Kollektion
             </p>
             <h2
-              className="text-3xl md:text-4xl text-white leading-snug"
+              className="text-xl md:text-4xl text-white leading-snug"
               style={{ fontFamily: 'LEMONMILK, sans-serif', fontWeight: 400 }}
             >
               Exklusive{" "}
               <span style={{ color: '#82B2CA' }}>Pergola-Modelle</span>
             </h2>
           </div>
-          <div className="flex gap-6 md:gap-8">
+          <div className="flex gap-3 md:gap-8">
             <button
               type="button"
               onClick={() => scroll("left")}
               disabled={!canScrollLeft}
-              className={`flex h-14 w-14 items-center justify-center bg-[#82B2CA] text-white transition-all duration-200 rotate-45 ${!canScrollLeft ? "opacity-40 cursor-not-allowed" : "hover:bg-[#5fa0b8]"}`}
+              className={`flex h-10 w-10 md:h-14 md:w-14 items-center justify-center bg-[#82B2CA] text-white transition-all duration-200 rotate-45 ${!canScrollLeft ? "opacity-40 cursor-not-allowed" : "hover:bg-[#5fa0b8]"}`}
               aria-label="Zurück scrollen"
               style={{ outline: 'none', border: 'none' }}
             >
               <span className="rotate-[-45deg]">
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <svg className="h-4 w-4 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                 </svg>
               </span>
@@ -223,12 +223,12 @@ export const ProductSlider = () => {
               type="button"
               onClick={() => scroll("right")}
               disabled={!canScrollRight}
-              className={`flex h-14 w-14 items-center justify-center bg-[#82B2CA] text-white transition-all duration-200 rotate-45 ${!canScrollRight ? "opacity-40 cursor-not-allowed" : "hover:bg-[#5fa0b8]"}`}
+              className={`flex h-10 w-10 md:h-14 md:w-14 items-center justify-center bg-[#82B2CA] text-white transition-all duration-200 rotate-45 ${!canScrollRight ? "opacity-40 cursor-not-allowed" : "hover:bg-[#5fa0b8]"}`}
               aria-label="Weiter scrollen"
               style={{ outline: 'none', border: 'none' }}
             >
               <span className="rotate-[-45deg]">
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <svg className="h-4 w-4 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </span>
@@ -237,9 +237,9 @@ export const ProductSlider = () => {
         </div>
         {/* Scrollable cards */}
         <div ref={scrollRef} className="overflow-x-auto scrollbar-hide scroll-smooth px-0">
-          <ul className="flex gap-10 md:gap-14 w-full list-none p-0 m-0 pb-8" style={{ minWidth: '100%' }}>
+          <ul className="flex gap-5 md:gap-10 lg:gap-14 w-full list-none p-0 m-0 pb-8" style={{ minWidth: '100%' }}>
             {products.map((p) => (
-              <li key={p.productName} className="w-[380px] shrink-0 pb-2">
+              <li key={p.productName} className="w-[72vw] max-w-[300px] sm:w-[300px] md:w-[340px] lg:w-[380px] shrink-0 pb-2">
                 <ProductCard {...p} priceWrapperClass="items-center gap-x-1.5 flex flex-wrap gap-y-1" />
               </li>
             ))}
