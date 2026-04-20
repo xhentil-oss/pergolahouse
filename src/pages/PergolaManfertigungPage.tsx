@@ -327,43 +327,6 @@ export const PergolaManfertigungPage = () => {
                     <span className="text-sm font-semibold text-zinc-700">Größe<span className="text-zinc-400">.</span> <span className="font-normal text-zinc-500">Wähle die genaue Größe</span></span>
                   </div>
                   <div className="space-y-5 rounded-xl border border-stone-200 bg-white p-5">
-                    {/* Breite */}
-                    <div>
-                      <label className="mb-2 flex items-center gap-1 text-sm font-semibold text-[#82B2CA]">
-                        Breite
-                        <svg className="h-4 w-4 text-[#82B2CA]" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" /><text x="10" y="14" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="bold">i</text></svg>
-                      </label>
-                      <div className="flex items-center gap-4">
-                        <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
-                          {breite}mm
-                        </div>
-                        <div className="relative w-full">
-                          <input
-                            type="range"
-                            min={breiteRange.min}
-                            max={breiteRange.max}
-                            step={breiteRange.step}
-                            value={breite}
-                            onChange={(e) => setBreite(Number(e.target.value))}
-                            className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
-                            style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #e7e5e4 ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #e7e5e4 100%)` }}
-                          />
-                          {/* Marker for 3170mm */}
-                          <div
-                            className="absolute top-1/2 -translate-y-1/2 h-6 w-0.5 bg-[#B91C1C]"
-                            style={{ left: `${((3170 - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%` }}
-                          >
-                            <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-[#B91C1C] whitespace-nowrap">3170mm</span>
-                          </div>
-                        </div>
-                      </div>
-                      {breite >= 3170 && (
-                        <div className="mt-2 text-xs text-[#B91C1C] font-semibold">
-                          Maximale Modulbreite für eine Pergola ist 3170mm. Bei größeren Breiten wird ein weiteres Modul hinzugefügt.
-                        </div>
-                      )}
-                    </div>
-
                     {/* Länge */}
                     <div>
                       <label className="mb-2 flex items-center gap-1 text-sm font-semibold text-[#82B2CA]">
@@ -397,6 +360,43 @@ export const PergolaManfertigungPage = () => {
                       {laenge >= 2830 && (
                         <div className="mt-2 text-xs text-[#B91C1C] font-semibold">
                           Maximale Modullänge für eine Pergola ist 2830mm. Bei größeren Längen wird ein weiteres Modul hinzugefügt.
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Breite */}
+                    <div>
+                      <label className="mb-2 flex items-center gap-1 text-sm font-semibold text-[#82B2CA]">
+                        Breite
+                        <svg className="h-4 w-4 text-[#82B2CA]" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" /><text x="10" y="14" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="bold">i</text></svg>
+                      </label>
+                      <div className="flex items-center gap-4">
+                        <div className="w-28 shrink-0 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-center text-sm font-semibold text-zinc-800">
+                          {breite}mm
+                        </div>
+                        <div className="relative w-full">
+                          <input
+                            type="range"
+                            min={breiteRange.min}
+                            max={breiteRange.max}
+                            step={breiteRange.step}
+                            value={breite}
+                            onChange={(e) => setBreite(Number(e.target.value))}
+                            className="custom-slider h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
+                            style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #e7e5e4 ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #e7e5e4 100%)` }}
+                          />
+                          {/* Marker for 3170mm */}
+                          <div
+                            className="absolute top-1/2 -translate-y-1/2 h-6 w-0.5 bg-[#B91C1C]"
+                            style={{ left: `${((3170 - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%` }}
+                          >
+                            <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-[#B91C1C] whitespace-nowrap">3170mm</span>
+                          </div>
+                        </div>
+                      </div>
+                      {breite >= 3170 && (
+                        <div className="mt-2 text-xs text-[#B91C1C] font-semibold">
+                          Maximale Modulbreite für eine Pergola ist 3170mm. Bei größeren Breiten wird ein weiteres Modul hinzugefügt.
                         </div>
                       )}
                     </div>

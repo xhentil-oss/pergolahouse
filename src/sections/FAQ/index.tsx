@@ -7,19 +7,19 @@ export const FAQ = () => {
       <div className="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-[#82B2CA]/20 blur-[100px]" />
       <div className="pointer-events-none absolute -right-40 bottom-20 h-80 w-80 rounded-full bg-[#82B2CA]/15 blur-[100px]" />
 
-      <div className="relative max-w-[1440px] mx-auto px-4 py-16 md:px-16 md:py-[120px]">
+      <div className="relative max-w-[1440px] mx-auto px-4 py-12 md:px-16 md:py-[100px]">
         {/* header */}
-        <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#82B2CA]/10 border border-[#82B2CA]/30 px-4 py-1.5 mb-5">
+        <div className="text-center mb-8 md:mb-14">
+          <div className="inline-flex items-center gap-2 rounded-full bg-[#82B2CA]/10 border border-[#82B2CA]/30 px-4 py-1.5 mb-4 md:mb-5">
             <svg className="h-4 w-4 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
             </svg>
             <span className="text-sm font-semibold text-[#82B2CA]">Häufig gestellte Fragen</span>
           </div>
-          <h2 className="text-zinc-900 text-[32px] font-bold leading-10 md:text-5xl md:leading-[58px]">
+          <h2 className="text-zinc-900 text-2xl font-bold leading-tight md:text-5xl md:leading-[58px]">
             Hast du noch Fragen?
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-zinc-500 text-base md:text-lg">
+          <p className="mx-auto mt-3 max-w-lg text-zinc-500 text-sm md:text-lg">
             Hier findest du Antworten auf die häufigsten Fragen rund um unsere Pergolen.
           </p>
         </div>

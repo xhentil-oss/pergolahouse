@@ -80,24 +80,24 @@ export const BenefitsGrid = () => {
   }, []);
 
   return (
-    <section className="bg-black py-16 md:py-24 border-t border-[#82B2CA]/30">
+    <section className="bg-black py-14 md:py-24 border-t border-[#82B2CA]/30">
       <div className="mx-auto max-w-[1440px] px-4 md:px-16">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12 md:mb-16">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-8 md:mb-16">
           <div>
             <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-white mb-2">
               Deine Vorteile
             </span>
-            <h2 className="text-3xl md:text-4xl font-semibold text-white max-w-md">
+            <h2 className="text-2xl md:text-4xl font-semibold text-white max-w-md">
               Die beste Wahl für deine Pergola
             </h2>
           </div>
         </div>
 
-        <div ref={containerRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div ref={containerRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {benefits.map((b, i) => (
             <div
               key={i}
-              className={`group relative bg-black rounded-2xl p-7 border border-[#82B2CA]/40
+              className={`group relative bg-black rounded-2xl p-4 md:p-7 border border-[#82B2CA]/40
                 hover:border-[#82B2CA] transition-all duration-500
                 hover:shadow-lg hover:shadow-[#82B2CA]/10 hover:-translate-y-1
                 ${visibleCount > i ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}

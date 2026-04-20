@@ -59,21 +59,21 @@ export const DesignServices = () => {
   }, []);
 
   return (
-    <section className="bg-[#191A19] py-20 border-t border-[#333]">
+    <section className="bg-[#191A19] py-14 md:py-20 border-t border-[#333]">
       <div className="max-w-7xl mx-auto px-4 md:px-16">
-        <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div ref={containerRef} className="grid grid-cols-1 sm:grid-cols-3 gap-5 md:gap-8">
           {services.map((s, i) => (
             <div
               key={i}
-              className={`flex flex-col items-center text-center px-8 py-12 bg-[#232323] rounded-2xl border border-[#333] relative
+              className={`flex flex-col items-center text-center px-4 py-8 md:px-8 md:py-12 bg-[#232323] rounded-2xl border border-[#333] relative
                 transition-all duration-700
                 ${visibleCount > i ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
             >
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#82B2CA]/10">
                 {s.icon}
               </div>
-              <h3 className="text-[#F8F8F8] text-2xl font-extrabold mb-3 tracking-wide uppercase">{s.title}</h3>
-              <p className="text-[#BDBDBD] text-base mb-8 max-w-xs mx-auto">{s.description}</p>
+              <h3 className="text-[#F8F8F8] text-lg md:text-xl font-extrabold mb-3 tracking-wide uppercase">{s.title}</h3>
+              <p className="text-[#BDBDBD] text-sm md:text-base mb-8 leading-relaxed">{s.description}</p>
               <div className="absolute left-0 right-0 bottom-8 flex items-center justify-center gap-2">
                 <span className="block w-16 h-0.5 bg-[#82B2CA]" />
                 <span className="block w-3 h-3 rounded-full bg-[#82B2CA]" />

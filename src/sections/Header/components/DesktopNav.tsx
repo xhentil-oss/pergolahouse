@@ -3,7 +3,7 @@ import { NavItem } from "@/sections/Header/components/NavItem";
 
 export const DesktopNav = () => {
   return (
-    <nav className="hidden items-center gap-x-1 md:flex">
+    <nav className="hidden items-center gap-x-1 xl:flex">
       <NavItem
         label="Pergolen"
         href="/pergola/elegante-pergola"

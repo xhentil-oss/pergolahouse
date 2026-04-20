@@ -204,7 +204,6 @@ export const ZipScreensPage = () => {
                       <p className="text-xs text-white/50">Gesamtpreis</p>
                       <span className="font-lemonmilk text-2xl font-bold text-white">{formatPrice(sizeData.price)}</span>
                     </div>
-                    <p className="text-right text-[10px] leading-4 text-white/40">Kostenloser<br />Versand ab 1.000 €</p>
                   </div>
                 </div>
 

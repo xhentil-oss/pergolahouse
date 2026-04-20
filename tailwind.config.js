@@ -60,6 +60,10 @@ module.exports = {
       "lemonmilk": ["LEMONMILK", "ui-sans-serif", "system-ui", "sans-serif"]
       },
       keyframes: {
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
                 heroTextIn: {
                   from: { opacity: "0", transform: "translateX(-60px)" },
                   to: { opacity: "1", transform: "translateX(0)" },
@@ -78,6 +82,7 @@ module.exports = {
         },
       },
       animation: {
+        marquee: "marquee 22s linear infinite",
           heroTextIn: "heroTextIn 1s cubic-bezier(0.22, 1, 0.36, 1)",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",

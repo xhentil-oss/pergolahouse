@@ -198,7 +198,6 @@ export const CarportsPage = () => {
                       <p className="text-xs text-white/50">Gesamtpreis</p>
                       <span className="font-lemonmilk text-2xl font-bold text-white">{formatPrice(sizeData.price)}</span>
                     </div>
-                    <p className="text-right text-[10px] leading-4 text-white/40">Kostenloser<br />Versand ab 1.000 €</p>
                   </div>
                 </div>
 
@@ -264,24 +263,24 @@ export const CarportsPage = () => {
         <FeatureTicker backgroundColorClass="bg-[#344148]" />
 
         {/* ── Contact CTA ── */}
-        <section className="bg-zinc-950 py-12 text-center text-white md:py-16">
+        <section className="bg-zinc-950 py-10 md:py-16 px-4 text-center text-white">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#82B2CA]">Über 100.000 zufriedene Kunden weltweit</p>
-          <h2 className="mx-auto mt-3 max-w-xl text-3xl font-semibold md:text-4xl">Haben Sie noch Fragen?</h2>
+          <h2 className="mx-auto mt-3 max-w-xl text-2xl md:text-4xl font-semibold">Haben Sie noch Fragen?</h2>
           <p className="mx-auto mt-4 max-w-md text-sm text-white/70">Unser Kundenservice-Team steht Ihnen gerne zur Verfügung. Kontaktieren Sie uns für eine persönliche Beratung.</p>
-          <div className="mt-6 flex items-center justify-center gap-4">
-            <Link to="/contact" className="rounded-full border border-white/30 px-6 py-2.5 text-sm font-semibold transition hover:bg-white hover:text-zinc-900">Kontaktieren Sie uns</Link>
-            <a href="tel:+49" className="rounded-full bg-[#82B2CA] px-6 py-2.5 text-sm font-semibold text-zinc-900 transition hover:opacity-90">Anrufen</a>
+          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <Link to="/contact" className="w-full sm:w-auto rounded-full border border-white/30 px-6 py-2.5 text-sm font-semibold transition hover:bg-white hover:text-zinc-900">Kontaktieren Sie uns</Link>
+            <a href="tel:+49" className="w-full sm:w-auto rounded-full bg-[#82B2CA] px-6 py-2.5 text-sm font-semibold text-zinc-900 transition hover:opacity-90">Anrufen</a>
           </div>
         </section>
 
         {/* ── Optionale Ausstattung ── */}
-        <section className="bg-[#344148] py-16 md:py-24">
+        <section className="bg-[#344148] py-12 md:py-24">
           <div className="mx-auto max-w-[1440px] px-4 md:px-16">
-            <div className="mb-12 text-center">
+            <div className="mb-8 md:mb-12 text-center">
               <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
                 Optionale Ausstattung
               </span>
-              <h2 className="mt-4 text-3xl font-bold text-white md:text-4xl">Gestalten Sie Ihren Carport</h2>
+              <h2 className="mt-4 text-2xl md:text-4xl font-bold text-white">Gestalten Sie Ihren Carport</h2>
               <p className="mx-auto mt-3 max-w-xl text-sm text-white/50">
                 Wählen Sie die Ausstattung, die zu Ihrem Stil passt — alles direkt in die Struktur integriert.
               </p>
@@ -290,7 +289,7 @@ export const CarportsPage = () => {
               {addonItems.map((item) => (
                 <div
                   key={item.title}
-                  className="group relative flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:shadow-xl hover:-translate-y-0.5"
+                  className="group relative flex flex-col gap-2 rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-5 transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:shadow-xl hover:-translate-y-0.5"
                 >
                   <div
                     className="flex h-12 w-12 items-center justify-center rounded-xl"
@@ -320,18 +319,18 @@ export const CarportsPage = () => {
           <div className="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-[#82B2CA]/20 blur-[100px]" />
           <div className="pointer-events-none absolute -right-40 bottom-20 h-80 w-80 rounded-full bg-[#82B2CA]/15 blur-[100px]" />
 
-          <div className="relative max-w-[1440px] mx-auto px-4 py-16 md:px-16 md:py-[120px]">
-            <div className="text-center mb-14">
+          <div className="relative max-w-[1440px] mx-auto px-4 py-12 md:px-16 md:py-[100px]">
+            <div className="text-center mb-8 md:mb-14">
               <div className="inline-flex items-center gap-2 rounded-full bg-[#82B2CA]/10 border border-[#82B2CA]/30 px-4 py-1.5 mb-5">
                 <svg className="h-4 w-4 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
                 </svg>
                 <span className="text-sm font-semibold text-[#82B2CA]">Häufig gestellte Fragen</span>
               </div>
-              <h2 className="text-zinc-900 text-[32px] font-bold leading-10 md:text-5xl md:leading-[58px]">
+              <h2 className="text-zinc-900 text-2xl md:text-5xl font-bold leading-snug">
                 Hast du noch Fragen?
               </h2>
-              <p className="mx-auto mt-4 max-w-lg text-zinc-500 text-base md:text-lg">
+              <p className="mx-auto mt-3 max-w-lg text-zinc-500 text-sm md:text-lg">
                 Hier findest du Antworten auf die häufigsten Fragen zum Carport.
               </p>
             </div>
@@ -377,11 +376,11 @@ export const CarportsPage = () => {
       <Footer />
 
       {/* ── Sticky mobile bottom bar ── */}
-      <div className={`fixed inset-x-0 bottom-0 z-50 border-t border-stone-200 bg-white px-4 py-3 shadow-[0_-2px_12px_rgba(0,0,0,.08)] transition-transform md:hidden ${showStickyBar ? "translate-y-0" : "translate-y-full"}`}>
+      <div className={`fixed inset-x-0 bottom-0 z-50 border-t border-stone-200 bg-white px-5 py-3 shadow-[0_-2px_12px_rgba(0,0,0,.08)] transition-transform lg:hidden ${showStickyBar ? "translate-y-0" : "translate-y-full"}`}>
         <div className="flex items-center gap-3">
           <div className="flex-1">
-            <div className="text-lg font-bold text-zinc-950">{formatPrice(sizeData.price)}</div>
-            <div className="text-xs text-zinc-500">inkl. Versand</div>
+            <div className="text-base font-bold text-zinc-950">{formatPrice(sizeData.price)}</div>
+            <div className="text-xs text-zinc-400">inkl. aller Extras</div>
           </div>
           <button type="button" onClick={handleAddToCart} className="rounded-xl px-6 py-3 text-sm font-bold text-white transition hover:opacity-90" style={{ backgroundColor: '#344148' }}>
             In den Warenkorb

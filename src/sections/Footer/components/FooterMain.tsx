@@ -4,10 +4,10 @@ import { FooterLinks } from "@/sections/Footer/components/FooterLinks";
 export const FooterMain = () => {
   return (
     <section>
-      <div className="bg-zinc-950 py-16 md:py-[80px]">
+      <div className="bg-zinc-950 py-12 md:py-[80px]">
         <div className="max-w-[1440px] mx-auto px-4 md:px-16">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-            <FooterBrand />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+            <div className="col-span-2 md:col-span-1"><FooterBrand /></div>
             <FooterLinks
               title="Produkte"
               links={[

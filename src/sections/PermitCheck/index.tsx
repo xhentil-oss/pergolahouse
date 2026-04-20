@@ -41,19 +41,19 @@ const features = [
 
 export const PermitCheck = () => {
   return (
-    <section className="bg-white py-20 md:py-28 border-t border-neutral-100">
+    <section className="bg-white py-14 md:py-28 border-t border-neutral-100">
       <div className="max-w-[1440px] mx-auto px-4 md:px-16">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-14 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-8 md:mb-14 gap-4 md:gap-6">
           <div>
             <p
-              className="text-xs tracking-[0.3em] uppercase text-[#82B2CA] mb-3"
+              className="text-xs tracking-[0.3em] uppercase text-[#82B2CA] mb-2 md:mb-3"
               style={{ fontFamily: "LEMONMILK, sans-serif" }}
             >
               Unser Service
             </p>
             <h2
-              className="text-3xl md:text-4xl text-[#344148] leading-snug"
+              className="text-xl md:text-4xl text-[#344148] leading-snug"
               style={{ fontFamily: "LEMONMILK, sans-serif", fontWeight: 400 }}
             >
               Professioneller{" "}

@@ -41,10 +41,10 @@ export const UeberUnsPage = () => {
             <div className="absolute inset-0 z-10 bg-zinc-900/50" />
             <div className="relative z-20 max-w-3xl mx-auto">
               <p className="text-[#82B2CA] text-sm font-semibold uppercase tracking-[0.18em] mb-4">Über uns</p>
-              <h1 className="font-lemonmilk text-3xl md:text-4xl text-white leading-tight mb-4">
+              <h1 className="font-lemonmilk text-2xl md:text-4xl text-white leading-tight mb-4">
                 Moderne Eleganz für einen<br />Lebensstil ohne Kompromisse.
               </h1>
-              <p className="text-white/80 text-base md:text-lg">
+              <p className="text-white/80 text-sm md:text-lg">
                 PergolaHaus steht für bis ins Detail durchdachte Outdoor-Lösungen – ein Ausdruck von Stil, Komfort und gehobenem Wohnen.
               </p>
             </div>
@@ -52,13 +52,13 @@ export const UeberUnsPage = () => {
         </section>
 
         {/* ── ABOUT: text left + image grid right ── */}
-        <section className="max-w-[1440px] mx-auto px-6 md:px-16 py-14 md:py-20">
+        <section className="max-w-[1440px] mx-auto px-4 md:px-16 py-10 md:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
             {/* Left: all text */}
             <div>
               <p className="text-[#82B2CA] text-xs font-semibold uppercase tracking-[0.3em] mb-4">Unser Versprechen</p>
-              <h2 className="font-lemonmilk text-3xl md:text-4xl text-[#344148] leading-tight mb-6">
+              <h2 className="font-lemonmilk text-2xl md:text-4xl text-[#344148] leading-tight mb-6">
                 Wir schaffen Außenbereiche,{" "}
                 <span className="text-[#82B2CA]">die begeistern.</span>
               </h2>
@@ -118,11 +118,11 @@ export const UeberUnsPage = () => {
 
         {/* ── PILLARS ── */}
         <section className="bg-[#344148]">
-          <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-14 md:py-20">
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+          <div className="max-w-[1440px] mx-auto px-4 md:px-16 py-10 md:py-20">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 md:mb-10">
               <div>
                 <p className="text-[#82B2CA] text-xs font-semibold uppercase tracking-[0.3em] mb-3">Was uns auszeichnet</p>
-                <h2 className="font-lemonmilk text-3xl md:text-4xl text-white leading-tight">
+                <h2 className="font-lemonmilk text-2xl md:text-4xl text-white leading-tight">
                   Drei Prinzipien.<br />Ein Anspruch.
                 </h2>
               </div>
