@@ -69,20 +69,24 @@ import icon13 from "@/assets/icon13.jpeg";
 import icon1 from "@/assets/icon1.jpeg";
 import { Pergola3DViewer } from "@/components/Pergola3DViewer";
 
-import photo1 from "../assets/image-pergola.png";
-import photo2 from "../assets/image-light.png";
-import photo3 from "../assets/Photo (26).png";
-import photo4 from "../assets/pergola-glass.png";
-import photo5 from "../assets/pergola-glass-guillot.png";
-import photo6 from "../assets/zip-screen-pergola.png";
+import photo1 from "../assets/slats.png";
+import photo2 from "../assets/First page.png";
+import photo3 from "../assets/6.png";
+import photo4 from "../assets/5.png";
+import photo5 from "../assets/3.png";
+import photo6 from "../assets/4.png";
+import photo7 from "../assets/2.png";
+import photo8 from "../assets/1.png";
 
 const gallery = [
-  { src: photo1, alt: "Luxus-Pergola – modernes minimalistisches Design, Tag" },
-  { src: photo2, alt: "Luxus-Pergola – modernes minimalistisches Design, Nacht" },
-  { src: photo3, alt: "Luxus-Pergola – LED RGB am Pool" },
-  { src: photo4, alt: "Luxus-Pergola – mit Glaswänden, Gartenatmosphäre" },
-  { src: photo5, alt: "Luxus-Pergola – mit Glaswänden, Entspannungsbereich" },
-  { src: photo6, alt: "Luxus-Pergola – klassisch, am Pool" },
+  { src: photo1, alt: "Luxus-Pergola – Lamellen-Technologie" },
+  { src: photo2, alt: "Luxus-Pergola – Premium Design mit Pool" },
+  { src: photo3, alt: "Luxus-Pergola – Anthrazit mit Gartenbereich" },
+  { src: photo4, alt: "Luxus-Pergola – Business Outdoor Bereich" },
+  { src: photo5, alt: "Luxus-Pergola – LED-Beleuchtung bei Nacht" },
+  { src: photo6, alt: "Luxus-Pergola – Modernes Outdoor-Wohnen" },
+  { src: photo7, alt: "Luxus-Pergola – Wintergarten mit Pool" },
+  { src: photo8, alt: "Luxus-Pergola – Lamellen-Detailansicht" },
 ];
 
 const colorOptions = [
@@ -278,10 +282,10 @@ export const LuxusPergolaPage = () => {
   const [activeImage, setActiveImage] = useState(0);
   const [louversOpen] = useState(true);
   const [descExpanded, setDescExpanded] = useState(false);
-  const [selectedColor, setSelectedColor] = useState(colorOptions[0].label);
-  const [breite, setBreite] = useState(3395);
-  const [laenge, setLaenge] = useState(2330);
-  const [hoehe, setHoehe] = useState(1441);
+  const [selectedColor, setSelectedColor] = useState("Gray 7016 T");
+  const [breite, setBreite] = useState(3000);
+  const [laenge, setLaenge] = useState(3000);
+  const [hoehe, setHoehe] = useState(2800);
   const [selectedMount, setSelectedMount] = useState(mountOptions[0].label);
   const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
@@ -448,7 +452,7 @@ export const LuxusPergolaPage = () => {
             </div>
 
             {/* RIGHT: Configurator card */}
-            <div className="w-full lg:sticky lg:top-20 lg:w-[42%]">
+            <div className="w-full lg:w-[42%] lg:max-h-[calc(100vh-100px)] lg:overflow-y-auto lg:pb-6 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
               <div className="rounded-3xl bg-white p-6 shadow-2xl md:p-7">
               <h1 className="font-lemonmilk text-2xl font-bold leading-tight text-[#344148] md:text-3xl">Luxus Pergola</h1>
               <p className="mt-1 text-sm text-zinc-500">Deine Luxus Pergola – millimetergenau gefertigt</p>
