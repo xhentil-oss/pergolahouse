@@ -48,16 +48,13 @@ module.exports = {
       },
       fontFamily: {
         sans: [
+          "LEMONMILK",
           "ui-sans-serif",
           "system-ui",
           "sans-serif",
-          '"Apple Color Emoji"',
-          '"Segoe UI Emoji"',
-          '"Segoe UI Symbol"',
-          '"Noto Color Emoji"',
         ],
-        "inter_tight": ["Inter Tight", "ui-sans-serif", "system-ui", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"],
-      "lemonmilk": ["LEMONMILK", "ui-sans-serif", "system-ui", "sans-serif"]
+        "inter_tight": ["Inter Tight", "ui-sans-serif", "system-ui", "sans-serif"],
+        "lemonmilk": ["LEMONMILK", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       keyframes: {
         marquee: {

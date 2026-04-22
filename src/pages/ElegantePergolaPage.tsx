@@ -8,12 +8,13 @@ import { useCart } from "@/context/CartContext";
 import { getPromotion } from "@/config/promotions";
 import { useDiscounts } from "@/context/DiscountContext";
 // Removed unused imports from previous implementation
-import icon18 from "@/assets/icon18.jpeg";
-import icon6 from "@/assets/icon6.jpeg";
-import icon4 from "@/assets/icon4.jpeg";
-import icon11 from "@/assets/icon11.jpeg";
-import icon13 from "@/assets/icon13.jpeg";
-import icon1 from "@/assets/icon1.jpeg";
+import ikon1 from "@/assets/ikon1.jpeg";
+import ikon2 from "@/assets/ikon2.jpeg";
+import ikon3 from "@/assets/ikon3.jpeg";
+import ikon4 from "@/assets/ikon4.jpeg";
+import ikon5 from "@/assets/ikon5.jpeg";
+import ikon6 from "@/assets/ikon6.jpeg";
+import ikon7 from "@/assets/ikon7.jpeg";
 import { Pergola3DViewer } from "@/components/Pergola3DViewer";
 
 import photo1 from "../assets/image-pergola.png";
@@ -110,12 +111,13 @@ const accessoryCategories = [
 const accessoryOptions = accessoryCategories.flatMap((c) => c.items);
 
 const featureStory = [
-  { image: icon18 },
-  { image: icon6 },
-  { image: icon4 },
-  { image: icon11 },
-  { image: icon13 },
-  { image: icon1 },
+  { image: ikon1 },
+  { image: ikon2 },
+  { image: ikon3 },
+  { image: ikon4 },
+  { image: ikon5 },
+  { image: ikon6 },
+  { image: ikon7 },
 ];
 
 const addonItems = [
@@ -270,10 +272,10 @@ export const ElegantePergolaPage = () => {
   const [activeImage, setActiveImage] = useState(0);
   const [louversOpen] = useState(false);
   const [descExpanded, setDescExpanded] = useState(false);
-  const [selectedColor, setSelectedColor] = useState(colorOptions[0].label);
-  const [breite, setBreite] = useState(3395);
-  const [laenge, setLaenge] = useState(2330);
-  const [hoehe, setHoehe] = useState(1441);
+  const [selectedColor, setSelectedColor] = useState("Gray 7016 T");
+  const [breite, setBreite] = useState(3000);
+  const [laenge, setLaenge] = useState(3000);
+  const [hoehe, setHoehe] = useState(2800);
   const [selectedMount, setSelectedMount] = useState(mountOptions[0].label);
   const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
@@ -435,10 +437,10 @@ export const ElegantePergolaPage = () => {
                   </div>
 
                   {/* Feature icons — same width as image above */}
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-4 gap-2">
                     {featureStory.map((item, i) => (
-                      <div key={i} className="overflow-hidden rounded-xl border border-white/10 bg-white/5">
-                        <img src={item.image} alt="Feature" className="w-full object-cover" />
+                      <div key={i} className="overflow-hidden rounded-xl">
+                        <img src={item.image} alt="Feature" className="w-full h-full object-cover block" />
                       </div>
                     ))}
                   </div>
@@ -552,7 +554,7 @@ export const ElegantePergolaPage = () => {
                     <div className="grid grid-cols-2 gap-2">
                       {mountOptions.map((m) => (
                         <button key={m.label} type="button" onClick={() => setSelectedMount(m.label)}
-                          className={`flex flex-col items-center gap-2 rounded-xl border-2 p-3 transition-all ${selectedMount === m.label ? "border-[#344148] bg-[#344148]/5" : "border-stone-200 hover:border-zinc-300"}`}>
+                          className={`flex flex-col items-center gap-2 rounded-3xl border-2 p-3 transition-all ${selectedMount === m.label ? "border-[#344148] bg-[#344148]/5" : "border-stone-200 hover:border-zinc-300"}`}>
                           <img src={m.img} alt={m.label} className="h-9 object-contain" />
                           <span className={`text-xs font-semibold ${selectedMount === m.label ? "text-[#344148]" : "text-zinc-600"}`}>{m.label}</span>
                         </button>

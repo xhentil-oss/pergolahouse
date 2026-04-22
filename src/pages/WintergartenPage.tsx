@@ -137,7 +137,7 @@ export const WintergartenPage = () => {
   const { addToCart } = useCart();
   const [activeImage, setActiveImage] = useState(0);
   const [descExpanded, setDescExpanded] = useState(false);
-  const [selectedColor, setSelectedColor] = useState(colorOptions[0].label);
+  const [selectedColor, setSelectedColor] = useState("Gray 7016 T");
   const [selectedSize, setSelectedSize] = useState(sizeOptions[0].label);
   const [selectedMount, setSelectedMount] = useState(mountOptions[0].label);
   const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
@@ -290,7 +290,7 @@ export const WintergartenPage = () => {
             </div>
 
             {/* RIGHT: Configurator card */}
-            <div className="w-full lg:sticky lg:top-20 lg:w-[42%]">
+            <div className="w-full lg:w-[42%] lg:max-h-[calc(100vh-100px)] lg:overflow-y-auto lg:pb-6 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
               <div className="rounded-3xl bg-white p-6 shadow-2xl md:p-7">
 
                 <h1 className="font-lemonmilk text-2xl font-bold leading-tight text-[#344148] md:text-3xl">Wintergarten</h1>

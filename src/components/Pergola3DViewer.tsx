@@ -98,8 +98,6 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, showDimensions
   const postD = 0.12;
   const mainBeamH = 0.18;
   const mainBeamW = 0.10;
-  const gutterH = 0.06;
-  const gutterW = 0.14;
   const rafterH = 0.10;
   const rafterW = 0.05;
   const louverCount = Math.max(6, Math.round(width / 0.18));
@@ -115,16 +113,7 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, showDimensions
     () => new THREE.MeshStandardMaterial({ color: hex, roughness: 0.28, metalness: 0.75 }),
     [hex]
   );
-  const darkMat = useMemo(
-    () => new THREE.MeshStandardMaterial({
-      color: new THREE.Color(hex).multiplyScalar(0.7),
-      roughness: 0.35,
-      metalness: 0.8,
-    }),
-    [hex]
-  );
-
-  /* ── Post positions ── */
+/* ── Post positions ── */
   const posts: [number, number, number][] = useMemo(() => [
     [-halfW + postW / 2, height / 2, -halfD + postD / 2],
     [halfW - postW / 2, height / 2, -halfD + postD / 2],
@@ -167,19 +156,6 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, showDimensions
         <RoundedBox key={`post-${i}`} args={[postW, height, postD]} radius={0.015} smoothness={4} position={pos} material={mainMat} castShadow />
       ))}
 
-      {/* ── Post base plates ── */}
-      {posts.map((pos, i) => (
-        <mesh key={`base-${i}`} position={[pos[0], 0.01, pos[2]]} material={darkMat}>
-          <boxGeometry args={[postW + 0.04, 0.02, postD + 0.04]} />
-        </mesh>
-      ))}
-
-      {/* ── Post top caps ── */}
-      {posts.map((pos, i) => (
-        <mesh key={`cap-${i}`} position={[pos[0], height + 0.005, pos[2]]} material={darkMat}>
-          <boxGeometry args={[postW + 0.02, 0.01, postD + 0.02]} />
-        </mesh>
-      ))}
 
       {/* ── Main Perimeter Beams (front & back) ── */}
       <RoundedBox args={[width, mainBeamH, mainBeamW]} radius={0.01} smoothness={4} position={[0, beamCenterY, -halfD + mainBeamW / 2]} material={mainMat} castShadow />
@@ -188,15 +164,6 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, showDimensions
       {/* ── Main Perimeter Beams (left & right) ── */}
       <RoundedBox args={[mainBeamW, mainBeamH, depth - mainBeamW * 2]} radius={0.01} smoothness={4} position={[-halfW + mainBeamW / 2, beamCenterY, 0]} material={mainMat} castShadow />
       <RoundedBox args={[mainBeamW, mainBeamH, depth - mainBeamW * 2]} radius={0.01} smoothness={4} position={[halfW - mainBeamW / 2, beamCenterY, 0]} material={mainMat} castShadow />
-
-      {/* ── Integrated Gutter ── */}
-      <mesh position={[0, roofY - mainBeamH - gutterH / 2, -halfD + gutterW / 2]} material={darkMat}>
-        <boxGeometry args={[width + 0.02, gutterH, gutterW]} />
-      </mesh>
-      <mesh position={[0, roofY - mainBeamH - gutterH / 2, halfD - gutterW / 2]} material={darkMat}>
-        <boxGeometry args={[width + 0.02, gutterH, gutterW]} />
-      </mesh>
-
 
       {/* ── Louver Blades ── */}
       {louvers.map((x, i) => (
@@ -211,22 +178,14 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, showDimensions
         />
       ))}
 
-      {/* ── Top rail over louvers ── */}
-      <mesh position={[0, roofY + 0.015, -halfD + mainBeamW / 2]} material={darkMat}>
-        <boxGeometry args={[width + 0.04, 0.025, 0.04]} />
-      </mesh>
-      <mesh position={[0, roofY + 0.015, halfD - mainBeamW / 2]} material={darkMat}>
-        <boxGeometry args={[width + 0.04, 0.025, 0.04]} />
-      </mesh>
-
       {/* ── Dimension lines ── */}
       {showDimensions && (
         <>
-          {/* Breite — right side of roof, front to back (depth direction) */}
+          {/* Länge — right side of roof, front to back (depth direction) */}
           <DimensionLine
             from={[halfW + 0.18, height + 0.04, -halfD]}
             to={[halfW + 0.18, height + 0.04, halfD]}
-            label={`${Math.round(depth * 1000)} mm`}
+            label={`${Math.round(width * 1000)} mm`}
             tickDir={[1, 0, 0]}
           />
           {/* Höhe — front-left post, vertical */}
@@ -236,11 +195,11 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, showDimensions
             label={`${Math.round(height * 1000)} mm`}
             tickDir={[1, 0, 0]}
           />
-          {/* Länge — below front edge, left to right (width direction) */}
+          {/* Breite — below front edge, left to right (width direction) */}
           <DimensionLine
             from={[-halfW, -0.12, -halfD - 0.18]}
             to={[halfW, -0.12, -halfD - 0.18]}
-            label={`${Math.round(width * 1000)} mm`}
+            label={`${Math.round(depth * 1000)} mm`}
             tickDir={[0, 0, 1]}
           />
         </>
