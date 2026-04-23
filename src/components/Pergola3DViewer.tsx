@@ -87,12 +87,6 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, showDimensions
   const groupRef = useRef<THREE.Group>(null!);
   const hex = colorMap[color] ?? color;
 
-  useFrame((_, delta) => {
-    if (groupRef.current && !showDimensions) {
-      groupRef.current.rotation.y += delta * 0.04;
-    }
-  });
-
   /* ── Dimensions ── */
   const postW = 0.12;
   const postD = 0.12;
@@ -110,7 +104,7 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, showDimensions
 
   /* ── Materials ── */
   const mainMat = useMemo(
-    () => new THREE.MeshStandardMaterial({ color: hex, roughness: 0.28, metalness: 0.75 }),
+    () => new THREE.MeshStandardMaterial({ color: hex, roughness: 0.55, metalness: 0.1 }),
     [hex]
   );
 /* ── Post positions ── */
@@ -181,11 +175,18 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, showDimensions
       {/* ── Dimension lines ── */}
       {showDimensions && (
         <>
-          {/* Länge — right side of roof, front to back (depth direction) */}
+          {/* Breite — above back edge, left to right (shown at top of image) */}
+          <DimensionLine
+            from={[-halfW, height + 0.18, halfD + 0.15]}
+            to={[halfW, height + 0.18, halfD + 0.15]}
+            label={`${Math.round(width * 1000)} mm`}
+            tickDir={[0, 0, 1]}
+          />
+          {/* Länge — right side of 3D (left in image), front to back */}
           <DimensionLine
             from={[halfW + 0.18, height + 0.04, -halfD]}
             to={[halfW + 0.18, height + 0.04, halfD]}
-            label={`${Math.round(width * 1000)} mm`}
+            label={`${Math.round(depth * 1000)} mm`}
             tickDir={[1, 0, 0]}
           />
           {/* Höhe — front-left post, vertical */}
@@ -194,13 +195,6 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, showDimensions
             to={[-halfW - 0.2, height, -halfD]}
             label={`${Math.round(height * 1000)} mm`}
             tickDir={[1, 0, 0]}
-          />
-          {/* Breite — below front edge, left to right (width direction) */}
-          <DimensionLine
-            from={[-halfW, -0.12, -halfD - 0.18]}
-            to={[halfW, -0.12, -halfD - 0.18]}
-            label={`${Math.round(depth * 1000)} mm`}
-            tickDir={[0, 0, 1]}
           />
         </>
       )}
@@ -253,14 +247,14 @@ export const Pergola3DViewer = ({ breite, laenge, hoehe, color }: Pergola3DViewe
       <Suspense fallback={<Loader />}>
         <Canvas
           shadows
-          camera={{ position: [camDist * 0.6, camDist * 1.5, camDist * 0.6], fov: 40, near: 0.1, far: 200 }}
+          camera={{ position: [camDist * 0.65, camDist * 0.9, camDist * 1.35], fov: 40, near: 0.1, far: 200 }}
           style={{ background: "#e8e8e8", position: "absolute", inset: 0, width: "100%", height: "calc(100% - 44px)" }}
           gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.1 }}
         >
-          <ambientLight intensity={0.8} />
+          <ambientLight intensity={1.2} />
           <directionalLight
             position={[6, 10, 4]}
-            intensity={1.2}
+            intensity={1.0}
             castShadow
             shadow-mapSize-width={2048}
             shadow-mapSize-height={2048}
@@ -271,7 +265,8 @@ export const Pergola3DViewer = ({ breite, laenge, hoehe, color }: Pergola3DViewe
             shadow-camera-bottom={-10}
           />
           <directionalLight position={[-4, 6, -3]} intensity={0.5} color="#ffffff" />
-          <hemisphereLight intensity={0.4} color="#ffffff" groundColor="#e0e0e0" />
+          <directionalLight position={[0, -8, 0]} intensity={0.7} color="#ffffff" />
+          <hemisphereLight intensity={0.5} color="#ffffff" groundColor="#ffffff" />
 
           <PergolaModel width={w} depth={d} height={h} color={color} louversOpen={louversOpen} showDimensions={showDimensions} />
 
@@ -289,7 +284,7 @@ export const Pergola3DViewer = ({ breite, laenge, hoehe, color }: Pergola3DViewe
 
       {/* dimension badge */}
       <div className="pointer-events-none absolute left-3 rounded-lg bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-white backdrop-blur" style={{ bottom: 52 }}>
-        {(breite / 1000).toFixed(1)}m × {(laenge / 1000).toFixed(1)}m × {(hoehe / 1000).toFixed(1)}m
+        {(laenge / 1000).toFixed(1)}m × {(breite / 1000).toFixed(1)}m × {(hoehe / 1000).toFixed(1)}m
       </div>
 
       {/* 3D interaction hint */}
