@@ -9,11 +9,12 @@ import { useDiscounts } from "@/context/DiscountContext";
 import pergolaImg from "@/assets/pergola.png";
 import photo18 from "@/assets/Photo (18).png";
 import photo26 from "@/assets/Photo (26).png";
-import icon18 from "@/assets/icon18.jpeg";
-import icon6 from "@/assets/icon6.jpeg";
-import icon4 from "@/assets/icon4.jpeg";
-import icon11 from "@/assets/icon11.jpeg";
-import icon10 from "@/assets/icon10.jpeg";
+import ikon1 from "@/assets/1 png.png";
+import ikon2 from "@/assets/2 png (1).png";
+import ikon3 from "@/assets/3 png.png";
+import ikon4 from "@/assets/4 png.png";
+import ikon5 from "@/assets/5 png.png";
+import ikon6 from "@/assets/6 png.png";
 
 /* ─── image gallery ─── */
 import photo1 from "../assets/image-pergola.png";
@@ -116,13 +117,13 @@ const accessoryOptions = accessoryCategories.flatMap((c) => c.items);
 
 
 
-/* ─── feature story (icon-based) ─── */
 const featureStory = [
-  { image: icon18 },
-  { image: icon6 },
-  { image: icon4 },
-  { image: icon11 },
-  { image: icon10 },
+  { image: ikon1 },
+  { image: ikon2 },
+  { image: ikon3 },
+  { image: ikon4 },
+  { image: ikon5 },
+  { image: ikon6 },
 ];
 
 const addonItems = [
@@ -307,10 +308,10 @@ export const PreiswertePergolaPage = () => {
                   </div>
 
                   {/* Feature icons */}
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-4 gap-2">
                     {featureStory.map((item, i) => (
-                      <div key={i} className="overflow-hidden rounded-xl border border-white/10 bg-white/5">
-                        <img src={item.image} alt="Feature" className="w-full object-cover" />
+                      <div key={i} className="overflow-hidden rounded-xl">
+                        <img src={item.image} alt="Feature" className="w-full h-full object-cover block" />
                       </div>
                     ))}
                   </div>
