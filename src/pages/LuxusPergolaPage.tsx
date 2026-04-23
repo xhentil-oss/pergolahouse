@@ -61,15 +61,15 @@ import { useCart } from "@/context/CartContext";
 import { getPromotion } from "@/config/promotions";
 import { useDiscounts } from "@/context/DiscountContext";
 // Removed unused image imports
-import icon18 from "@/assets/icon18.jpeg";
-import icon6 from "@/assets/icon6.jpeg";
-import icon4 from "@/assets/icon4.jpeg";
-import icon11 from "@/assets/icon11.jpeg";
-import icon13 from "@/assets/icon13.jpeg";
-import icon1 from "@/assets/icon1.jpeg";
+import ikon1 from "@/assets/1 png.png";
+import ikon2 from "@/assets/2 png.png";
+import ikon3 from "@/assets/3 png.png";
+import ikon4 from "@/assets/4 png.png";
+import ikon5 from "@/assets/5 png.png";
+import ikon6 from "@/assets/6 png.png";
 import { Pergola3DViewer } from "@/components/Pergola3DViewer";
 
-import photo1 from "../assets/slats.png";
+
 import photo2 from "../assets/First page.png";
 import photo3 from "../assets/6.png";
 import photo4 from "../assets/5.png";
@@ -79,7 +79,7 @@ import photo7 from "../assets/2.png";
 import photo8 from "../assets/1.png";
 
 const gallery = [
-  { src: photo1, alt: "Luxus-Pergola – Lamellen-Technologie" },
+
   { src: photo2, alt: "Luxus-Pergola – Premium Design mit Pool" },
   { src: photo3, alt: "Luxus-Pergola – Anthrazit mit Gartenbereich" },
   { src: photo4, alt: "Luxus-Pergola – Business Outdoor Bereich" },
@@ -97,8 +97,8 @@ const colorOptions = [
   { label: "Black 9005 T", color: "#0A0A0D", hint: "Tiefschwarz – markant und modern" },
 ];
 
-const breiteRange = { min: 1000, max: 4000, step: 1 };
-const laengeRange = { min: 1000, max: 6950, step: 1 };
+const breiteRange = { min: 1000, max: 6950, step: 1 };
+const laengeRange = { min: 1000, max: 4000, step: 1 };
 const hoeheRange = { min: 1000, max: 3500, step: 1 };
 
 const pricePerSqm = 445;
@@ -121,12 +121,12 @@ import ikonaMbrapa from "@/assets/ikona-mbrapa.png";
 // accessoryOptions already declared above
 
 const featureStory = [
-  { image: icon18 },
-  { image: icon6 },
-  { image: icon4 },
-  { image: icon11 },
-  { image: icon13 },
-  { image: icon1 },
+  { image: ikon1 },
+  { image: ikon2 },
+  { image: ikon3 },
+  { image: ikon4 },
+  { image: ikon5 },
+  { image: ikon6 },
 ];
 
 
@@ -286,6 +286,9 @@ export const LuxusPergolaPage = () => {
   const [breite, setBreite] = useState(3000);
   const [laenge, setLaenge] = useState(3000);
   const [hoehe, setHoehe] = useState(2800);
+  const [laengeInput, setLaengeInput] = useState("3000");
+  const [breiteInput, setBreiteInput] = useState("3000");
+  const [hoeheInput, setHoeheInput] = useState("2800");
   const [selectedMount, setSelectedMount] = useState(mountOptions[0].label);
   const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
@@ -440,10 +443,10 @@ export const LuxusPergolaPage = () => {
                     </div>
                   </div>
                   {/* Feature icons */}
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-4 gap-2">
                     {featureStory.map((item, i) => (
-                      <div key={i} className="overflow-hidden rounded-xl border border-white/10 bg-white/5">
-                        <img src={item.image} alt="Feature" className="w-full object-cover" />
+                      <div key={i} className="overflow-hidden rounded-xl">
+                        <img src={item.image} alt="Feature" className="w-full h-full object-cover block" />
                       </div>
                     ))}
                   </div>
@@ -500,9 +503,17 @@ export const LuxusPergolaPage = () => {
                     <div>
                       <div className="mb-1.5 flex items-center justify-between">
                         <span className="text-xs font-semibold text-[#344148]">Länge</span>
-                        <span className="rounded-lg bg-white px-2.5 py-1 text-xs font-bold text-[#344148] shadow-sm border border-stone-200">{laenge} mm</span>
+                        {(() => { const err = laengeInput !== "" && (Number(laengeInput) > laengeRange.max || Number(laengeInput) < laengeRange.min); return (
+                        <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
+                          <input type="number" value={laengeInput}
+                            onFocus={() => setLaengeInput("")}
+                            onChange={(e) => { setLaengeInput(e.target.value); const v = Number(e.target.value); if (!isNaN(v) && v > 0) setLaenge(v); }}
+                            onBlur={() => { const v = Math.max(laengeRange.min, Math.min(laengeRange.max, Number(laengeInput) || laengeRange.min)); setLaenge(v); setLaengeInput(String(v)); }}
+                            className={`w-16 bg-transparent pl-2.5 py-1 text-xs font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
+                          <span className={`pr-2.5 text-xs font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
+                        </div>); })()}
                       </div>
-                      <input type="range" min={laengeRange.min} max={laengeRange.max} step={laengeRange.step} value={laenge} onChange={(e) => setLaenge(Number(e.target.value))}
+                      <input type="range" min={laengeRange.min} max={laengeRange.max} step={laengeRange.step} value={laenge} onChange={(e) => { setLaenge(Number(e.target.value)); setLaengeInput(e.target.value); }}
                         className="h-1.5 w-full cursor-pointer appearance-none rounded-full [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow"
                         style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #d6d3d1 ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #d6d3d1 100%)` }}
                       />
@@ -510,9 +521,17 @@ export const LuxusPergolaPage = () => {
                     <div>
                       <div className="mb-1.5 flex items-center justify-between">
                         <span className="text-xs font-semibold text-[#344148]">Breite</span>
-                        <span className="rounded-lg bg-white px-2.5 py-1 text-xs font-bold text-[#344148] shadow-sm border border-stone-200">{breite} mm</span>
+                        {(() => { const err = breiteInput !== "" && (Number(breiteInput) > breiteRange.max || Number(breiteInput) < breiteRange.min); return (
+                        <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
+                          <input type="number" value={breiteInput}
+                            onFocus={() => setBreiteInput("")}
+                            onChange={(e) => { setBreiteInput(e.target.value); const v = Number(e.target.value); if (!isNaN(v) && v > 0) setBreite(v); }}
+                            onBlur={() => { const v = Math.max(breiteRange.min, Math.min(breiteRange.max, Number(breiteInput) || breiteRange.min)); setBreite(v); setBreiteInput(String(v)); }}
+                            className={`w-16 bg-transparent pl-2.5 py-1 text-xs font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
+                          <span className={`pr-2.5 text-xs font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
+                        </div>); })()}
                       </div>
-                      <input type="range" min={breiteRange.min} max={breiteRange.max} step={breiteRange.step} value={breite} onChange={(e) => setBreite(Number(e.target.value))}
+                      <input type="range" min={breiteRange.min} max={breiteRange.max} step={breiteRange.step} value={breite} onChange={(e) => { setBreite(Number(e.target.value)); setBreiteInput(e.target.value); }}
                         className="h-1.5 w-full cursor-pointer appearance-none rounded-full [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow"
                         style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #d6d3d1 ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #d6d3d1 100%)` }}
                       />
@@ -520,9 +539,17 @@ export const LuxusPergolaPage = () => {
                     <div>
                       <div className="mb-1.5 flex items-center justify-between">
                         <span className="text-xs font-semibold text-[#344148]">Höhe</span>
-                        <span className="rounded-lg bg-white px-2.5 py-1 text-xs font-bold text-[#344148] shadow-sm border border-stone-200">{hoehe} mm</span>
+                        {(() => { const err = hoeheInput !== "" && (Number(hoeheInput) > hoeheRange.max || Number(hoeheInput) < hoeheRange.min); return (
+                        <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
+                          <input type="number" value={hoeheInput}
+                            onFocus={() => setHoeheInput("")}
+                            onChange={(e) => { setHoeheInput(e.target.value); const v = Number(e.target.value); if (!isNaN(v) && v > 0) setHoehe(v); }}
+                            onBlur={() => { const v = Math.max(hoeheRange.min, Math.min(hoeheRange.max, Number(hoeheInput) || hoeheRange.min)); setHoehe(v); setHoeheInput(String(v)); }}
+                            className={`w-16 bg-transparent pl-2.5 py-1 text-xs font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
+                          <span className={`pr-2.5 text-xs font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
+                        </div>); })()}
                       </div>
-                      <input type="range" min={hoeheRange.min} max={hoeheRange.max} step={hoeheRange.step} value={hoehe} onChange={(e) => setHoehe(Number(e.target.value))}
+                      <input type="range" min={hoeheRange.min} max={hoeheRange.max} step={hoeheRange.step} value={hoehe} onChange={(e) => { setHoehe(Number(e.target.value)); setHoeheInput(e.target.value); }}
                         className="h-1.5 w-full cursor-pointer appearance-none rounded-full [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow"
                         style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((hoehe - hoeheRange.min) / (hoeheRange.max - hoeheRange.min)) * 100}%, #d6d3d1 ${((hoehe - hoeheRange.min) / (hoeheRange.max - hoeheRange.min)) * 100}%, #d6d3d1 100%)` }}
                       />
