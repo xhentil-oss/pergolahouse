@@ -62,7 +62,7 @@ import { getPromotion } from "@/config/promotions";
 import { useDiscounts } from "@/context/DiscountContext";
 // Removed unused image imports
 import ikon1 from "@/assets/1 png.png";
-import ikon2 from "@/assets/2 png.png";
+import ikon2 from "@/assets/2 png (1).png";
 import ikon3 from "@/assets/3 png.png";
 import ikon4 from "@/assets/4 png.png";
 import ikon5 from "@/assets/5 png.png";
