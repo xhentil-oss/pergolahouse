@@ -381,9 +381,9 @@ export const LuxusPergolaPage = () => {
             </div>
           </div>
 
-          <div className="mx-auto flex max-w-[1440px] flex-col gap-6 px-5 pb-10 pt-4 md:px-12 lg:flex-row lg:items-start lg:gap-8 lg:px-16 lg:pb-16">
+          <div className="mx-auto flex max-w-[1440px] flex-col gap-6 px-5 pb-10 pt-4 md:px-12 lg:grid lg:grid-cols-[58fr_42fr] lg:items-start lg:gap-8 lg:px-16 lg:pb-16">
             {/* LEFT: Gallery */}
-            <div className="w-full lg:w-[58%]">
+            <div className="w-full">
               <div className="flex gap-3">
                 {/* Vertical thumbnail strip */}
                 <div className="hidden flex-col gap-2 md:flex">
@@ -455,7 +455,7 @@ export const LuxusPergolaPage = () => {
             </div>
 
             {/* RIGHT: Configurator card */}
-            <div className="w-full lg:w-[42%] lg:max-h-[calc(100vh+130px)] lg:overflow-y-auto lg:pb-6 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
+            <div className="w-full lg:max-h-[calc(100vh+130px)] lg:overflow-y-auto lg:pb-6 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
               <div className="rounded-3xl bg-white p-6 shadow-2xl md:p-7">
               <h1 className="font-lemonmilk text-2xl font-bold leading-tight text-[#344148] md:text-3xl">Luxus Pergola</h1>
               <p className="mt-1 text-sm text-zinc-500">Deine Luxus Pergola – millimetergenau gefertigt</p>
@@ -632,7 +632,7 @@ export const LuxusPergolaPage = () => {
                     })}
                   </div>
                 </div>
-                <div className="grid gap-2 sm:grid-cols-2 pt-1">
+                <div className="grid gap-2 sm:grid-cols-2 pt-1 lg:sticky lg:bottom-0 lg:bg-white lg:-mx-7 lg:px-7 lg:pb-4 lg:pt-3 lg:border-t lg:border-stone-100 lg:rounded-b-3xl">
                   <button type="button" onClick={handleAddToCart}
                     className="rounded-full py-3 text-center text-sm font-bold text-white transition hover:opacity-90 hover:shadow-lg"
                     style={{ backgroundColor: '#82B2CA' }}>
