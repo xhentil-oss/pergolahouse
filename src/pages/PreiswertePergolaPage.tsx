@@ -35,11 +35,11 @@ const gallery = [
 
 /* ─── variants ─── */
 const colorOptions = [
-  { label: "White 9016 T", color: "#E8E4DF", hint: "Verkehrsweiß – hell und minimalistisch" },
-  { label: "Ivory 1015 T", color: "#D9C87A", hint: "Heller Elfenbeinton – warm und einladend" },
-  { label: "Gray 7046 T", color: "#8E9196", hint: "Telegrau – dezent und vielseitig" },
   { label: "Gray 7016 T", color: "#2E3234", hint: "Anthrazitgrau – zeitlos und elegant" },
+  { label: "Gray 7046 T", color: "#8E9196", hint: "Telegrau – dezent und vielseitig" },
   { label: "Black 9005 T", color: "#0A0A0D", hint: "Tiefschwarz – markant und modern" },
+  { label: "Ivory 1015 T", color: "#D9C87A", hint: "Heller Elfenbeinton – warm und einladend" },
+  { label: "White 9016 T", color: "#E8E4DF", hint: "Verkehrsweiß – hell und minimalistisch" },
 ];
 
 const sizeOptions = [
@@ -308,7 +308,7 @@ export const PreiswertePergolaPage = () => {
                   </div>
 
                   {/* Feature icons */}
-                  <div className="grid grid-cols-4 gap-2">
+                  <div className="grid grid-cols-3 gap-2">
                     {featureStory.map((item, i) => (
                       <div key={i} className="overflow-hidden rounded-xl">
                         <img src={item.image} alt="Feature" className="w-full h-full object-cover block" />
@@ -320,7 +320,7 @@ export const PreiswertePergolaPage = () => {
             </div>
 
             {/* RIGHT: Configurator card */}
-            <div className="w-full lg:w-[42%] lg:max-h-[calc(100vh-100px)] lg:overflow-y-auto lg:pb-6 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
+            <div className="w-full lg:w-[42%] lg:max-h-[calc(100vh+130px)] lg:overflow-y-auto lg:pb-6 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
               <div className="rounded-3xl bg-white p-6 shadow-2xl md:p-7">
 
               <h1 className="font-lemonmilk text-2xl font-bold leading-tight text-[#344148] md:text-3xl">Preiswerte Pergola</h1>
@@ -328,7 +328,7 @@ export const PreiswertePergolaPage = () => {
 
               {/* description */}
               <div className="mt-3 border-t border-stone-100 pt-3">
-                <p className={`text-xs leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
+                <p className={`text-[13px] leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
                   Die preiswerte Pergola ist ein wirtschaftliches Aluminium-Pergolasystem in vorgefertigten Standardmaßen, das die moderne Optik der eleganten Pergola mit einer besonders effizienten und kostengünstigen Ausführung verbindet. Sie bietet zuverlässigen Schutz vor Sonne und Witterung und ist eine praktische Lösung für stilvolle Außenbereiche. Dank des Kit-Systems ermöglicht sie eine einfache Planung, eine schnelle Montage und ein attraktives Preis-Leistungs-Verhältnis.
                 </p>
                 <button type="button" onClick={() => setDescExpanded(!descExpanded)} className="mt-0.5 text-xs font-semibold text-[#344148] underline underline-offset-2">
@@ -368,7 +368,7 @@ export const PreiswertePergolaPage = () => {
                       </button>
                     ))}
                   </div>
-                  <p className="mt-1.5 text-xs text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
+                  <p className="mt-1.5 text-[13px] text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
                 </div>
 
                 {/* Size */}
@@ -462,7 +462,7 @@ export const PreiswertePergolaPage = () => {
                                     <div className="scale-75">{addonItem?.icon}</div>
                                   </div>
                                   <div className="flex-1 min-w-0">
-                                    <div className="text-[11px] font-semibold leading-tight text-zinc-800">{acc.label}</div>
+                                    <div className="text-[13px] font-semibold leading-tight text-zinc-800">{acc.label}</div>
                                     <div className="text-[10px] text-zinc-400">+{formatPrice(acc.price)}</div>
                                   </div>
                                   <button

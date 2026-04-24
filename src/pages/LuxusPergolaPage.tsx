@@ -90,11 +90,11 @@ const gallery = [
 ];
 
 const colorOptions = [
-  { label: "White 9016 T", color: "#E8E4DF", hint: "Verkehrsweiß – hell und minimalistisch" },
-  { label: "Ivory 1015 T", color: "#D9C87A", hint: "Heller Elfenbeinton – warm und einladend" },
-  { label: "Gray 7046 T", color: "#8E9196", hint: "Telegrau – dezent und vielseitig" },
   { label: "Gray 7016 T", color: "#2E3234", hint: "Anthrazitgrau – zeitlos und elegant" },
+  { label: "Gray 7046 T", color: "#8E9196", hint: "Telegrau – dezent und vielseitig" },
   { label: "Black 9005 T", color: "#0A0A0D", hint: "Tiefschwarz – markant und modern" },
+  { label: "Ivory 1015 T", color: "#D9C87A", hint: "Heller Elfenbeinton – warm und einladend" },
+  { label: "White 9016 T", color: "#E8E4DF", hint: "Verkehrsweiß – hell und minimalistisch" },
 ];
 
 const breiteRange = { min: 1000, max: 6950, step: 1 };
@@ -443,7 +443,7 @@ export const LuxusPergolaPage = () => {
                     </div>
                   </div>
                   {/* Feature icons */}
-                  <div className="grid grid-cols-4 gap-2">
+                  <div className="grid grid-cols-3 gap-2">
                     {featureStory.map((item, i) => (
                       <div key={i} className="overflow-hidden rounded-xl">
                         <img src={item.image} alt="Feature" className="w-full h-full object-cover block" />
@@ -455,12 +455,12 @@ export const LuxusPergolaPage = () => {
             </div>
 
             {/* RIGHT: Configurator card */}
-            <div className="w-full lg:w-[42%] lg:max-h-[calc(100vh-100px)] lg:overflow-y-auto lg:pb-6 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
+            <div className="w-full lg:w-[42%] lg:max-h-[calc(100vh+130px)] lg:overflow-y-auto lg:pb-6 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
               <div className="rounded-3xl bg-white p-6 shadow-2xl md:p-7">
               <h1 className="font-lemonmilk text-2xl font-bold leading-tight text-[#344148] md:text-3xl">Luxus Pergola</h1>
               <p className="mt-1 text-sm text-zinc-500">Deine Luxus Pergola – millimetergenau gefertigt</p>
               <div className="mt-3 border-t border-stone-100 pt-3">
-                <p className={`text-xs leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
+                <p className={`text-[13px] leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
                   Die Luxus-Pergola ist ein exklusives Aluminium-Pergolasystem mit vollständig einfahrbaren und drehbaren Lamellen, integriertem Wasserablauf und hoher Widerstandsfähigkeit gegenüber Witterungseinflüssen. Sie schafft elegante Außenräume mit maximalem Komfort und einem besonders großzügigen Raumgefühl, da sich das Dach vollständig öffnen lässt und die Lamellen zusätzlich flexibel gedreht werden können. So ermöglicht sie sowohl optimalen Schutz vor Sonne und Regen als auch eine individuelle Steuerung von Licht, Schatten und Belüftung. Optional ist sie mit LED-Beleuchtung, Regen- und Windsensoren, Smartphone-Steuerung sowie seitlichen Glas- oder Zip-Systemen erhältlich.
                 </p>
                 <button type="button" onClick={() => setDescExpanded(!descExpanded)} className="mt-0.5 text-xs font-semibold text-[#344148] underline underline-offset-2">
@@ -495,14 +495,14 @@ export const LuxusPergolaPage = () => {
                       </button>
                     ))}
                   </div>
-                  <p className="mt-1.5 text-xs text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
+                  <p className="mt-1.5 text-[13px] text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
                 </div>
                 <div>
                   <p className="mb-2.5 text-xs font-bold uppercase tracking-widest text-zinc-400">Größe</p>
                   <div className="space-y-4 rounded-2xl bg-[#344148]/5 p-4">
                     <div>
                       <div className="mb-1.5 flex items-center justify-between">
-                        <span className="text-xs font-semibold text-[#344148]">Länge</span>
+                        <span className="text-[13px] font-semibold text-[#344148]">Länge</span>
                         {(() => { const err = laengeInput !== "" && (Number(laengeInput) > laengeRange.max || Number(laengeInput) < laengeRange.min); return (
                         <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
                           <input type="number" value={laengeInput}
@@ -520,7 +520,7 @@ export const LuxusPergolaPage = () => {
                     </div>
                     <div>
                       <div className="mb-1.5 flex items-center justify-between">
-                        <span className="text-xs font-semibold text-[#344148]">Breite</span>
+                        <span className="text-[13px] font-semibold text-[#344148]">Breite</span>
                         {(() => { const err = breiteInput !== "" && (Number(breiteInput) > breiteRange.max || Number(breiteInput) < breiteRange.min); return (
                         <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
                           <input type="number" value={breiteInput}
@@ -538,7 +538,7 @@ export const LuxusPergolaPage = () => {
                     </div>
                     <div>
                       <div className="mb-1.5 flex items-center justify-between">
-                        <span className="text-xs font-semibold text-[#344148]">Höhe</span>
+                        <span className="text-[13px] font-semibold text-[#344148]">Höhe</span>
                         {(() => { const err = hoeheInput !== "" && (Number(hoeheInput) > hoeheRange.max || Number(hoeheInput) < hoeheRange.min); return (
                         <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
                           <input type="number" value={hoeheInput}
@@ -613,7 +613,7 @@ export const LuxusPergolaPage = () => {
                                     <div className="scale-75">{addonItem?.icon}</div>
                                   </div>
                                   <div className="flex-1 min-w-0">
-                                    <div className="text-[11px] font-semibold leading-tight text-zinc-800">{acc.label}</div>
+                                    <div className="text-[13px] font-semibold leading-tight text-zinc-800">{acc.label}</div>
                                     <div className="text-[10px] text-zinc-400">+{formatPrice(acc.price)}</div>
                                   </div>
                                   <button

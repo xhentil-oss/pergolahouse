@@ -12,13 +12,12 @@ import photo3 from "../assets/Photo (26).png";
 import photo4 from "../assets/pergola-glass.png";
 import photo5 from "../assets/pergola-glass-guillot.png";
 import photo6 from "../assets/zip-screen-pergola.png";
-import icon1 from "@/assets/icon1.jpeg";
-import icon4 from "@/assets/icon4.jpeg";
-import icon6 from "@/assets/icon6.jpeg";
-import icon11 from "@/assets/icon11.jpeg";
-import icon17 from "@/assets/icon17.jpeg";
-import icon18 from "@/assets/icon18.jpeg";
-import icon10 from "@/assets/icon10.jpeg";
+import ikon1 from "@/assets/1 png.png";
+import ikon2 from "@/assets/2 png (1).png";
+import ikon3 from "@/assets/3 png.png";
+import ikon4 from "@/assets/4 png.png";
+import ikon5 from "@/assets/5 png.png";
+import ikon6 from "@/assets/6 png.png";
 import ikonaThjesht from "@/assets/ikona-thjesht.png";
 import ikonaMuri from "@/assets/ikona-muri.png";
 import ikonaMajtas from "@/assets/ikona-majtas.png";
@@ -36,11 +35,11 @@ const gallery = [
 ];
 
 const colorOptions = [
-  { label: "White 9016 T", color: "#E8E4DF", hint: "Verkehrsweiß – hell und minimalistisch" },
-  { label: "Ivory 1015 T", color: "#D9C87A", hint: "Heller Elfenbeinton – warm und einladend" },
-  { label: "Gray 7046 T", color: "#8E9196", hint: "Telegrau – dezent und vielseitig" },
   { label: "Gray 7016 T", color: "#2E3234", hint: "Anthrazitgrau – zeitlos und elegant" },
+  { label: "Gray 7046 T", color: "#8E9196", hint: "Telegrau – dezent und vielseitig" },
   { label: "Black 9005 T", color: "#0A0A0D", hint: "Tiefschwarz – markant und modern" },
+  { label: "Ivory 1015 T", color: "#D9C87A", hint: "Heller Elfenbeinton – warm und einladend" },
+  { label: "White 9016 T", color: "#E8E4DF", hint: "Verkehrsweiß – hell und minimalistisch" },
 ];
 
 const sizeOptions = [
@@ -94,13 +93,12 @@ const accessoryCategories = [
 const accessoryOptions = accessoryCategories.flatMap((c) => c.items);
 
 const featureStory = [
-  { image: icon18 },
-  { image: icon6 },
-  { image: icon4 },
-  { image: icon11 },
-  { image: icon1 },
-  { image: icon17 },
-  { image: icon10 },
+  { image: ikon1 },
+  { image: ikon2 },
+  { image: ikon3 },
+  { image: ikon4 },
+  { image: ikon5 },
+  { image: ikon6 },
 ];
 
 const addonItems = [
@@ -280,8 +278,8 @@ export const WintergartenPage = () => {
                   {/* Feature icons */}
                   <div className="grid grid-cols-3 gap-2">
                     {featureStory.map((item, i) => (
-                      <div key={i} className="overflow-hidden rounded-xl border border-white/10 bg-white/5">
-                        <img src={item.image} alt="Feature" className="w-full object-cover" />
+                      <div key={i} className="overflow-hidden rounded-xl">
+                        <img src={item.image} alt="Feature" className="w-full h-full object-cover block" />
                       </div>
                     ))}
                   </div>
@@ -290,7 +288,7 @@ export const WintergartenPage = () => {
             </div>
 
             {/* RIGHT: Configurator card */}
-            <div className="w-full lg:w-[42%] lg:max-h-[calc(100vh-100px)] lg:overflow-y-auto lg:pb-6 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
+            <div className="w-full lg:w-[42%] lg:max-h-[calc(100vh+130px)] lg:overflow-y-auto lg:pb-6 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
               <div className="rounded-3xl bg-white p-6 shadow-2xl md:p-7">
 
                 <h1 className="font-lemonmilk text-2xl font-bold leading-tight text-[#344148] md:text-3xl">Wintergarten</h1>
@@ -298,7 +296,7 @@ export const WintergartenPage = () => {
 
                 {/* description */}
                 <div className="mt-3 border-t border-stone-100 pt-3">
-                  <p className={`text-xs leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
+                  <p className={`text-[13px] leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
                     Der Wintergarten ist ein hochwertiges Aluminium- und Glassystem mit festem Glasdach, integrierter Wasserableitung und moderner, klarer Formensprache. Er schafft helle, offene Räume mit viel Tageslicht und bietet gleichzeitig zuverlässigen Schutz vor Witterungseinflüssen. Optional ist er mit Schiebe-, Guillotine- oder Zip-Systemen sowie weiteren Komfort- und Automatisierungslösungen erhältlich.
                   </p>
                   <button type="button" onClick={() => setDescExpanded(!descExpanded)} className="mt-0.5 text-xs font-semibold text-[#344148] underline underline-offset-2">
@@ -338,7 +336,7 @@ export const WintergartenPage = () => {
                         </button>
                       ))}
                     </div>
-                    <p className="mt-1.5 text-xs text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
+                    <p className="mt-1.5 text-[13px] text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
                   </div>
 
                   {/* Size */}
@@ -426,7 +424,7 @@ export const WintergartenPage = () => {
                                       <div className="scale-75">{addonItem?.icon}</div>
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                      <div className="text-[11px] font-semibold leading-tight text-zinc-800">{acc.label}</div>
+                                      <div className="text-[13px] font-semibold leading-tight text-zinc-800">{acc.label}</div>
                                       <div className="text-[10px] text-zinc-400">+{formatPrice(acc.price)}</div>
                                     </div>
                                     <button
