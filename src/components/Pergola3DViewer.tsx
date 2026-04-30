@@ -50,40 +50,46 @@ interface PergolaModelProps {
 }
 
 /* ── Individual Louver Blade ── */
-const LouverBlade = ({ position, bladeW, bladeD, material, targetAngle, delay }: {
+const LouverBlade = ({ position, bladeW, bladeD, material, targetAngle, targetX, delay, speed }: {
   position: [number, number, number];
   bladeW: number;
   bladeD: number;
   material: THREE.MeshStandardMaterial;
   targetAngle: number;
+  targetX: number;
   delay: number;
+  speed: number;
 }) => {
   const meshRef = useRef<THREE.Mesh>(null!);
-  const currentAngle = useRef(0);
-  const delayTimer = useRef(0);
-  const prevTarget = useRef(targetAngle);
+  const curAngle = useRef(0);
+  const curX = useRef(position[0]);
+  const timer = useRef(0);
+  const prevRef = useRef({ angle: targetAngle, x: targetX });
 
   useFrame((_, delta) => {
-    if (prevTarget.current !== targetAngle) {
-      delayTimer.current = 0;
-      prevTarget.current = targetAngle;
+    if (prevRef.current.angle !== targetAngle || prevRef.current.x !== targetX) {
+      timer.current = 0;
+      prevRef.current = { angle: targetAngle, x: targetX };
     }
-    delayTimer.current += delta;
-    if (delayTimer.current < delay) return;
-    currentAngle.current += (targetAngle - currentAngle.current) * Math.min(delta * 3, 1);
+    timer.current += delta;
+    if (timer.current < delay) return;
+    const lf = Math.min(delta * speed, 1);
+    curAngle.current += (targetAngle - curAngle.current) * lf;
+    curX.current += (targetX - curX.current) * lf;
     if (meshRef.current) {
-      meshRef.current.rotation.z = currentAngle.current;
+      meshRef.current.rotation.z = curAngle.current;
+      meshRef.current.position.x = curX.current;
     }
   });
 
   return (
-    <mesh ref={meshRef} position={position} rotation={[0, 0, 0]} material={material} castShadow>
+    <mesh ref={meshRef} position={position} material={material} castShadow>
       <boxGeometry args={[bladeW, 0.008, bladeD]} />
     </mesh>
   );
 };
 
-const PergolaModel = ({ width, depth, height, color, louversOpen, showDimensions }: PergolaModelProps & { louversOpen: boolean; showDimensions: boolean }) => {
+const PergolaModel = ({ width, depth, height, color, louversOpen, louversRetracted, showDimensions }: PergolaModelProps & { louversOpen: boolean; louversRetracted: boolean; showDimensions: boolean }) => {
   const groupRef = useRef<THREE.Group>(null!);
   const hex = colorMap[color] ?? color;
 
@@ -160,17 +166,28 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, showDimensions
       <RoundedBox args={[mainBeamW, mainBeamH, depth - mainBeamW * 2]} radius={0.01} smoothness={4} position={[halfW - mainBeamW / 2, beamCenterY, 0]} material={mainMat} castShadow />
 
       {/* ── Louver Blades ── */}
-      {louvers.map((x, i) => (
-        <LouverBlade
-          key={`louver-${i}`}
-          position={[x, roofY + 0.004, 0]}
-          bladeW={bladeW}
-          bladeD={bladeD}
-          material={mainMat}
-          targetAngle={louversOpen ? Math.PI / 2.5 : 0}
-          delay={i * 0.04}
-        />
-      ))}
+      {louvers.map((x, i) => {
+        const stackX = -halfW + mainBeamW + bladeW / 2 + i * 0.006;
+        const txX = louversRetracted ? stackX : x;
+        const txAngle = louversRetracted ? 0 : (louversOpen ? Math.PI / 2.5 : 0);
+        const delay = louversRetracted
+          ? (louverCount - 1 - i) * 0.20
+          : i * 0.20;
+        const speed = 0.45;
+        return (
+          <LouverBlade
+            key={`louver-${i}`}
+            position={[x, roofY + 0.004, 0]}
+            bladeW={bladeW}
+            bladeD={bladeD}
+            material={mainMat}
+            targetAngle={txAngle}
+            targetX={txX}
+            delay={delay}
+            speed={speed}
+          />
+        );
+      })}
 
       {/* ── Dimension lines ── */}
       {showDimensions && (
@@ -233,6 +250,7 @@ interface Pergola3DViewerProps {
 
 export const Pergola3DViewer = ({ breite, laenge, hoehe, color }: Pergola3DViewerProps) => {
   const [louversOpen, setLouversOpen] = useState(true);
+  const [louversRetracted, setLouversRetracted] = useState(false);
   const [showDimensions, setShowDimensions] = useState(false);
 
   const w = breite / 1000;
@@ -268,7 +286,7 @@ export const Pergola3DViewer = ({ breite, laenge, hoehe, color }: Pergola3DViewe
           <directionalLight position={[0, -8, 0]} intensity={0.7} color="#ffffff" />
           <hemisphereLight intensity={0.5} color="#ffffff" groundColor="#ffffff" />
 
-          <PergolaModel width={w} depth={d} height={h} color={color} louversOpen={louversOpen} showDimensions={showDimensions} />
+          <PergolaModel width={w} depth={d} height={h} color={color} louversOpen={louversOpen} louversRetracted={louversRetracted} showDimensions={showDimensions} />
 
           <OrbitControls
             enablePan={false}
@@ -296,8 +314,9 @@ export const Pergola3DViewer = ({ breite, laenge, hoehe, color }: Pergola3DViewe
       </div>
 
       {/* Toggle buttons row */}
-      <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center gap-8 bg-white border-t border-zinc-200" style={{ height: 44 }}>
+      <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center gap-5 bg-white border-t border-zinc-200" style={{ height: 44 }}>
         <ToggleSwitch checked={louversOpen} onChange={() => setLouversOpen(v => !v)} label="Lamellen öffnen" />
+        <ToggleSwitch checked={louversRetracted} onChange={() => setLouversRetracted(v => !v)} label="Lamellen einziehen" />
         <ToggleSwitch checked={showDimensions} onChange={() => setShowDimensions(v => !v)} label="Maße anzeigen" />
       </div>
     </div>
