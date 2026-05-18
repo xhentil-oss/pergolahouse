@@ -6,6 +6,7 @@ import { FeatureTicker } from "@/sections/FeatureTicker";
 import { useCart } from "@/context/CartContext";
 import { getPromotion } from "@/config/promotions";
 import { useDiscounts } from "@/context/DiscountContext";
+import { usePrices } from "@/context/PriceContext";
 import pergolaImg from "@/assets/pergola.png";
 import photo18 from "@/assets/Photo (18).png";
 import photo26 from "@/assets/Photo (26).png";
@@ -53,67 +54,17 @@ const sizeOptions = [
 
 import ikonaThjesht from "@/assets/ikona-thjesht.png";
 import ikonaMuri from "@/assets/ikona-muri.png";
-const mountOptions = [
-  { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
-  { label: "Wandmontage", img: ikonaMuri, surcharge: 240 },
-];
-
 import ikonaMajtas from "@/assets/ikona-majtas.png";
 import ikonaDjathtas from "@/assets/ikona-djathtas.png";
 import ikonaPerball from "@/assets/ikona-perball.png";
 import ikonaMbrapa from "@/assets/ikona-mbrapa.png";
+
 const sideOptions = [
   { key: "left", label: "Links", sizeLabel: "3m Seite", img: ikonaMajtas },
   { key: "right", label: "Rechts", sizeLabel: "3m Seite", img: ikonaDjathtas },
   { key: "front", label: "Vorne", sizeLabel: "3m Seite", img: ikonaPerball },
   { key: "back", label: "Hinten", sizeLabel: "3m Seite", img: ikonaMbrapa },
 ];
-
-const sideTypeChoices = [
-  { value: "none", label: "Keine", price: 0 },
-  { value: "screen", label: "Screen Rollo", price: 499 },
-  { value: "schiebeglas", label: "Schiebeverglasung", price: 899 },
-  { value: "guillotine", label: "Guillotine-Verglasung", price: 1199 },
-];
-
-const accessoryCategories = [
-  {
-    key: "beleuchtung",
-    label: "Beleuchtung",
-    icon: "💡",
-    items: [
-      { label: "Warmweißes Licht", description: "Warmes Ambiente-Licht für gemütliche Abende.", price: 329 },
-      { label: "Kaltweiß Licht", description: "Klares, modernes Kaltweiß-Licht für die Pergola.", price: 299 },
-      { label: "RGB-Beleuchtung", description: "Farbwechsel-Beleuchtung für individuelle Stimmungen.", price: 449 },
-      { label: "Perimeter-Beleuchtung", description: "Umlaufende Beleuchtung – dekorativer Premium-Effekt.", price: 389 },
-      { label: "Spot-Beleuchtung", description: "Fokussierte Beleuchtung – integrierte Spots in der Struktur.", price: 279 },
-    ],
-  },
-  {
-    key: "sensoren",
-    label: "Sensoren",
-    icon: "📡",
-    items: [
-      { label: "Windsensor", description: "Schließt die Lamellen automatisch bei starkem Wind.", price: 249 },
-      { label: "Regensensor", description: "Schließt die Lamellen automatisch bei Regen.", price: 219 },
-      { label: "Schneesensor", description: "Automatischer Schutz gegen Schnee und Lasteinwirkungen.", price: 239 },
-      { label: "Sonnensensor", description: "Regelt die Lamellen automatisch je nach Sonneneinstrahlung.", price: 229 },
-      { label: "Solar-System", description: "Optionales Solarsystem für den Motor – ideal ohne Stromanschluss.", price: 699 },
-    ],
-  },
-  {
-    key: "heizung",
-    label: "Heizung & Komfort",
-    icon: "🔥",
-    items: [
-      { label: "Infrarot-Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühlen Tagen.", price: 549 },
-      { label: "Integrierte Steckdosen", description: "Elektrische Steckdosen, integriert in die Pergola-Pfosten.", price: 199 },
-      { label: "Soundsystem", description: "Integrierbares Soundsystem – Musik überall unter der Pergola.", price: 599 },
-    ],
-  },
-];
-
-const accessoryOptions = accessoryCategories.flatMap((c) => c.items);
 
 
 
@@ -161,12 +112,47 @@ const Stars = ({ count }: { count: number }) => (
 /* ─────────────────────────────────────────────── */
 export const PreiswertePergolaPage = () => {
   const { addToCart } = useCart();
+  const { prices } = usePrices();
+
+  const mountOptions = [
+    { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
+    { label: "Wandmontage", img: ikonaMuri, surcharge: prices.wandmontage },
+  ];
+  const sideTypeChoices = [
+    { value: "none", label: "Keine", price: 0 },
+    { value: "screen", label: "Screen Rollo", price: prices.screenRollo },
+    { value: "schiebeglas", label: "Schiebeverglasung", price: prices.schiebeverglasung },
+    { value: "guillotine", label: "Guillotine-Verglasung", price: prices.guillotineVerglasung },
+  ];
+  const accessoryCategories = [
+    { key: "beleuchtung", label: "Beleuchtung", icon: "💡", items: [
+      { label: "Warmweißes Licht", description: "Warmes Ambiente-Licht für gemütliche Abende.", price: prices.warmweissesLicht },
+      { label: "Kaltweiß Licht", description: "Klares, modernes Kaltweiß-Licht für die Pergola.", price: prices.kaltweissLicht },
+      { label: "RGB-Beleuchtung", description: "Farbwechsel-Beleuchtung für individuelle Stimmungen.", price: prices.rgbBeleuchtung },
+      { label: "Perimeter-Beleuchtung", description: "Umlaufende Beleuchtung – dekorativer Premium-Effekt.", price: prices.perimeterBeleuchtung },
+      { label: "Spot-Beleuchtung", description: "Fokussierte Beleuchtung – integrierte Spots in der Struktur.", price: prices.spotBeleuchtung },
+    ]},
+    { key: "sensoren", label: "Sensoren", icon: "📡", items: [
+      { label: "Windsensor", description: "Schließt die Lamellen automatisch bei starkem Wind.", price: prices.windsensor },
+      { label: "Regensensor", description: "Schließt die Lamellen automatisch bei Regen.", price: prices.regensensor },
+      { label: "Schneesensor", description: "Automatischer Schutz gegen Schnee und Lasteinwirkungen.", price: prices.schneesensor },
+      { label: "Sonnensensor", description: "Regelt die Lamellen automatisch je nach Sonneneinstrahlung.", price: prices.sonnensensor },
+      { label: "Solar-System", description: "Optionales Solarsystem für den Motor – ideal ohne Stromanschluss.", price: prices.solarSystem },
+    ]},
+    { key: "heizung", label: "Heizung & Komfort", icon: "🔥", items: [
+      { label: "Infrarot-Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühlen Tagen.", price: prices.infrarotHeizung },
+      { label: "Integrierte Steckdosen", description: "Elektrische Steckdosen, integriert in die Pergola-Pfosten.", price: prices.integriertSteckdosen },
+      { label: "Soundsystem", description: "Integrierbares Soundsystem – Musik überall unter der Pergola.", price: prices.soundsystem },
+    ]},
+  ];
+  const accessoryOptions = accessoryCategories.flatMap((c) => c.items);
+
   /* state */
   const [activeImage, setActiveImage] = useState(0);
   const [descExpanded, setDescExpanded] = useState(false);
   const [selectedColor, setSelectedColor] = useState("Gray 7016 T");
   const [selectedSize, setSelectedSize] = useState(sizeOptions[0].label);
-  const [selectedMount, setSelectedMount] = useState(mountOptions[0].label);
+  const [selectedMount, setSelectedMount] = useState("Freistehend");
   const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -211,7 +197,7 @@ export const PreiswertePergolaPage = () => {
   const accTotal = accessoryOptions.filter((o) => selectedAccessories.includes(o.label)).reduce((s, o) => s + o.price, 0);
   const { isActive } = useDiscounts();
   const preiswertPromo = getPromotion("preiswerte-pergola");
-  const discountFactor = (preiswertPromo && isActive("preiswerte-pergola")) ? (1 - preiswertPromo.discountPercent / 100) : 1;
+  const discountFactor = (preiswertPromo && isActive("preiswerte-pergola")) ? (1 - prices.preiswerte_discountPercent / 100) : 1;
   const discountedBase = Math.round(sizeData.price * discountFactor);
   const finalPrice = discountedBase + mountData.surcharge + sideTotal + accTotal;
   const originalFinalPrice = sizeData.price + mountData.surcharge + sideTotal + accTotal;
@@ -343,7 +329,7 @@ export const PreiswertePergolaPage = () => {
                     <p className="text-xs text-white/50">Gesamtpreis</p>
                     {preiswertPromo?.active && (
                       <span className="rounded-full px-2 py-0.5 text-[9px] font-bold text-white" style={{ backgroundColor: "#82B2CA" }}>
-                        -{preiswertPromo.discountPercent}%
+                        -{prices.preiswerte_discountPercent}%
                       </span>
                     )}
                   </div>

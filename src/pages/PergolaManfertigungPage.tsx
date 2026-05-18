@@ -4,6 +4,7 @@ import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
 import { FeatureTicker } from "@/sections/FeatureTicker";
 import { useCart } from "@/context/CartContext";
+import { usePrices } from "@/context/PriceContext";
 import icon18 from "@/assets/icon18.jpeg";
 import icon6 from "@/assets/icon6.jpeg";
 import icon4 from "@/assets/icon4.jpeg";
@@ -43,39 +44,18 @@ const breiteRange = { min: 1000, max: 7000, step: 1 };
 const laengeRange = { min: 1000, max: 7000, step: 1 };
 const hoeheRange = { min: 1000, max: 3500, step: 1 };
 
-/* Price per m² for custom sizes */
-const pricePerSqm = 445;
-
 import ikonaThjesht from "@/assets/ikona-thjesht.png";
 import ikonaMuri from "@/assets/ikona-muri.png";
-const mountOptions = [
-  { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
-  { label: "Wandmontage", img: ikonaMuri, surcharge: 240 },
-];
-
 import ikonaMajtas from "@/assets/ikona-majtas.png";
 import ikonaDjathtas from "@/assets/ikona-djathtas.png";
 import ikonaPerball from "@/assets/ikona-perball.png";
 import ikonaMbrapa from "@/assets/ikona-mbrapa.png";
+
 const sideOptions = [
   { key: "left", label: "Links", sizeLabel: "Seite", img: ikonaMajtas },
   { key: "right", label: "Rechts", sizeLabel: "Seite", img: ikonaDjathtas },
   { key: "front", label: "Vorne", sizeLabel: "Seite", img: ikonaPerball },
   { key: "back", label: "Hinten", sizeLabel: "Seite", img: ikonaMbrapa },
-];
-
-const sideTypeChoices = [
-  { value: "none", label: "Keine", price: 0 },
-  { value: "screen", label: "Screen Rollo", price: 499 },
-  { value: "schiebeglas", label: "Schiebeverglasung", price: 899 },
-  { value: "guillotine", label: "Guillotine-Verglasung", price: 1199 },
-];
-
-const accessoryOptions = [
-  { label: "LED Warmweiß", description: "Warmweißes Licht für gemütliche Abende unter der Pergola.", price: 329 },
-  { label: "LED RGB", description: "Farbwechsel-Beleuchtung für individuelle Stimmungen und Akzente.", price: 449 },
-  { label: "Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühleren Tagen.", price: 549 },
-  { label: "Smart Steuerung", description: "Intelligente Steuerung per App – Lamellen, Licht und Heizung.", price: 399 },
 ];
 
 
@@ -116,6 +96,26 @@ const Stars = ({ count }: { count: number }) => (
 /* ─────────────────────────────────────────────── */
 export const PergolaManfertigungPage = () => {
   const { addToCart } = useCart();
+  const { prices } = usePrices();
+
+  const pricePerSqm = prices.pergolaPerSqm;
+  const mountOptions = [
+    { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
+    { label: "Wandmontage", img: ikonaMuri, surcharge: prices.wandmontage },
+  ];
+  const sideTypeChoices = [
+    { value: "none", label: "Keine", price: 0 },
+    { value: "screen", label: "Screen Rollo", price: prices.screenRollo },
+    { value: "schiebeglas", label: "Schiebeverglasung", price: prices.schiebeverglasung },
+    { value: "guillotine", label: "Guillotine-Verglasung", price: prices.guillotineVerglasung },
+  ];
+  const accessoryOptions = [
+    { label: "LED Warmweiß", description: "Warmweißes Licht für gemütliche Abende unter der Pergola.", price: prices.warmweissesLicht },
+    { label: "LED RGB", description: "Farbwechsel-Beleuchtung für individuelle Stimmungen und Akzente.", price: prices.rgbBeleuchtung },
+    { label: "Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühleren Tagen.", price: prices.infrarotHeizung },
+    { label: "Smart Steuerung", description: "Intelligente Steuerung per App – Lamellen, Licht und Heizung.", price: 399 },
+  ];
+
   /* state */
   const [activeImage, setActiveImage] = useState(0);
   const [louversOpen, setLouversOpen] = useState(false);
@@ -124,7 +124,7 @@ export const PergolaManfertigungPage = () => {
   const [breite, setBreite] = useState(3395);
   const [laenge, setLaenge] = useState(2330);
   const [hoehe, setHoehe] = useState(1441);
-  const [selectedMount, setSelectedMount] = useState(mountOptions[0].label);
+  const [selectedMount, setSelectedMount] = useState("Freistehend");
   const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
   const [showAccessories, setShowAccessories] = useState(false);
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);

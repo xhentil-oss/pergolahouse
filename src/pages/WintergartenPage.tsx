@@ -6,6 +6,7 @@ import { FeatureTicker } from "@/sections/FeatureTicker";
 import { useCart } from "@/context/CartContext";
 import { getPromotion } from "@/config/promotions";
 import { useDiscounts } from "@/context/DiscountContext";
+import { usePrices } from "@/context/PriceContext";
 import photo1 from "../assets/image-pergola.png";
 import photo2 from "../assets/image-light.png";
 import photo3 from "../assets/Photo (26).png";
@@ -42,55 +43,12 @@ const colorOptions = [
   { label: "White 9016 T", color: "#E8E4DF", hint: "Verkehrsweiß – hell und minimalistisch" },
 ];
 
-const sizeOptions = [
-  { label: "3×3 m", price: 6490 },
-  { label: "3×4 m", price: 7190 },
-  { label: "3×5 m", price: 7890 },
-  { label: "3×6 m", price: 8590 },
-  { label: "4×4 m", price: 8990 },
-  { label: "4×5 m", price: 9690 },
-  { label: "4×6 m", price: 10390 },
-];
-
-const mountOptions = [
-  { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
-  { label: "Wandmontage", img: ikonaMuri, surcharge: 240 },
-];
-
 const sideOptions = [
   { key: "left", label: "Links", img: ikonaMajtas },
   { key: "right", label: "Rechts", img: ikonaDjathtas },
   { key: "front", label: "Vorne", img: ikonaPerball },
   { key: "back", label: "Hinten", img: ikonaMbrapa },
 ];
-
-const sideTypeChoices = [
-  { value: "none", label: "Keine", price: 0 },
-  { value: "screen", label: "Screen Rollo", price: 499 },
-  { value: "schiebeglas", label: "Schiebeverglasung", price: 899 },
-  { value: "guillotine", label: "Guillotine-Verglasung", price: 1199 },
-];
-
-const accessoryCategories = [
-  {
-    key: "beleuchtung",
-    label: "Beleuchtung",
-    items: [
-      { label: "Warmweißes Licht", description: "Warmweißes Licht für gemütliche Abende im Wintergarten.", price: 329 },
-      { label: "RGB-Beleuchtung", description: "Farbwechsel-Beleuchtung für individuelle Stimmungen und Akzente.", price: 449 },
-    ],
-  },
-  {
-    key: "komfort",
-    label: "Heizung & Komfort",
-    items: [
-      { label: "Infrarot-Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühleren Tagen.", price: 549 },
-      { label: "Smart Steuerung", description: "Intelligente Steuerung per App – Lamellen, Licht und Heizung.", price: 399 },
-    ],
-  },
-];
-
-const accessoryOptions = accessoryCategories.flatMap((c) => c.items);
 
 const featureStory = [
   { image: ikon1 },
@@ -133,11 +91,44 @@ const Stars = ({ count }: { count: number }) => (
 /* ─────────────────────────────────────────────── */
 export const WintergartenPage = () => {
   const { addToCart } = useCart();
+  const { prices } = usePrices();
+
+  const sizeOptions = [
+    { label: "3×3 m", price: prices.wintergarten_3x3 },
+    { label: "3×4 m", price: prices.wintergarten_3x4 },
+    { label: "3×5 m", price: prices.wintergarten_3x5 },
+    { label: "3×6 m", price: prices.wintergarten_3x6 },
+    { label: "4×4 m", price: prices.wintergarten_4x4 },
+    { label: "4×5 m", price: prices.wintergarten_4x5 },
+    { label: "4×6 m", price: prices.wintergarten_4x6 },
+  ];
+  const mountOptions = [
+    { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
+    { label: "Wandmontage", img: ikonaMuri, surcharge: prices.wandmontage },
+  ];
+  const sideTypeChoices = [
+    { value: "none", label: "Keine", price: 0 },
+    { value: "screen", label: "Screen Rollo", price: prices.screenRollo },
+    { value: "schiebeglas", label: "Schiebeverglasung", price: prices.schiebeverglasung },
+    { value: "guillotine", label: "Guillotine-Verglasung", price: prices.guillotineVerglasung },
+  ];
+  const accessoryCategories = [
+    { key: "beleuchtung", label: "Beleuchtung", items: [
+      { label: "Warmweißes Licht", description: "Warmweißes Licht für gemütliche Abende im Wintergarten.", price: prices.warmweissesLicht },
+      { label: "RGB-Beleuchtung", description: "Farbwechsel-Beleuchtung für individuelle Stimmungen und Akzente.", price: prices.rgbBeleuchtung },
+    ]},
+    { key: "komfort", label: "Heizung & Komfort", items: [
+      { label: "Infrarot-Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühleren Tagen.", price: prices.infrarotHeizung },
+      { label: "Smart Steuerung", description: "Intelligente Steuerung per App – Lamellen, Licht und Heizung.", price: 399 },
+    ]},
+  ];
+  const accessoryOptions = accessoryCategories.flatMap((c) => c.items);
+
   const [activeImage, setActiveImage] = useState(0);
   const [descExpanded, setDescExpanded] = useState(false);
   const [selectedColor, setSelectedColor] = useState("Gray 7016 T");
-  const [selectedSize, setSelectedSize] = useState(sizeOptions[0].label);
-  const [selectedMount, setSelectedMount] = useState(mountOptions[0].label);
+  const [selectedSize, setSelectedSize] = useState("3×3 m");
+  const [selectedMount, setSelectedMount] = useState("Freistehend");
   const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -179,7 +170,7 @@ export const WintergartenPage = () => {
   const accTotal = accessoryOptions.filter((o) => selectedAccessories.includes(o.label)).reduce((s, o) => s + o.price, 0);
   const { isActive } = useDiscounts();
   const winterPromo = getPromotion("wintergarten");
-  const discountFactor = (winterPromo && isActive("wintergarten")) ? (1 - winterPromo.discountPercent / 100) : 1;
+  const discountFactor = (winterPromo && isActive("wintergarten")) ? (1 - prices.wintergarten_discountPercent / 100) : 1;
   const discountedBase = Math.round(sizeData.price * discountFactor);
   const finalPrice = discountedBase + mountData.surcharge + sideTotal + accTotal;
   const originalFinalPrice = sizeData.price + mountData.surcharge + sideTotal + accTotal;
@@ -311,7 +302,7 @@ export const WintergartenPage = () => {
                       <p className="text-xs text-white/50">Gesamtpreis</p>
                       {winterPromo?.active && (
                         <span className="rounded-full px-2 py-0.5 text-[9px] font-bold text-white" style={{ backgroundColor: "#82B2CA" }}>
-                          -{winterPromo.discountPercent}%
+                          -{prices.wintergarten_discountPercent}%
                         </span>
                       )}
                     </div>

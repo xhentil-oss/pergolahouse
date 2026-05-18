@@ -13,6 +13,7 @@ import { CarportsPage } from "@/pages/CarportsPage";
 import { ZipScreensPage } from "@/pages/ZipScreensPage";
 import { CartProvider } from "@/context/CartContext";
 import { DiscountProvider } from "@/context/DiscountContext";
+import { PriceProvider } from "@/context/PriceContext";
 import { AdminPage } from "@/pages/AdminPage";
 import { CheckoutPage } from "@/pages/CheckoutPage";
 
@@ -25,6 +26,7 @@ const ScrollToTop = () => {
 export const App = () => {
   return (
     <BrowserRouter>
+      <PriceProvider>
       <DiscountProvider>
       <CartProvider>
         <ScrollToTop />
@@ -46,6 +48,7 @@ export const App = () => {
         </Routes>
       </CartProvider>
       </DiscountProvider>
+      </PriceProvider>
     </BrowserRouter>
   );
 };
