@@ -1,9 +1,9 @@
 import { ProductCard } from "@/sections/ProductSlider/components/ProductCard";
 import { useRef, useState, useEffect } from "react";
-import photo2 from "@/assets/Photo (2).png";
-import photo3 from "@/assets/Photo (3).png";
+import photo2 from "@/assets/elegante8.png";
+import photo3 from "@/assets/luxus1.png";
 import photo4 from "@/assets/Photo (4).png";
-import photo5 from "@/assets/Photo (5).png";
+import photo5 from "@/assets/wintergarden1.png";
 import photo6 from "@/assets/Photo (6).png";
 import photo7 from "@/assets/Photo (7).png";
 

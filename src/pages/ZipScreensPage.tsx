@@ -265,9 +265,6 @@ export const ZipScreensPage = () => {
           </div>
         </section>
 
-        {/* ── Ticker ── */}
-        <FeatureTicker backgroundColorClass="bg-[#344148]" />
-
         {/* ── Contact CTA ── */}
         <section className="bg-zinc-950 py-12 text-center text-white md:py-16">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#82B2CA]">Über 100.000 zufriedene Kunden weltweit</p>
@@ -318,7 +315,7 @@ export const ZipScreensPage = () => {
         </section>
 
         {/* ── Ticker bottom ── */}
-        <FeatureTicker backgroundColorClass="bg-[#344148]" />
+        <FeatureTicker backgroundColorClass="bg-[#344148]" textColorClass="text-white" />
 
         {/* ── FAQ ── */}
         <section className="relative overflow-hidden bg-gradient-to-b from-zinc-50 to-white">

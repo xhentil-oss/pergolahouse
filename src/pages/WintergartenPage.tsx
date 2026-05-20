@@ -7,12 +7,16 @@ import { useCart } from "@/context/CartContext";
 import { getPromotion } from "@/config/promotions";
 import { useDiscounts } from "@/context/DiscountContext";
 import { usePrices } from "@/context/PriceContext";
-import photo1 from "../assets/image-pergola.png";
-import photo2 from "../assets/image-light.png";
-import photo3 from "../assets/Photo (26).png";
-import photo4 from "../assets/pergola-glass.png";
-import photo5 from "../assets/pergola-glass-guillot.png";
-import photo6 from "../assets/zip-screen-pergola.png";
+import { Wintergarten3DViewer } from "@/components/Wintergarten3DViewer";
+import photo1 from "../assets/wintergarden1.png";
+import photo2 from "../assets/wintergarden2.png";
+import photo3 from "../assets/wintergarden3.png";
+import photo4 from "../assets/wintergarden4.png";
+import photo5 from "../assets/wintergarden5.png";
+import photo6 from "../assets/wintergarden6.png";
+import photo7 from "../assets/wintergarden7.png";
+import photo8 from "../assets/wintergarden8.png";
+import photo9 from "../assets/wintergarden9.png";
 import ikon1 from "@/assets/1 png.png";
 import ikon2 from "@/assets/2 png (1).png";
 import ikon3 from "@/assets/3 png.png";
@@ -27,21 +31,25 @@ import ikonaPerball from "@/assets/ikona-perball.png";
 import ikonaMbrapa from "@/assets/ikona-mbrapa.png";
 
 const gallery = [
-  { src: photo1, alt: "Wintergarten – modernes minimalistisches Design, Tag" },
-  { src: photo2, alt: "Wintergarten – modernes minimalistisches Design, Nacht" },
-  { src: photo3, alt: "Wintergarten – LED RGB am Pool" },
-  { src: photo4, alt: "Wintergarten – mit Glaswänden, Gartenatmosphäre" },
-  { src: photo5, alt: "Wintergarten – mit Glaswänden, Entspannungsbereich" },
-  { src: photo6, alt: "Wintergarten – klassisch, am Pool" },
+  { src: photo1, alt: "Wintergarten 1" },
+  { src: photo2, alt: "Wintergarten 9" },
+  { src: photo3, alt: "Wintergarten 3" },
+  { src: photo4, alt: "Wintergarten 4" },
+  { src: photo5, alt: "Wintergarten 5" },
+  { src: photo6, alt: "Wintergarten 6" },
+  { src: photo7, alt: "Wintergarten 7" },
+  { src: photo8, alt: "Wintergarten 8" },
+  { src: photo9, alt: "Wintergarten 2" },
 ];
 
 const colorOptions = [
-  { label: "Gray 7016 T", color: "#2E3234", hint: "Anthrazitgrau – zeitlos und elegant" },
-  { label: "Gray 7046 T", color: "#8E9196", hint: "Telegrau – dezent und vielseitig" },
-  { label: "Black 9005 T", color: "#0A0A0D", hint: "Tiefschwarz – markant und modern" },
-  { label: "Ivory 1015 T", color: "#D9C87A", hint: "Heller Elfenbeinton – warm und einladend" },
-  { label: "White 9016 T", color: "#E8E4DF", hint: "Verkehrsweiß – hell und minimalistisch" },
+  { label: "7016 T", color: "#2E3234", hint: "Anthrazitgrau – zeitlos und elegant" },
+  { label: "9016 T", color: "#F0EDE8", hint: "Verkehrsweiß – hell und minimalistisch" },
 ];
+
+const breiteRange = { min: 1000, max: 20000, step: 1 };
+const laengeRange = { min: 1000, max: 4500,  step: 1 };
+const hoeheRange  = { min: 2000, max: 7300,  step: 1 };
 
 const sideOptions = [
   { key: "left", label: "Links", img: ikonaMajtas },
@@ -93,24 +101,17 @@ export const WintergartenPage = () => {
   const { addToCart } = useCart();
   const { prices } = usePrices();
 
-  const sizeOptions = [
-    { label: "3×3 m", price: prices.wintergarten_3x3 },
-    { label: "3×4 m", price: prices.wintergarten_3x4 },
-    { label: "3×5 m", price: prices.wintergarten_3x5 },
-    { label: "3×6 m", price: prices.wintergarten_3x6 },
-    { label: "4×4 m", price: prices.wintergarten_4x4 },
-    { label: "4×5 m", price: prices.wintergarten_4x5 },
-    { label: "4×6 m", price: prices.wintergarten_4x6 },
-  ];
+  const pricePerSqm = prices.wintergarten_3x3 / 9;
   const mountOptions = [
     { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
     { label: "Wandmontage", img: ikonaMuri, surcharge: prices.wandmontage },
   ];
   const sideTypeChoices = [
     { value: "none", label: "Keine", price: 0 },
-    { value: "screen", label: "Screen Rollo", price: prices.screenRollo },
-    { value: "schiebeglas", label: "Schiebeverglasung", price: prices.schiebeverglasung },
-    { value: "guillotine", label: "Guillotine-Verglasung", price: prices.guillotineVerglasung },
+    { value: "guillotine", label: "Guillotine-Glassysteme", price: prices.guillotineVerglasung },
+    { value: "faltglas", label: "Faltglassysteme", price: prices.schiebeverglasung },
+    { value: "schiebeglas", label: "Schiebeglassysteme", price: prices.schiebeverglasung },
+    { value: "zip", label: "Zip-Screens", price: prices.screenRollo },
   ];
   const accessoryCategories = [
     { key: "beleuchtung", label: "Beleuchtung", items: [
@@ -126,8 +127,13 @@ export const WintergartenPage = () => {
 
   const [activeImage, setActiveImage] = useState(0);
   const [descExpanded, setDescExpanded] = useState(false);
-  const [selectedColor, setSelectedColor] = useState("Gray 7016 T");
-  const [selectedSize, setSelectedSize] = useState("3×3 m");
+  const [selectedColor, setSelectedColor] = useState("7016 T");
+  const [breite, setBreite] = useState(3000);
+  const [laenge, setLaenge] = useState(3000);
+  const [hoehe, setHoehe] = useState(2800);
+  const [breiteInput, setBreiteInput] = useState("3000");
+  const [laengeInput, setLaengeInput] = useState("3000");
+  const [hoeheInput, setHoeheInput] = useState("2800");
   const [selectedMount, setSelectedMount] = useState("Freistehend");
   const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
@@ -151,7 +157,7 @@ export const WintergartenPage = () => {
       const diff = startX - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 50) {
         setActiveImage((prev) => {
-          if (diff > 0) return Math.min(prev + 1, gallery.length - 1);
+          if (diff > 0) return Math.min(prev + 1, gallery.length);
           return Math.max(prev - 1, 0);
         });
       }
@@ -161,7 +167,9 @@ export const WintergartenPage = () => {
     return () => { el.removeEventListener("touchstart", handleStart); el.removeEventListener("touchend", handleEnd); };
   }, []);
 
-  const sizeData = sizeOptions.find((o) => o.label === selectedSize) ?? sizeOptions[0];
+  const sqm = (breite / 1000) * (laenge / 1000);
+  const basePrice = Math.round(sqm * pricePerSqm);
+  const sizeLabel = `${breite}x${laenge}x${hoehe}mm`;
   const mountData = mountOptions.find((o) => o.label === selectedMount) ?? mountOptions[0];
   const sideTotal = Object.values(sides).reduce((sum, v) => {
     const choice = sideTypeChoices.find((c) => c.value === v);
@@ -171,9 +179,9 @@ export const WintergartenPage = () => {
   const { isActive } = useDiscounts();
   const winterPromo = getPromotion("wintergarten");
   const discountFactor = (winterPromo && isActive("wintergarten")) ? (1 - prices.wintergarten_discountPercent / 100) : 1;
-  const discountedBase = Math.round(sizeData.price * discountFactor);
+  const discountedBase = Math.round(basePrice * discountFactor);
   const finalPrice = discountedBase + mountData.surcharge + sideTotal + accTotal;
-  const originalFinalPrice = sizeData.price + mountData.surcharge + sideTotal + accTotal;
+  const originalFinalPrice = basePrice + mountData.surcharge + sideTotal + accTotal;
 
   const toggleAccessory = (label: string) =>
     setSelectedAccessories((c) => (c.includes(label) ? c.filter((x) => x !== label) : [...c, label]));
@@ -193,12 +201,12 @@ export const WintergartenPage = () => {
       productName: "Wintergarten",
       image: gallery[0].src,
       color: selectedColor,
-      size: selectedSize,
+      size: sizeLabel,
       mount: selectedMount,
       mountSurcharge: mountData.surcharge,
       sides: cartSides,
       accessories: cartAccessories,
-      basePrice: sizeData.price,
+      basePrice,
       totalPrice: finalPrice,
     });
   };
@@ -219,18 +227,26 @@ export const WintergartenPage = () => {
             </div>
           </div>
 
-          <div className="mx-auto flex max-w-[1440px] flex-col gap-6 px-5 pb-10 pt-4 md:px-12 lg:grid lg:grid-cols-[58fr_42fr] lg:items-start lg:gap-8 lg:px-16 lg:pb-16">
+          <div className="mx-auto flex max-w-[1440px] flex-col gap-6 px-5 pb-10 pt-4 md:px-12 lg:grid lg:grid-cols-[58fr_42fr] lg:items-stretch lg:gap-8 lg:px-16 lg:pb-16">
             {/* LEFT: Gallery */}
             <div className="w-full">
               <div className="flex gap-3">
                 {/* Vertical thumbnail strip */}
                 <div className="hidden flex-col gap-2 md:flex">
+                  {/* 3D view thumbnail */}
+                  <button
+                    type="button"
+                    onClick={() => setActiveImage(0)}
+                    className={`h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 transition-all flex items-center justify-center ${activeImage === 0 ? "border-[#82B2CA] opacity-100 bg-[#344148]" : "border-transparent opacity-50 hover:opacity-80 bg-zinc-700"}`}
+                  >
+                    <span className="text-[10px] font-bold text-white tracking-wide">3D</span>
+                  </button>
                   {gallery.map((img, i) => (
                     <button
                       key={img.src}
                       type="button"
-                      onClick={() => setActiveImage(i)}
-                      className={`h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 transition-all ${activeImage === i ? "border-[#82B2CA] opacity-100" : "border-transparent opacity-50 hover:opacity-80"}`}
+                      onClick={() => setActiveImage(i + 1)}
+                      className={`h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 transition-all ${activeImage === i + 1 ? "border-[#82B2CA] opacity-100" : "border-transparent opacity-50 hover:opacity-80"}`}
                     >
                       <img src={img.src} alt={img.alt} className="h-full w-full object-cover" />
                     </button>
@@ -240,11 +256,22 @@ export const WintergartenPage = () => {
                 {/* Main image + featureStory below */}
                 <div className="flex flex-1 flex-col gap-2">
                   <div ref={galleryRef} className="relative overflow-hidden rounded-2xl">
-                    <img
-                      src={gallery[activeImage].src}
-                      alt={gallery[activeImage].alt}
-                      className="aspect-[4/3] w-full object-cover md:h-[480px]"
-                    />
+                    {activeImage === 0 ? (
+                      <div className="aspect-[4/3] w-full md:h-[480px]">
+                        <Wintergarten3DViewer
+                          breite={breite}
+                          tiefe={laenge}
+                          hoehe={hoehe}
+                          color={selectedColor}
+                        />
+                      </div>
+                    ) : (
+                      <img
+                        src={gallery[activeImage - 1].src}
+                        alt={gallery[activeImage - 1].alt}
+                        className="w-full object-contain"
+                      />
+                    )}
                     <button
                       type="button"
                       onClick={() => setActiveImage((p) => Math.max(p - 1, 0))}
@@ -254,13 +281,13 @@ export const WintergartenPage = () => {
                     </button>
                     <button
                       type="button"
-                      onClick={() => setActiveImage((p) => Math.min(p + 1, gallery.length - 1))}
+                      onClick={() => setActiveImage((p) => Math.min(p + 1, gallery.length))}
                       className="absolute right-3 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/60"
                     >
                       <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
                     </button>
                     <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5 md:hidden">
-                      {gallery.map((_, i) => (
+                      {[...Array(gallery.length + 1)].map((_, i) => (
                         <button key={i} type="button" onClick={() => setActiveImage(i)} className={`h-1.5 rounded-full transition-all ${activeImage === i ? "w-5 bg-white" : "w-1.5 bg-white/40"}`} />
                       ))}
                     </div>
@@ -333,23 +360,69 @@ export const WintergartenPage = () => {
                   {/* Size */}
                   <div>
                     <p className="mb-2.5 text-xs font-bold uppercase tracking-widest text-zinc-400">Größe</p>
-                    <div className="grid grid-cols-2 gap-2">
-                      {sizeOptions.map((s) => (
-                        <button key={s.label} type="button" onClick={() => setSelectedSize(s.label)}
-                          className={`group relative flex flex-col gap-1.5 rounded-2xl border-2 px-3 py-3 text-left transition-all ${selectedSize === s.label ? "border-[#344148] bg-[#344148]/5 shadow-sm" : "border-stone-200 bg-white hover:border-[#82B2CA]/50 hover:bg-stone-50"}`}>
-                          <div className="flex items-center justify-between gap-2">
-                            <div className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition-all ${selectedSize === s.label ? "border-[#344148] bg-[#344148]" : "border-stone-300"}`}>
-                              {selectedSize === s.label && (
-                                <svg className="h-2.5 w-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-                              )}
-                            </div>
-                            <span className={`rounded-md px-2 py-0.5 text-[10px] font-bold ${selectedSize === s.label ? "bg-[#344148] text-white" : "bg-stone-100 text-zinc-600"}`}>
-                              {formatPrice(s.price)}
-                            </span>
-                          </div>
-                          <div className={`font-bold text-base leading-tight ${selectedSize === s.label ? "text-[#344148]" : "text-zinc-800"}`}>{s.label}</div>
-                        </button>
-                      ))}
+                    <div className="space-y-4 rounded-2xl bg-[#344148]/5 p-4">
+                      {/* Länge */}
+                      <div>
+                        <div className="mb-1.5 flex items-center justify-between">
+                          <span className="text-[13px] font-semibold text-[#344148]">Länge</span>
+                          {(() => { const err = laengeInput !== "" && (Number(laengeInput) > laengeRange.max || Number(laengeInput) < laengeRange.min); return (
+                          <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
+                            <input type="number" value={laengeInput}
+                              onFocus={() => setLaengeInput("")}
+                              onChange={(e) => { setLaengeInput(e.target.value); const v = Number(e.target.value); if (!isNaN(v) && v > 0) setLaenge(v); }}
+                              onBlur={() => { const v = Math.max(laengeRange.min, Math.min(laengeRange.max, Number(laengeInput) || laengeRange.min)); setLaenge(v); setLaengeInput(String(v)); }}
+                              className={`w-16 bg-transparent pl-2.5 py-1 text-xs font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
+                            <span className={`pr-2.5 text-xs font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
+                          </div>); })()}
+                        </div>
+                        <input type="range" min={laengeRange.min} max={laengeRange.max} step={laengeRange.step} value={laenge} onChange={(e) => { setLaenge(Number(e.target.value)); setLaengeInput(e.target.value); }}
+                          className="h-1.5 w-full cursor-pointer appearance-none rounded-full [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow"
+                          style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #d6d3d1 ${((laenge - laengeRange.min) / (laengeRange.max - laengeRange.min)) * 100}%, #d6d3d1 100%)` }}
+                        />
+                      </div>
+                      {/* Breite */}
+                      <div>
+                        <div className="mb-1.5 flex items-center justify-between">
+                          <span className="text-[13px] font-semibold text-[#344148]">Breite</span>
+                          {(() => { const err = breiteInput !== "" && (Number(breiteInput) > breiteRange.max || Number(breiteInput) < breiteRange.min); return (
+                          <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
+                            <input type="number" value={breiteInput}
+                              onFocus={() => setBreiteInput("")}
+                              onChange={(e) => { setBreiteInput(e.target.value); const v = Number(e.target.value); if (!isNaN(v) && v > 0) setBreite(v); }}
+                              onBlur={() => { const v = Math.max(breiteRange.min, Math.min(breiteRange.max, Number(breiteInput) || breiteRange.min)); setBreite(v); setBreiteInput(String(v)); }}
+                              className={`w-16 bg-transparent pl-2.5 py-1 text-xs font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
+                            <span className={`pr-2.5 text-xs font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
+                          </div>); })()}
+                        </div>
+                        <input type="range" min={breiteRange.min} max={breiteRange.max} step={breiteRange.step} value={breite} onChange={(e) => { setBreite(Number(e.target.value)); setBreiteInput(e.target.value); }}
+                          className="h-1.5 w-full cursor-pointer appearance-none rounded-full [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow"
+                          style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #d6d3d1 ${((breite - breiteRange.min) / (breiteRange.max - breiteRange.min)) * 100}%, #d6d3d1 100%)` }}
+                        />
+                      </div>
+                      {/* Höhe */}
+                      <div>
+                        <div className="mb-1.5 flex items-center justify-between">
+                          <span className="text-[13px] font-semibold text-[#344148]">Höhe</span>
+                          {(() => { const err = hoeheInput !== "" && (Number(hoeheInput) > hoeheRange.max || Number(hoeheInput) < hoeheRange.min); return (
+                          <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
+                            <input type="number" value={hoeheInput}
+                              onFocus={() => setHoeheInput("")}
+                              onChange={(e) => { setHoeheInput(e.target.value); const v = Number(e.target.value); if (!isNaN(v) && v > 0) setHoehe(v); }}
+                              onBlur={() => { const v = Math.max(hoeheRange.min, Math.min(hoeheRange.max, Number(hoeheInput) || hoeheRange.min)); setHoehe(v); setHoeheInput(String(v)); }}
+                              className={`w-16 bg-transparent pl-2.5 py-1 text-xs font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
+                            <span className={`pr-2.5 text-xs font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
+                          </div>); })()}
+                        </div>
+                        <input type="range" min={hoeheRange.min} max={hoeheRange.max} step={hoeheRange.step} value={hoehe} onChange={(e) => { setHoehe(Number(e.target.value)); setHoeheInput(e.target.value); }}
+                          className="h-1.5 w-full cursor-pointer appearance-none rounded-full [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#344148] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow"
+                          style={{ background: `linear-gradient(to right, #82B2CA 0%, #82B2CA ${((hoehe - hoeheRange.min) / (hoeheRange.max - hoeheRange.min)) * 100}%, #d6d3d1 ${((hoehe - hoeheRange.min) / (hoeheRange.max - hoeheRange.min)) * 100}%, #d6d3d1 100%)` }}
+                        />
+                      </div>
+                      {/* Dachneigung — fixed */}
+                      <div className="flex items-center justify-between rounded-xl bg-white px-3 py-2 border border-stone-200">
+                        <span className="text-[13px] font-semibold text-[#344148]">Wasserabfluss (Dachneigung)</span>
+                        <span className="rounded-md bg-[#344148] px-2 py-0.5 text-[11px] font-bold text-white">8°</span>
+                      </div>
                     </div>
                   </div>
 
@@ -453,9 +526,6 @@ export const WintergartenPage = () => {
           </div>
         </section>
 
-        {/* ── Ticker ── */}
-        <FeatureTicker backgroundColorClass="bg-[#344148]" />
-
         {/* ── Contact CTA ── */}
         <section className="bg-zinc-950 py-10 md:py-16 px-4 text-center text-white">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#82B2CA]">Über 100.000 zufriedene Kunden weltweit</p>
@@ -510,8 +580,69 @@ export const WintergartenPage = () => {
           </div>
         </section>
 
+        {/* ── Produktinformation ── */}
+        <section className="bg-white py-16 md:py-24">
+          <div className="mx-auto max-w-[1440px] px-4 md:px-16">
+            <div className="mb-12 text-center">
+              <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
+                Einleitung
+              </span>
+              <h2 className="mt-4 text-2xl font-bold text-[#344148] md:text-4xl">Der Wintergarten</h2>
+              <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-zinc-500 md:text-base">
+                Ein modernes, transparentes Glasdachsystem, das Wohn- und Gewerbeflächen mit natürlichem Licht, ganzjährigem Komfort und einem freien Panoramablick aufwertet.
+              </p>
+            </div>
+            <div className="grid gap-6 md:grid-cols-3 mb-6">
+              <div className="rounded-2xl border border-stone-100 bg-stone-50 p-7">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#344148]">
+                  <svg className="h-6 w-6 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
+                </div>
+                <h3 className="mb-2 text-base font-bold text-[#344148]">Natürliches Licht & Panoramablick</h3>
+                <p className="text-sm leading-relaxed text-zinc-500">Das transparente Glasdach sorgt für viel Tageslicht, ein helles offenes Ambiente und einen ungestörten Panoramablick — als harmonischer Übergang zwischen innen und außen.</p>
+              </div>
+              <div className="rounded-2xl border border-stone-100 bg-stone-50 p-7">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#344148]">
+                  <svg className="h-6 w-6 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+                </div>
+                <h3 className="mb-2 text-base font-bold text-[#344148]">Energieeffizienz & Komfort</h3>
+                <p className="text-sm leading-relaxed text-zinc-500">Gute Wärmedämmung und optionale intelligente Ausstattung wie LED-Beleuchtung sowie Regen-, Wind- und Schneesensoren verbessern das Raumklima und reduzieren den Energiebedarf.</p>
+              </div>
+              <div className="rounded-2xl border border-stone-100 bg-stone-50 p-7">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#344148]">
+                  <svg className="h-6 w-6 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" /></svg>
+                </div>
+                <h3 className="mb-2 text-base font-bold text-[#344148]">Vielseitigkeit & modernes Design</h3>
+                <p className="text-sm leading-relaxed text-zinc-500">Erhältlich in verschiedenen Farben und Konfigurationen — mit Schiebesystemen, Automatisierung und integrierter Beleuchtung. Ideal für Wohnbereiche, Terrassen, Restaurants und Hotels.</p>
+              </div>
+            </div>
+            <div className="grid gap-6 md:grid-cols-3">
+              <div className="rounded-2xl border border-stone-100 bg-stone-50 p-7">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#344148]">
+                  <svg className="h-6 w-6 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>
+                </div>
+                <h3 className="mb-2 text-base font-bold text-[#344148]">Integriertes Entwässerungssystem</h3>
+                <p className="text-sm leading-relaxed text-zinc-500">Feste Sicherheitsglas-Paneele mit dezenter Neigung leiten Regenwasser zuverlässig ab. Die kontrollierte Entwässerung erfolgt unauffällig über die vorderen Stützen.</p>
+              </div>
+              <div className="rounded-2xl border border-stone-100 bg-stone-50 p-7">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#344148]">
+                  <svg className="h-6 w-6 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
+                </div>
+                <h3 className="mb-2 text-base font-bold text-[#344148]">Hochwertige Verarbeitung</h3>
+                <p className="text-sm leading-relaxed text-zinc-500">Keine sichtbaren Schrauben, schmal gestaltete Zwischenprofile und hochwertige Oberflächen ergeben ein harmonisches, minimalistisches Erscheinungsbild.</p>
+              </div>
+              <div className="rounded-2xl border border-stone-100 bg-stone-50 p-7">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#344148]">
+                  <svg className="h-6 w-6 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" /></svg>
+                </div>
+                <h3 className="mb-2 text-base font-bold text-[#344148]">Individuell erweiterbar</h3>
+                <p className="text-sm leading-relaxed text-zinc-500">Flexibel anpassbar mit Guillotine-Systemen, Schiebesystemen oder Zip-Screens — für zusätzlichen Komfort, Wind- und Sichtschutz sowie ein modernes Gesamtbild.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ── Ticker bottom ── */}
-        <FeatureTicker backgroundColorClass="bg-[#344148]" />
+        <FeatureTicker backgroundColorClass="bg-[#344148]" textColorClass="text-white" />
 
         {/* ── FAQ ── */}
         <section className="relative overflow-hidden bg-gradient-to-b from-zinc-50 to-white">

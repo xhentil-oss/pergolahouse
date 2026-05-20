@@ -10,7 +10,7 @@ import icon6 from "@/assets/icon6.jpeg";
 import icon4 from "@/assets/icon4.jpeg";
 import icon11 from "@/assets/icon11.jpeg";
 import icon13 from "@/assets/icon13.jpeg";
-import icon1 from "@/assets/icon1.jpeg";
+import icon1 from "@/assets/icon2.jpeg";
 import { Pergola3DViewer } from "@/components/Pergola3DViewer";
 
 /* ─── image gallery ─── */
@@ -518,7 +518,7 @@ export const PergolaManfertigungPage = () => {
         </section>
 
         {/* ── Ticker ── */}
-        <FeatureTicker backgroundColorClass="bg-[#344148]" />
+        <FeatureTicker backgroundColorClass="bg-[#344148]" textColorClass="text-white" />
 
         {/* ── Contact CTA ── */}
         <section className="bg-zinc-950 py-12 text-center text-white md:py-16">
@@ -564,7 +564,7 @@ export const PergolaManfertigungPage = () => {
         </section>
 
         {/* ── Ticker bottom ── */}
-        <FeatureTicker backgroundColorClass="bg-[#344148]" />
+        <FeatureTicker backgroundColorClass="bg-[#344148]" textColorClass="text-white" />
 
         {/* ── FAQ ── */}
         <section className="relative overflow-hidden bg-gradient-to-b from-zinc-50 to-white">

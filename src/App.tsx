@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { HomePage } from "@/pages/HomePage";
 import { UeberUnsPage } from "@/pages/UeberUnsPage";
@@ -25,7 +25,7 @@ const ScrollToTop = () => {
 
 export const App = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <PriceProvider>
       <DiscountProvider>
       <CartProvider>
@@ -49,6 +49,6 @@ export const App = () => {
       </CartProvider>
       </DiscountProvider>
       </PriceProvider>
-    </HashRouter>
+    </BrowserRouter>
   );
 };

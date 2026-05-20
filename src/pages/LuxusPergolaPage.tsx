@@ -22,23 +22,25 @@ import ikon6 from "@/assets/6 png.png";
 import { Pergola3DViewer } from "@/components/Pergola3DViewer";
 
 
-import photo2 from "../assets/First page.png";
-import photo3 from "../assets/6.png";
-import photo4 from "../assets/5.png";
-import photo5 from "../assets/3.png";
-import photo6 from "../assets/4.png";
-import photo7 from "../assets/2.png";
-import photo8 from "../assets/1.png";
+import photo1 from "../assets/luxus1.png";
+import photo2 from "../assets/luxus2.png";
+import photo3 from "../assets/luxus3.png";
+import photo4 from "../assets/luxus4.png";
+import photo5 from "../assets/luxus5.png";
+import photo6 from "../assets/luxus6.png";
+import photo7 from "../assets/luxus7.png";
+import photo8 from "../assets/luxus8.png";
+import luxusDiagram from "../assets/luxus-diagram.png";
 
 const gallery = [
-
-  { src: photo2, alt: "Luxus-Pergola – Premium Design mit Pool" },
-  { src: photo3, alt: "Luxus-Pergola – Anthrazit mit Gartenbereich" },
-  { src: photo4, alt: "Luxus-Pergola – Business Outdoor Bereich" },
-  { src: photo5, alt: "Luxus-Pergola – LED-Beleuchtung bei Nacht" },
-  { src: photo6, alt: "Luxus-Pergola – Modernes Outdoor-Wohnen" },
-  { src: photo7, alt: "Luxus-Pergola – Wintergarten mit Pool" },
-  { src: photo8, alt: "Luxus-Pergola – Lamellen-Detailansicht" },
+  { src: photo1, alt: "Luxus-Pergola 1" },
+  { src: photo2, alt: "Luxus-Pergola 2" },
+  { src: photo3, alt: "Luxus-Pergola 3" },
+  { src: photo4, alt: "Luxus-Pergola 4" },
+  { src: photo5, alt: "Luxus-Pergola 5" },
+  { src: photo6, alt: "Luxus-Pergola 6" },
+  { src: photo7, alt: "Luxus-Pergola 7" },
+  { src: photo8, alt: "Luxus-Pergola 8" },
 ];
 
 const colorOptions = [
@@ -228,9 +230,10 @@ export const LuxusPergolaPage = () => {
   ];
   const sideTypeChoices = [
     { value: "none", label: "Keine", price: 0 },
-    { value: "screen", label: "Screen Rollo", price: prices.screenRollo },
-    { value: "schiebeglas", label: "Schiebeverglasung", price: prices.schiebeverglasung },
-    { value: "guillotine", label: "Guillotine-Verglasung", price: prices.guillotineVerglasung },
+    { value: "guillotine", label: "Guillotine-Glassysteme", price: prices.guillotineVerglasung },
+    { value: "faltglas", label: "Faltglassysteme", price: prices.schiebeverglasung },
+    { value: "schiebeglas", label: "Schiebeglassysteme", price: prices.schiebeverglasung },
+    { value: "zip", label: "Zip-Screens", price: prices.screenRollo },
   ];
   const accessoryCategories = [
     { key: "beleuchtung", label: "Beleuchtung", icon: "💡", items: [
@@ -624,7 +627,6 @@ export const LuxusPergolaPage = () => {
           </div>
         </div>
         </section>
-        <FeatureTicker backgroundColorClass="bg-[#344148]" />
         <section className="bg-zinc-950 py-10 text-center text-white md:py-16 px-4">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#82B2CA]">Über 100.000 zufriedene Kunden weltweit</p>
           <h2 className="mx-auto mt-3 max-w-xl text-2xl font-semibold md:text-4xl">Haben Sie noch Fragen?</h2>
@@ -675,7 +677,88 @@ export const LuxusPergolaPage = () => {
             </div>
           </div>
         </section>
-        <FeatureTicker backgroundColorClass="bg-[#344148]" />
+
+        {/* ── Produktinformation ── */}
+        <section className="bg-white py-16 md:py-24">
+          <div className="mx-auto max-w-[1440px] px-4 md:px-16">
+
+            {/* Header */}
+            <div className="mb-12 text-center">
+              <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
+                Einführung
+              </span>
+              <h2 className="mt-4 text-2xl font-bold text-[#344148] md:text-4xl">
+                Die Luxus Pergola
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-zinc-500 md:text-base">
+                Ein wasserdichtes Beschattungssystem mit drehbaren Lamellen. Vollständig aus Aluminium gefertigt – für höchste Langlebigkeit, zuverlässige Widerstandsfähigkeit und eine elegante, moderne Optik.
+              </p>
+            </div>
+
+            {/* Feature cards */}
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-16">
+
+              <div className="rounded-2xl border border-stone-100 bg-stone-50 p-7">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#344148]">
+                  <svg className="h-6 w-6 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                  </svg>
+                </div>
+                <h3 className="mb-2 text-base font-bold text-[#344148]">Wetterschutz & Entwässerung</h3>
+                <p className="text-sm leading-relaxed text-zinc-500">
+                  Zuverlässiger Schutz vor Sonne, Regen und Schnee durch ein spezielles Entwässerungssystem. Die flexibel verstellbaren Lamellen reduzieren Hitzeentwicklung und minimieren Blendungen effektiv.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-stone-100 bg-stone-50 p-7">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#344148]">
+                  <svg className="h-6 w-6 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+                  </svg>
+                </div>
+                <h3 className="mb-2 text-base font-bold text-[#344148]">Einfahrbares Lamellensystem</h3>
+                <p className="text-sm leading-relaxed text-zinc-500">
+                  Einzigartiges einfahrbares System per Fernbedienung steuerbar. Ermöglicht präzise Kontrolle von Licht, Schatten und Belüftung sowie ein offeneres Raumgefühl und großzügigere Aussicht.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-stone-100 bg-stone-50 p-7 md:col-span-2 lg:col-span-1">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#344148]">
+                  <svg className="h-6 w-6 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+                  </svg>
+                </div>
+                <h3 className="mb-2 text-base font-bold text-[#344148]">Vielseitige Einsatzbereiche</h3>
+                <p className="text-sm leading-relaxed text-zinc-500">
+                  Ideal für Wohnhäuser, Hotelanlagen, Restaurants und Cafés. Schafft unabhängig von den Witterungsbedingungen einen komfortablen, stilvollen Bereich für Erholung und geselliges Beisammensein.
+                </p>
+              </div>
+            </div>
+
+            {/* Lamellenausrichtung */}
+            <div className="rounded-3xl bg-[#344148] px-8 py-10 md:px-14 md:py-14">
+              <div className="mb-8">
+                <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA] mb-4">
+                  Lamellenausrichtung & Dachöffnung
+                </span>
+                <h3 className="text-xl font-bold text-white md:text-3xl mb-3">
+                  Stufenlos verstellbar — bis zur maximalen Öffnung
+                </h3>
+                <p className="text-sm leading-relaxed text-white/60 max-w-2xl">
+                  Bei 90° erreichen die Lamellen ihre maximale Öffnungsposition und ermöglichen so eine vollständige Nutzung des natürlichen Sonnenlichts.
+                </p>
+              </div>
+              <img
+                src={luxusDiagram}
+                alt="Lamellenausrichtung Diagramm"
+                className="w-full rounded-2xl"
+              />
+            </div>
+
+          </div>
+        </section>
+
+        <FeatureTicker backgroundColorClass="bg-[#344148]" textColorClass="text-white" />
         <section className="relative overflow-hidden bg-gradient-to-b from-zinc-50 to-white">
           <div className="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-[#82B2CA]/20 blur-[100px]" />
           <div className="pointer-events-none absolute -right-40 bottom-20 h-80 w-80 rounded-full bg-[#82B2CA]/15 blur-[100px]" />
