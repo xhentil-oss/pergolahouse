@@ -18,15 +18,15 @@ import ikon5 from "@/assets/5 png.png";
 import ikon6 from "@/assets/6 png.png";
 
 /* ─── image gallery ─── */
-import preiswerte1 from "../assets/preiswerte1.png";
-import preiswerte2 from "../assets/preiswerte2.png";
-import preiswerte3 from "../assets/preiswerte3.png";
-import preiswerte4 from "../assets/preiswerte4.png";
-import preiswerte5 from "../assets/preiswerte5.png";
-import preiswerte6 from "../assets/preiswerte6.png";
-import preiswerte7 from "../assets/preiswerte7.png";
-import preiswerte8 from "../assets/preiswerte8.png";
-import preiswerte9 from "../assets/preiswerte9.png";
+import preiswerte1 from "../assets/Preiswerte1.png";
+import preiswerte2 from "../assets/Preiswerte2.png";
+import preiswerte3 from "../assets/Preiswerte3.png";
+import preiswerte4 from "../assets/Preiswerte4.png";
+import preiswerte5 from "../assets/Preiswerte5.png";
+import preiswerte6 from "../assets/Preiswerte6.png";
+import preiswerte7 from "../assets/Preiswerte7.png";
+import preiswerte8 from "../assets/Preiswerte8.png";
+import preiswerte9 from "../assets/Preiswerte9.png";
 
 const gallery = [
   { src: preiswerte1, alt: "Preiswerte Pergola 1" },
