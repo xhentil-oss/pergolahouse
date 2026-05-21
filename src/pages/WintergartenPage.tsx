@@ -81,6 +81,7 @@ const addonItems = [
   { title: "Schneesensor", subtitle: "Schutz bei Schneefall", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v18M3 12h18M5.636 5.636l12.728 12.728M18.364 5.636L5.636 18.364" /></svg>), color: "#BAE6FD" },
   { title: "Sonnensensor", subtitle: "Automatisch bei Sonneneinstrahlung", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>), color: "#F59E0B" },
   { title: "Solar-System", subtitle: "Für Standorte ohne Stromanschluss", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>), color: "#84CC16" },
+  { title: "Smart Steuerung", subtitle: "Intelligente App-Steuerung", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 15.75h3" /></svg>), color: "#82B2CA" },
 ];
 
 const formatPrice = (n: number) =>
@@ -116,10 +117,22 @@ export const WintergartenPage = () => {
   const accessoryCategories = [
     { key: "beleuchtung", label: "Beleuchtung", items: [
       { label: "Warmweißes Licht", description: "Warmweißes Licht für gemütliche Abende im Wintergarten.", price: prices.warmweissesLicht },
-      { label: "RGB-Beleuchtung", description: "Farbwechsel-Beleuchtung für individuelle Stimmungen und Akzente.", price: prices.rgbBeleuchtung },
+      { label: "Kaltweiß Licht", description: "Klares, modernes Kaltweiß-Licht.", price: prices.kaltweissLicht },
+      { label: "RGB-Beleuchtung", description: "Farbwechsel-Beleuchtung für individuelle Stimmungen.", price: prices.rgbBeleuchtung },
+      { label: "Perimeter-Beleuchtung", description: "Umlaufende Beleuchtung – dekorativer Premium-Effekt.", price: prices.perimeterBeleuchtung },
+      { label: "Spot-Beleuchtung", description: "Integrierte Spots für gezielte Ausleuchtung.", price: prices.spotBeleuchtung },
+    ]},
+    { key: "sensoren", label: "Sensoren", items: [
+      { label: "Windsensor", description: "Automatische Reaktion bei starkem Wind.", price: prices.windsensor },
+      { label: "Regensensor", description: "Automatischer Schutz bei Regen.", price: prices.regensensor },
+      { label: "Schneesensor", description: "Schutz bei Schneefall.", price: prices.schneesensor },
+      { label: "Sonnensensor", description: "Automatisch bei starker Sonneneinstrahlung.", price: prices.sonnensensor },
+      { label: "Solar-System", description: "Für Standorte ohne Stromanschluss.", price: prices.solarSystem },
     ]},
     { key: "komfort", label: "Heizung & Komfort", items: [
-      { label: "Infrarot-Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühleren Tagen.", price: prices.infrarotHeizung },
+      { label: "Infrarot-Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme.", price: prices.infrarotHeizung },
+      { label: "Integrierte Steckdosen", description: "Elektrische Steckdosen, integriert in die Pfosten.", price: prices.integriertSteckdosen },
+      { label: "Soundsystem", description: "Integrierbares Soundsystem für Musik im Wintergarten.", price: prices.soundsystem },
       { label: "Smart Steuerung", description: "Intelligente Steuerung per App – Lamellen, Licht und Heizung.", price: prices.smartSteuerung },
     ]},
   ];
