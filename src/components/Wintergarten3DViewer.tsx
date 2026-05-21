@@ -47,10 +47,10 @@ const DimensionLine = ({ from, to, label, tickDir }: {
 
 interface WintergartenModelProps {
   width: number; depth: number; backH: number; frontH: number;
-  color: string; showDimensions: boolean; sideSystem: SideSystem; faltOpen: boolean; schOpen: boolean;
+  color: string; showDimensions: boolean; sideSystem: SideSystem; faltOpen: boolean; schOpen: boolean; zipDown: boolean;
 }
 
-const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions, sideSystem, faltOpen, schOpen }: WintergartenModelProps) => {
+const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions, sideSystem, faltOpen, schOpen, zipDown }: WintergartenModelProps) => {
   const hex = colorMap[color] ?? "#2E3234";
   const halfW = width / 2;
   const halfD = depth / 2;
@@ -67,6 +67,16 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
     () => new THREE.MeshStandardMaterial({ color: hex, roughness: 0.38, metalness: 0.28 }),
     [hex]
   );
+
+  // Zip screen — solid dark fabric material
+  const zipFabricMat = useMemo(() => new THREE.MeshStandardMaterial({
+    color: '#3a3a3a',
+    transparent: true,
+    opacity: 0.90,
+    roughness: 0.96,
+    metalness: 0.02,
+    side: THREE.DoubleSide,
+  }), []);
 
   const pitchAngle = Math.atan2(backH - frontH, depth);
   const slopedLen  = Math.sqrt(depth * depth + (backH - frontH) * (backH - frontH));
@@ -111,6 +121,16 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
     return s;
   }, [halfD, postS, backH, frontH, beamH]);
 
+  // Triangular glass above the traversa — fills the 8° wedge on each side
+  const upperSideShape = useMemo(() => {
+    const s = new THREE.Shape();
+    s.moveTo(-halfD + postS, frontH - beamH * 0.6);
+    s.lineTo( halfD - postS, frontH - beamH * 0.6);
+    s.lineTo( halfD - postS, backH  - beamH * 0.6);
+    s.closePath();
+    return s;
+  }, [halfD, postS, frontH, backH, beamH]);
+
   const mullionDivs = 0; // Schiebeglas now uses individual panels, not mullions
 
   const frontInnerW   = width - postS * 2;
@@ -141,7 +161,18 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
 
   // Schiebeglas sliding animation refs
   const frontSchRefs = useRef<(THREE.Group | null)[]>([]);
-  // Three Z-tracks (fixed per panel), only X moves
+  const leftSchRefs  = useRef<(THREE.Group | null)[]>([]);
+  const rightSchRefs = useRef<(THREE.Group | null)[]>([]);
+
+  // Zip screen roll-down refs
+  const zipCurrentRef   = useRef(1); // start fully down
+  const zipFrontRef     = useRef<THREE.Mesh | null>(null);
+  const zipFrontRailRef = useRef<THREE.Mesh | null>(null);
+  const zipLeftRef      = useRef<THREE.Mesh | null>(null);
+  const zipLeftRailRef  = useRef<THREE.Mesh | null>(null);
+  const zipRightRef     = useRef<THREE.Mesh | null>(null);
+  const zipRightRailRef = useRef<THREE.Mesh | null>(null);
+  // Front: Z-tracks fixed, X moves
   const schTracks = [-halfD + 0.005, -halfD + 0.022, -halfD + 0.038];
   const schClosedXs = [
     -halfW + postS + (frontInnerW / schCount) * 0.5,
@@ -153,6 +184,20 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
     -halfW + postS + (frontInnerW / schCount) * 0.5,
     -halfW + postS + (frontInnerW / schCount) * 0.5,
   ];
+  // Side: X-tracks fixed, Z moves
+  const sSPW = (depth - postS * 2) / schCount;
+  const schSideClosedZs = [
+    -halfD + postS + sSPW * 0.5,
+    -halfD + postS + sSPW * 1.5,
+    -halfD + postS + sSPW * 2.5,
+  ];
+  const schSideOpenZs = [
+    halfD - postS - sSPW * 0.5,
+    halfD - postS - sSPW * 0.5,
+    halfD - postS - sSPW * 0.5,
+  ];
+  const schSideTracks_L = [-halfW + 0.005, -halfW + 0.022, -halfW + 0.038];
+  const schSideTracks_R = [ halfW - 0.005,  halfW - 0.022,  halfW - 0.038];
 
   useFrame((_, delta) => {
     const target = faltOpen ? 1.30 : 0.03;
@@ -177,29 +222,50 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
     const hBackSide  = backH  - beamH * 0.6;
     leftPanelRefs.current.forEach((ref, i) => {
       if (!ref) return;
-      const pcz  = stackStartZ + projZ * i + projZ / 2;
-      const zFrac = Math.max(0, Math.min(1, (pcz - stackStartZ) / depthInner));
-      const targetH = hFrontSide + zFrac * (hBackSide - hFrontSide);
+      const pcz = stackStartZ + projZ * i + projZ / 2;
       ref.position.z = pcz;
       ref.rotation.y = i % 2 === 0 ? -fold : fold;
-      if (ref.userData.baseH) ref.scale.y = targetH / ref.userData.baseH;
     });
     rightPanelRefs.current.forEach((ref, i) => {
       if (!ref) return;
-      const pcz  = stackStartZ + projZ * i + projZ / 2;
-      const zFrac = Math.max(0, Math.min(1, (pcz - stackStartZ) / depthInner));
-      const targetH = hFrontSide + zFrac * (hBackSide - hFrontSide);
+      const pcz = stackStartZ + projZ * i + projZ / 2;
       ref.position.z = pcz;
       ref.rotation.y = i % 2 === 0 ? fold : -fold;
-      if (ref.userData.baseH) ref.scale.y = targetH / ref.userData.baseH;
     });
 
-    // Schiebeglas: slide panels in X toward open/closed target
+    // Schiebeglas front: slide in X
     frontSchRefs.current.forEach((ref, i) => {
       if (!ref) return;
       const targetX = schOpen ? schOpenXs[i] : schClosedXs[i];
       ref.position.x = THREE.MathUtils.lerp(ref.position.x, targetX, Math.min(1, delta * 2.8));
     });
+    // Schiebeglas sides: slide in Z (fixed height, no scale.y needed)
+    [leftSchRefs, rightSchRefs].forEach((refsObj) => {
+      refsObj.current.forEach((ref, i) => {
+        if (!ref) return;
+        const targetZ = schOpen ? schSideOpenZs[i] : schSideClosedZs[i];
+        ref.position.z = THREE.MathUtils.lerp(ref.position.z, targetZ, Math.min(1, delta * 2.8));
+      });
+    });
+
+    // Zip screen roll-down animation
+    if (isZip) {
+      const zipTarget = zipDown ? 1 : 0;
+      zipCurrentRef.current = THREE.MathUtils.lerp(zipCurrentRef.current, zipTarget, Math.min(1, delta * 2.5));
+      const zc  = zipCurrentRef.current;
+      const sc  = Math.max(0.001, zc);
+      const zipH = frontH - beamH * 0.6;
+      // Screen: scale from top → position.y = topY - visibleH/2
+      const screenCY = zipH - (zipH * sc) / 2;
+      // Bottom rail follows the bottom edge of the screen
+      const railY = zipH - zipH * zc;
+      if (zipFrontRef.current) { zipFrontRef.current.scale.y = sc; zipFrontRef.current.position.y = screenCY; }
+      if (zipFrontRailRef.current) zipFrontRailRef.current.position.y = railY;
+      if (zipLeftRef.current) { zipLeftRef.current.scale.y = sc; zipLeftRef.current.position.y = screenCY; }
+      if (zipLeftRailRef.current) zipLeftRailRef.current.position.y = railY;
+      if (zipRightRef.current) { zipRightRef.current.scale.y = sc; zipRightRef.current.position.y = screenCY; }
+      if (zipRightRailRef.current) zipRightRailRef.current.position.y = railY;
+    }
   });
 
   return (
@@ -251,20 +317,11 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
         rotation={[-pitchAngle, 0, 0]}
         position={[-halfW + beamD/2, slopeCenterY - beamH/2, 0]} material={frameMat} castShadow />
 
-      {/* Left inner side top rail — 20 cm inside outer edge, clearly visible from inside */}
-      <RoundedBox args={[beamH, beamH, slopedLen]} radius={0.008} smoothness={4}
-        rotation={[-pitchAngle, 0, 0]}
-        position={[-halfW + beamD + beamH * 2, slopeCenterY - beamH * 0.6, 0]} material={frameMat} castShadow />
-
       {/* Right outer sloped beam (roof edge) */}
       <RoundedBox args={[beamD, beamH, slopedLen]} radius={0.008} smoothness={4}
         rotation={[-pitchAngle, 0, 0]}
         position={[ halfW - beamD/2, slopeCenterY - beamH/2, 0]} material={frameMat} castShadow />
 
-      {/* Right inner side top rail — 20 cm inside outer edge, clearly visible from inside */}
-      <RoundedBox args={[beamH, beamH, slopedLen]} radius={0.008} smoothness={4}
-        rotation={[-pitchAngle, 0, 0]}
-        position={[ halfW - beamD - beamH * 2, slopeCenterY - beamH * 0.6, 0]} material={frameMat} castShadow />
 
       {/* ── Side panels ── */}
       {showPanels && !isZip && (
@@ -275,14 +332,10 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
               const fold0 = foldCurrentRef.current;
               const sPW   = (depth - postS * 2) / faltCount;
               const projZ0 = sPW * Math.cos(fold0);
-              const depthInner = depth - postS * 2;
-              const hFront = frontH - beamH * 0.6;
-              const hBack  = backH  - beamH * 0.6;
               const stackStartZ = -halfD + postS;
+              const hPanel = frontH - beamH * 0.6;
               return Array.from({ length: faltCount }, (_, i) => {
                 const pcz0  = stackStartZ + projZ0 * i + projZ0 / 2;
-                const zFrac = Math.max(0, Math.min(1, (pcz0 - (-halfD + postS)) / depthInner));
-                const hPanel = hFront + zFrac * (hBack - hFront);
                 const hSide = i % 2 === 0 ? 1 : -1;
                 const handleZ = hSide * (sPW / 2 - faltFrameW - handleThk * 1.2);
                 return (
@@ -305,35 +358,22 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
             })()
           ) : isSchiebeglas ? (
             (() => {
-              const sPW  = (depth - postS * 2) / schCount;
-              const depthInner = depth - postS * 2;
-              const hFront = frontH - beamH * 0.6;
-              const hBack  = backH  - beamH * 0.6;
-              const divThk  = 0.008;
-              const divCount = 2;
+              const pH = frontH - beamH * 0.6 - trackH;
+              const pCy = trackH + pH / 2;
+              const divThk = 0.008; const divCount = 2;
               return Array.from({ length: schCount }, (_, i) => {
-                const pcz  = -halfD + postS + sPW * i + sPW / 2;
-                const xOff = i % 2 === 0 ? 0.008 : 0.034;
-                const zFrac = Math.max(0, Math.min(1, (sPW * i + sPW / 2) / depthInner));
-                const pH   = (hFront + zFrac * (hBack - hFront)) - trackH;
-                const pCy  = trackH + pH / 2;
+                const initZ = schSideClosedZs[i];
+                const xOff  = schSideTracks_L[i];
                 return (
-                  <group key={i} position={[-halfW + xOff, 0, pcz]}>
+                  <group key={i} ref={el => { leftSchRefs.current[i] = el; }}
+                    position={[xOff, 0, initZ]}>
                     <mesh position={[0, pCy, 0]}>
-                      <boxGeometry args={[glassTh * 2, pH - schFrameW * 2, sPW - schFrameW * 2]} />
-                      <meshStandardMaterial color="#d4eef6" transparent opacity={0.20}
-                        roughness={0.02} metalness={0.06} side={THREE.DoubleSide} depthWrite={false} />
+                      <boxGeometry args={[glassTh * 1.5, pH, sSPW + 0.004]} />
+                      <meshStandardMaterial color="#d8eef6" transparent opacity={0.19}
+                        roughness={0.01} metalness={0.08} side={THREE.DoubleSide} depthWrite={false} />
                     </mesh>
-                    <RoundedBox args={[schFrameW, pH, schFrameW]} radius={0.005} smoothness={4}
-                      position={[0, pCy, -sPW / 2 + schFrameW / 2]} material={frameMat} castShadow />
-                    <RoundedBox args={[schFrameW, pH, schFrameW]} radius={0.005} smoothness={4}
-                      position={[0, pCy,  sPW / 2 - schFrameW / 2]} material={frameMat} castShadow />
-                    <RoundedBox args={[schFrameW, schFrameW, sPW]} radius={0.005} smoothness={4}
-                      position={[0, trackH + pH - schFrameW / 2, 0]} material={frameMat} castShadow />
-                    <RoundedBox args={[schFrameW, schFrameW, sPW]} radius={0.005} smoothness={4}
-                      position={[0, trackH + schFrameW / 2, 0]} material={frameMat} castShadow />
                     {Array.from({ length: divCount }, (_, d) => {
-                      const zPos = -sPW / 2 + (sPW / (divCount + 1)) * (d + 1);
+                      const zPos = -sSPW / 2 + (sSPW / (divCount + 1)) * (d + 1);
                       return (
                         <mesh key={d} position={[0, pCy, zPos]}>
                           <boxGeometry args={[glassTh * 2.8, pH, divThk]} />
@@ -342,6 +382,12 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
                         </mesh>
                       );
                     })}
+                    {/* Handle on closing panel — front edge, interior face */}
+                    {i === 0 && (
+                      <RoundedBox args={[schHandleThk * 0.45, schHandleH, schHandleThk * 0.8]} radius={0.005} smoothness={4}
+                        position={[schHandleThk * 0.3, pCy, -sSPW / 2 + schHandleThk * 1.4]}
+                        material={frameMat} castShadow />
+                    )}
                   </group>
                 );
               });
@@ -359,14 +405,10 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
               const fold0 = foldCurrentRef.current;
               const sPW   = (depth - postS * 2) / faltCount;
               const projZ0 = sPW * Math.cos(fold0);
-              const depthInner = depth - postS * 2;
-              const hFront = frontH - beamH * 0.6;
-              const hBack  = backH  - beamH * 0.6;
               const stackStartZ = -halfD + postS;
+              const hPanel = frontH - beamH * 0.6;
               return Array.from({ length: faltCount }, (_, i) => {
                 const pcz0  = stackStartZ + projZ0 * i + projZ0 / 2;
-                const zFrac = Math.max(0, Math.min(1, (pcz0 - (-halfD + postS)) / depthInner));
-                const hPanel = hFront + zFrac * (hBack - hFront);
                 const hSide = i % 2 === 0 ? 1 : -1;
                 const handleZ = hSide * (sPW / 2 - faltFrameW - handleThk * 1.2);
                 return (
@@ -389,35 +431,22 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
             })()
           ) : isSchiebeglas ? (
             (() => {
-              const sPW  = (depth - postS * 2) / schCount;
-              const depthInner = depth - postS * 2;
-              const hFront = frontH - beamH * 0.6;
-              const hBack  = backH  - beamH * 0.6;
-              const divThk  = 0.008;
-              const divCount = 2;
+              const pH = frontH - beamH * 0.6 - trackH;
+              const pCy = trackH + pH / 2;
+              const divThk = 0.008; const divCount = 2;
               return Array.from({ length: schCount }, (_, i) => {
-                const pcz  = -halfD + postS + sPW * i + sPW / 2;
-                const xOff = i % 2 === 0 ? 0.008 : 0.034;
-                const zFrac = Math.max(0, Math.min(1, (sPW * i + sPW / 2) / depthInner));
-                const pH   = (hFront + zFrac * (hBack - hFront)) - trackH;
-                const pCy  = trackH + pH / 2;
+                const initZ = schSideClosedZs[i];
+                const xOff  = schSideTracks_R[i];
                 return (
-                  <group key={i} position={[halfW - xOff, 0, pcz]}>
+                  <group key={i} ref={el => { rightSchRefs.current[i] = el; }}
+                    position={[xOff, 0, initZ]}>
                     <mesh position={[0, pCy, 0]}>
-                      <boxGeometry args={[glassTh * 2, pH - schFrameW * 2, sPW - schFrameW * 2]} />
-                      <meshStandardMaterial color="#d4eef6" transparent opacity={0.20}
-                        roughness={0.02} metalness={0.06} side={THREE.DoubleSide} depthWrite={false} />
+                      <boxGeometry args={[glassTh * 1.5, pH, sSPW + 0.004]} />
+                      <meshStandardMaterial color="#d8eef6" transparent opacity={0.19}
+                        roughness={0.01} metalness={0.08} side={THREE.DoubleSide} depthWrite={false} />
                     </mesh>
-                    <RoundedBox args={[schFrameW, pH, schFrameW]} radius={0.005} smoothness={4}
-                      position={[0, pCy, -sPW / 2 + schFrameW / 2]} material={frameMat} castShadow />
-                    <RoundedBox args={[schFrameW, pH, schFrameW]} radius={0.005} smoothness={4}
-                      position={[0, pCy,  sPW / 2 - schFrameW / 2]} material={frameMat} castShadow />
-                    <RoundedBox args={[schFrameW, schFrameW, sPW]} radius={0.005} smoothness={4}
-                      position={[0, trackH + pH - schFrameW / 2, 0]} material={frameMat} castShadow />
-                    <RoundedBox args={[schFrameW, schFrameW, sPW]} radius={0.005} smoothness={4}
-                      position={[0, trackH + schFrameW / 2, 0]} material={frameMat} castShadow />
                     {Array.from({ length: divCount }, (_, d) => {
-                      const zPos = -sPW / 2 + (sPW / (divCount + 1)) * (d + 1);
+                      const zPos = -sSPW / 2 + (sSPW / (divCount + 1)) * (d + 1);
                       return (
                         <mesh key={d} position={[0, pCy, zPos]}>
                           <boxGeometry args={[glassTh * 2.8, pH, divThk]} />
@@ -426,6 +455,12 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
                         </mesh>
                       );
                     })}
+                    {/* Handle on closing panel — front edge, interior face */}
+                    {i === 0 && (
+                      <RoundedBox args={[schHandleThk * 0.45, schHandleH, schHandleThk * 0.8]} radius={0.005} smoothness={4}
+                        position={[-schHandleThk * 0.3, pCy, -sSPW / 2 + schHandleThk * 1.4]}
+                        material={frameMat} castShadow />
+                    )}
                   </group>
                 );
               });
@@ -445,6 +480,7 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
                 const fPW   = faltPanelW;
                 const projW0 = fPW * Math.cos(fold0);
                 const stackStartX = -halfW + postS;
+                const panH = frontH - beamH * 0.6;
                 return Array.from({ length: faltCount }, (_, i) => {
                   const pcx0 = stackStartX + projW0 * i + projW0 / 2;
                   const hSide = i % 2 === 0 ? 1 : -1;
@@ -452,17 +488,17 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
                   return (
                     <group key={i} ref={el => { frontPanelRefs.current[i] = el; }}
                       position={[pcx0, 0, -halfD]} rotation={[0, i % 2 === 0 ? -fold0 : fold0, 0]}>
-                      <mesh position={[0, frontH / 2, 0]}>
-                        <boxGeometry args={[fPW - faltFrameW * 2, frontH - faltFrameW * 2, glassTh * 2]} />
+                      <mesh position={[0, panH / 2, 0]}>
+                        <boxGeometry args={[fPW - faltFrameW * 2, panH - faltFrameW * 2, glassTh * 2]} />
                         <meshStandardMaterial color="#c8e4ee" transparent opacity={0.32}
                           roughness={0.03} metalness={0.06} side={THREE.DoubleSide} depthWrite={false} />
                       </mesh>
-                      <RoundedBox args={[faltFrameW, frontH, faltFrameW]} radius={0.005} smoothness={4}
-                        position={[-fPW / 2 + faltFrameW / 2, frontH / 2, 0]} material={frameMat} castShadow />
-                      <RoundedBox args={[faltFrameW, frontH, faltFrameW]} radius={0.005} smoothness={4}
-                        position={[ fPW / 2 - faltFrameW / 2, frontH / 2, 0]} material={frameMat} castShadow />
+                      <RoundedBox args={[faltFrameW, panH, faltFrameW]} radius={0.005} smoothness={4}
+                        position={[-fPW / 2 + faltFrameW / 2, panH / 2, 0]} material={frameMat} castShadow />
+                      <RoundedBox args={[faltFrameW, panH, faltFrameW]} radius={0.005} smoothness={4}
+                        position={[ fPW / 2 - faltFrameW / 2, panH / 2, 0]} material={frameMat} castShadow />
                       <RoundedBox args={[handleThk, handleH, handleThk]} radius={0.004} smoothness={4}
-                        position={[hx, frontH * 0.5, -handleThk * 0.8]} material={frameMat} castShadow />
+                        position={[hx, panH * 0.5, -handleThk * 0.8]} material={frameMat} castShadow />
                     </group>
                   );
                 });
@@ -488,6 +524,11 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
               {/* Back right corner foot */}
               <RoundedBox args={[postS + 0.02, trackH, postS + 0.02]} radius={0.010} smoothness={4}
                 position={[ halfW - postS / 2, trackH / 2, halfD - postS / 2]} material={frameMat} castShadow />
+              {/* Horizontal top rail — separates glass from 8° sloped corner */}
+              <RoundedBox args={[beamD, beamH * 0.75, depth - postS * 2]} radius={0.006} smoothness={4}
+                position={[-halfW + beamD / 2, frontH - beamH * 0.6, 0]} material={frameMat} castShadow />
+              <RoundedBox args={[beamD, beamH * 0.75, depth - postS * 2]} radius={0.006} smoothness={4}
+                position={[ halfW - beamD / 2, frontH - beamH * 0.6, 0]} material={frameMat} castShadow />
             </>
           ) : isSchiebeglas ? (
             /* Schiebeglas: 3 frameless sliding glass panels — thin horizontal dividers, one handle */
@@ -495,7 +536,7 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
               {Array.from({ length: schCount }, (_, i) => {
                 const initX   = schClosedXs[i];
                 const zOff    = schTracks[i];
-                const pH      = frontH - trackH;
+                const pH      = frontH - beamH * 0.6 - trackH;
                 const pCy     = trackH + pH / 2;
                 const divThk  = 0.008;
                 const divCount = 2;
@@ -519,10 +560,10 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
                         </mesh>
                       );
                     })}
-                    {/* Handle on last panel — slim vertical bar */}
-                    {i === schCount - 1 && (
+                    {/* Handle on third panel — left edge */}
+                    {i === 2 && (
                       <RoundedBox args={[schHandleThk * 0.8, schHandleH, schHandleThk * 0.45]} radius={0.005} smoothness={4}
-                        position={[-schPanelW / 2 + schHandleThk * 1.4, pCy, -schHandleThk * 0.22]}
+                        position={[schPanelW / 2 - schHandleThk * 1.4, pCy, -schHandleThk * 0.22]}
                         material={frameMat} castShadow />
                     )}
                   </group>
@@ -537,9 +578,9 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
                 position={[ halfW - postS / 2, trackH / 2, -halfD + postS / 2]} material={frameMat} castShadow />
             </>
           ) : (
-            /* All other glass systems: single front panel */
-            <mesh position={[0, frontH/2, -halfD + glassTh/2]}>
-              <boxGeometry args={[width - postS*2, frontH, glassTh]} />
+            /* All other glass systems: single front panel — stops at traversa */
+            <mesh position={[0, (frontH - beamH * 0.6) / 2, -halfD + glassTh/2]}>
+              <boxGeometry args={[width - postS*2, frontH - beamH * 0.6, glassTh]} />
               <meshStandardMaterial color="#c8e4ee" transparent opacity={0.22}
                 roughness={0.04} metalness={0.05} side={THREE.DoubleSide} depthWrite={false} />
             </mesh>
@@ -572,74 +613,171 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
               {/* Vertical mullion at mid-depth */}
               <RoundedBox args={[mullS, slopeCenterY, mullS]} radius={0.005} smoothness={4}
                 position={[-halfW + mullS/2, slopeCenterY/2, 0]} material={frameMat} castShadow />
-              {/* Sloped horizontal divider at 50% height */}
-              <RoundedBox args={[0.052, 0.052, sideDivLen]} radius={0.005} smoothness={4}
-                rotation={[-sideDivAngle, 0, 0]}
-                position={[-halfW + 0.026, sideDivCenterY, 0]} material={frameMat} castShadow />
+              {/* Horizontal divider at 50% height — straight 90° */}
+              <RoundedBox args={[0.052, 0.052, depth - postS * 2]} radius={0.005} smoothness={4}
+                position={[-halfW + 0.026, frontH * 0.5, 0]} material={frameMat} castShadow />
               {/* Bottom side track */}
               <RoundedBox args={[trackD, trackH, depth - postS * 2]} radius={0.008} smoothness={4}
                 position={[-halfW + trackD/2, trackH/2, 0]} material={frameMat} castShadow />
               {/* Back left corner foot */}
               <RoundedBox args={[postS + 0.02, trackH, postS + 0.02]} radius={0.010} smoothness={4}
                 position={[-halfW + postS/2, trackH/2, halfD - postS/2]} material={frameMat} castShadow />
+              {/* Horizontal top rail left */}
+              <RoundedBox args={[beamD, beamH * 0.75, depth - postS * 2]} radius={0.006} smoothness={4}
+                position={[-halfW + beamD / 2, frontH - beamH * 0.6, 0]} material={frameMat} castShadow />
 
               {/* ── Right side panel framing ── */}
               {/* Vertical mullion at mid-depth */}
               <RoundedBox args={[mullS, slopeCenterY, mullS]} radius={0.005} smoothness={4}
                 position={[halfW - mullS/2, slopeCenterY/2, 0]} material={frameMat} castShadow />
-              {/* Sloped horizontal divider at 50% height */}
-              <RoundedBox args={[0.052, 0.052, sideDivLen]} radius={0.005} smoothness={4}
-                rotation={[-sideDivAngle, 0, 0]}
-                position={[halfW - 0.026, sideDivCenterY, 0]} material={frameMat} castShadow />
+              {/* Horizontal divider at 50% height — straight 90° */}
+              <RoundedBox args={[0.052, 0.052, depth - postS * 2]} radius={0.005} smoothness={4}
+                position={[halfW - 0.026, frontH * 0.5, 0]} material={frameMat} castShadow />
               {/* Bottom side track */}
               <RoundedBox args={[trackD, trackH, depth - postS * 2]} radius={0.008} smoothness={4}
                 position={[halfW - trackD/2, trackH/2, 0]} material={frameMat} castShadow />
               {/* Back right corner foot */}
               <RoundedBox args={[postS + 0.02, trackH, postS + 0.02]} radius={0.010} smoothness={4}
                 position={[halfW - postS/2, trackH/2, halfD - postS/2]} material={frameMat} castShadow />
+              {/* Horizontal top rail right */}
+              <RoundedBox args={[beamD, beamH * 0.75, depth - postS * 2]} radius={0.006} smoothness={4}
+                position={[ halfW - beamD / 2, frontH - beamH * 0.6, 0]} material={frameMat} castShadow />
             </>
           )}
 
-          {/* Schiebeglas side wall tracks + corner feet */}
+          {/* Upper triangular glass — fills 8° wedge above traversa (faltglas & schiebeglas) */}
+          {(sideSystem === "faltglas" || isSchiebeglas) && (
+            <>
+              <mesh position={[-halfW + glassTh / 2, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
+                <shapeGeometry args={[upperSideShape]} />
+                <meshStandardMaterial color="#c8e4ee" transparent opacity={0.22} roughness={0.04} metalness={0.05} side={THREE.DoubleSide} depthWrite={false} />
+              </mesh>
+              <mesh position={[halfW - glassTh / 2, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
+                <shapeGeometry args={[upperSideShape]} />
+                <meshStandardMaterial color="#c8e4ee" transparent opacity={0.22} roughness={0.04} metalness={0.05} side={THREE.DoubleSide} depthWrite={false} />
+              </mesh>
+            </>
+          )}
+
+          {/* Schiebeglas side wall tracks + corner feet + horizontal top rail */}
           {isSchiebeglas && (
             <>
+              {/* Bottom floor tracks */}
               <RoundedBox args={[trackH * 0.55, trackH, depth - postS * 2]} radius={0.007} smoothness={4}
                 position={[-halfW + trackH * 0.27, trackH / 2, 0]} material={frameMat} castShadow />
               <RoundedBox args={[trackH * 0.55, trackH, depth - postS * 2]} radius={0.007} smoothness={4}
                 position={[ halfW - trackH * 0.27, trackH / 2, 0]} material={frameMat} castShadow />
+              {/* Back corner feet */}
               <RoundedBox args={[postS + 0.02, trackH, postS + 0.02]} radius={0.010} smoothness={4}
                 position={[-halfW + postS / 2, trackH / 2, halfD - postS / 2]} material={frameMat} castShadow />
               <RoundedBox args={[postS + 0.02, trackH, postS + 0.02]} radius={0.010} smoothness={4}
                 position={[ halfW - postS / 2, trackH / 2, halfD - postS / 2]} material={frameMat} castShadow />
+              {/* Horizontal top rail — separates glass from 8° sloped corner */}
+              <RoundedBox args={[beamD, beamH * 0.75, depth - postS * 2]} radius={0.006} smoothness={4}
+                position={[-halfW + beamD / 2, frontH - beamH * 0.6, 0]} material={frameMat} castShadow />
+              <RoundedBox args={[beamD, beamH * 0.75, depth - postS * 2]} radius={0.006} smoothness={4}
+                position={[ halfW - beamD / 2, frontH - beamH * 0.6, 0]} material={frameMat} castShadow />
             </>
           )}
         </>
       )}
 
-      {/* Zip screens */}
-      {showPanels && isZip && (
-        <>
-          <mesh position={[-halfW + glassTh/2, 0, 0]} rotation={[0, -Math.PI/2, 0]}>
-            <shapeGeometry args={[sideShape]} />
-            <meshStandardMaterial color="#3a3a3a" transparent opacity={0.72}
-              roughness={0.85} metalness={0.04} side={THREE.DoubleSide} depthWrite={false} />
-          </mesh>
-          <mesh position={[halfW - glassTh/2, 0, 0]} rotation={[0, -Math.PI/2, 0]}>
-            <shapeGeometry args={[sideShape]} />
-            <meshStandardMaterial color="#3a3a3a" transparent opacity={0.72}
-              roughness={0.85} metalness={0.04} side={THREE.DoubleSide} depthWrite={false} />
-          </mesh>
-          <mesh position={[0, frontH/2, -halfD + glassTh/2]}>
-            <boxGeometry args={[width - postS*2, frontH, glassTh]} />
-            <meshStandardMaterial color="#3a3a3a" transparent opacity={0.72}
-              roughness={0.85} metalness={0.04} side={THREE.DoubleSide} depthWrite={false} />
-          </mesh>
-          <RoundedBox args={[mullS*0.6, frontH, mullS*0.6]} radius={0.003} smoothness={4}
-            position={[-halfW + mullS*0.3, frontH/2, -halfD + mullS*0.3]} material={frameMat} />
-          <RoundedBox args={[mullS*0.6, frontH, mullS*0.6]} radius={0.003} smoothness={4}
-            position={[ halfW - mullS*0.3, frontH/2, -halfD + mullS*0.3]} material={frameMat} />
-        </>
-      )}
+      {/* Zip screens — animated roll-down */}
+      {showPanels && isZip && (() => {
+        const zipH   = frontH - beamH * 0.6;
+        const hsH    = beamH * 1.4;        // housing height
+        const hsY    = zipH - hsH / 2;     // housing center — hangs below traversa, top flush with it
+        const chW    = 0.032;          // channel width
+        const railH  = 0.032;          // bottom rail height
+        const floorRailH = trackH * 0.7;
+
+        return (
+          <>
+            {/* ── Front wall ── */}
+            {/* Housing / kasete — roller box flush with traversa top */}
+            <RoundedBox args={[width - postS * 2 + chW * 2, hsH, beamD * 1.1]} radius={0.010} smoothness={4}
+              position={[0, hsY, -halfD + beamD * 0.55]} material={frameMat} castShadow />
+            {/* Side guide channels */}
+            <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4}
+              position={[-halfW + postS + chW * 0.5, zipH / 2, -halfD + chW * 0.5]} material={frameMat} castShadow />
+            <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4}
+              position={[ halfW - postS - chW * 0.5, zipH / 2, -halfD + chW * 0.5]} material={frameMat} castShadow />
+            {/* Screen fabric */}
+            <mesh ref={el => { zipFrontRef.current = el; }}
+              position={[0, zipH / 2, -halfD + glassTh * 2]}
+              material={zipFabricMat}>
+              <boxGeometry args={[width - postS * 2 - chW * 2 - 0.008, zipH, glassTh * 2]} />
+            </mesh>
+            {/* Moving bottom rail */}
+            <mesh ref={zipFrontRailRef} position={[0, 0, -halfD + glassTh * 2]}>
+              <boxGeometry args={[width - postS * 2 - chW * 2, railH, railH]} />
+              <meshStandardMaterial color={hex} roughness={0.38} metalness={0.28} />
+            </mesh>
+            {/* Floor traversa (fixed) */}
+            <RoundedBox args={[width - postS * 2, floorRailH, floorRailH]} radius={0.005} smoothness={4}
+              position={[0, floorRailH / 2, -halfD + floorRailH / 2]} material={frameMat} castShadow />
+            {/* Corner feet front */}
+            <RoundedBox args={[postS + 0.02, trackH, postS + 0.02]} radius={0.010} smoothness={4}
+              position={[-halfW + postS/2, trackH/2, -halfD + postS/2]} material={frameMat} castShadow />
+            <RoundedBox args={[postS + 0.02, trackH, postS + 0.02]} radius={0.010} smoothness={4}
+              position={[ halfW - postS/2, trackH/2, -halfD + postS/2]} material={frameMat} castShadow />
+
+            {/* ── Left wall ── */}
+            <RoundedBox args={[beamD * 1.1, hsH, depth - postS * 2 + chW * 2]} radius={0.010} smoothness={4}
+              position={[-halfW + beamD * 0.55, hsY, 0]} material={frameMat} castShadow />
+            <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4}
+              position={[-halfW + chW * 0.5, zipH / 2, -halfD + postS + chW * 0.5]} material={frameMat} castShadow />
+            <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4}
+              position={[-halfW + chW * 0.5, zipH / 2,  halfD - postS - chW * 0.5]} material={frameMat} castShadow />
+            <mesh ref={el => { zipLeftRef.current = el; }}
+              position={[-halfW + glassTh * 2, zipH / 2, 0]}
+              material={zipFabricMat}>
+              <boxGeometry args={[glassTh * 2, zipH, depth - postS * 2 - chW * 2 - 0.008]} />
+            </mesh>
+            <mesh ref={zipLeftRailRef} position={[-halfW + glassTh * 2, 0, 0]}>
+              <boxGeometry args={[railH, railH, depth - postS * 2 - chW * 2]} />
+              <meshStandardMaterial color={hex} roughness={0.38} metalness={0.28} />
+            </mesh>
+            {/* Floor traversa left */}
+            <RoundedBox args={[floorRailH, floorRailH, depth - postS * 2]} radius={0.005} smoothness={4}
+              position={[-halfW + floorRailH / 2, floorRailH / 2, 0]} material={frameMat} castShadow />
+            <RoundedBox args={[postS + 0.02, trackH, postS + 0.02]} radius={0.010} smoothness={4}
+              position={[-halfW + postS/2, trackH/2, halfD - postS/2]} material={frameMat} castShadow />
+
+            {/* ── Right wall ── */}
+            <RoundedBox args={[beamD * 1.1, hsH, depth - postS * 2 + chW * 2]} radius={0.010} smoothness={4}
+              position={[ halfW - beamD * 0.55, hsY, 0]} material={frameMat} castShadow />
+            <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4}
+              position={[ halfW - chW * 0.5, zipH / 2, -halfD + postS + chW * 0.5]} material={frameMat} castShadow />
+            <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4}
+              position={[ halfW - chW * 0.5, zipH / 2,  halfD - postS - chW * 0.5]} material={frameMat} castShadow />
+            <mesh ref={el => { zipRightRef.current = el; }}
+              position={[halfW - glassTh * 2, zipH / 2, 0]}
+              material={zipFabricMat}>
+              <boxGeometry args={[glassTh * 2, zipH, depth - postS * 2 - chW * 2 - 0.008]} />
+            </mesh>
+            <mesh ref={zipRightRailRef} position={[halfW - glassTh * 2, 0, 0]}>
+              <boxGeometry args={[railH, railH, depth - postS * 2 - chW * 2]} />
+              <meshStandardMaterial color={hex} roughness={0.38} metalness={0.28} />
+            </mesh>
+            {/* Floor traversa right */}
+            <RoundedBox args={[floorRailH, floorRailH, depth - postS * 2]} radius={0.005} smoothness={4}
+              position={[ halfW - floorRailH / 2, floorRailH / 2, 0]} material={frameMat} castShadow />
+            <RoundedBox args={[postS + 0.02, trackH, postS + 0.02]} radius={0.010} smoothness={4}
+              position={[ halfW - postS/2, trackH/2, halfD - postS/2]} material={frameMat} castShadow />
+
+            {/* Upper triangular glass — 8° wedge above traversa */}
+            <mesh position={[-halfW + glassTh / 2, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
+              <shapeGeometry args={[upperSideShape]} />
+              <meshStandardMaterial color="#c8e4ee" transparent opacity={0.22} roughness={0.04} metalness={0.05} side={THREE.DoubleSide} depthWrite={false} />
+            </mesh>
+            <mesh position={[halfW - glassTh / 2, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
+              <shapeGeometry args={[upperSideShape]} />
+              <meshStandardMaterial color="#c8e4ee" transparent opacity={0.22} roughness={0.04} metalness={0.05} side={THREE.DoubleSide} depthWrite={false} />
+            </mesh>
+          </>
+        );
+      })()}
 
       {/* Roof glass */}
       <mesh geometry={roofGlassGeom}>
@@ -701,6 +839,7 @@ export const Wintergarten3DViewer = ({ breite, tiefe, hoehe, color }: Wintergart
   const [sideSystem, setSideSystem] = useState<SideSystem>("none");
   const [faltOpen, setFaltOpen] = useState(true);
   const [schOpen, setSchOpen] = useState(false);
+  const [zipDown, setZipDown] = useState(true);
 
   const w = breite / 1000;
   const d = tiefe / 1000;
@@ -730,7 +869,7 @@ export const Wintergarten3DViewer = ({ breite, tiefe, hoehe, color }: Wintergart
           <hemisphereLight intensity={0.45} color="#d4ecf5" groundColor="#ffffff" />
 
           <WintergartenModel width={w} depth={d} backH={backH} frontH={frontH}
-            color={color} showDimensions={showDimensions} sideSystem={sideSystem} faltOpen={faltOpen} schOpen={schOpen} />
+            color={color} showDimensions={showDimensions} sideSystem={sideSystem} faltOpen={faltOpen} schOpen={schOpen} zipDown={zipDown} />
 
           <OrbitControls enablePan={false} minPolarAngle={Math.PI/10} maxPolarAngle={Math.PI*0.82}
             minDistance={maxDim*0.7} maxDistance={maxDim*5} />
@@ -780,6 +919,20 @@ export const Wintergarten3DViewer = ({ breite, tiefe, hoehe, color }: Wintergart
           )}
           {sideSystem === "schiebeglas" && (
             <ToggleSwitch checked={schOpen} onChange={() => setSchOpen(v => !v)} label={schOpen ? "Geöffnet" : "Geschlossen"} />
+          )}
+          {sideSystem === "zip" && (
+            <div className="flex items-center gap-1">
+              <button onClick={() => setZipDown(false)}
+                className={`flex items-center gap-1 rounded-lg px-3 py-1 text-[11px] font-semibold border transition-all ${!zipDown ? "bg-[#344148] text-white border-[#344148]" : "bg-white text-zinc-500 border-zinc-200 hover:border-zinc-400"}`}>
+                <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" /></svg>
+                Heben
+              </button>
+              <button onClick={() => setZipDown(true)}
+                className={`flex items-center gap-1 rounded-lg px-3 py-1 text-[11px] font-semibold border transition-all ${zipDown ? "bg-[#344148] text-white border-[#344148]" : "bg-white text-zinc-500 border-zinc-200 hover:border-zinc-400"}`}>
+                <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                Senken
+              </button>
+            </div>
           )}
         </div>
       </div>
