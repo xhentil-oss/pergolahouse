@@ -46,14 +46,6 @@ const colorOptions = [
   { label: "White 9016 T", color: "#E8E4DF", hint: "Verkehrsweiß – hell und minimalistisch" },
 ];
 
-const sizeOptions = [
-  { label: "PH1 – Komplettset", kit: "PergolaHaus Komplettset PH1", dims: "3000 × 4000 × 2500", variant: "145-mm-Lamellen, manuell, 4 Pfosten", price: 3990 },
-  { label: "PH2 – Komplettset", kit: "PergolaHaus Komplettset PH2", dims: "4000 × 4000 × 2500", variant: "145-mm-Lamellen, Motor + LED, 4 Pfosten", price: 4390 },
-  { label: "PH3 – Komplettset", kit: "PergolaHaus Komplettset PH3", dims: "3000 × 4000 × 2500", variant: "145-mm-Lamellen, Motorantrieb, 4 Pfosten", price: 4790 },
-  { label: "PH4 – Komplettset", kit: "PergolaHaus Komplettset PH4", dims: "4000 × 5000 × 2500", variant: "175-mm-Lamellen, Motorantrieb, 4 Pfosten", price: 5190 },
-  { label: "PH5 – Komplettset", kit: "PergolaHaus Komplettset PH5", dims: "4000 × 4000 × 2500", variant: "175-mm-Lamellen, Motor + LED, 2 Pfosten wandmontiert", price: 5790 },
-  { label: "PH6 – Komplettset", kit: "PergolaHaus Komplettset PH6", dims: "4000 × 5000 × 2500", variant: "175-mm-Lamellen, Motorantrieb, 2 Pfosten wandmontiert", price: 6390 },
-];
 
 import ikonaThjesht from "@/assets/ikona-thjesht.png";
 import ikonaMuri from "@/assets/ikona-muri.png";
@@ -116,6 +108,15 @@ const Stars = ({ count }: { count: number }) => (
 export const PreiswertePergolaPage = () => {
   const { addToCart } = useCart();
   const { prices } = usePrices();
+
+  const sizeOptions = [
+    { label: "PH1 – Komplettset", kit: "PergolaHaus Komplettset PH1", dims: "3000 × 4000 × 2500", variant: "145-mm-Lamellen, manuell, 4 Pfosten", price: prices.preiswerte_ph1 },
+    { label: "PH2 – Komplettset", kit: "PergolaHaus Komplettset PH2", dims: "4000 × 4000 × 2500", variant: "145-mm-Lamellen, Motor + LED, 4 Pfosten", price: prices.preiswerte_ph2 },
+    { label: "PH3 – Komplettset", kit: "PergolaHaus Komplettset PH3", dims: "3000 × 4000 × 2500", variant: "145-mm-Lamellen, Motorantrieb, 4 Pfosten", price: prices.preiswerte_ph3 },
+    { label: "PH4 – Komplettset", kit: "PergolaHaus Komplettset PH4", dims: "4000 × 5000 × 2500", variant: "175-mm-Lamellen, Motorantrieb, 4 Pfosten", price: prices.preiswerte_ph4 },
+    { label: "PH5 – Komplettset", kit: "PergolaHaus Komplettset PH5", dims: "4000 × 4000 × 2500", variant: "175-mm-Lamellen, Motor + LED, 2 Pfosten wandmontiert", price: prices.preiswerte_ph5 },
+    { label: "PH6 – Komplettset", kit: "PergolaHaus Komplettset PH6", dims: "4000 × 5000 × 2500", variant: "175-mm-Lamellen, Motorantrieb, 2 Pfosten wandmontiert", price: prices.preiswerte_ph6 },
+  ];
 
   const mountOptions = [
     { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },

@@ -101,7 +101,7 @@ export const WintergartenPage = () => {
   const { addToCart } = useCart();
   const { prices } = usePrices();
 
-  const pricePerSqm = prices.wintergarten_3x3 / 9;
+  const pricePerSqm = prices.wintergarten_perSqm;
   const mountOptions = [
     { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
     { label: "Wandmontage", img: ikonaMuri, surcharge: prices.wandmontage },
@@ -109,7 +109,7 @@ export const WintergartenPage = () => {
   const sideTypeChoices = [
     { value: "none", label: "Keine", price: 0 },
     { value: "guillotine", label: "Guillotine-Glassysteme", price: prices.guillotineVerglasung },
-    { value: "faltglas", label: "Faltglassysteme", price: prices.schiebeverglasung },
+    { value: "faltglas", label: "Faltglassysteme", price: prices.faltglasverglasung },
     { value: "schiebeglas", label: "Schiebeglassysteme", price: prices.schiebeverglasung },
     { value: "zip", label: "Zip-Screens", price: prices.screenRollo },
   ];
@@ -120,7 +120,7 @@ export const WintergartenPage = () => {
     ]},
     { key: "komfort", label: "Heizung & Komfort", items: [
       { label: "Infrarot-Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühleren Tagen.", price: prices.infrarotHeizung },
-      { label: "Smart Steuerung", description: "Intelligente Steuerung per App – Lamellen, Licht und Heizung.", price: 399 },
+      { label: "Smart Steuerung", description: "Intelligente Steuerung per App – Lamellen, Licht und Heizung.", price: prices.smartSteuerung },
     ]},
   ];
   const accessoryOptions = accessoryCategories.flatMap((c) => c.items);

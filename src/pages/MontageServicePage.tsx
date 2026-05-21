@@ -1,157 +1,134 @@
-import { Link } from "react-router-dom";
+import { useState, useRef } from "react";
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
 import { FAQItem } from "@/sections/FAQ/components/FAQItem";
 import heroImg from "@/assets/Photo (9).png";
 
+/* ─── static data ─── */
 const steps = [
-  {
-    number: "01",
-    title: "Beratung & Planung",
-    description: "Unser Expertenteam berät Sie persönlich und plant die optimale Lösung für Ihren Außenbereich – vor Ort oder per Video-Call.",
-  },
-  {
-    number: "02",
-    title: "Terminvereinbarung",
-    description: "Wir vereinbaren einen Wunschtermin, der zu Ihrem Zeitplan passt – flexibel auch am Wochenende.",
-  },
-  {
-    number: "03",
-    title: "Professionelle Montage",
-    description: "Unser zertifiziertes Montageteam installiert Ihre Pergola schnell, sauber und fachgerecht – ohne Schmutz, ohne Stress.",
-  },
-  {
-    number: "04",
-    title: "Abnahme & Service",
-    description: "Nach der Montage prüfen wir gemeinsam alles – und stehen Ihnen auch danach mit unserem 24/7-Service zur Verfügung.",
-  },
+  { number: "01", title: "Anfrage stellen", description: "Füllen Sie das Online-Formular aus und laden Sie bis zu 3 Fotos des Montageorts hoch." },
+  { number: "02", title: "Individuelle Analyse", description: "Unser Team prüft Ihren Montageort und bereitet ein maßgeschneidertes Angebot vor." },
+  { number: "03", title: "Angebot erhalten", description: "Sie erhalten Ihr persönliches Montageangebot direkt per E-Mail – transparent und ohne versteckte Kosten." },
+  { number: "04", title: "Professionelle Montage", description: "Unser zertifiziertes Montageteam installiert Ihre Pergola schnell, sauber und fachgerecht." },
 ];
 
 const included = [
   {
-    icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
-      </svg>
-    ),
+    icon: <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" /></svg>,
     title: "Professionelles Werkzeug",
     desc: "Unser Team bringt alles mit – kein Aufwand Ihrerseits.",
   },
   {
-    icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-      </svg>
-    ),
+    icon: <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>,
     title: "2 Jahre Montagegarantie",
     desc: "Vollständige Garantie auf alle Montagearbeiten.",
   },
   {
-    icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
-      </svg>
-    ),
+    icon: <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" /><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" /></svg>,
     title: "Fotodokumentation",
     desc: "Vollständige Dokumentation aller Montagestufen.",
   },
   {
-    icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
-      </svg>
-    ),
+    icon: <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" /></svg>,
     title: "Vollständige Reinigung",
     desc: "Wir hinterlassen Ihren Bereich sauber und besenrein.",
   },
   {
-    icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-      </svg>
-    ),
+    icon: <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>,
     title: "Deutschlandweit",
     desc: "Montageservice in allen Bundesländern verfügbar.",
   },
   {
-    icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
+    icon: <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
     title: "Pünktliche Ausführung",
     desc: "Termintreue ist unser Versprechen an jeden Kunden.",
   },
 ];
 
 const reasons = [
-  {
-    stat: "10+",
-    label: "Jahre Erfahrung",
-    desc: "Über ein Jahrzehnt Expertise im Bereich Terrassenüberdachungen und Pergolasysteme.",
-    color: "#82B2CA",
-  },
-  {
-    stat: "2.500+",
-    label: "Montagen",
-    desc: "Tausende erfolgreich montierte Pergolen – jede mit höchster Sorgfalt ausgeführt.",
-    color: "#344148",
-  },
-  {
-    stat: "98%",
-    label: "Kundenzufriedenheit",
-    desc: "Fast alle unsere Kunden empfehlen unseren Montageservice weiter.",
-    color: "#82B2CA",
-  },
+  { stat: "10+", label: "Jahre Erfahrung", desc: "Über ein Jahrzehnt Expertise im Bereich Terrassenüberdachungen.", color: "#82B2CA" },
+  { stat: "2.500+", label: "Montagen", desc: "Tausende erfolgreich montierte Pergolen – jede mit höchster Sorgfalt.", color: "#344148" },
+  { stat: "98%", label: "Kundenzufriedenheit", desc: "Fast alle unsere Kunden empfehlen unseren Montageservice weiter.", color: "#82B2CA" },
 ];
 
 const reviews = [
-  {
-    name: "Thomas K.",
-    city: "Frankfurt",
-    stars: 5,
-    text: "Das Montageteam war absolut professionell – pünktlich, sauber und schnell. Die Pergola steht perfekt und alles wurde genau nach Plan umgesetzt. Klare Empfehlung!",
-  },
-  {
-    name: "Sandra M.",
-    city: "München",
-    stars: 5,
-    text: "Von der Beratung bis zur Abnahme lief alles reibungslos. Die Monteure waren freundlich und haben sogar kleine Änderungswünsche spontan berücksichtigt.",
-  },
-  {
-    name: "Michael B.",
-    city: "Hamburg",
-    stars: 5,
-    text: "Sehr kompetentes Team. Die Installation dauerte nur einen halben Tag – und danach war alles tip-top aufgeräumt. Wir sind begeistert von der Qualität.",
-  },
+  { name: "Thomas K.", city: "Frankfurt", stars: 5, text: "Das Montageteam war absolut professionell – pünktlich, sauber und schnell. Die Pergola steht perfekt und alles wurde genau nach Plan umgesetzt. Klare Empfehlung!" },
+  { name: "Sandra M.", city: "München", stars: 5, text: "Von der Beratung bis zur Abnahme lief alles reibungslos. Die Monteure waren freundlich und haben sogar kleine Änderungswünsche spontan berücksichtigt." },
+  { name: "Michael B.", city: "Hamburg", stars: 5, text: "Sehr kompetentes Team. Die Installation dauerte nur einen halben Tag – und danach war alles tip-top aufgeräumt. Wir sind begeistert von der Qualität." },
 ];
 
 const faqs = [
+  { q: "Wie lange dauert eine typische Pergola-Montage?", a: "Je nach Größe und Modell dauert eine Standardmontage zwischen 4 und 8 Stunden. Bei komplexeren Projekten mit Glaswänden oder Beleuchtung kann es 1–2 Tage in Anspruch nehmen." },
+  { q: "Was muss ich für die Montage vorbereiten?", a: "Sie benötigen lediglich einen zugänglichen Bereich sowie einen Stromanschluss in der Nähe. Alle Werkzeuge, Befestigungsmittel und Materialien bringt unser Team mit." },
+  { q: "Ist der Montageservice in ganz Deutschland verfügbar?", a: "Ja, wir bieten unseren professionellen Montageservice deutschlandweit an. Bitte kontaktieren Sie uns für eine Verfügbarkeitsabfrage in Ihrer Region." },
+  { q: "Welche Garantie erhalte ich auf die Montage?", a: "Auf alle Montagearbeiten gewähren wir eine 2-jährige Handwerkergarantie. Produktgarantien des Herstellers sind davon unabhängig und gelten zusätzlich." },
+  { q: "Was kostet der Montageservice?", a: "Die Montagekosten richten sich nach Modell, Größe und Sonderwünschen. Nach Ihrer Anfrage erstellen wir ein individuelles und transparentes Angebot." },
+  { q: "Kann ich einen Wunschtermin für die Montage angeben?", a: "Ja, wir stimmen den Montagetermin ganz auf Ihren Zeitplan ab – flexibel auch am Wochenende. Nach Ihrer Anfrage nehmen wir Kontakt auf und vereinbaren gemeinsam einen passenden Termin." },
+];
+
+const productDocs = [
   {
-    q: "Wie lange dauert eine typische Pergola-Montage?",
-    a: "Je nach Größe und Modell dauert eine Standardmontage zwischen 4 und 8 Stunden. Bei komplexeren Projekten mit Glaswänden oder Beleuchtung kann es 1–2 Tage in Anspruch nehmen.",
+    id: "PH1",
+    label: "PergolaHaus Komplettset PH1",
+    dims: "3000 × 4000 × 2500 mm",
+    docs: [
+      { type: "pdf", title: "Montageanleitung PH1", desc: "Schritt-für-Schritt-Anleitung zur Montage", icon: "📄" },
+      { type: "pdf", title: "Technisches Datenblatt PH1", desc: "Technische Spezifikationen und Maßzeichnungen", icon: "📐" },
+    ],
+    video: { title: "Montagevideo PH1", duration: "12:34", thumb: null },
   },
   {
-    q: "Was muss ich für die Montage vorbereiten?",
-    a: "Sie benötigen lediglich einen zugänglichen Bereich für das Montageteam sowie einen Stromanschluss in der Nähe. Alle Werkzeuge, Befestigungsmittel und Materialien bringt unser Team mit.",
+    id: "PH2",
+    label: "PergolaHaus Komplettset PH2",
+    dims: "4000 × 4000 × 2500 mm",
+    docs: [
+      { type: "pdf", title: "Montageanleitung PH2", desc: "Schritt-für-Schritt-Anleitung zur Montage", icon: "📄" },
+      { type: "pdf", title: "Technisches Datenblatt PH2", desc: "Technische Spezifikationen und Maßzeichnungen", icon: "📐" },
+      { type: "pdf", title: "LED-Verkabelungsplan PH2", desc: "Anschlussplan für LED-Beleuchtung", icon: "💡" },
+    ],
+    video: { title: "Montagevideo PH2", duration: "15:20", thumb: null },
   },
   {
-    q: "Ist der Montageservice in ganz Deutschland verfügbar?",
-    a: "Ja, wir bieten unseren professionellen Montageservice deutschlandweit an. Bitte kontaktieren Sie uns für eine Verfügbarkeitsabfrage in Ihrer Region.",
+    id: "PH3",
+    label: "PergolaHaus Komplettset PH3",
+    dims: "3000 × 4000 × 2500 mm",
+    docs: [
+      { type: "pdf", title: "Montageanleitung PH3", desc: "Schritt-für-Schritt-Anleitung zur Montage", icon: "📄" },
+      { type: "pdf", title: "Technisches Datenblatt PH3", desc: "Technische Spezifikationen und Maßzeichnungen", icon: "📐" },
+      { type: "pdf", title: "Motorantrieb-Konfiguration PH3", desc: "Einrichtung und Konfiguration des Motorantriebs", icon: "⚙️" },
+    ],
+    video: null,
   },
   {
-    q: "Welche Garantie erhalte ich auf die Montage?",
-    a: "Auf alle Montagearbeiten gewähren wir eine 2-jährige Handwerkergarantie. Produktgarantien des Herstellers sind davon unabhängig und gelten zusätzlich.",
+    id: "PH4",
+    label: "PergolaHaus Komplettset PH4",
+    dims: "4000 × 5000 × 2500 mm",
+    docs: [
+      { type: "pdf", title: "Montageanleitung PH4", desc: "Schritt-für-Schritt-Anleitung zur Montage", icon: "📄" },
+      { type: "pdf", title: "Technisches Datenblatt PH4", desc: "Technische Spezifikationen und Maßzeichnungen", icon: "📐" },
+    ],
+    video: { title: "Montagevideo PH4", duration: "18:05", thumb: null },
   },
   {
-    q: "Was kostet der Montageservice?",
-    a: "Die Montagekosten richten sich nach Modell, Größe und ggf. Sonderwünschen. Nach Ihrer Anfrage erstellen wir ein individuelles und transparentes Angebot.",
+    id: "PH5",
+    label: "PergolaHaus Komplettset PH5",
+    dims: "4000 × 4000 × 2500 mm",
+    docs: [
+      { type: "pdf", title: "Montageanleitung PH5 (Wandmontage)", desc: "Wandmontage-Anleitung mit Verankerungsdetails", icon: "📄" },
+      { type: "pdf", title: "Technisches Datenblatt PH5", desc: "Technische Spezifikationen und Maßzeichnungen", icon: "📐" },
+      { type: "pdf", title: "LED-Verkabelungsplan PH5", desc: "Anschlussplan für LED-Beleuchtung", icon: "💡" },
+    ],
+    video: { title: "Montagevideo PH5 (Wandmontage)", duration: "14:48", thumb: null },
   },
   {
-    q: "Kann ich einen Wunschtermin für die Montage angeben?",
-    a: "Ja, wir stimmen den Montagetermin ganz auf Ihren Zeitplan ab – flexibel auch am Wochenende. Nach Ihrer Anfrage nehmen wir Kontakt auf und vereinbaren gemeinsam einen passenden Termin.",
+    id: "PH6",
+    label: "PergolaHaus Komplettset PH6",
+    dims: "4000 × 5000 × 2500 mm",
+    docs: [
+      { type: "pdf", title: "Montageanleitung PH6 (Wandmontage)", desc: "Wandmontage-Anleitung mit Verankerungsdetails", icon: "📄" },
+      { type: "pdf", title: "Technisches Datenblatt PH6", desc: "Technische Spezifikationen und Maßzeichnungen", icon: "📐" },
+    ],
+    video: null,
   },
 ];
 
@@ -165,7 +142,44 @@ const Stars = ({ count }: { count: number }) => (
   </span>
 );
 
+/* ─── form initial state ─── */
+const emptyForm = {
+  name: "",
+  email: "",
+  phone: "",
+  orderNumber: "",
+  productType: "",
+  address: "",
+  additionalInfo: "",
+};
+
 export const MontageServicePage = () => {
+  const [activeTab, setActiveTab] = useState<"anfrage" | "anleitung">("anfrage");
+  const [formData, setFormData] = useState(emptyForm);
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const [dragOver, setDragOver] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileAdd = (files: FileList | null) => {
+    if (!files) return;
+    const newFiles = Array.from(files).slice(0, 3 - uploadedFiles.length);
+    setUploadedFiles((prev) => [...prev, ...newFiles].slice(0, 3));
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setDragOver(false);
+    handleFileAdd(e.dataTransfer.files);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+  };
+
+  const selectedDoc = productDocs.find((p) => p.id === selectedProduct);
 
   return (
     <div className="relative text-neutral-900 bg-white overflow-x-hidden font-inter_tight">
@@ -175,7 +189,7 @@ export const MontageServicePage = () => {
         {/* ── Hero ── */}
         <section className="relative isolate overflow-hidden min-h-[380px] md:min-h-[460px] flex items-center justify-center text-center px-4 py-16">
           <img src={heroImg} alt="" className="absolute inset-0 z-0 w-full h-full object-cover object-center" />
-          <div className="absolute inset-0 z-10 bg-zinc-900/50" />
+          <div className="absolute inset-0 z-10 bg-zinc-900/55" />
           <div className="relative z-20 max-w-3xl mx-auto">
             <p className="text-[#82B2CA] text-sm font-semibold uppercase tracking-[0.18em] mb-4">
               Von Planung bis Fertigstellung
@@ -183,53 +197,408 @@ export const MontageServicePage = () => {
             <h1 className="font-lemonmilk text-white text-3xl md:text-4xl leading-tight mb-4">
               Montage Service
             </h1>
-            <p className="text-white/80 text-base md:text-lg">
-              Professionelle Installation Ihrer Pergola – schnell, sauber und zuverlässig durch unser zertifiziertes Fachteam.
+            <p className="text-white/80 text-base md:text-lg max-w-xl mx-auto">
+              Professionelle Installation Ihrer Pergola – und alle Montageunterlagen auf einen Blick.
             </p>
           </div>
         </section>
 
-        {/* ── Process steps ── */}
-        <section className="max-w-[1440px] mx-auto px-4 md:px-16 py-16 md:py-24">
-          <div className="text-center mb-14">
-            <span className="inline-block rounded-full bg-[#82B2CA]/10 border border-[#82B2CA]/30 px-4 py-1.5 text-[#82B2CA] text-xs font-semibold uppercase tracking-[0.2em] mb-4">
-              So funktioniert es
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-zinc-900">Unser Montageprozess</h2>
-            <p className="mt-3 text-neutral-500 max-w-lg mx-auto text-sm">
-              Von der ersten Beratung bis zur finalen Abnahme – transparent, strukturiert und professionell.
-            </p>
+        {/* ── Two-section tabs ── */}
+        <section className="max-w-[1440px] mx-auto px-4 md:px-16 py-14 md:py-20">
+
+          {/* tab bar */}
+          <div className="flex gap-2 mb-10 border-b border-stone-200">
+            <button
+              onClick={() => setActiveTab("anfrage")}
+              className={`pb-3 px-1 text-sm font-semibold border-b-2 transition-colors mr-6 ${activeTab === "anfrage" ? "border-[#344148] text-[#344148]" : "border-transparent text-zinc-400 hover:text-zinc-600"}`}
+            >
+              Montageofferte anfordern
+            </button>
+            <button
+              onClick={() => setActiveTab("anleitung")}
+              className={`pb-3 px-1 text-sm font-semibold border-b-2 transition-colors ${activeTab === "anleitung" ? "border-[#344148] text-[#344148]" : "border-transparent text-zinc-400 hover:text-zinc-600"}`}
+            >
+              Montageanleitung &amp; Videos
+            </button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-            {/* connecting line desktop */}
-            <div className="hidden lg:block absolute top-10 left-[12.5%] right-[12.5%] h-px bg-[#82B2CA]/20" style={{ zIndex: 0 }} />
-            {steps.map((step, i) => (
-              <div key={step.number} className="relative z-10 rounded-3xl border border-neutral-200 bg-white p-7 shadow-sm hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full text-white text-sm font-bold shrink-0"
-                    style={{ backgroundColor: i % 2 === 0 ? "#82B2CA" : "#344148" }}>
-                    {step.number}
-                  </div>
-                  <div className="h-px flex-1 bg-neutral-100" />
+
+          {/* ── TAB 1: Anfrage ── */}
+          {activeTab === "anfrage" && (
+            <div className="grid lg:grid-cols-5 gap-10 items-start">
+
+              {/* left: info */}
+              <div className="lg:col-span-2 flex flex-col gap-6">
+                <div>
+                  <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA] mb-4">
+                    Schritt 1 von 1
+                  </span>
+                  <h2 className="text-2xl md:text-3xl font-bold text-[#344148] leading-snug">
+                    Montageofferte anfordern
+                  </h2>
+                  <p className="mt-3 text-sm text-zinc-500 leading-relaxed">
+                    Füllen Sie das Formular aus und laden Sie bis zu 3 Fotos des Montageorts hoch. Nach unserer Analyse erhalten Sie ein individuelles Angebot direkt per E-Mail.
+                  </p>
                 </div>
-                <h3 className="text-base font-bold text-zinc-900 mb-2">{step.title}</h3>
-                <p className="text-sm text-neutral-500 leading-relaxed">{step.description}</p>
+                <div className="flex flex-col gap-3">
+                  {[
+                    { icon: "📋", label: "Individuelle Analyse", desc: "Wir prüfen Ihren Montageort sorgfältig." },
+                    { icon: "📩", label: "Angebot per E-Mail", desc: "Sie erhalten Ihr Angebot innerhalb von 24–48 Stunden." },
+                    { icon: "🔒", label: "Unverbindlich & kostenlos", desc: "Die Anfrage ist völlig unverbindlich und kostenlos." },
+                  ].map((item) => (
+                    <div key={item.label} className="flex items-start gap-3 rounded-xl border border-stone-100 bg-stone-50 p-4">
+                      <span className="text-xl">{item.icon}</span>
+                      <div>
+                        <p className="text-sm font-semibold text-[#344148]">{item.label}</p>
+                        <p className="text-xs text-zinc-500 mt-0.5">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
+
+              {/* right: form */}
+              <div className="lg:col-span-3">
+                {formSubmitted ? (
+                  <div className="flex flex-col items-center justify-center gap-5 rounded-2xl border border-green-100 bg-green-50 p-12 text-center">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+                      <svg className="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <h3 className="text-xl font-bold text-zinc-800">Anfrage erfolgreich gesendet!</h3>
+                    <p className="text-sm text-zinc-500 max-w-sm">
+                      Vielen Dank für Ihre Anfrage. Wir melden uns innerhalb von 24–48 Stunden mit einem individuellen Angebot bei Ihnen.
+                    </p>
+                    <button
+                      onClick={() => { setFormSubmitted(false); setFormData(emptyForm); setUploadedFiles([]); }}
+                      className="mt-2 rounded-full border border-zinc-300 px-6 py-2 text-sm font-semibold text-zinc-700 hover:bg-zinc-100 transition"
+                    >
+                      Neue Anfrage stellen
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-5 rounded-2xl border border-stone-200 bg-white p-6 md:p-8 shadow-sm">
+                    {/* name + email */}
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="mb-1.5 block text-xs font-semibold text-zinc-600">Name *</label>
+                        <input
+                          required
+                          type="text"
+                          placeholder="Max Mustermann"
+                          value={formData.name}
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-2.5 text-sm text-zinc-800 outline-none focus:border-[#82B2CA] focus:ring-2 focus:ring-[#82B2CA]/20 transition"
+                        />
+                      </div>
+                      <div>
+                        <label className="mb-1.5 block text-xs font-semibold text-zinc-600">E-Mail *</label>
+                        <input
+                          required
+                          type="email"
+                          placeholder="max@beispiel.de"
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-2.5 text-sm text-zinc-800 outline-none focus:border-[#82B2CA] focus:ring-2 focus:ring-[#82B2CA]/20 transition"
+                        />
+                      </div>
+                    </div>
+
+                    {/* phone + order number */}
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="mb-1.5 block text-xs font-semibold text-zinc-600">Telefon</label>
+                        <input
+                          type="tel"
+                          placeholder="+49 000 00000"
+                          value={formData.phone}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-2.5 text-sm text-zinc-800 outline-none focus:border-[#82B2CA] focus:ring-2 focus:ring-[#82B2CA]/20 transition"
+                        />
+                      </div>
+                      <div>
+                        <label className="mb-1.5 block text-xs font-semibold text-zinc-600">Bestellnummer</label>
+                        <input
+                          type="text"
+                          placeholder="z. B. PH-2024-001"
+                          value={formData.orderNumber}
+                          onChange={(e) => setFormData({ ...formData, orderNumber: e.target.value })}
+                          className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-2.5 text-sm text-zinc-800 outline-none focus:border-[#82B2CA] focus:ring-2 focus:ring-[#82B2CA]/20 transition"
+                        />
+                      </div>
+                    </div>
+
+                    {/* product type */}
+                    <div>
+                      <label className="mb-1.5 block text-xs font-semibold text-zinc-600">Produktart *</label>
+                      <select
+                        required
+                        value={formData.productType}
+                        onChange={(e) => setFormData({ ...formData, productType: e.target.value })}
+                        className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-2.5 text-sm text-zinc-800 outline-none focus:border-[#82B2CA] focus:ring-2 focus:ring-[#82B2CA]/20 transition"
+                      >
+                        <option value="">Bitte wählen …</option>
+                        <option>PergolaHaus Komplettset PH1</option>
+                        <option>PergolaHaus Komplettset PH2</option>
+                        <option>PergolaHaus Komplettset PH3</option>
+                        <option>PergolaHaus Komplettset PH4</option>
+                        <option>PergolaHaus Komplettset PH5</option>
+                        <option>PergolaHaus Komplettset PH6</option>
+                        <option>Preiswerte Pergola</option>
+                        <option>Wintergarten</option>
+                        <option>Sonstiges</option>
+                      </select>
+                    </div>
+
+                    {/* address */}
+                    <div>
+                      <label className="mb-1.5 block text-xs font-semibold text-zinc-600">Montageadresse *</label>
+                      <input
+                        required
+                        type="text"
+                        placeholder="Straße, Hausnummer, PLZ, Ort"
+                        value={formData.address}
+                        onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                        className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-2.5 text-sm text-zinc-800 outline-none focus:border-[#82B2CA] focus:ring-2 focus:ring-[#82B2CA]/20 transition"
+                      />
+                    </div>
+
+                    {/* additional info */}
+                    <div>
+                      <label className="mb-1.5 block text-xs font-semibold text-zinc-600">Zusätzliche Informationen zum Montageort</label>
+                      <textarea
+                        rows={3}
+                        placeholder="z. B. Untergrundart, Zugangsbeschränkungen, besondere Gegebenheiten …"
+                        value={formData.additionalInfo}
+                        onChange={(e) => setFormData({ ...formData, additionalInfo: e.target.value })}
+                        className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-2.5 text-sm text-zinc-800 outline-none focus:border-[#82B2CA] focus:ring-2 focus:ring-[#82B2CA]/20 transition resize-none"
+                      />
+                    </div>
+
+                    {/* file upload */}
+                    <div>
+                      <label className="mb-1.5 block text-xs font-semibold text-zinc-600">
+                        Fotos des Montageorts (max. 3)
+                      </label>
+                      <div
+                        onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+                        onDragLeave={() => setDragOver(false)}
+                        onDrop={handleDrop}
+                        onClick={() => fileInputRef.current?.click()}
+                        className={`cursor-pointer rounded-xl border-2 border-dashed p-6 text-center transition-colors ${dragOver ? "border-[#82B2CA] bg-[#82B2CA]/5" : "border-stone-200 bg-stone-50 hover:border-[#82B2CA]/50"}`}
+                      >
+                        <svg className="mx-auto mb-2 h-8 w-8 text-zinc-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                        </svg>
+                        <p className="text-xs text-zinc-500">
+                          Dateien hierher ziehen oder <span className="font-semibold text-[#82B2CA]">auswählen</span>
+                        </p>
+                        <p className="mt-1 text-[10px] text-zinc-400">JPG, PNG, HEIC, PDF – max. 3 Dateien</p>
+                        <input
+                          ref={fileInputRef}
+                          type="file"
+                          multiple
+                          accept="image/*,.pdf"
+                          className="hidden"
+                          onChange={(e) => handleFileAdd(e.target.files)}
+                        />
+                      </div>
+
+                      {uploadedFiles.length > 0 && (
+                        <div className="mt-3 flex flex-col gap-2">
+                          {uploadedFiles.map((file, i) => (
+                            <div key={i} className="flex items-center justify-between rounded-lg border border-stone-200 bg-white px-3 py-2">
+                              <div className="flex items-center gap-2 min-w-0">
+                                <svg className="h-4 w-4 shrink-0 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
+                                </svg>
+                                <span className="text-xs text-zinc-700 truncate">{file.name}</span>
+                              </div>
+                              <button
+                                type="button"
+                                onClick={() => setUploadedFiles((prev) => prev.filter((_, idx) => idx !== i))}
+                                className="ml-2 shrink-0 text-zinc-400 hover:text-red-500 transition"
+                              >
+                                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="mt-1 w-full rounded-full py-3.5 text-sm font-bold text-white transition hover:opacity-90"
+                      style={{ backgroundColor: "#344148" }}
+                    >
+                      Anfrage absenden
+                    </button>
+                    <p className="text-center text-[11px] text-zinc-400">
+                      Mit dem Absenden akzeptieren Sie unsere Datenschutzerklärung. Die Anfrage ist unverbindlich.
+                    </p>
+                  </form>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* ── TAB 2: Anleitungen & Videos ── */}
+          {activeTab === "anleitung" && (
+            <div className="grid lg:grid-cols-5 gap-10 items-start">
+
+              {/* left: product list */}
+              <div className="lg:col-span-2">
+                <div className="mb-5">
+                  <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA] mb-4">
+                    Produkt wählen
+                  </span>
+                  <h2 className="text-2xl md:text-3xl font-bold text-[#344148] leading-snug">
+                    Montageanleitung &amp; Videos
+                  </h2>
+                  <p className="mt-3 text-sm text-zinc-500 leading-relaxed">
+                    Wählen Sie Ihr Produkt – alle zugehörigen Anleitungen, technischen Dokumente und Videos werden direkt angezeigt.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  {productDocs.map((p) => (
+                    <button
+                      key={p.id}
+                      onClick={() => setSelectedProduct(p.id)}
+                      className={`flex items-center gap-3 rounded-xl border px-4 py-3.5 text-left transition-all ${selectedProduct === p.id ? "border-[#344148] bg-[#344148] text-white" : "border-stone-200 bg-white hover:border-[#82B2CA]/50 text-zinc-800"}`}
+                    >
+                      <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-xs font-bold ${selectedProduct === p.id ? "bg-white/20 text-white" : "bg-[#82B2CA]/15 text-[#82B2CA]"}`}>
+                        {p.id}
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-sm font-semibold leading-tight truncate">{p.label}</p>
+                        <p className={`text-xs mt-0.5 ${selectedProduct === p.id ? "text-white/60" : "text-zinc-400"}`}>{p.dims}</p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* right: documents & video */}
+              <div className="lg:col-span-3">
+                {!selectedDoc ? (
+                  <div className="flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-stone-200 bg-stone-50 p-16 text-center">
+                    <svg className="h-12 w-12 text-stone-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                    </svg>
+                    <p className="text-sm font-semibold text-zinc-400">Bitte wählen Sie links ein Produkt aus</p>
+                  </div>
+                ) : (
+                  <div className="flex flex-col gap-5">
+                    <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+                      <p className="text-xs font-semibold uppercase tracking-widest text-[#82B2CA] mb-1">Ausgewähltes Produkt</p>
+                      <h3 className="text-lg font-bold text-[#344148]">{selectedDoc.label}</h3>
+                      <p className="text-sm text-zinc-500 mt-1">{selectedDoc.dims}</p>
+                    </div>
+
+                    {/* documents */}
+                    <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+                      <div className="flex items-center gap-2 mb-4">
+                        <svg className="h-5 w-5 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                        </svg>
+                        <span className="text-sm font-bold text-zinc-800">Dokumente</span>
+                      </div>
+                      <div className="flex flex-col gap-3">
+                        {selectedDoc.docs.map((doc, i) => (
+                          <div key={i} className="flex items-center justify-between rounded-xl border border-stone-100 bg-stone-50 px-4 py-3">
+                            <div className="flex items-center gap-3">
+                              <span className="text-xl">{doc.icon}</span>
+                              <div>
+                                <p className="text-sm font-semibold text-zinc-800">{doc.title}</p>
+                                <p className="text-xs text-zinc-400">{doc.desc}</p>
+                              </div>
+                            </div>
+                            <button className="flex items-center gap-1.5 rounded-lg border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-3 py-1.5 text-xs font-semibold text-[#344148] hover:bg-[#82B2CA]/20 transition">
+                              <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                              </svg>
+                              PDF
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* video */}
+                    {selectedDoc.video ? (
+                      <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+                        <div className="flex items-center gap-2 mb-4">
+                          <svg className="h-5 w-5 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                          </svg>
+                          <span className="text-sm font-bold text-zinc-800">Montagevideo</span>
+                        </div>
+                        <div className="relative flex items-center justify-center rounded-xl bg-[#344148] overflow-hidden" style={{ aspectRatio: "16/9" }}>
+                          <div className="flex flex-col items-center gap-3 text-white">
+                            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+                              <svg className="h-7 w-7 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                              </svg>
+                            </div>
+                            <p className="text-sm font-semibold">{selectedDoc.video.title}</p>
+                            <p className="text-xs text-white/50">{selectedDoc.video.duration}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="rounded-2xl border border-dashed border-stone-200 bg-stone-50 p-6 text-center">
+                        <p className="text-sm text-zinc-400">Für dieses Produkt ist noch kein Montagevideo verfügbar.</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* ── Process steps ── */}
+        <section className="bg-zinc-50 py-16 md:py-24">
+          <div className="max-w-[1440px] mx-auto px-4 md:px-16">
+            <div className="text-center mb-14">
+              <span className="inline-block rounded-full bg-[#82B2CA]/10 border border-[#82B2CA]/30 px-4 py-1.5 text-[#82B2CA] text-xs font-semibold uppercase tracking-[0.2em] mb-4">
+                So funktioniert es
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-zinc-900">Unser Montageprozess</h2>
+              <p className="mt-3 text-neutral-500 max-w-lg mx-auto text-sm">
+                Von der ersten Anfrage bis zur finalen Abnahme – transparent und professionell.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {steps.map((step, i) => (
+                <div key={step.number} className="rounded-3xl border border-neutral-200 bg-white p-7 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full text-white text-sm font-bold shrink-0"
+                      style={{ backgroundColor: i % 2 === 0 ? "#82B2CA" : "#344148" }}>
+                      {step.number}
+                    </div>
+                    <div className="h-px flex-1 bg-neutral-100" />
+                  </div>
+                  <h3 className="text-base font-bold text-zinc-900 mb-2">{step.title}</h3>
+                  <p className="text-sm text-neutral-500 leading-relaxed">{step.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* ── What's included ── */}
-        <section className="bg-zinc-50 py-16 md:py-24">
+        <section className="py-16 md:py-24">
           <div className="max-w-[1440px] mx-auto px-4 md:px-16">
             <div className="text-center mb-14">
               <span className="inline-block rounded-full bg-[#82B2CA]/10 border border-[#82B2CA]/30 px-4 py-1.5 text-[#82B2CA] text-xs font-semibold uppercase tracking-[0.2em] mb-4">
                 Leistungsumfang
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-zinc-900">Das ist alles inklusive</h2>
-              <p className="mt-3 text-neutral-500 max-w-lg mx-auto text-sm">
-                Unser Montageservice ist vollständig – ohne versteckte Kosten.
-              </p>
+              <p className="mt-3 text-neutral-500 max-w-lg mx-auto text-sm">Unser Montageservice ist vollständig – ohne versteckte Kosten.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {included.map((item) => (
@@ -248,48 +617,50 @@ export const MontageServicePage = () => {
         </section>
 
         {/* ── Why us ── */}
-        <section className="max-w-[1440px] mx-auto px-4 md:px-16 py-16 md:py-24">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <span className="inline-block rounded-full bg-[#82B2CA]/10 border border-[#82B2CA]/30 px-4 py-1.5 text-[#82B2CA] text-xs font-semibold uppercase tracking-[0.2em] mb-5">
-                Warum wir
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-5 leading-tight">
-                Ihr Vertrauen ist unser Antrieb
-              </h2>
-              <p className="text-neutral-500 text-sm leading-relaxed mb-8">
-                Wir sind kein anonymes Callcenter – sondern ein eingespieltes Team, das für Qualität und Zuverlässigkeit steht. Jede Montage führen wir so durch, als wäre es unser eigenes Zuhause.
-              </p>
-              <ul className="space-y-4">
-                {[
-                  "Zertifizierte Monteure mit langjähriger Erfahrung",
-                  "Fixpreisgarantie – keine unerwarteten Mehrkosten",
-                  "Persönlicher Ansprechpartner vom ersten Kontakt bis zur Abnahme",
-                  "Vollversicherter Service – Ihre Immobilie ist geschützt",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                    <div className="shrink-0 flex h-5 w-5 items-center justify-center rounded-full mt-0.5" style={{ backgroundColor: "#82B2CA" }}>
-                      <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
+        <section className="bg-zinc-50 py-16 md:py-24">
+          <div className="max-w-[1440px] mx-auto px-4 md:px-16">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <span className="inline-block rounded-full bg-[#82B2CA]/10 border border-[#82B2CA]/30 px-4 py-1.5 text-[#82B2CA] text-xs font-semibold uppercase tracking-[0.2em] mb-5">
+                  Warum wir
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-5 leading-tight">
+                  Ihr Vertrauen ist unser Antrieb
+                </h2>
+                <p className="text-neutral-500 text-sm leading-relaxed mb-8">
+                  Wir sind kein anonymes Callcenter – sondern ein eingespieltes Team, das für Qualität und Zuverlässigkeit steht.
+                </p>
+                <ul className="space-y-4">
+                  {[
+                    "Zertifizierte Monteure mit langjähriger Erfahrung",
+                    "Fixpreisgarantie – keine unerwarteten Mehrkosten",
+                    "Persönlicher Ansprechpartner vom ersten Kontakt bis zur Abnahme",
+                    "Vollversicherter Service – Ihre Immobilie ist geschützt",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
+                      <div className="shrink-0 flex h-5 w-5 items-center justify-center rounded-full mt-0.5" style={{ backgroundColor: "#82B2CA" }}>
+                        <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="grid grid-cols-1 gap-5">
+                {reasons.map((r) => (
+                  <div key={r.label} className="flex items-center gap-6 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
+                    <div className="text-4xl font-bold shrink-0" style={{ fontFamily: "LEMONMILK, sans-serif", color: r.color }}>
+                      {r.stat}
                     </div>
-                    {item}
-                  </li>
+                    <div>
+                      <p className="text-sm font-bold text-zinc-900 mb-1">{r.label}</p>
+                      <p className="text-xs text-neutral-500 leading-relaxed">{r.desc}</p>
+                    </div>
+                  </div>
                 ))}
-              </ul>
-            </div>
-            <div className="grid grid-cols-1 gap-5">
-              {reasons.map((r) => (
-                <div key={r.label} className="flex items-center gap-6 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
-                  <div className="text-4xl font-bold shrink-0" style={{ fontFamily: "LEMONMILK, sans-serif", color: r.color }}>
-                    {r.stat}
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-zinc-900 mb-1">{r.label}</p>
-                    <p className="text-xs text-neutral-500 leading-relaxed">{r.desc}</p>
-                  </div>
-                </div>
-              ))}
+              </div>
             </div>
           </div>
         </section>
@@ -305,12 +676,11 @@ export const MontageServicePage = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {reviews.map((r) => (
-                <div key={r.name} className="flex flex-col gap-4 rounded-2xl bg-white/5 border border-white/10 p-7 hover:bg-white/8 transition-colors">
+                <div key={r.name} className="flex flex-col gap-4 rounded-2xl bg-white/5 border border-white/10 p-7">
                   <Stars count={r.stars} />
                   <p className="text-sm text-white/80 leading-relaxed flex-1">"{r.text}"</p>
                   <div className="flex items-center gap-3 pt-3 border-t border-white/10">
-                    <div className="h-9 w-9 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0"
-                      style={{ backgroundColor: "#82B2CA" }}>
+                    <div className="h-9 w-9 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0" style={{ backgroundColor: "#82B2CA" }}>
                       {r.name[0]}
                     </div>
                     <div>
@@ -320,37 +690,6 @@ export const MontageServicePage = () => {
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── Guarantee banner ── */}
-        <section className="bg-[#82B2CA] py-12">
-          <div className="max-w-[1440px] mx-auto px-4 md:px-16">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-5">
-                <div className="shrink-0 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/20">
-                  <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-white font-bold text-xl">2 Jahre Montagegarantie</p>
-                  <p className="text-white/80 text-sm mt-1">
-                    Auf alle Montagearbeiten gewähren wir eine vollständige 2-jährige Handwerkergarantie.
-                  </p>
-                </div>
-              </div>
-              <Link
-                to="/contact"
-                className="shrink-0 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-bold transition hover:opacity-90"
-                style={{ color: "#344148" }}
-              >
-                Jetzt anfragen
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </Link>
             </div>
           </div>
         </section>
@@ -402,8 +741,8 @@ export const MontageServicePage = () => {
               Lassen Sie sich persönlich beraten und erhalten Sie ein unverbindliches Angebot – direkt von unserem Expertenteam.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <Link
-                to="/contact"
+              <button
+                onClick={() => { setActiveTab("anfrage"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                 className="inline-flex items-center gap-2 rounded-full px-9 py-4 text-sm font-bold text-white transition hover:opacity-90 hover:shadow-lg"
                 style={{ backgroundColor: "#82B2CA" }}
               >
@@ -411,7 +750,7 @@ export const MontageServicePage = () => {
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                 </svg>
-              </Link>
+              </button>
               <a
                 href="tel:+4966141087500"
                 className="inline-flex items-center gap-2 rounded-full border border-white/30 px-9 py-4 text-sm font-semibold text-white transition hover:bg-white/10"
