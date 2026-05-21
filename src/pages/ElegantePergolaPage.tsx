@@ -398,7 +398,7 @@ export const ElegantePergolaPage = () => {
                   <div ref={galleryRef} className="relative overflow-hidden rounded-2xl">
                     {activeImage === 0 ? (
                       <div className="aspect-[4/3] w-full md:h-[480px]">
-                        <Pergola3DViewer breite={breite} laenge={laenge} hoehe={hoehe} color={selectedColor} louversOpen={louversOpen} />
+                        <Pergola3DViewer breite={breite} laenge={laenge} hoehe={hoehe} color={selectedColor} louversOpen={louversOpen} showRetract={false} />
                       </div>
                     ) : (
                       <img

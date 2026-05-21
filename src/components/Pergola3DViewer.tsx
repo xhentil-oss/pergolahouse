@@ -241,14 +241,15 @@ const ToggleSwitch = ({ checked, onChange, label }: { checked: boolean; onChange
 
 /* ── exported component ── */
 interface Pergola3DViewerProps {
-  breite: number;    // mm
-  laenge: number;    // mm
-  hoehe: number;     // mm
+  breite: number;
+  laenge: number;
+  hoehe: number;
   color: string;
   louversOpen?: boolean;
+  showRetract?: boolean;
 }
 
-export const Pergola3DViewer = ({ breite, laenge, hoehe, color }: Pergola3DViewerProps) => {
+export const Pergola3DViewer = ({ breite, laenge, hoehe, color, showRetract = true }: Pergola3DViewerProps) => {
   const [louversOpen, setLouversOpen] = useState(true);
   const [louversRetracted, setLouversRetracted] = useState(false);
   const [showDimensions, setShowDimensions] = useState(false);
@@ -316,7 +317,7 @@ export const Pergola3DViewer = ({ breite, laenge, hoehe, color }: Pergola3DViewe
       {/* Toggle buttons row */}
       <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center gap-5 bg-white border-t border-zinc-200" style={{ height: 44 }}>
         <ToggleSwitch checked={louversOpen} onChange={() => setLouversOpen(v => !v)} label="Lamellen öffnen" />
-        <ToggleSwitch checked={louversRetracted} onChange={() => setLouversRetracted(v => !v)} label="Lamellen einziehen" />
+        {showRetract && <ToggleSwitch checked={louversRetracted} onChange={() => setLouversRetracted(v => !v)} label="Lamellen einziehen" />}
         <ToggleSwitch checked={showDimensions} onChange={() => setShowDimensions(v => !v)} label="Maße anzeigen" />
       </div>
     </div>
