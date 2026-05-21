@@ -4,20 +4,53 @@ import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
 import { FeatureTicker } from "@/sections/FeatureTicker";
 import { useCart } from "@/context/CartContext";
+import { usePrices } from "@/context/PriceContext";
+import ikonaThjesht from "@/assets/ikona-thjesht.png";
+import ikonaMuri from "@/assets/ikona-muri.png";
+import ikonaMajtas from "@/assets/ikona-majtas.png";
+import ikonaDjathtas from "@/assets/ikona-djathtas.png";
+import ikonaPerball from "@/assets/ikona-perball.png";
+import ikonaMbrapa from "@/assets/ikona-mbrapa.png";
+import carpots1 from "../assets/carpots1.png";
+import carpots2 from "../assets/carpots2.png";
+import carpots3 from "../assets/carpots3.png";
+import carpots4 from "../assets/carpots4.png";
+import carpots5 from "../assets/carpots5.png";
+import carpots6 from "../assets/carpots6.png";
+import carpots7 from "../assets/carpots7.png";
+import carpots8 from "../assets/carpots8.png";
+import ikon1 from "@/assets/1 png.png";
+import ikon2 from "@/assets/2 png (1).png";
+import ikon3 from "@/assets/3 png.png";
+import ikon4 from "@/assets/4 png.png";
+import ikon5 from "@/assets/5 png.png";
+import ikon6 from "@/assets/6 png.png";
+
+const featureStory = [
+  { image: ikon1 },
+  { image: ikon2 },
+  { image: ikon3 },
+  { image: ikon4 },
+  { image: ikon5 },
+  { image: ikon6 },
+];
 
 const gallery = [
-  { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/Sundream_3x4_Screens-4x3.jpg?v=1711543068", alt: "Carport – Hauptansicht" },
-  { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/PSC_AC_ANT_600_ZIP_02.jpg?v=1723556288", alt: "Carport – Seitenansicht" },
-  { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/ANTRACITE_5mSCREEN_ed7c811d-a98f-4873-b0c1-114f0f566658.png?v=1747734954", alt: "Carport Anthrazit" },
-  { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/BLACK_3mSCREEN_fb9bd088-6469-4520-b7ea-91432e336cbf.png?v=1747734992", alt: "Carport Schwarz" },
-  { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/Group_73.png?v=1749220146", alt: "Carport Weiß" },
-  { src: "https://cdn.shopify.com/s/files/1/0575/2173/3813/files/White_5m_f359b606-9a43-43b4-96a4-61f7e9f4e0f4.png?v=1750923131", alt: "Carport Weiß – Detail" },
+  { src: carpots1, alt: "Carport 2" },
+  { src: carpots2, alt: "Carport 1" },
+  { src: carpots3, alt: "Carport 3" },
+  { src: carpots4, alt: "Carport 4" },
+  { src: carpots5, alt: "Carport 5" },
+  { src: carpots6, alt: "Carport 6" },
+  { src: carpots7, alt: "Carport 7" },
+  { src: carpots8, alt: "Carport 8" },
 ];
 
 const colorOptions = [
-  { label: "Anthrazit", color: "#2E3234", hint: "Anthrazitgrau – zeitlos und elegant" },
-  { label: "Weiß", color: "#E8E4DF", hint: "Verkehrsweiß – hell und minimalistisch" },
-  { label: "Schwarz", color: "#0A0A0D", hint: "Tiefschwarz – markant und modern" },
+  { label: "Beige 1015 T", color: "#D9C4A0", hint: "Warmer Beiton – natürlich und einladend" },
+  { label: "Schwarz 9005 T", color: "#0A0A0D", hint: "Tiefschwarz – markant und modern" },
+  { label: "Anthrazit 7016 T", color: "#2E3234", hint: "Anthrazitgrau – zeitlos und elegant" },
+  { label: "Weiß 9016 T", color: "#F5F5F5", hint: "Verkehrsweiß – hell und minimalistisch" },
 ];
 
 const sizeOptions = [
@@ -61,10 +94,46 @@ const Stars = ({ count }: { count: number }) => (
 /* ─────────────────────────────────────────────── */
 export const CarportsPage = () => {
   const { addToCart } = useCart();
+  const { prices } = usePrices();
+
+  const mountOptions = [
+    { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
+    { label: "Wandmontage", img: ikonaMuri, surcharge: prices.wandmontage },
+  ];
+  const sideIcons: Record<string, string> = {
+    left: ikonaMajtas, right: ikonaDjathtas, front: ikonaPerball, back: ikonaMbrapa,
+  };
+  const sideLabels: Record<string, string> = {
+    left: "Links", right: "Rechts", front: "Vorne", back: "Hinten",
+  };
+  const sideTypeChoices = [
+    { value: "none",       label: "Keine",                price: 0 },
+    { value: "screen",     label: "Screen Rollo",          price: prices.screenRollo },
+    { value: "schiebeglas",label: "Schiebeverglasung",     price: prices.schiebeverglasung },
+    { value: "guillotine", label: "Guillotine-Verglasung", price: prices.guillotineVerglasung },
+  ];
+
+  const accessoryCategories = [
+    { key: "beleuchtung", label: "Beleuchtung", items: [
+      { label: "Warmweißes Licht", description: "Warmes Ambiente-Licht für gemütliche Abende.", price: prices.warmweissesLicht },
+      { label: "Kaltweiß Licht", description: "Klares, modernes Kaltweiß-Licht.", price: prices.kaltweissLicht },
+      { label: "RGB-Beleuchtung", description: "Farbwechsel-Beleuchtung für individuelle Stimmungen.", price: prices.rgbBeleuchtung },
+      { label: "Perimeter-Beleuchtung", description: "Umlaufende Beleuchtung – dekorativer Premium-Effekt.", price: prices.perimeterBeleuchtung },
+      { label: "Spot-Beleuchtung", description: "Integrierte Spots für gezielte Ausleuchtung.", price: prices.spotBeleuchtung },
+    ]},
+    { key: "komfort", label: "Komfort", items: [
+      { label: "Integrierte Steckdosen", description: "Elektrische Steckdosen, integriert in die Pfosten.", price: prices.integriertSteckdosen },
+    ]},
+  ];
+  const accessoryOptions = accessoryCategories.flatMap((c) => c.items);
+
   const [activeImage, setActiveImage] = useState(0);
   const [descExpanded, setDescExpanded] = useState(false);
   const [selectedColor, setSelectedColor] = useState(colorOptions[0].label);
   const [selectedSize, setSelectedSize] = useState(sizeOptions[0].label);
+  const [selectedMount, setSelectedMount] = useState("Freistehend");
+  const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
+  const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showStickyBar, setShowStickyBar] = useState(false);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -93,18 +162,35 @@ export const CarportsPage = () => {
   }, []);
 
   const sizeData = sizeOptions.find((s) => s.label === selectedSize) ?? sizeOptions[0];
+  const mountData = mountOptions.find((o) => o.label === selectedMount) ?? mountOptions[0];
+  const sideTotal = Object.values(sides).reduce((sum, v) => {
+    const choice = sideTypeChoices.find((c) => c.value === v);
+    return sum + (choice?.price ?? 0);
+  }, 0);
+  const accTotal = accessoryOptions.filter((o) => selectedAccessories.includes(o.label)).reduce((s, o) => s + o.price, 0);
+  const totalPrice = sizeData.price + mountData.surcharge + sideTotal + accTotal;
+
+  const toggleAccessory = (label: string) =>
+    setSelectedAccessories((c) => (c.includes(label) ? c.filter((x) => x !== label) : [...c, label]));
+
   const handleAddToCart = () => {
+    const cartSides = Object.entries(sides)
+      .filter(([, v]) => v !== "none")
+      .map(([k, v]) => ({ key: sideLabels[k], label: sideLabels[k], type: sideTypeChoices.find(c => c.value === v)?.label ?? "", price: sideTypeChoices.find(c => c.value === v)?.price ?? 0 }));
+    const cartAccessories = accessoryOptions
+      .filter((o) => selectedAccessories.includes(o.label))
+      .map((o) => ({ label: o.label, price: o.price }));
     addToCart({
       productName: "Carport",
       image: gallery[0].src,
       color: selectedColor,
       size: selectedSize,
-      mount: "",
-      mountSurcharge: 0,
-      sides: [],
-      accessories: [],
+      mount: selectedMount,
+      mountSurcharge: mountData.surcharge,
+      sides: cartSides,
+      accessories: cartAccessories,
       basePrice: sizeData.price,
-      totalPrice: sizeData.price,
+      totalPrice,
     });
   };
 
@@ -142,7 +228,7 @@ export const CarportsPage = () => {
                   ))}
                 </div>
 
-                {/* Main image */}
+                {/* Main image + feature grid */}
                 <div className="flex flex-1 flex-col gap-2">
                   <div ref={galleryRef} className="relative overflow-hidden rounded-2xl">
                     <img
@@ -170,12 +256,21 @@ export const CarportsPage = () => {
                       ))}
                     </div>
                   </div>
+
+                  {/* Feature icons */}
+                  <div className="grid grid-cols-3 gap-2">
+                    {featureStory.map((item, i) => (
+                      <div key={i} className="overflow-hidden rounded-xl">
+                        <img src={item.image} alt="Feature" className="w-full h-full object-cover block" />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* RIGHT: Configurator card */}
-            <div className="w-full lg:sticky lg:top-20 lg:w-[42%]">
+            <div className="w-full lg:w-[42%] lg:max-h-[calc(100vh+130px)] lg:overflow-y-auto lg:pb-6 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
               <div className="rounded-3xl bg-white p-6 shadow-2xl md:p-7">
 
                 <h1 className="font-lemonmilk text-2xl font-bold leading-tight text-[#344148] md:text-3xl">Carport</h1>
@@ -196,13 +291,52 @@ export const CarportsPage = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-xs text-white/50">Gesamtpreis</p>
-                      <span className="font-lemonmilk text-2xl font-bold text-white">{formatPrice(sizeData.price)}</span>
+                      <span className="font-lemonmilk text-2xl font-bold text-white">{formatPrice(totalPrice)}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* ── Configurator sections ── */}
                 <div className="mt-5 space-y-5">
+
+                  {/* Aufbau */}
+                  <div>
+                    <p className="mb-2.5 text-xs font-bold uppercase tracking-widest text-zinc-400">Aufbau</p>
+                    <div className="grid grid-cols-2 gap-2">
+                      {mountOptions.map((m) => (
+                        <button key={m.label} type="button" onClick={() => setSelectedMount(m.label)}
+                          className={`flex flex-col items-center gap-2 rounded-3xl border-2 p-3 transition-all ${selectedMount === m.label ? "border-[#344148] bg-[#344148]/5" : "border-stone-200 hover:border-zinc-300"}`}>
+                          <img src={m.img} alt={m.label} className="h-9 object-contain" />
+                          <span className={`text-xs font-semibold ${selectedMount === m.label ? "text-[#344148]" : "text-zinc-600"}`}>{m.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Seitenelemente */}
+                  <div>
+                    <p className="mb-2.5 text-xs font-bold uppercase tracking-widest text-zinc-400">Seitenelemente</p>
+                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                      {(["left", "right", "front", "back"] as const).map((side) => (
+                        <div key={side} className="flex flex-col items-center gap-1.5 rounded-xl border border-stone-200 bg-stone-50 p-2.5">
+                          <img src={sideIcons[side]} alt={sideLabels[side]} className="h-10 object-contain" />
+                          <span className="text-[10px] font-semibold text-zinc-500">{sideLabels[side]}</span>
+                          <select
+                            value={sides[side]}
+                            onChange={(e) => setSides((prev) => ({ ...prev, [side]: e.target.value }))}
+                            className="w-full rounded-lg border border-stone-200 bg-white px-1.5 py-1 text-[10px] text-zinc-700 focus:border-[#344148] focus:outline-none"
+                          >
+                            {sideTypeChoices.map((c) => (
+                              <option key={c.value} value={c.value}>
+                                {c.label}{c.price ? ` (+${formatPrice(c.price)})` : ""}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
                   {/* Color */}
                   <div>
                     <p className="mb-2.5 text-xs font-bold uppercase tracking-widest text-zinc-400">Farbe</p>
@@ -241,8 +375,57 @@ export const CarportsPage = () => {
                     </div>
                   </div>
 
+                  {/* Optionales Zubehör */}
+                  <div>
+                    <div className="mb-2.5 flex items-center justify-between">
+                      <p className="text-xs font-bold uppercase tracking-widest text-zinc-400">Optionales Zubehör</p>
+                      {selectedAccessories.length > 0 && (
+                        <span className="rounded-full bg-[#82B2CA] px-2 py-0.5 text-[10px] font-bold text-white">{selectedAccessories.length} gewählt</span>
+                      )}
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      {accessoryCategories.map((cat) => {
+                        const selectedInCat = cat.items.filter(i => selectedAccessories.includes(i.label)).length;
+                        return (
+                          <div key={cat.key} className="overflow-hidden rounded-2xl border border-stone-200 bg-white">
+                            <div className="flex items-center gap-2 px-4 py-3" style={{ backgroundColor: '#82B2CA' }}>
+                              <span className="flex-1 text-[11px] font-bold text-white tracking-wide">{cat.label}</span>
+                              {selectedInCat > 0 && (
+                                <span className="rounded-full bg-white/30 px-2 py-0.5 text-[10px] font-bold text-white">{selectedInCat}</span>
+                              )}
+                            </div>
+                            <div className="divide-y divide-stone-100">
+                              {cat.items.map((acc) => {
+                                const active = selectedAccessories.includes(acc.label);
+                                const addonItem = addonItems.find(a => a.title === acc.label);
+                                return (
+                                  <div key={acc.label} className={`flex items-center gap-2.5 px-3 py-2.5 transition-colors ${active ? "bg-[#344148]/5" : ""}`}>
+                                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg" style={{ backgroundColor: addonItem ? `${addonItem.color}20` : '#f5f5f4', color: addonItem?.color }}>
+                                      <div className="scale-75">{addonItem?.icon}</div>
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                      <div className="text-[13px] font-semibold leading-tight text-zinc-800">{acc.label}</div>
+                                      <div className="text-[10px] text-zinc-400">+{formatPrice(acc.price)}</div>
+                                    </div>
+                                    <button
+                                      type="button"
+                                      onClick={() => toggleAccessory(acc.label)}
+                                      className={`shrink-0 flex h-7 w-7 items-center justify-center rounded-full text-sm font-bold transition-all ${active ? "bg-zinc-800 text-white hover:bg-zinc-700" : "bg-[#344148] text-white hover:bg-[#82B2CA]"}`}
+                                    >
+                                      {active ? "−" : "+"}
+                                    </button>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
                   {/* CTA buttons */}
-                  <div className="grid gap-2 sm:grid-cols-2 pt-1">
+                  <div className="grid gap-2 sm:grid-cols-2 pt-1 lg:sticky lg:bottom-0 lg:bg-white lg:-mx-7 lg:px-7 lg:pb-4 lg:pt-3 lg:border-t lg:border-stone-100 lg:rounded-b-3xl">
                     <button type="button" onClick={handleAddToCart}
                       className="rounded-full py-3 text-center text-sm font-bold text-white transition hover:opacity-90 hover:shadow-lg"
                       style={{ backgroundColor: '#82B2CA' }}>
