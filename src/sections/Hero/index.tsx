@@ -3,6 +3,8 @@ import { gsap } from "gsap";
 import { Link } from "react-router-dom";
 import { promotions, formatPromoPrice } from "@/config/promotions";
 import { useDiscounts } from "@/context/DiscountContext";
+import { usePrices } from "@/context/PriceContext";
+import { PriceConfig } from "@/config/prices";
 // importo fontin custom në stilizim global ose përmes Tailwind plugin
 // import "../../assets/fonts/LEMONMILK-Bold.woff2";
 
@@ -39,8 +41,16 @@ const slides = [
 ];
 
 
+const promoKeyMap: Record<string, { origKey: keyof PriceConfig; discKey: keyof PriceConfig }> = {
+  "elegante-pergola":   { origKey: "elegante_originalPrice",    discKey: "elegante_discountPercent" },
+  "luxus-pergola":      { origKey: "luxus_originalPrice",       discKey: "luxus_discountPercent" },
+  "preiswerte-pergola": { origKey: "preiswerte_originalPrice",  discKey: "preiswerte_discountPercent" },
+  "wintergarten":       { origKey: "wintergarten_originalPrice",discKey: "wintergarten_discountPercent" },
+};
+
 export const Hero = () => {
   const { isActive } = useDiscounts();
+  const { prices } = usePrices();
   const [active, setActive] = useState(0);
   const timeoutRef = useRef(null);
   const imageRef = useRef(null);
@@ -174,7 +184,10 @@ export const Hero = () => {
       {/* Promo cards — right side */}
       <div className="absolute right-0 top-0 h-full hidden lg:flex flex-col justify-center gap-3 pr-8 pl-4 z-10" style={{ width: 300 }}>
         {promotions.filter((p) => isActive(p.key)).map((p) => {
-          const discountedPrice = Math.round(p.originalPrice * (1 - p.discountPercent / 100));
+          const km = promoKeyMap[p.key];
+          const origPrice = km ? (prices[km.origKey] as number) : p.originalPrice;
+          const discPct = km ? (prices[km.discKey] as number) : p.discountPercent;
+          const discountedPrice = Math.round(origPrice * (1 - discPct / 100));
           return (
             <Link
               key={p.key}
@@ -188,7 +201,7 @@ export const Hero = () => {
                   {p.label}
                 </span>
                 <span className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-bold text-white" style={{ backgroundColor: "#82B2CA" }}>
-                  -{p.discountPercent}%
+                  -{discPct}%
                 </span>
               </div>
               {/* Prices */}
@@ -197,7 +210,7 @@ export const Hero = () => {
                   {formatPromoPrice(discountedPrice)}
                 </span>
                 <span className="text-white/40 text-xs line-through">
-                  {formatPromoPrice(p.originalPrice)}
+                  {formatPromoPrice(origPrice)}
                 </span>
               </div>
               {/* Arrow */}

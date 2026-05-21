@@ -7,7 +7,13 @@ import { FeatureTicker } from "@/sections/FeatureTicker";
 import { useCart } from "@/context/CartContext";
 import { getPromotion } from "@/config/promotions";
 import { useDiscounts } from "@/context/DiscountContext";
-// Removed unused imports from previous implementation
+import { usePrices } from "@/context/PriceContext";
+import ikonaThjesht from "@/assets/ikona-thjesht.png";
+import ikonaMuri from "@/assets/ikona-muri.png";
+import ikonaMajtas from "@/assets/ikona-majtas.png";
+import ikonaDjathtas from "@/assets/ikona-djathtas.png";
+import ikonaPerball from "@/assets/ikona-perball.png";
+import ikonaMbrapa from "@/assets/ikona-mbrapa.png";
 import ikon1 from "@/assets/1 png.png";
 import ikon2 from "@/assets/2 png (1).png";
 import ikon3 from "@/assets/3 png.png";
@@ -16,20 +22,26 @@ import ikon5 from "@/assets/5 png.png";
 import ikon6 from "@/assets/6 png.png";
 import { Pergola3DViewer } from "@/components/Pergola3DViewer";
 
-import photo1 from "../assets/image-pergola.png";
-import photo2 from "../assets/image-light.png";
-import photo3 from "../assets/Photo (26).png";
-import photo4 from "../assets/pergola-glass.png";
-import photo5 from "../assets/pergola-glass-guillot.png";
-import photo6 from "../assets/zip-screen-pergola.png";
+import photo1 from "../assets/elegante6.png";
+import photo2 from "../assets/elegante2.png";
+import photo3 from "../assets/elegante3.png";
+import photo4 from "../assets/elegante4.png";
+import photo5 from "../assets/elegante5.png";
+import photo6 from "../assets/elegante1.png";
+import photo7 from "../assets/elegante7.png";
+import photo8 from "../assets/elegante8.png";
+import photo9 from "../assets/elegante9.png";
 
 const gallery = [
-  { src: photo1, alt: "Elegante Pergola – modernes minimalistisches Design, Tag" },
-  { src: photo2, alt: "Elegante Pergola – modernes minimalistisches Design, Nacht" },
-  { src: photo3, alt: "Elegante Pergola – LED RGB am Pool" },
-  { src: photo4, alt: "Elegante Pergola – mit Glaswänden, Gartenatmosphäre" },
-  { src: photo5, alt: "Elegante Pergola – mit Glaswänden, Entspannungsbereich" },
-  { src: photo6, alt: "Elegante Pergola – klassisch, am Pool" },
+  { src: photo1, alt: "Elegante Pergola 1" },
+  { src: photo2, alt: "Elegante Pergola 2" },
+  { src: photo3, alt: "Elegante Pergola 3" },
+  { src: photo4, alt: "Elegante Pergola 4" },
+  { src: photo5, alt: "Elegante Pergola 5" },
+  { src: photo6, alt: "Elegante Pergola 6" },
+  { src: photo7, alt: "Elegante Pergola 7" },
+  { src: photo8, alt: "Elegante Pergola 8" },
+  { src: photo9, alt: "Elegante Pergola 9" },
 ];
 
 const colorOptions = [
@@ -43,71 +55,13 @@ const colorOptions = [
 const breiteRange = { min: 1000, max: 7000, step: 1 };
 const laengeRange = { min: 1000, max: 5500, step: 1 };
 const hoeheRange = { min: 1000, max: 3500, step: 1 };
-const pricePerSqm = 445;
 
-import ikonaThjesht from "@/assets/ikona-thjesht.png";
-import ikonaMuri from "@/assets/ikona-muri.png";
-const mountOptions = [
-  { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
-  { label: "Wandmontage", img: ikonaMuri, surcharge: 240 },
-];
-
-import ikonaMajtas from "@/assets/ikona-majtas.png";
-import ikonaDjathtas from "@/assets/ikona-djathtas.png";
-import ikonaPerball from "@/assets/ikona-perball.png";
-import ikonaMbrapa from "@/assets/ikona-mbrapa.png";
 const sideOptions = [
   { key: "left", label: "Links", sizeLabel: "Seite", img: ikonaMajtas },
   { key: "right", label: "Rechts", sizeLabel: "Seite", img: ikonaDjathtas },
   { key: "front", label: "Vorne", sizeLabel: "Seite", img: ikonaPerball },
   { key: "back", label: "Hinten", sizeLabel: "Seite", img: ikonaMbrapa },
 ];
-
-const sideTypeChoices = [
-  { value: "none", label: "Keine", price: 0 },
-  { value: "screen", label: "Screen Rollo", price: 499 },
-  { value: "schiebeglas", label: "Schiebeverglasung", price: 899 },
-  { value: "guillotine", label: "Guillotine-Verglasung", price: 1199 },
-];
-
-const accessoryCategories = [
-  {
-    key: "beleuchtung",
-    label: "Beleuchtung",
-    icon: "💡",
-    items: [
-      { label: "Warmweißes Licht", description: "Warmes Ambiente-Licht für gemütliche Abende.", price: 329 },
-      { label: "Kaltweiß Licht", description: "Klares, modernes Kaltweiß-Licht für die Pergola.", price: 299 },
-      { label: "RGB-Beleuchtung", description: "Farbwechsel-Beleuchtung für individuelle Stimmungen.", price: 449 },
-      { label: "Perimeter-Beleuchtung", description: "Umlaufende Beleuchtung – dekorativer Premium-Effekt.", price: 389 },
-      { label: "Spot-Beleuchtung", description: "Fokussierte Beleuchtung – integrierte Spots in der Struktur.", price: 279 },
-    ],
-  },
-  {
-    key: "sensoren",
-    label: "Sensoren",
-    icon: "📡",
-    items: [
-      { label: "Windsensor", description: "Schließt die Lamellen automatisch bei starkem Wind.", price: 249 },
-      { label: "Regensensor", description: "Schließt die Lamellen automatisch bei Regen.", price: 219 },
-      { label: "Schneesensor", description: "Automatischer Schutz gegen Schnee und Lasteinwirkungen.", price: 239 },
-      { label: "Sonnensensor", description: "Regelt die Lamellen automatisch je nach Sonneneinstrahlung.", price: 229 },
-      { label: "Solar-System", description: "Optionales Solarsystem für den Motor – ideal ohne Stromanschluss.", price: 699 },
-    ],
-  },
-  {
-    key: "heizung",
-    label: "Heizung & Komfort",
-    icon: "🔥",
-    items: [
-      { label: "Infrarot-Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühlen Tagen.", price: 549 },
-      { label: "Integrierte Steckdosen", description: "Elektrische Steckdosen, integriert in die Pergola-Pfosten.", price: 199 },
-      { label: "Soundsystem", description: "Integrierbares Soundsystem – Musik überall unter der Pergola.", price: 599 },
-    ],
-  },
-];
-
-const accessoryOptions = accessoryCategories.flatMap((c) => c.items);
 
 const featureStory = [
   { image: ikon1 },
@@ -267,6 +221,43 @@ const Stars = ({ count }: { count: number }) => (
 
 export const ElegantePergolaPage = () => {
   const { addToCart } = useCart();
+  const { prices } = usePrices();
+
+  const pricePerSqm = prices.elegante_originalPrice / 9;
+  const mountOptions = [
+    { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
+    { label: "Wandmontage", img: ikonaMuri, surcharge: prices.wandmontage },
+  ];
+  const sideTypeChoices = [
+    { value: "none", label: "Keine", price: 0 },
+    { value: "guillotine", label: "Guillotine-Glassysteme", price: prices.guillotineVerglasung },
+    { value: "faltglas", label: "Faltglassysteme", price: prices.schiebeverglasung },
+    { value: "schiebeglas", label: "Schiebeglassysteme", price: prices.schiebeverglasung },
+    { value: "zip", label: "Zip-Screens", price: prices.screenRollo },
+  ];
+  const accessoryCategories = [
+    { key: "beleuchtung", label: "Beleuchtung", icon: "💡", items: [
+      { label: "Warmweißes Licht", description: "Warmes Ambiente-Licht für gemütliche Abende.", price: prices.warmweissesLicht },
+      { label: "Kaltweiß Licht", description: "Klares, modernes Kaltweiß-Licht für die Pergola.", price: prices.kaltweissLicht },
+      { label: "RGB-Beleuchtung", description: "Farbwechsel-Beleuchtung für individuelle Stimmungen.", price: prices.rgbBeleuchtung },
+      { label: "Perimeter-Beleuchtung", description: "Umlaufende Beleuchtung – dekorativer Premium-Effekt.", price: prices.perimeterBeleuchtung },
+      { label: "Spot-Beleuchtung", description: "Fokussierte Beleuchtung – integrierte Spots in der Struktur.", price: prices.spotBeleuchtung },
+    ]},
+    { key: "sensoren", label: "Sensoren", icon: "📡", items: [
+      { label: "Windsensor", description: "Schließt die Lamellen automatisch bei starkem Wind.", price: prices.windsensor },
+      { label: "Regensensor", description: "Schließt die Lamellen automatisch bei Regen.", price: prices.regensensor },
+      { label: "Schneesensor", description: "Automatischer Schutz gegen Schnee und Lasteinwirkungen.", price: prices.schneesensor },
+      { label: "Sonnensensor", description: "Regelt die Lamellen automatisch je nach Sonneneinstrahlung.", price: prices.sonnensensor },
+      { label: "Solar-System", description: "Optionales Solarsystem für den Motor – ideal ohne Stromanschluss.", price: prices.solarSystem },
+    ]},
+    { key: "heizung", label: "Heizung & Komfort", icon: "🔥", items: [
+      { label: "Infrarot-Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühlen Tagen.", price: prices.infrarotHeizung },
+      { label: "Integrierte Steckdosen", description: "Elektrische Steckdosen, integriert in die Pergola-Pfosten.", price: prices.integriertSteckdosen },
+      { label: "Soundsystem", description: "Integrierbares Soundsystem – Musik überall unter der Pergola.", price: prices.soundsystem },
+    ]},
+  ];
+  const accessoryOptions = accessoryCategories.flatMap((c) => c.items);
+
   const [activeImage, setActiveImage] = useState(0);
   const [louversOpen] = useState(false);
   const [descExpanded, setDescExpanded] = useState(false);
@@ -277,7 +268,7 @@ export const ElegantePergolaPage = () => {
   const [laengeInput, setLaengeInput] = useState("3000");
   const [breiteInput, setBreiteInput] = useState("3000");
   const [hoeheInput, setHoeheInput] = useState("2800");
-  const [selectedMount, setSelectedMount] = useState(mountOptions[0].label);
+  const [selectedMount, setSelectedMount] = useState("Freistehend");
   const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -323,7 +314,7 @@ export const ElegantePergolaPage = () => {
   const accTotal = accessoryOptions.filter((o) => selectedAccessories.includes(o.label)).reduce((s, o) => s + o.price, 0);
   const { isActive } = useDiscounts();
   const elegantePromo = getPromotion("elegante-pergola");
-  const discountFactor = (elegantePromo && isActive("elegante-pergola")) ? (1 - elegantePromo.discountPercent / 100) : 1;
+  const discountFactor = (elegantePromo && isActive("elegante-pergola")) ? (1 - prices.elegante_discountPercent / 100) : 1;
   const discountedBase = Math.round(basePrice * discountFactor);
   const finalPrice = discountedBase + mountData.surcharge + sideTotal + accTotal;
   const originalFinalPrice = basePrice + mountData.surcharge + sideTotal + accTotal;
@@ -476,7 +467,7 @@ export const ElegantePergolaPage = () => {
                       <p className="text-xs text-white/50">Gesamtpreis</p>
                       {elegantePromo?.active && (
                         <span className="rounded-full px-2 py-0.5 text-[9px] font-bold text-white" style={{ backgroundColor: "#82B2CA" }}>
-                          -{elegantePromo.discountPercent}%
+                          -{prices.elegante_discountPercent}%
                         </span>
                       )}
                     </div>
@@ -677,9 +668,6 @@ export const ElegantePergolaPage = () => {
           </div>
         </section>
 
-        {/* ── Ticker ── */}
-        <FeatureTicker backgroundColorClass="bg-[#344148]" />
-
         {/* ── Contact CTA ── */}
         <section className="bg-zinc-950 py-10 text-center text-white md:py-16 px-4">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#82B2CA]">Über 100.000 zufriedene Kunden weltweit</p>
@@ -741,8 +729,105 @@ export const ElegantePergolaPage = () => {
             </div>
           </div>
         </section>
+        {/* ── Produktinformation ── */}
+        <section className="bg-white py-16 md:py-24">
+          <div className="mx-auto max-w-[1440px] px-4 md:px-16">
+
+            {/* Header */}
+            <div className="mb-12 text-center">
+              <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
+                Einführung
+              </span>
+              <h2 className="mt-4 text-2xl font-bold text-[#344148] md:text-4xl">
+                Die Elegante Pergola
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-zinc-500 md:text-base">
+                Ein wasserdichtes Beschattungssystem mit drehbaren Lamellen. Vollständig aus Aluminium gefertigt – für höchste Langlebigkeit, zuverlässige Widerstandsfähigkeit und eine elegante, moderne Optik.
+              </p>
+            </div>
+
+            {/* Feature cards */}
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-16">
+
+              <div className="rounded-2xl border border-stone-100 bg-stone-50 p-7">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#344148]">
+                  <svg className="h-6 w-6 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                  </svg>
+                </div>
+                <h3 className="mb-2 text-base font-bold text-[#344148]">Wetterschutz & Entwässerung</h3>
+                <p className="text-sm leading-relaxed text-zinc-500">
+                  Dank des speziellen Entwässerungssystems bietet die Pergola zuverlässigen Schutz vor Sonneneinstrahlung, Regenwasser und Schnee – zu jeder Jahreszeit.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-stone-100 bg-stone-50 p-7">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#344148]">
+                  <svg className="h-6 w-6 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+                  </svg>
+                </div>
+                <h3 className="mb-2 text-base font-bold text-[#344148]">Design & Individualität</h3>
+                <p className="text-sm leading-relaxed text-zinc-500">
+                  Modernes Design kombiniert mit vielfältigen Farben und der Möglichkeit zur Integration von LED-Beleuchtung, Regen-, Wind- und Schneesensoren für maximale Gestaltungsfreiheit.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-stone-100 bg-stone-50 p-7 md:col-span-2 lg:col-span-1">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#344148]">
+                  <svg className="h-6 w-6 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+                  </svg>
+                </div>
+                <h3 className="mb-2 text-base font-bold text-[#344148]">Vielseitige Einsatzbereiche</h3>
+                <p className="text-sm leading-relaxed text-zinc-500">
+                  Ideal für Wohnhäuser, Hotelanlagen, Restaurants und Cafés. Schafft unabhängig von den Witterungsbedingungen einen komfortablen Bereich für Erholung und geselliges Beisammensein.
+                </p>
+              </div>
+            </div>
+
+            {/* Lamellenausrichtung */}
+            <div className="rounded-3xl bg-[#344148] px-8 py-10 md:px-14 md:py-14">
+              <div className="grid gap-10 md:grid-cols-2 items-center">
+                <div>
+                  <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA] mb-4">
+                    Lamellenausrichtung
+                  </span>
+                  <h3 className="text-xl font-bold text-white md:text-3xl mb-4">
+                    0° bis 120° — stufenlos verstellbar
+                  </h3>
+                  <p className="text-sm leading-relaxed text-white/60">
+                    Die Lamellen lassen sich präzise an Sonnenstand, Belüftung und Beschattung anpassen. In geschlossener Position vermittelt die Pergola Ruhe und Eleganz — geöffnet verleiht sie dem Außenbereich Leichtigkeit und Offenheit.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-4">
+                  {[
+                    { angle: "0°", label: "Vollständig geschlossen", desc: "Maximaler Schutz vor Regen & Sonne", width: "w-0" },
+                    { angle: "45°", label: "Teilweise geöffnet", desc: "Angenehme Luftzirkulation & Teillicht", width: "w-1/2" },
+                    { angle: "120°", label: "Vollständig geöffnet", desc: "Maximale Offenheit & Belüftung", width: "w-full" },
+                  ].map((item) => (
+                    <div key={item.angle} className="flex items-center gap-4">
+                      <span className="w-10 text-right text-sm font-bold text-[#82B2CA]">{item.angle}</span>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-xs font-semibold text-white">{item.label}</span>
+                          <span className="text-[10px] text-white/40">{item.desc}</span>
+                        </div>
+                        <div className="h-1.5 w-full rounded-full bg-white/10">
+                          <div className={`h-1.5 rounded-full bg-[#82B2CA] ${item.width}`} />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
         {/* ── Ticker bottom ── */}
-        <FeatureTicker backgroundColorClass="bg-[#344148]" />
+        <FeatureTicker backgroundColorClass="bg-[#344148]" textColorClass="text-white" />
 
         {/* ── FAQ ── */}
         <section className="relative overflow-hidden bg-gradient-to-b from-zinc-50 to-white">

@@ -6,21 +6,29 @@ const items = [
   "✓ Persönliche Beratung",
   "✓ Schnelle Lieferung",
   "✓ Premium Qualität",
+  "✓ Höchste Sicherheit",
+  "✓ Langlebige Konstruktion",
+  "✓ Wasserdicht & Wetterfest",
+  "✓ Maßgefertigte Lösungen",
+  "✓ Zertifizierte Materialien",
+  "✓ Modernste Technologie",
+  "✓ Kostenloser Versand",
 ];
 
-export const FeatureTicker = ({ backgroundColorClass = "bg-[#f4f4f3]" }) => {
+export const FeatureTicker = ({
+  backgroundColorClass = "bg-[#f4f4f3]",
+  textColorClass = "text-[#344148]",
+}) => {
   return (
     <section className={`${backgroundColorClass} py-3 md:py-4 w-full overflow-hidden`}>
       <div className="flex animate-marquee whitespace-nowrap">
-        {/* copy 1 */}
         {items.map((item, i) => (
-          <span key={`a-${i}`} className="text-[#344148] font-bold text-xs md:text-sm tracking-widest uppercase shrink-0 mx-6 md:mx-10">
+          <span key={`a-${i}`} className={`${textColorClass} font-bold text-xs md:text-sm tracking-widest uppercase shrink-0 mx-6 md:mx-10`}>
             {item}
           </span>
         ))}
-        {/* copy 2 — seamless loop */}
         {items.map((item, i) => (
-          <span key={`b-${i}`} className="text-[#344148] font-bold text-xs md:text-sm tracking-widest uppercase shrink-0 mx-6 md:mx-10">
+          <span key={`b-${i}`} className={`${textColorClass} font-bold text-xs md:text-sm tracking-widest uppercase shrink-0 mx-6 md:mx-10`}>
             {item}
           </span>
         ))}
