@@ -18,38 +18,41 @@ import ikon5 from "@/assets/5 png.png";
 import ikon6 from "@/assets/6 png.png";
 
 /* ─── image gallery ─── */
-import photo1 from "../assets/image-pergola.png";
-import photo2 from "../assets/image-light.png";
-import photo3 from "../assets/Photo (26).png";
-import photo4 from "../assets/pergola-glass.png";
-import photo5 from "../assets/pergola-glass-guillot.png";
-import photo6 from "../assets/zip-screen-pergola.png";
+import preiswerte1 from "../assets/preiswerte1.png";
+import preiswerte2 from "../assets/preiswerte2.png";
+import preiswerte3 from "../assets/preiswerte3.png";
+import preiswerte4 from "../assets/preiswerte4.png";
+import preiswerte5 from "../assets/preiswerte5.png";
+import preiswerte6 from "../assets/preiswerte6.png";
+import preiswerte7 from "../assets/preiswerte7.png";
+import preiswerte8 from "../assets/preiswerte8.png";
+import preiswerte9 from "../assets/preiswerte9.png";
 
 const gallery = [
-  { src: photo1, alt: "Preiswerte Pergola – modernes minimalistisches Design, Tag" },
-  { src: photo2, alt: "Preiswerte Pergola – modernes minimalistisches Design, Nacht" },
-  { src: photo3, alt: "Preiswerte Pergola – LED RGB am Pool" },
-  { src: photo4, alt: "Preiswerte Pergola – mit Glaswänden, Gartenatmosphäre" },
-  { src: photo5, alt: "Preiswerte Pergola – mit Glaswänden, Entspannungsbereich" },
-  { src: photo6, alt: "Preiswerte Pergola – klassisch, am Pool" },
+  { src: preiswerte1, alt: "Preiswerte Pergola 1" },
+  { src: preiswerte2, alt: "Preiswerte Pergola 2" },
+  { src: preiswerte3, alt: "Preiswerte Pergola 3" },
+  { src: preiswerte4, alt: "Preiswerte Pergola 4" },
+  { src: preiswerte5, alt: "Preiswerte Pergola 5" },
+  { src: preiswerte6, alt: "Preiswerte Pergola 6" },
+  { src: preiswerte7, alt: "Preiswerte Pergola 7" },
+  { src: preiswerte8, alt: "Preiswerte Pergola 8" },
+  { src: preiswerte9, alt: "Preiswerte Pergola 9" },
 ];
 
 /* ─── variants ─── */
 const colorOptions = [
   { label: "Gray 7016 T", color: "#2E3234", hint: "Anthrazitgrau – zeitlos und elegant" },
-  { label: "Gray 7046 T", color: "#8E9196", hint: "Telegrau – dezent und vielseitig" },
-  { label: "Black 9005 T", color: "#0A0A0D", hint: "Tiefschwarz – markant und modern" },
-  { label: "Ivory 1015 T", color: "#D9C87A", hint: "Heller Elfenbeinton – warm und einladend" },
   { label: "White 9016 T", color: "#E8E4DF", hint: "Verkehrsweiß – hell und minimalistisch" },
 ];
 
 const sizeOptions = [
-  { label: "Kit 3×4 Manual", kit: "Pergola Light Kit", dims: "3000 × 4000 × 2500", variant: "Manual", price: 3990 },
-  { label: "Kit 4×4 LED", kit: "Pergola Light Kit", dims: "4000 × 4000 × 2500", variant: "Motorized with LED", price: 4390 },
-  { label: "Kit 3×4 145 Slat", kit: "Pergola Light Kit", dims: "3000 × 4000 × 2500", variant: "Motorized with 145 Slat", price: 4790 },
-  { label: "Kit 4×5 175 Louver", kit: "Pergola Light Kit", dims: "4000 × 5000 × 2500", variant: "Motorized with 175 Louver", price: 5190 },
-  { label: "2-Col 4×4 LED+175", kit: "Pergola Light Kit, 2-Column Version", dims: "4000 × 4000 × 2500", variant: "Motorized with LED and 175 Slat", price: 5790 },
-  { label: "2-Col 4×5 175 Slat", kit: "Pergola Light Kit, 2-Column Version", dims: "4000 × 5000 × 2500", variant: "Motorized with 175 Slat", price: 6390 },
+  { label: "PH1 – Komplettset", kit: "PergolaHaus Komplettset PH1", dims: "3000 × 4000 × 2500", variant: "145-mm-Lamellen, manuell, 4 Pfosten", price: 3990 },
+  { label: "PH2 – Komplettset", kit: "PergolaHaus Komplettset PH2", dims: "4000 × 4000 × 2500", variant: "145-mm-Lamellen, Motor + LED, 4 Pfosten", price: 4390 },
+  { label: "PH3 – Komplettset", kit: "PergolaHaus Komplettset PH3", dims: "3000 × 4000 × 2500", variant: "145-mm-Lamellen, Motorantrieb, 4 Pfosten", price: 4790 },
+  { label: "PH4 – Komplettset", kit: "PergolaHaus Komplettset PH4", dims: "4000 × 5000 × 2500", variant: "175-mm-Lamellen, Motorantrieb, 4 Pfosten", price: 5190 },
+  { label: "PH5 – Komplettset", kit: "PergolaHaus Komplettset PH5", dims: "4000 × 4000 × 2500", variant: "175-mm-Lamellen, Motor + LED, 2 Pfosten wandmontiert", price: 5790 },
+  { label: "PH6 – Komplettset", kit: "PergolaHaus Komplettset PH6", dims: "4000 × 5000 × 2500", variant: "175-mm-Lamellen, Motorantrieb, 2 Pfosten wandmontiert", price: 6390 },
 ];
 
 import ikonaThjesht from "@/assets/ikona-thjesht.png";
@@ -536,6 +539,89 @@ export const PreiswertePergolaPage = () => {
               <p className="text-sm text-white/40">
                 Alle Optionen sind während der Bestellung konfigurierbar · Professionelle Montage verfügbar
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Produktvorteile ── */}
+        <section className="bg-white py-16 md:py-28">
+          <div className="mx-auto max-w-[1440px] px-4 md:px-16">
+            <div className="mb-10 md:mb-16 text-center">
+              <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
+                Produktvorteile
+              </span>
+              <h2 className="mt-4 text-2xl md:text-4xl font-bold text-[#344148]">Was unsere Pergola auszeichnet</h2>
+              <p className="mx-auto mt-3 max-w-xl text-sm text-zinc-500">
+                Hochwertige Materialien und durchdachte Details für ein langjähriges Außenerlebnis.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                {
+                  icon: (
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1M4.22 4.22l.707.707m12.728 12.728.707.707M3 12h1m16 0h1M4.927 19.073l.707-.707M18.364 5.636l.707-.707" />
+                    </svg>
+                  ),
+                  title: "Großer Öffnungswinkel",
+                  text: "Die Lamellen lassen sich mit einem Öffnungs- und Schließwinkel von bis zu 150° verstellen, sodass sich Beschattungsgrad und Luftzirkulation ganz nach Bedarf individuell anpassen lassen.",
+                },
+                {
+                  icon: (
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 4h18M3 8h18M3 12h18M3 16h10" />
+                    </svg>
+                  ),
+                  title: "Doppelwandige Ausführung",
+                  text: "Die Lamellen sind mit einem seitlichen Entwässerungssystem ausgestattet. Selbst wenn sie nach starkem Regen geöffnet werden, wird das Wasser kontrolliert in das integrierte Ablaufsystem geleitet, ohne nach unten zu tropfen.",
+                },
+                {
+                  icon: (
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c0 0-6 4.5-6 9a6 6 0 0012 0c0-4.5-6-9-6-9z" />
+                    </svg>
+                  ),
+                  title: "Verdeckte Entwässerung",
+                  text: "Das verdeckt integrierte Entwässerungssystem leitet das Regenwasser direkt von den Lamellen in die Pfosten und von dort kontrolliert über die unterirdische Entwässerung ab.",
+                },
+                {
+                  icon: (
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                    </svg>
+                  ),
+                  title: "Widerstandsfähigkeit",
+                  text: "Das stabile und langlebige Material sorgt für eine hohe Widerstandsfähigkeit im täglichen Gebrauch. Die Konstruktion ist belastbar bis zu 110 kg/m² und bietet zuverlässige Stabilität auch bei anspruchsvollen Wetterbedingungen.",
+                },
+                {
+                  icon: (
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10" />
+                    </svg>
+                  ),
+                  title: "Aluminiumlegierung & Pulverbeschichtung",
+                  text: "Gefertigt aus hochwertiger Aluminiumlegierung 6063 überzeugt die Konstruktion durch hohe Stabilität, geringes Gewicht und langlebige Beständigkeit. Die pulverbeschichtete Oberfläche schützt zuverlässig vor Witterungseinflüssen.",
+                },
+                {
+                  icon: (
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  ),
+                  title: "Leistungsstarke Entwässerung",
+                  text: "Das doppelte Entwässerungssystem ist dafür ausgelegt, auch bei hoher Niederschlagsintensität eine zuverlässige Wasserableitung zu gewährleisten – bis zu 40–50 ml/s pro Quadratmeter über einen Zeitraum von 2 Minuten.",
+                },
+              ].map((item, i) => (
+                <div key={i} className="group flex flex-col gap-4 rounded-2xl border border-stone-100 bg-stone-50 p-6 transition-all hover:border-[#82B2CA]/40 hover:shadow-lg hover:-translate-y-0.5">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#82B2CA]/15 text-[#82B2CA]">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-[#344148]">{item.title}</p>
+                    <p className="mt-2 text-xs leading-relaxed text-zinc-500">{item.text}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
