@@ -1,9 +1,13 @@
 export type PriceConfig = {
-  // Base price per sqm (all pergola configurators)
+  // Base price per sqm (pergola configurators)
   pergolaPerSqm: number;
+
+  // Wintergarten configurator – price per sqm
+  wintergarten_perSqm: number;
 
   // Side type surcharges (per side)
   screenRollo: number;
+  faltglasverglasung: number;
   schiebeverglasung: number;
   guillotineVerglasung: number;
 
@@ -28,6 +32,7 @@ export type PriceConfig = {
   infrarotHeizung: number;
   integriertSteckdosen: number;
   soundsystem: number;
+  smartSteuerung: number;
 
   // Promotion base prices & discounts
   elegante_originalPrice: number;
@@ -39,20 +44,21 @@ export type PriceConfig = {
   wintergarten_originalPrice: number;
   wintergarten_discountPercent: number;
 
-  // Wintergarten fixed size prices
-  wintergarten_3x3: number;
-  wintergarten_3x4: number;
-  wintergarten_3x5: number;
-  wintergarten_3x6: number;
-  wintergarten_4x4: number;
-  wintergarten_4x5: number;
-  wintergarten_4x6: number;
+  // Preiswerte Pergola – Modelle PH1–PH6
+  preiswerte_ph1: number;
+  preiswerte_ph2: number;
+  preiswerte_ph3: number;
+  preiswerte_ph4: number;
+  preiswerte_ph5: number;
+  preiswerte_ph6: number;
 };
 
 export const defaultPrices: PriceConfig = {
   pergolaPerSqm: 445,
+  wintergarten_perSqm: 721,
 
   screenRollo: 499,
+  faltglasverglasung: 799,
   schiebeverglasung: 899,
   guillotineVerglasung: 1199,
   wandmontage: 240,
@@ -72,6 +78,7 @@ export const defaultPrices: PriceConfig = {
   infrarotHeizung: 549,
   integriertSteckdosen: 199,
   soundsystem: 599,
+  smartSteuerung: 399,
 
   elegante_originalPrice: 3990,
   elegante_discountPercent: 35,
@@ -82,11 +89,10 @@ export const defaultPrices: PriceConfig = {
   wintergarten_originalPrice: 9694,
   wintergarten_discountPercent: 30,
 
-  wintergarten_3x3: 6490,
-  wintergarten_3x4: 7190,
-  wintergarten_3x5: 7890,
-  wintergarten_3x6: 8590,
-  wintergarten_4x4: 8990,
-  wintergarten_4x5: 9690,
-  wintergarten_4x6: 10390,
+  preiswerte_ph1: 3990,
+  preiswerte_ph2: 4390,
+  preiswerte_ph3: 4790,
+  preiswerte_ph4: 5190,
+  preiswerte_ph5: 5790,
+  preiswerte_ph6: 6390,
 };

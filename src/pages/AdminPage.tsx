@@ -188,7 +188,8 @@ export const AdminPage = () => {
             </SectionCard>
 
             <SectionCard title="Seitenwände">
-              <PriceInput label="Screen Rollo (pro Seite)" fieldKey="screenRollo" value={prices.screenRollo} onChange={set} />
+              <PriceInput label="Zip-Screen / Screen Rollo (pro Seite)" fieldKey="screenRollo" value={prices.screenRollo} onChange={set} />
+              <PriceInput label="Faltglasverglasung (pro Seite)" fieldKey="faltglasverglasung" value={prices.faltglasverglasung} onChange={set} />
               <PriceInput label="Schiebeverglasung (pro Seite)" fieldKey="schiebeverglasung" value={prices.schiebeverglasung} onChange={set} />
               <PriceInput label="Guillotine-Verglasung (pro Seite)" fieldKey="guillotineVerglasung" value={prices.guillotineVerglasung} onChange={set} />
             </SectionCard>
@@ -215,14 +216,20 @@ export const AdminPage = () => {
               <PriceInput label="Soundsystem" fieldKey="soundsystem" value={prices.soundsystem} onChange={set} />
             </SectionCard>
 
-            <SectionCard title="Wintergarten – Festpreise">
-              <PriceInput label="3 × 3 m" fieldKey="wintergarten_3x3" value={prices.wintergarten_3x3} onChange={set} />
-              <PriceInput label="3 × 4 m" fieldKey="wintergarten_3x4" value={prices.wintergarten_3x4} onChange={set} />
-              <PriceInput label="3 × 5 m" fieldKey="wintergarten_3x5" value={prices.wintergarten_3x5} onChange={set} />
-              <PriceInput label="3 × 6 m" fieldKey="wintergarten_3x6" value={prices.wintergarten_3x6} onChange={set} />
-              <PriceInput label="4 × 4 m" fieldKey="wintergarten_4x4" value={prices.wintergarten_4x4} onChange={set} />
-              <PriceInput label="4 × 5 m" fieldKey="wintergarten_4x5" value={prices.wintergarten_4x5} onChange={set} />
-              <PriceInput label="4 × 6 m" fieldKey="wintergarten_4x6" value={prices.wintergarten_4x6} onChange={set} />
+            <SectionCard title="Wintergarten – Konfigurator">
+              <p className="text-[11px] text-zinc-400 mb-3 -mt-1">Der Preis wird je nach eingegebener Fläche (Breite × Länge) automatisch berechnet.</p>
+              <PriceInput label="Preis pro m² (Wintergarten)" fieldKey="wintergarten_perSqm" value={prices.wintergarten_perSqm} onChange={set} />
+              <PriceInput label="Smart Steuerung" fieldKey="smartSteuerung" value={prices.smartSteuerung} onChange={set} />
+            </SectionCard>
+
+            <SectionCard title="Preiswerte Pergola – Modelle PH1–PH6">
+              <p className="text-[11px] text-zinc-400 mb-3 -mt-1">Grundpreise der einzelnen Komplettsets auf der Produktseite.</p>
+              <PriceInput label="PH1 – 3×4 m, manuell, 4 Pfosten" fieldKey="preiswerte_ph1" value={prices.preiswerte_ph1} onChange={set} />
+              <PriceInput label="PH2 – 4×4 m, Motor + LED, 4 Pfosten" fieldKey="preiswerte_ph2" value={prices.preiswerte_ph2} onChange={set} />
+              <PriceInput label="PH3 – 3×4 m, Motorantrieb, 4 Pfosten" fieldKey="preiswerte_ph3" value={prices.preiswerte_ph3} onChange={set} />
+              <PriceInput label="PH4 – 4×5 m, Motorantrieb, 4 Pfosten" fieldKey="preiswerte_ph4" value={prices.preiswerte_ph4} onChange={set} />
+              <PriceInput label="PH5 – 4×4 m, Motor + LED, 2 Pfosten wandmontiert" fieldKey="preiswerte_ph5" value={prices.preiswerte_ph5} onChange={set} />
+              <PriceInput label="PH6 – 4×5 m, Motorantrieb, 2 Pfosten wandmontiert" fieldKey="preiswerte_ph6" value={prices.preiswerte_ph6} onChange={set} />
             </SectionCard>
 
             <div className="flex justify-center pt-2 pb-6">
