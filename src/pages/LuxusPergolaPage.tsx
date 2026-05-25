@@ -165,16 +165,6 @@ const addonItems = [
     color: "#06B6D4",
   },
   {
-    title: "Regensensor",
-    subtitle: "Automatisch bei Regen",
-    icon: (
-      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-      </svg>
-    ),
-    color: "#3B82F6",
-  },
-  {
     title: "Schneesensor",
     subtitle: "Schutz bei Schneefall",
     icon: (
@@ -193,16 +183,6 @@ const addonItems = [
       </svg>
     ),
     color: "#F59E0B",
-  },
-  {
-    title: "Solar-System",
-    subtitle: "Für Standorte ohne Stromanschluss",
-    icon: (
-      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-      </svg>
-    ),
-    color: "#84CC16",
   },
 ];
 
@@ -439,7 +419,7 @@ export const LuxusPergolaPage = () => {
               <h1 className="font-lemonmilk text-2xl font-bold leading-tight text-[#344148] md:text-3xl">Luxus Pergola</h1>
               <p className="mt-1 text-sm text-zinc-500">Deine Luxus Pergola – millimetergenau gefertigt</p>
               <div className="mt-3 border-t border-stone-100 pt-3">
-                <p className={`text-[13px] leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
+                <p className={`text-sm leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
                   Die Luxus-Pergola ist ein exklusives Aluminium-Pergolasystem mit vollständig einfahrbaren und drehbaren Lamellen, integriertem Wasserablauf und hoher Widerstandsfähigkeit gegenüber Witterungseinflüssen. Sie schafft elegante Außenräume mit maximalem Komfort und einem besonders großzügigen Raumgefühl, da sich das Dach vollständig öffnen lässt und die Lamellen zusätzlich flexibel gedreht werden können. So ermöglicht sie sowohl optimalen Schutz vor Sonne und Regen als auch eine individuelle Steuerung von Licht, Schatten und Belüftung. Optional ist sie mit LED-Beleuchtung, Regen- und Windsensoren, Smartphone-Steuerung sowie seitlichen Glas- oder Zip-Systemen erhältlich.
                 </p>
                 <button type="button" onClick={() => setDescExpanded(!descExpanded)} className="mt-0.5 text-xs font-semibold text-[#344148] underline underline-offset-2">
@@ -468,28 +448,28 @@ export const LuxusPergolaPage = () => {
                   <div className="flex flex-wrap gap-2">
                     {colorOptions.map((c) => (
                       <button key={c.label} type="button" onClick={() => setSelectedColor(c.label)}
-                        className={`flex items-center gap-2 rounded-full border-2 px-3 py-1.5 text-xs font-medium transition-all ${selectedColor === c.label ? "border-[#344148] bg-[#344148] text-white" : "border-stone-200 text-zinc-600 hover:border-zinc-400"}`}>
+                        className={`flex items-center gap-2 rounded-full border-2 px-3 py-1.5 text-sm font-medium transition-all ${selectedColor === c.label ? "border-[#344148] bg-[#344148] text-white" : "border-stone-200 text-zinc-600 hover:border-zinc-400"}`}>
                         <div className="h-4 w-4 rounded-full border border-white/30 shadow-sm" style={{ backgroundColor: c.color }} />
                         {c.label}
                       </button>
                     ))}
                   </div>
-                  <p className="mt-1.5 text-[13px] text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
+                  <p className="mt-1.5 text-sm text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
                 </div>
                 <div>
                   <p className="mb-2.5 text-xs font-bold uppercase tracking-widest text-zinc-400">Größe</p>
                   <div className="space-y-4 rounded-2xl bg-[#344148]/5 p-4">
                     <div>
                       <div className="mb-1.5 flex items-center justify-between">
-                        <span className="text-[13px] font-semibold text-[#344148]">Länge</span>
+                        <span className="text-sm font-semibold text-[#344148]">Länge</span>
                         {(() => { const err = laengeInput !== "" && (Number(laengeInput) > laengeRange.max || Number(laengeInput) < laengeRange.min); return (
                         <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
                           <input type="number" value={laengeInput}
                             onFocus={() => setLaengeInput("")}
                             onChange={(e) => { setLaengeInput(e.target.value); const v = Number(e.target.value); if (!isNaN(v) && v > 0) setLaenge(v); }}
                             onBlur={() => { const v = Math.max(laengeRange.min, Math.min(laengeRange.max, Number(laengeInput) || laengeRange.min)); setLaenge(v); setLaengeInput(String(v)); }}
-                            className={`w-16 bg-transparent pl-2.5 py-1 text-xs font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
-                          <span className={`pr-2.5 text-xs font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
+                            className={`w-20 bg-transparent pl-2.5 py-1 text-sm font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
+                          <span className={`pr-2.5 text-sm font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
                         </div>); })()}
                       </div>
                       <input type="range" min={laengeRange.min} max={laengeRange.max} step={laengeRange.step} value={laenge} onChange={(e) => { setLaenge(Number(e.target.value)); setLaengeInput(e.target.value); }}
@@ -499,15 +479,15 @@ export const LuxusPergolaPage = () => {
                     </div>
                     <div>
                       <div className="mb-1.5 flex items-center justify-between">
-                        <span className="text-[13px] font-semibold text-[#344148]">Breite</span>
+                        <span className="text-sm font-semibold text-[#344148]">Breite</span>
                         {(() => { const err = breiteInput !== "" && (Number(breiteInput) > breiteRange.max || Number(breiteInput) < breiteRange.min); return (
                         <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
                           <input type="number" value={breiteInput}
                             onFocus={() => setBreiteInput("")}
                             onChange={(e) => { setBreiteInput(e.target.value); const v = Number(e.target.value); if (!isNaN(v) && v > 0) setBreite(v); }}
                             onBlur={() => { const v = Math.max(breiteRange.min, Math.min(breiteRange.max, Number(breiteInput) || breiteRange.min)); setBreite(v); setBreiteInput(String(v)); }}
-                            className={`w-16 bg-transparent pl-2.5 py-1 text-xs font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
-                          <span className={`pr-2.5 text-xs font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
+                            className={`w-20 bg-transparent pl-2.5 py-1 text-sm font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
+                          <span className={`pr-2.5 text-sm font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
                         </div>); })()}
                       </div>
                       <input type="range" min={breiteRange.min} max={breiteRange.max} step={breiteRange.step} value={breite} onChange={(e) => { setBreite(Number(e.target.value)); setBreiteInput(e.target.value); }}
@@ -517,15 +497,15 @@ export const LuxusPergolaPage = () => {
                     </div>
                     <div>
                       <div className="mb-1.5 flex items-center justify-between">
-                        <span className="text-[13px] font-semibold text-[#344148]">Höhe</span>
+                        <span className="text-sm font-semibold text-[#344148]">Höhe</span>
                         {(() => { const err = hoeheInput !== "" && (Number(hoeheInput) > hoeheRange.max || Number(hoeheInput) < hoeheRange.min); return (
                         <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
                           <input type="number" value={hoeheInput}
                             onFocus={() => setHoeheInput("")}
                             onChange={(e) => { setHoeheInput(e.target.value); const v = Number(e.target.value); if (!isNaN(v) && v > 0) setHoehe(v); }}
                             onBlur={() => { const v = Math.max(hoeheRange.min, Math.min(hoeheRange.max, Number(hoeheInput) || hoeheRange.min)); setHoehe(v); setHoeheInput(String(v)); }}
-                            className={`w-16 bg-transparent pl-2.5 py-1 text-xs font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
-                          <span className={`pr-2.5 text-xs font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
+                            className={`w-20 bg-transparent pl-2.5 py-1 text-sm font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
+                          <span className={`pr-2.5 text-sm font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
                         </div>); })()}
                       </div>
                       <input type="range" min={hoeheRange.min} max={hoeheRange.max} step={hoeheRange.step} value={hoehe} onChange={(e) => { setHoehe(Number(e.target.value)); setHoeheInput(e.target.value); }}
@@ -542,7 +522,7 @@ export const LuxusPergolaPage = () => {
                       <button key={m.label} type="button" onClick={() => setSelectedMount(m.label)}
                         className={`flex flex-col items-center gap-2 rounded-xl border-2 p-3 transition-all ${selectedMount === m.label ? "border-[#344148] bg-[#344148]/5" : "border-stone-200 hover:border-zinc-300"}`}>
                         <img src={m.img} alt={m.label} className="h-9 object-contain" />
-                        <span className={`text-xs font-semibold ${selectedMount === m.label ? "text-[#344148]" : "text-zinc-600"}`}>{m.label}</span>
+                        <span className={`text-sm font-semibold ${selectedMount === m.label ? "text-[#344148]" : "text-zinc-600"}`}>{m.label}</span>
                       </button>
                     ))}
                   </div>
@@ -553,11 +533,11 @@ export const LuxusPergolaPage = () => {
                     {sideOptions.map((side) => (
                       <div key={side.key} className="flex flex-col items-center gap-1.5 rounded-xl border border-stone-200 bg-stone-50 p-2.5">
                         <img src={side.img} alt={side.label} className="h-10 object-contain" />
-                        <span className="text-[10px] font-semibold text-zinc-500">{side.label}</span>
+                        <span className="text-xs font-semibold text-zinc-500">{side.label}</span>
                         <select
                           value={sides[side.key]}
                           onChange={(e) => setSides((prev) => ({ ...prev, [side.key]: e.target.value }))}
-                          className="w-full rounded-lg border border-stone-200 bg-white px-1.5 py-1 text-[10px] text-zinc-700 focus:border-[#344148] focus:outline-none"
+                          className="w-full rounded-lg border border-stone-200 bg-white px-1.5 py-1 text-xs text-zinc-700 focus:border-[#344148] focus:outline-none"
                         >
                           {sideTypeChoices.map((choice) => (
                             <option key={choice.value} value={choice.value}>
@@ -577,7 +557,7 @@ export const LuxusPergolaPage = () => {
                       return (
                         <div key={cat.key} className="overflow-hidden rounded-2xl border border-stone-200 bg-white">
                           <div className="flex items-center gap-2 px-4 py-3" style={{ backgroundColor: '#82B2CA' }}>
-                            <span className="flex-1 text-[11px] font-bold text-white tracking-wide">{cat.label}</span>
+                            <span className="flex-1 text-xs font-bold text-white tracking-wide">{cat.label}</span>
                             {selectedInCat > 0 && (
                               <span className="rounded-full bg-white/30 px-2 py-0.5 text-[9px] font-bold text-white">{selectedInCat}</span>
                             )}
@@ -592,8 +572,8 @@ export const LuxusPergolaPage = () => {
                                     <div className="scale-75">{addonItem?.icon}</div>
                                   </div>
                                   <div className="flex-1 min-w-0">
-                                    <div className="text-[13px] font-semibold leading-tight text-zinc-800">{acc.label}</div>
-                                    <div className="text-[10px] text-zinc-400">+{formatPrice(acc.price)}</div>
+                                    <div className="text-sm font-semibold leading-tight text-zinc-800">{acc.label}</div>
+                                    <div className="text-xs text-zinc-400">+{formatPrice(acc.price)}</div>
                                   </div>
                                   <button
                                     type="button"

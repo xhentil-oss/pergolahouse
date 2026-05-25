@@ -82,10 +82,8 @@ const addonItems = [
   { title: "Integrierte Steckdosen", subtitle: "Strom direkt an der Pergola", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>), color: "#10B981" },
   { title: "Soundsystem", subtitle: "Musik überall unter der Pergola", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" /></svg>), color: "#6366F1" },
   { title: "Windsensor", subtitle: "Automatisch bei Windstärke", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2" /></svg>), color: "#06B6D4" },
-  { title: "Regensensor", subtitle: "Automatisch bei Regen", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>), color: "#3B82F6" },
   { title: "Schneesensor", subtitle: "Schutz bei Schneefall", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v18M3 12h18M5.636 5.636l12.728 12.728M18.364 5.636L5.636 18.364" /></svg>), color: "#BAE6FD" },
   { title: "Sonnensensor", subtitle: "Automatisch bei Sonneneinstrahlung", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>), color: "#F59E0B" },
-  { title: "Solar-System", subtitle: "Für Standorte ohne Stromanschluss", icon: (<svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>), color: "#84CC16" },
 ];
 
 /* ─── helpers ─── */
@@ -318,7 +316,7 @@ export const PreiswertePergolaPage = () => {
 
               {/* description */}
               <div className="mt-3 border-t border-stone-100 pt-3">
-                <p className={`text-[13px] leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
+                <p className={`text-sm leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
                   Die preiswerte Pergola ist ein wirtschaftliches Aluminium-Pergolasystem in vorgefertigten Standardmaßen, das die moderne Optik der eleganten Pergola mit einer besonders effizienten und kostengünstigen Ausführung verbindet. Sie bietet zuverlässigen Schutz vor Sonne und Witterung und ist eine praktische Lösung für stilvolle Außenbereiche. Dank des Kit-Systems ermöglicht sie eine einfache Planung, eine schnelle Montage und ein attraktives Preis-Leistungs-Verhältnis.
                 </p>
                 <button type="button" onClick={() => setDescExpanded(!descExpanded)} className="mt-0.5 text-xs font-semibold text-[#344148] underline underline-offset-2">
@@ -352,13 +350,13 @@ export const PreiswertePergolaPage = () => {
                   <div className="flex flex-wrap gap-2">
                     {colorOptions.map((c) => (
                       <button key={c.label} type="button" onClick={() => setSelectedColor(c.label)}
-                        className={`flex items-center gap-2 rounded-full border-2 px-3 py-1.5 text-xs font-medium transition-all ${selectedColor === c.label ? "border-[#344148] bg-[#344148] text-white" : "border-stone-200 text-zinc-600 hover:border-zinc-400"}`}>
+                        className={`flex items-center gap-2 rounded-full border-2 px-3 py-1.5 text-sm font-medium transition-all ${selectedColor === c.label ? "border-[#344148] bg-[#344148] text-white" : "border-stone-200 text-zinc-600 hover:border-zinc-400"}`}>
                         <div className="h-4 w-4 rounded-full border border-white/30 shadow-sm" style={{ backgroundColor: c.color }} />
                         {c.label}
                       </button>
                     ))}
                   </div>
-                  <p className="mt-1.5 text-[13px] text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
+                  <p className="mt-1.5 text-sm text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
                 </div>
 
                 {/* Size */}
@@ -398,7 +396,7 @@ export const PreiswertePergolaPage = () => {
                       <button key={m.label} type="button" onClick={() => setSelectedMount(m.label)}
                         className={`flex flex-col items-center gap-2 rounded-xl border-2 p-3 transition-all ${selectedMount === m.label ? "border-[#344148] bg-[#344148]/5" : "border-stone-200 hover:border-zinc-300"}`}>
                         <img src={m.img} alt={m.label} className="h-9 object-contain" />
-                        <span className={`text-xs font-semibold ${selectedMount === m.label ? "text-[#344148]" : "text-zinc-600"}`}>{m.label}</span>
+                        <span className={`text-sm font-semibold ${selectedMount === m.label ? "text-[#344148]" : "text-zinc-600"}`}>{m.label}</span>
                       </button>
                     ))}
                   </div>
@@ -411,11 +409,11 @@ export const PreiswertePergolaPage = () => {
                     {sideOptions.map((side) => (
                       <div key={side.key} className="flex flex-col items-center gap-1.5 rounded-xl border border-stone-200 bg-stone-50 p-2.5">
                         <img src={side.img} alt={side.label} className="h-10 object-contain" />
-                        <span className="text-[10px] font-semibold text-zinc-500">{side.label}</span>
+                        <span className="text-xs font-semibold text-zinc-500">{side.label}</span>
                         <select
                           value={sides[side.key]}
                           onChange={(e) => setSides((prev) => ({ ...prev, [side.key]: e.target.value }))}
-                          className="w-full rounded-lg border border-stone-200 bg-white px-1.5 py-1 text-[10px] text-zinc-700 focus:border-[#344148] focus:outline-none"
+                          className="w-full rounded-lg border border-stone-200 bg-white px-1.5 py-1 text-xs text-zinc-700 focus:border-[#344148] focus:outline-none"
                         >
                           {sideTypeChoices.map((choice) => (
                             <option key={choice.value} value={choice.value}>
@@ -437,7 +435,7 @@ export const PreiswertePergolaPage = () => {
                       return (
                         <div key={cat.key} className="overflow-hidden rounded-2xl border border-stone-200 bg-white">
                           <div className="flex items-center gap-2 px-4 py-3" style={{ backgroundColor: '#82B2CA' }}>
-                            <span className="flex-1 text-[11px] font-bold text-white tracking-wide">{cat.label}</span>
+                            <span className="flex-1 text-xs font-bold text-white tracking-wide">{cat.label}</span>
                             {selectedInCat > 0 && (
                               <span className="rounded-full bg-white/30 px-2 py-0.5 text-[9px] font-bold text-white">{selectedInCat}</span>
                             )}
@@ -452,8 +450,8 @@ export const PreiswertePergolaPage = () => {
                                     <div className="scale-75">{addonItem?.icon}</div>
                                   </div>
                                   <div className="flex-1 min-w-0">
-                                    <div className="text-[13px] font-semibold leading-tight text-zinc-800">{acc.label}</div>
-                                    <div className="text-[10px] text-zinc-400">+{formatPrice(acc.price)}</div>
+                                    <div className="text-sm font-semibold leading-tight text-zinc-800">{acc.label}</div>
+                                    <div className="text-xs text-zinc-400">+{formatPrice(acc.price)}</div>
                                   </div>
                                   <button
                                     type="button"

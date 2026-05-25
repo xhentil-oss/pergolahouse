@@ -21,6 +21,12 @@ import ikon4 from "@/assets/4 png.png";
 import ikon5 from "@/assets/5 png.png";
 import ikon6 from "@/assets/6 png.png";
 import { Pergola3DViewer } from "@/components/Pergola3DViewer";
+import montage1 from "@/assets/montage1.png";
+import montage2 from "@/assets/montage2.png";
+import montage3 from "@/assets/montage3.png";
+import montage4 from "@/assets/montage4.png";
+import montage5 from "@/assets/montage5.png";
+import montage6 from "@/assets/montage6.png";
 
 import photo1 from "../assets/elegante6.png";
 import photo2 from "../assets/elegante2.png";
@@ -165,16 +171,6 @@ const addonItems = [
     color: "#06B6D4",
   },
   {
-    title: "Regensensor",
-    subtitle: "Automatisch bei Regen",
-    icon: (
-      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-      </svg>
-    ),
-    color: "#3B82F6",
-  },
-  {
     title: "Schneesensor",
     subtitle: "Schutz bei Schneefall",
     icon: (
@@ -193,16 +189,6 @@ const addonItems = [
       </svg>
     ),
     color: "#F59E0B",
-  },
-  {
-    title: "Solar-System",
-    subtitle: "Für Standorte ohne Stromanschluss",
-    icon: (
-      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-      </svg>
-    ),
-    color: "#84CC16",
   },
 ];
 
@@ -452,7 +438,7 @@ export const ElegantePergolaPage = () => {
 
                 {/* description */}
                 <div className="mt-3 border-t border-stone-100 pt-3">
-                  <p className={`text-[13px] leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
+                  <p className={`text-sm leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
                     Die elegante Pergola ist ein exklusives Aluminium-Pergolasystem mit drehbaren Lamellen, integriertem Wasserablauf und hoher Widerstandsfähigkeit gegenüber Witterungseinflüssen. Sie vereint modernes Design, eine präzise Licht- und Belüftungssteuerung sowie zuverlässigen Schutz vor Sonne, Regen und Schnee zu einer stilvollen Lösung für anspruchsvolle Außenbereiche. Optional ist sie mit LED-Beleuchtung, Regen- und Windsensoren, Smartphone-Steuerung sowie seitlichen Glas- oder Zip-Systemen erhältlich.
                   </p>
                   <button type="button" onClick={() => setDescExpanded(!descExpanded)} className="mt-0.5 text-xs font-semibold text-[#344148] underline underline-offset-2">
@@ -490,14 +476,14 @@ export const ElegantePergolaPage = () => {
                           key={c.label}
                           type="button"
                           onClick={() => setSelectedColor(c.label)}
-                          className={`flex items-center gap-2 rounded-full border-2 px-3 py-1.5 text-xs font-medium transition-all ${selectedColor === c.label ? "border-[#344148] bg-[#344148] text-white" : "border-stone-200 text-zinc-600 hover:border-zinc-400"}`}
+                          className={`flex items-center gap-2 rounded-full border-2 px-3 py-1.5 text-sm font-medium transition-all ${selectedColor === c.label ? "border-[#344148] bg-[#344148] text-white" : "border-stone-200 text-zinc-600 hover:border-zinc-400"}`}
                         >
                           <div className="h-4 w-4 rounded-full border border-white/30 shadow-sm" style={{ backgroundColor: c.color }} />
                           {c.label}
                         </button>
                       ))}
                     </div>
-                    <p className="mt-1.5 text-[13px] text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
+                    <p className="mt-1.5 text-sm text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
                   </div>
 
                   {/* Size */}
@@ -507,15 +493,15 @@ export const ElegantePergolaPage = () => {
                       {/* Länge */}
                       <div>
                         <div className="mb-1.5 flex items-center justify-between">
-                          <span className="text-[13px] font-semibold text-[#344148]">Länge</span>
+                          <span className="text-sm font-semibold text-[#344148]">Länge</span>
                           {(() => { const err = laengeInput !== "" && (Number(laengeInput) > laengeRange.max || Number(laengeInput) < laengeRange.min); return (
                           <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
                             <input type="number" value={laengeInput}
                               onFocus={() => setLaengeInput("")}
                               onChange={(e) => { setLaengeInput(e.target.value); const v = Number(e.target.value); if (!isNaN(v) && v > 0) setLaenge(v); }}
                               onBlur={() => { const v = Math.max(laengeRange.min, Math.min(laengeRange.max, Number(laengeInput) || laengeRange.min)); setLaenge(v); setLaengeInput(String(v)); }}
-                              className={`w-16 bg-transparent pl-2.5 py-1 text-xs font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
-                            <span className={`pr-2.5 text-xs font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
+                              className={`w-20 bg-transparent pl-2.5 py-1 text-sm font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
+                            <span className={`pr-2.5 text-sm font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
                           </div>); })()}
                         </div>
                         <input type="range" min={laengeRange.min} max={laengeRange.max} step={laengeRange.step} value={laenge} onChange={(e) => { setLaenge(Number(e.target.value)); setLaengeInput(e.target.value); }}
@@ -526,15 +512,15 @@ export const ElegantePergolaPage = () => {
                       {/* Breite */}
                       <div>
                         <div className="mb-1.5 flex items-center justify-between">
-                          <span className="text-[13px] font-semibold text-[#344148]">Breite</span>
+                          <span className="text-sm font-semibold text-[#344148]">Breite</span>
                           {(() => { const err = breiteInput !== "" && (Number(breiteInput) > breiteRange.max || Number(breiteInput) < breiteRange.min); return (
                           <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
                             <input type="number" value={breiteInput}
                               onFocus={() => setBreiteInput("")}
                               onChange={(e) => { setBreiteInput(e.target.value); const v = Number(e.target.value); if (!isNaN(v) && v > 0) setBreite(v); }}
                               onBlur={() => { const v = Math.max(breiteRange.min, Math.min(breiteRange.max, Number(breiteInput) || breiteRange.min)); setBreite(v); setBreiteInput(String(v)); }}
-                              className={`w-16 bg-transparent pl-2.5 py-1 text-xs font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
-                            <span className={`pr-2.5 text-xs font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
+                              className={`w-20 bg-transparent pl-2.5 py-1 text-sm font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
+                            <span className={`pr-2.5 text-sm font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
                           </div>); })()}
                         </div>
                         <input type="range" min={breiteRange.min} max={breiteRange.max} step={breiteRange.step} value={breite} onChange={(e) => { setBreite(Number(e.target.value)); setBreiteInput(e.target.value); }}
@@ -545,15 +531,15 @@ export const ElegantePergolaPage = () => {
                       {/* Höhe */}
                       <div>
                         <div className="mb-1.5 flex items-center justify-between">
-                          <span className="text-[13px] font-semibold text-[#344148]">Höhe</span>
+                          <span className="text-sm font-semibold text-[#344148]">Höhe</span>
                           {(() => { const err = hoeheInput !== "" && (Number(hoeheInput) > hoeheRange.max || Number(hoeheInput) < hoeheRange.min); return (
                           <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
                             <input type="number" value={hoeheInput}
                               onFocus={() => setHoeheInput("")}
                               onChange={(e) => { setHoeheInput(e.target.value); const v = Number(e.target.value); if (!isNaN(v) && v > 0) setHoehe(v); }}
                               onBlur={() => { const v = Math.max(hoeheRange.min, Math.min(hoeheRange.max, Number(hoeheInput) || hoeheRange.min)); setHoehe(v); setHoeheInput(String(v)); }}
-                              className={`w-16 bg-transparent pl-2.5 py-1 text-xs font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
-                            <span className={`pr-2.5 text-xs font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
+                              className={`w-20 bg-transparent pl-2.5 py-1 text-sm font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
+                            <span className={`pr-2.5 text-sm font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
                           </div>); })()}
                         </div>
                         <input type="range" min={hoeheRange.min} max={hoeheRange.max} step={hoeheRange.step} value={hoehe} onChange={(e) => { setHoehe(Number(e.target.value)); setHoeheInput(e.target.value); }}
@@ -572,7 +558,7 @@ export const ElegantePergolaPage = () => {
                         <button key={m.label} type="button" onClick={() => setSelectedMount(m.label)}
                           className={`flex flex-col items-center gap-2 rounded-3xl border-2 p-3 transition-all ${selectedMount === m.label ? "border-[#344148] bg-[#344148]/5" : "border-stone-200 hover:border-zinc-300"}`}>
                           <img src={m.img} alt={m.label} className="h-9 object-contain" />
-                          <span className={`text-xs font-semibold ${selectedMount === m.label ? "text-[#344148]" : "text-zinc-600"}`}>{m.label}</span>
+                          <span className={`text-sm font-semibold ${selectedMount === m.label ? "text-[#344148]" : "text-zinc-600"}`}>{m.label}</span>
                         </button>
                       ))}
                     </div>
@@ -585,9 +571,9 @@ export const ElegantePergolaPage = () => {
                       {sideOptions.map((side) => (
                         <div key={side.key} className="flex flex-col items-center gap-1.5 rounded-xl border border-stone-200 bg-stone-50 p-2.5">
                           <img src={side.img} alt={side.label} className="h-10 object-contain" />
-                          <span className="text-[10px] font-semibold text-zinc-500">{side.label}</span>
+                          <span className="text-xs font-semibold text-zinc-500">{side.label}</span>
                           <select value={sides[side.key]} onChange={(e) => setSides((prev) => ({ ...prev, [side.key]: e.target.value }))}
-                            className="w-full rounded-lg border border-stone-200 bg-white px-1.5 py-1 text-[10px] text-zinc-700 focus:border-[#344148] focus:outline-none">
+                            className="w-full rounded-lg border border-stone-200 bg-white px-1.5 py-1 text-xs text-zinc-700 focus:border-[#344148] focus:outline-none">
                             {sideTypeChoices.map((choice) => (
                               <option key={choice.value} value={choice.value}>
                                 {choice.label}{choice.price ? ` (+${formatPrice(choice.price)})` : ""}
@@ -614,7 +600,7 @@ export const ElegantePergolaPage = () => {
                           <div key={cat.key} className="overflow-hidden rounded-2xl border border-stone-200 bg-white">
                             {/* Category header */}
                             <div className="flex items-center gap-2 px-4 py-3" style={{ backgroundColor: '#82B2CA' }}>
-                              <span className="flex-1 text-[11px] font-bold text-white tracking-wide">{cat.label}</span>
+                              <span className="flex-1 text-xs font-bold text-white tracking-wide">{cat.label}</span>
                               {selectedInCat > 0 && (
                                 <span className="rounded-full bg-white/30 px-2 py-0.5 text-[9px] font-bold text-white">{selectedInCat}</span>
                               )}
@@ -630,8 +616,8 @@ export const ElegantePergolaPage = () => {
                                       <div className="scale-75">{addonItem?.icon}</div>
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                      <div className="text-[13px] font-semibold leading-tight text-zinc-800">{acc.label}</div>
-                                      <div className="text-[10px] text-zinc-400">+{formatPrice(acc.price)}</div>
+                                      <div className="text-sm font-semibold leading-tight text-zinc-800">{acc.label}</div>
+                                      <div className="text-xs text-zinc-400">+{formatPrice(acc.price)}</div>
                                     </div>
                                     <button
                                       type="button"
@@ -729,100 +715,116 @@ export const ElegantePergolaPage = () => {
             </div>
           </div>
         </section>
-        {/* ── Produktinformation ── */}
-        <section className="bg-white py-16 md:py-24">
-          <div className="mx-auto max-w-[1440px] px-4 md:px-16">
+        {/* ── Feature Showcase ── */}
+        <section className="bg-[#f2f2f2] py-12 md:py-20">
+          <div className="mx-auto max-w-[1440px] px-6 md:px-16">
+            <div className="flex flex-col gap-12 md:gap-20">
+
+              {/* Row 1 — image left */}
+              <div className="flex flex-col items-center gap-10 md:flex-row md:gap-16">
+                <div className="w-52 h-52 md:w-64 md:h-64 flex-shrink-0">
+                  <img src={ikon1} alt="Windbeständig" className="w-full h-full object-fill" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-[#344148] md:text-3xl">Zertifizierte Windbeständigkeit gegen Starkwind</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-zinc-500 md:text-base">
+                    Neben ihrem eleganten Design und ihrer hohen Funktionalität ist die Elegant Pergola speziell dafür ausgelegt, selbst extremsten Wetterbedingungen standzuhalten. Ihre solide Aluminiumkonstruktion und modernste Ingenieurkunst garantieren maximale Stabilität und bieten eine außergewöhnliche Windbeständigkeit von bis zu 224 km/h. Dieses System schenkt Ihnen absolute Sicherheit sowie langfristigen Schutz und sorgt dafür, dass Ihr Außenbereich zu jeder Jahreszeit optimal geschützt und uneingeschränkt nutzbar bleibt.
+                  </p>
+                </div>
+              </div>
+
+              {/* Row 2 — image right */}
+              <div className="flex flex-col items-center gap-10 md:flex-row-reverse md:gap-16">
+                <div className="w-52 h-52 md:w-64 md:h-64 flex-shrink-0">
+                  <img src={ikon2} alt="Wasserdicht" className="w-full h-full object-fill" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-[#344148] md:text-3xl">Integriertes Entwässerungssystem und absolute Wasserdichtigkeit</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-zinc-500 md:text-base">
+                    Die Elegant Pergola ist so konzipiert, dass sie selbst bei stärksten Regengüssen maximalen Schutz bietet. Dank ihres intelligenten, integrierten Entwässerungssystems wird das Regenwasser über die geschlossenen Lamellen gesammelt und kontrolliert durch die Trägerpfosten der Konstruktion abgeleitet. Diese Technologie garantiert eine absolute Wasserdichtigkeit von bis zu 120 Liter/m² und sorgt dafür, dass Ihr Außenbereich jederzeit vollkommen trocken, sicher und komfortabel bleibt.
+                  </p>
+                </div>
+              </div>
+
+              {/* Row 3 — image left */}
+              <div className="flex flex-col items-center gap-10 md:flex-row md:gap-16">
+                <div className="w-52 h-52 md:w-64 md:h-64 flex-shrink-0">
+                  <img src={ikon3} alt="Traglast" className="w-full h-full object-fill" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-[#344148] md:text-3xl">Hohe Tragfähigkeit und Schneelastbeständigkeit</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-zinc-500 md:text-base">
+                    Die Elegant Pergola ist optimal dafür ausgelegt, den Belastungen der Winterzeit mühelos standzuhalten. Ihre verstärkte Aluminiumkonstruktion und die hochstabilen Lamellen garantieren eine maximale Traglast von bis zu 120 kg/m². Diese Technologie sorgt dafür, dass die Pergola selbst unter der Last dichter Schneeschichten absolut sicher und stabil bleibt, wodurch sie das ganze Jahr über maximalen Schutz und absolute Sorgenfreiheit bietet.
+                  </p>
+                </div>
+              </div>
+
+              {/* Row 4 — image right */}
+              <div className="flex flex-col items-center gap-10 md:flex-row-reverse md:gap-16">
+                <div className="w-52 h-52 md:w-64 md:h-64 flex-shrink-0">
+                  <img src={ikon4} alt="Abmessungen" className="w-full h-full object-fill" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-[#344148] md:text-3xl">Maximale Abmessungen und flexible Raumgestaltung</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-zinc-500 md:text-base">
+                    Die Elegant Pergola bietet hervorragende Anpassungsmöglichkeiten, um sich perfekt in Ihren Außenbereich zu integrieren. Um selbst größte Flächen optimal abzudecken, unterstützt diese Konstruktion maximale Einzelmaße von 5.5 m Ausladung (A) x 7.0 m Breite (B) bei einer strukturellen Höhe von bis zu 3.5 m (C). Diese dimensionale Flexibilität ermöglicht es Ihnen, einen großzügigen und komfortablen Bereich zu schaffen, der jede architektonische und funktionale Anforderung Ihres Projekts erfüllt.
+                  </p>
+                </div>
+              </div>
+
+              {/* Row 5 — image left */}
+              <div className="flex flex-col items-center gap-10 md:flex-row md:gap-16">
+                <div className="w-52 h-52 md:w-64 md:h-64 flex-shrink-0">
+                  <img src={ikon5} alt="Lamellen" className="w-full h-full object-fill" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-[#344148] md:text-3xl">Lamellenausrichtung</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-zinc-500 md:text-base">
+                    Die Lamellen dieser exklusiven Pergola lassen sich stufenlos von 0° bis 120° verstellen und ermöglichen damit eine präzise Anpassung an Sonnenstand, Belüftung und Beschattung. So entsteht zu jeder Tageszeit die ideale Balance aus natürlichem Lichteinfall, angenehmer Luftzirkulation und stilvollem Schutz. In geschlossener Position vermittelt die Pergola ein Gefühl von Ruhe, Geborgenheit und Eleganz, während geöffnete Lamellen dem Außenbereich eine beeindruckende Leichtigkeit und Offenheit verleihen.
+                  </p>
+                </div>
+              </div>
+
+              {/* Row 6 — image right */}
+              <div className="flex flex-col items-center gap-10 md:flex-row-reverse md:gap-16">
+                <div className="w-52 h-52 md:w-64 md:h-64 flex-shrink-0">
+                  <img src={ikon6} alt="Smart Control" className="w-full h-full object-fill" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-[#344148] md:text-3xl">Design & Individualität</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-zinc-500 md:text-base">
+                    Das moderne Design, kombiniert mit der von uns angebotenen Farbvielfalt sowie der Möglichkeit zur Integration verschiedener automatisierter Systeme wie LED-Beleuchtung, Regen-, Wind- und Schneesensoren, eröffnet ein hohes Maß an individueller Gestaltungsfreiheit. Auf diese Weise lässt sich ein personalisierter Außenbereich schaffen, der sowohl stilvoll und hochwertig als auch funktional und alltagstauglich ist.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        {/* ── Montagevarianten ── */}
+        <section className="bg-white py-14 md:py-24">
+          <div className="mx-auto max-w-[1440px] px-6 md:px-16">
 
             {/* Header */}
             <div className="mb-12 text-center">
               <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
-                Einführung
+                Montage
               </span>
-              <h2 className="mt-4 text-2xl font-bold text-[#344148] md:text-4xl">
-                Die Elegante Pergola
-              </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-zinc-500 md:text-base">
-                Ein wasserdichtes Beschattungssystem mit drehbaren Lamellen. Vollständig aus Aluminium gefertigt – für höchste Langlebigkeit, zuverlässige Widerstandsfähigkeit und eine elegante, moderne Optik.
+              <h2 className="mt-4 text-2xl font-bold text-[#344148] md:text-4xl">Montagevarianten</h2>
+              <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-zinc-500 md:text-base">
+                Die Elegante Pergola lässt sich flexibel an jede Umgebung anpassen — freistehend, wandmontiert oder modular erweiterbar.
               </p>
             </div>
 
-            {/* Feature cards */}
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-16">
-
-              <div className="rounded-2xl border border-stone-100 bg-stone-50 p-7">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#344148]">
-                  <svg className="h-6 w-6 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                  </svg>
+            {/* Images grid — 3 lart, 3 poshtë */}
+            <div className="grid grid-cols-3 gap-4">
+              {[montage1, montage2, montage3, montage4, montage5, montage6].map((src, i) => (
+                <div key={i} className="rounded-xl overflow-hidden border border-stone-100 bg-white aspect-[4/3]">
+                  <img src={src} alt="" className="w-full h-full object-contain" />
                 </div>
-                <h3 className="mb-2 text-base font-bold text-[#344148]">Wetterschutz & Entwässerung</h3>
-                <p className="text-sm leading-relaxed text-zinc-500">
-                  Dank des speziellen Entwässerungssystems bietet die Pergola zuverlässigen Schutz vor Sonneneinstrahlung, Regenwasser und Schnee – zu jeder Jahreszeit.
-                </p>
-              </div>
-
-              <div className="rounded-2xl border border-stone-100 bg-stone-50 p-7">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#344148]">
-                  <svg className="h-6 w-6 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
-                  </svg>
-                </div>
-                <h3 className="mb-2 text-base font-bold text-[#344148]">Design & Individualität</h3>
-                <p className="text-sm leading-relaxed text-zinc-500">
-                  Modernes Design kombiniert mit vielfältigen Farben und der Möglichkeit zur Integration von LED-Beleuchtung, Regen-, Wind- und Schneesensoren für maximale Gestaltungsfreiheit.
-                </p>
-              </div>
-
-              <div className="rounded-2xl border border-stone-100 bg-stone-50 p-7 md:col-span-2 lg:col-span-1">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#344148]">
-                  <svg className="h-6 w-6 text-[#82B2CA]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
-                  </svg>
-                </div>
-                <h3 className="mb-2 text-base font-bold text-[#344148]">Vielseitige Einsatzbereiche</h3>
-                <p className="text-sm leading-relaxed text-zinc-500">
-                  Ideal für Wohnhäuser, Hotelanlagen, Restaurants und Cafés. Schafft unabhängig von den Witterungsbedingungen einen komfortablen Bereich für Erholung und geselliges Beisammensein.
-                </p>
-              </div>
+              ))}
             </div>
-
-            {/* Lamellenausrichtung */}
-            <div className="rounded-3xl bg-[#344148] px-8 py-10 md:px-14 md:py-14">
-              <div className="grid gap-10 md:grid-cols-2 items-center">
-                <div>
-                  <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA] mb-4">
-                    Lamellenausrichtung
-                  </span>
-                  <h3 className="text-xl font-bold text-white md:text-3xl mb-4">
-                    0° bis 120° — stufenlos verstellbar
-                  </h3>
-                  <p className="text-sm leading-relaxed text-white/60">
-                    Die Lamellen lassen sich präzise an Sonnenstand, Belüftung und Beschattung anpassen. In geschlossener Position vermittelt die Pergola Ruhe und Eleganz — geöffnet verleiht sie dem Außenbereich Leichtigkeit und Offenheit.
-                  </p>
-                </div>
-                <div className="flex flex-col gap-4">
-                  {[
-                    { angle: "0°", label: "Vollständig geschlossen", desc: "Maximaler Schutz vor Regen & Sonne", width: "w-0" },
-                    { angle: "45°", label: "Teilweise geöffnet", desc: "Angenehme Luftzirkulation & Teillicht", width: "w-1/2" },
-                    { angle: "120°", label: "Vollständig geöffnet", desc: "Maximale Offenheit & Belüftung", width: "w-full" },
-                  ].map((item) => (
-                    <div key={item.angle} className="flex items-center gap-4">
-                      <span className="w-10 text-right text-sm font-bold text-[#82B2CA]">{item.angle}</span>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-semibold text-white">{item.label}</span>
-                          <span className="text-[10px] text-white/40">{item.desc}</span>
-                        </div>
-                        <div className="h-1.5 w-full rounded-full bg-white/10">
-                          <div className={`h-1.5 rounded-full bg-[#82B2CA] ${item.width}`} />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
           </div>
         </section>
 
