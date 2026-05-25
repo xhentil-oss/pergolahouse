@@ -189,7 +189,7 @@ export const ZipScreensPage = () => {
 
                 {/* description */}
                 <div className="mt-3 border-t border-stone-100 pt-3">
-                  <p className={`text-xs leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
+                  <p className={`text-sm leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
                     Das Zip-Screen-System ist eine exklusive Beschattungslösung für den Außenbereich, die effektiven Sonnen-, Sicht- und Windschutz mit modernem Design und hoher Funktionalität verbindet. Während das Caribe Zip Screen als vertikales System ideal für seitliche Abschirmungen, Fassaden und Pergolen geeignet ist, wurde das Pacific Zip Screen als horizontales System speziell für Glasdächer, Wintergärten und Überdachungen entwickelt. Beide Systeme überzeugen durch robuste Aluminiumprofile, langlebige Screen-Gewebe und eine stabile Zip-Führung, die den Stoff auch bei Wind sicher in Position hält. Optional sind sie mit Motorisierung, Fernbedienung, verschiedenen Stoff- und Farbvarianten sowie weiteren Komfortlösungen erhältlich.
                   </p>
                   <button type="button" onClick={() => setDescExpanded(!descExpanded)} className="mt-0.5 text-xs font-semibold text-[#344148] underline underline-offset-2">
@@ -215,13 +215,13 @@ export const ZipScreensPage = () => {
                     <div className="flex flex-wrap gap-2">
                       {colorOptions.map((c) => (
                         <button key={c.label} type="button" onClick={() => setSelectedColor(c.label)}
-                          className={`flex items-center gap-2 rounded-full border-2 px-3 py-1.5 text-xs font-medium transition-all ${selectedColor === c.label ? "border-[#344148] bg-[#344148] text-white" : "border-stone-200 text-zinc-600 hover:border-zinc-400"}`}>
+                          className={`flex items-center gap-2 rounded-full border-2 px-3 py-1.5 text-sm font-medium transition-all ${selectedColor === c.label ? "border-[#344148] bg-[#344148] text-white" : "border-stone-200 text-zinc-600 hover:border-zinc-400"}`}>
                           <div className="h-4 w-4 rounded-full border border-white/30 shadow-sm" style={{ backgroundColor: c.color }} />
                           {c.label}
                         </button>
                       ))}
                     </div>
-                    <p className="mt-1.5 text-xs text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
+                    <p className="mt-1.5 text-sm text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
                   </div>
 
                   {/* Size */}

@@ -327,7 +327,7 @@ export const WintergartenPage = () => {
 
                 {/* description */}
                 <div className="mt-3 border-t border-stone-100 pt-3">
-                  <p className={`text-[13px] leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
+                  <p className={`text-sm leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
                     Der Wintergarten ist ein hochwertiges Aluminium- und Glassystem mit festem Glasdach, integrierter Wasserableitung und moderner, klarer Formensprache. Er schafft helle, offene Räume mit viel Tageslicht und bietet gleichzeitig zuverlässigen Schutz vor Witterungseinflüssen. Optional ist er mit Schiebe-, Guillotine- oder Zip-Systemen sowie weiteren Komfort- und Automatisierungslösungen erhältlich.
                   </p>
                   <button type="button" onClick={() => setDescExpanded(!descExpanded)} className="mt-0.5 text-xs font-semibold text-[#344148] underline underline-offset-2">
@@ -361,13 +361,13 @@ export const WintergartenPage = () => {
                     <div className="flex flex-wrap gap-2">
                       {colorOptions.map((c) => (
                         <button key={c.label} type="button" onClick={() => setSelectedColor(c.label)}
-                          className={`flex items-center gap-2 rounded-full border-2 px-3 py-1.5 text-xs font-medium transition-all ${selectedColor === c.label ? "border-[#344148] bg-[#344148] text-white" : "border-stone-200 text-zinc-600 hover:border-zinc-400"}`}>
+                          className={`flex items-center gap-2 rounded-full border-2 px-3 py-1.5 text-sm font-medium transition-all ${selectedColor === c.label ? "border-[#344148] bg-[#344148] text-white" : "border-stone-200 text-zinc-600 hover:border-zinc-400"}`}>
                           <div className="h-4 w-4 rounded-full border border-white/30 shadow-sm" style={{ backgroundColor: c.color }} />
                           {c.label}
                         </button>
                       ))}
                     </div>
-                    <p className="mt-1.5 text-[13px] text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
+                    <p className="mt-1.5 text-sm text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
                   </div>
 
                   {/* Size */}
@@ -377,15 +377,15 @@ export const WintergartenPage = () => {
                       {/* Länge */}
                       <div>
                         <div className="mb-1.5 flex items-center justify-between">
-                          <span className="text-[13px] font-semibold text-[#344148]">Länge</span>
+                          <span className="text-sm font-semibold text-[#344148]">Länge</span>
                           {(() => { const err = laengeInput !== "" && (Number(laengeInput) > laengeRange.max || Number(laengeInput) < laengeRange.min); return (
                           <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
                             <input type="number" value={laengeInput}
                               onFocus={() => setLaengeInput("")}
                               onChange={(e) => { setLaengeInput(e.target.value); const v = Number(e.target.value); if (!isNaN(v) && v > 0) setLaenge(v); }}
                               onBlur={() => { const v = Math.max(laengeRange.min, Math.min(laengeRange.max, Number(laengeInput) || laengeRange.min)); setLaenge(v); setLaengeInput(String(v)); }}
-                              className={`w-16 bg-transparent pl-2.5 py-1 text-xs font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
-                            <span className={`pr-2.5 text-xs font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
+                              className={`w-20 bg-transparent pl-2.5 py-1 text-sm font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
+                            <span className={`pr-2.5 text-sm font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
                           </div>); })()}
                         </div>
                         <input type="range" min={laengeRange.min} max={laengeRange.max} step={laengeRange.step} value={laenge} onChange={(e) => { setLaenge(Number(e.target.value)); setLaengeInput(e.target.value); }}
@@ -396,15 +396,15 @@ export const WintergartenPage = () => {
                       {/* Breite */}
                       <div>
                         <div className="mb-1.5 flex items-center justify-between">
-                          <span className="text-[13px] font-semibold text-[#344148]">Breite</span>
+                          <span className="text-sm font-semibold text-[#344148]">Breite</span>
                           {(() => { const err = breiteInput !== "" && (Number(breiteInput) > breiteRange.max || Number(breiteInput) < breiteRange.min); return (
                           <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
                             <input type="number" value={breiteInput}
                               onFocus={() => setBreiteInput("")}
                               onChange={(e) => { setBreiteInput(e.target.value); const v = Number(e.target.value); if (!isNaN(v) && v > 0) setBreite(v); }}
                               onBlur={() => { const v = Math.max(breiteRange.min, Math.min(breiteRange.max, Number(breiteInput) || breiteRange.min)); setBreite(v); setBreiteInput(String(v)); }}
-                              className={`w-16 bg-transparent pl-2.5 py-1 text-xs font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
-                            <span className={`pr-2.5 text-xs font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
+                              className={`w-20 bg-transparent pl-2.5 py-1 text-sm font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
+                            <span className={`pr-2.5 text-sm font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
                           </div>); })()}
                         </div>
                         <input type="range" min={breiteRange.min} max={breiteRange.max} step={breiteRange.step} value={breite} onChange={(e) => { setBreite(Number(e.target.value)); setBreiteInput(e.target.value); }}
@@ -415,15 +415,15 @@ export const WintergartenPage = () => {
                       {/* Höhe */}
                       <div>
                         <div className="mb-1.5 flex items-center justify-between">
-                          <span className="text-[13px] font-semibold text-[#344148]">Höhe</span>
+                          <span className="text-sm font-semibold text-[#344148]">Höhe</span>
                           {(() => { const err = hoeheInput !== "" && (Number(hoeheInput) > hoeheRange.max || Number(hoeheInput) < hoeheRange.min); return (
                           <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
                             <input type="number" value={hoeheInput}
                               onFocus={() => setHoeheInput("")}
                               onChange={(e) => { setHoeheInput(e.target.value); const v = Number(e.target.value); if (!isNaN(v) && v > 0) setHoehe(v); }}
                               onBlur={() => { const v = Math.max(hoeheRange.min, Math.min(hoeheRange.max, Number(hoeheInput) || hoeheRange.min)); setHoehe(v); setHoeheInput(String(v)); }}
-                              className={`w-16 bg-transparent pl-2.5 py-1 text-xs font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
-                            <span className={`pr-2.5 text-xs font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
+                              className={`w-20 bg-transparent pl-2.5 py-1 text-sm font-bold text-right outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${err ? "text-red-500" : "text-[#344148]"}`} />
+                            <span className={`pr-2.5 text-sm font-bold ${err ? "text-red-500" : "text-[#344148]"}`}>mm</span>
                           </div>); })()}
                         </div>
                         <input type="range" min={hoeheRange.min} max={hoeheRange.max} step={hoeheRange.step} value={hoehe} onChange={(e) => { setHoehe(Number(e.target.value)); setHoeheInput(e.target.value); }}
@@ -433,7 +433,7 @@ export const WintergartenPage = () => {
                       </div>
                       {/* Dachneigung — fixed */}
                       <div className="flex items-center justify-between rounded-xl bg-white px-3 py-2 border border-stone-200">
-                        <span className="text-[13px] font-semibold text-[#344148]">Wasserabfluss (Dachneigung)</span>
+                        <span className="text-sm font-semibold text-[#344148]">Wasserabfluss (Dachneigung)</span>
                         <span className="rounded-md bg-[#344148] px-2 py-0.5 text-[11px] font-bold text-white">8°</span>
                       </div>
                     </div>
@@ -447,7 +447,7 @@ export const WintergartenPage = () => {
                         <button key={m.label} type="button" onClick={() => setSelectedMount(m.label)}
                           className={`flex flex-col items-center gap-2 rounded-xl border-2 p-3 transition-all ${selectedMount === m.label ? "border-[#344148] bg-[#344148]/5" : "border-stone-200 hover:border-zinc-300"}`}>
                           <img src={m.img} alt={m.label} className="h-9 object-contain" />
-                          <span className={`text-xs font-semibold ${selectedMount === m.label ? "text-[#344148]" : "text-zinc-600"}`}>{m.label}</span>
+                          <span className={`text-sm font-semibold ${selectedMount === m.label ? "text-[#344148]" : "text-zinc-600"}`}>{m.label}</span>
                         </button>
                       ))}
                     </div>
@@ -460,11 +460,11 @@ export const WintergartenPage = () => {
                       {sideOptions.map((side) => (
                         <div key={side.key} className="flex flex-col items-center gap-1.5 rounded-xl border border-stone-200 bg-stone-50 p-2.5">
                           <img src={side.img} alt={side.label} className="h-10 object-contain" />
-                          <span className="text-[10px] font-semibold text-zinc-500">{side.label}</span>
+                          <span className="text-xs font-semibold text-zinc-500">{side.label}</span>
                           <select
                             value={sides[side.key]}
                             onChange={(e) => setSides((prev) => ({ ...prev, [side.key]: e.target.value }))}
-                            className="w-full rounded-lg border border-stone-200 bg-white px-1.5 py-1 text-[10px] text-zinc-700 focus:border-[#344148] focus:outline-none"
+                            className="w-full rounded-lg border border-stone-200 bg-white px-1.5 py-1 text-xs text-zinc-700 focus:border-[#344148] focus:outline-none"
                           >
                             {sideTypeChoices.map((choice) => (
                               <option key={choice.value} value={choice.value}>
@@ -486,7 +486,7 @@ export const WintergartenPage = () => {
                         return (
                           <div key={cat.key} className="overflow-hidden rounded-2xl border border-stone-200 bg-white">
                             <div className="flex items-center gap-2 px-4 py-3" style={{ backgroundColor: '#82B2CA' }}>
-                              <span className="flex-1 text-[11px] font-bold text-white tracking-wide">{cat.label}</span>
+                              <span className="flex-1 text-xs font-bold text-white tracking-wide">{cat.label}</span>
                               {selectedInCat > 0 && (
                                 <span className="rounded-full bg-white/30 px-2 py-0.5 text-[9px] font-bold text-white">{selectedInCat}</span>
                               )}
@@ -501,8 +501,8 @@ export const WintergartenPage = () => {
                                       <div className="scale-75">{addonItem?.icon}</div>
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                      <div className="text-[13px] font-semibold leading-tight text-zinc-800">{acc.label}</div>
-                                      <div className="text-[10px] text-zinc-400">+{formatPrice(acc.price)}</div>
+                                      <div className="text-sm font-semibold leading-tight text-zinc-800">{acc.label}</div>
+                                      <div className="text-xs text-zinc-400">+{formatPrice(acc.price)}</div>
                                     </div>
                                     <button
                                       type="button"

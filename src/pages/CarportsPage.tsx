@@ -278,7 +278,7 @@ export const CarportsPage = () => {
 
                 {/* description */}
                 <div className="mt-3 border-t border-stone-100 pt-3">
-                  <p className={`text-xs leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
+                  <p className={`text-sm leading-5 text-zinc-500 ${!descExpanded ? "line-clamp-2" : ""}`}>
                     Das Carport ist ein hochwertiges Aluminium-Carportsystem mit isolierten Sandwichpaneelen, integriertem Wasserablauf und hoher Widerstandsfähigkeit gegenüber Witterungseinflüssen. Es schützt Fahrzeuge und Außenbereiche zuverlässig vor Sonne, Regen und Schnee und überzeugt zugleich durch seine langlebige, pflegeleichte und moderne Ausführung. Optional ist es mit LED-Beleuchtung, Sensoren, Smartphone-Steuerung und weiteren Komfortfunktionen erhältlich.
                   </p>
                   <button type="button" onClick={() => setDescExpanded(!descExpanded)} className="mt-0.5 text-xs font-semibold text-[#344148] underline underline-offset-2">
@@ -307,7 +307,7 @@ export const CarportsPage = () => {
                         <button key={m.label} type="button" onClick={() => setSelectedMount(m.label)}
                           className={`flex flex-col items-center gap-2 rounded-3xl border-2 p-3 transition-all ${selectedMount === m.label ? "border-[#344148] bg-[#344148]/5" : "border-stone-200 hover:border-zinc-300"}`}>
                           <img src={m.img} alt={m.label} className="h-9 object-contain" />
-                          <span className={`text-xs font-semibold ${selectedMount === m.label ? "text-[#344148]" : "text-zinc-600"}`}>{m.label}</span>
+                          <span className={`text-sm font-semibold ${selectedMount === m.label ? "text-[#344148]" : "text-zinc-600"}`}>{m.label}</span>
                         </button>
                       ))}
                     </div>
@@ -320,11 +320,11 @@ export const CarportsPage = () => {
                       {(["left", "right", "front", "back"] as const).map((side) => (
                         <div key={side} className="flex flex-col items-center gap-1.5 rounded-xl border border-stone-200 bg-stone-50 p-2.5">
                           <img src={sideIcons[side]} alt={sideLabels[side]} className="h-10 object-contain" />
-                          <span className="text-[10px] font-semibold text-zinc-500">{sideLabels[side]}</span>
+                          <span className="text-xs font-semibold text-zinc-500">{sideLabels[side]}</span>
                           <select
                             value={sides[side]}
                             onChange={(e) => setSides((prev) => ({ ...prev, [side]: e.target.value }))}
-                            className="w-full rounded-lg border border-stone-200 bg-white px-1.5 py-1 text-[10px] text-zinc-700 focus:border-[#344148] focus:outline-none"
+                            className="w-full rounded-lg border border-stone-200 bg-white px-1.5 py-1 text-xs text-zinc-700 focus:border-[#344148] focus:outline-none"
                           >
                             {sideTypeChoices.map((c) => (
                               <option key={c.value} value={c.value}>
@@ -343,13 +343,13 @@ export const CarportsPage = () => {
                     <div className="flex flex-wrap gap-2">
                       {colorOptions.map((c) => (
                         <button key={c.label} type="button" onClick={() => setSelectedColor(c.label)}
-                          className={`flex items-center gap-2 rounded-full border-2 px-3 py-1.5 text-xs font-medium transition-all ${selectedColor === c.label ? "border-[#344148] bg-[#344148] text-white" : "border-stone-200 text-zinc-600 hover:border-zinc-400"}`}>
+                          className={`flex items-center gap-2 rounded-full border-2 px-3 py-1.5 text-sm font-medium transition-all ${selectedColor === c.label ? "border-[#344148] bg-[#344148] text-white" : "border-stone-200 text-zinc-600 hover:border-zinc-400"}`}>
                           <div className="h-4 w-4 rounded-full border border-white/30 shadow-sm" style={{ backgroundColor: c.color }} />
                           {c.label}
                         </button>
                       ))}
                     </div>
-                    <p className="mt-1.5 text-xs text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
+                    <p className="mt-1.5 text-sm text-zinc-400">{colorOptions.find((c) => c.label === selectedColor)?.hint}</p>
                   </div>
 
                   {/* Size */}
@@ -365,7 +365,7 @@ export const CarportsPage = () => {
                                 <svg className="h-2.5 w-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
                               )}
                             </div>
-                            <span className={`rounded-md px-2 py-0.5 text-[10px] font-bold ${selectedSize === s.label ? "bg-[#344148] text-white" : "bg-stone-100 text-zinc-600"}`}>
+                            <span className={`rounded-md px-2 py-0.5 text-xs font-bold ${selectedSize === s.label ? "bg-[#344148] text-white" : "bg-stone-100 text-zinc-600"}`}>
                               {formatPrice(s.price)}
                             </span>
                           </div>
@@ -389,7 +389,7 @@ export const CarportsPage = () => {
                         return (
                           <div key={cat.key} className="overflow-hidden rounded-2xl border border-stone-200 bg-white">
                             <div className="flex items-center gap-2 px-4 py-3" style={{ backgroundColor: '#82B2CA' }}>
-                              <span className="flex-1 text-[11px] font-bold text-white tracking-wide">{cat.label}</span>
+                              <span className="flex-1 text-xs font-bold text-white tracking-wide">{cat.label}</span>
                               {selectedInCat > 0 && (
                                 <span className="rounded-full bg-white/30 px-2 py-0.5 text-[10px] font-bold text-white">{selectedInCat}</span>
                               )}
@@ -404,8 +404,8 @@ export const CarportsPage = () => {
                                       <div className="scale-75">{addonItem?.icon}</div>
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                      <div className="text-[13px] font-semibold leading-tight text-zinc-800">{acc.label}</div>
-                                      <div className="text-[10px] text-zinc-400">+{formatPrice(acc.price)}</div>
+                                      <div className="text-sm font-semibold leading-tight text-zinc-800">{acc.label}</div>
+                                      <div className="text-xs text-zinc-400">+{formatPrice(acc.price)}</div>
                                     </div>
                                     <button
                                       type="button"
