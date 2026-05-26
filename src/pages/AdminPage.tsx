@@ -187,33 +187,37 @@ export const AdminPage = () => {
               <PriceInput label="Wandmontage – Aufpreis" fieldKey="wandmontage" value={prices.wandmontage} onChange={set} />
             </SectionCard>
 
-            <SectionCard title="Seitenwände">
-              <PriceInput label="Zip-Screen / Screen Rollo (pro Seite)" fieldKey="screenRollo" value={prices.screenRollo} onChange={set} />
-              <PriceInput label="Faltglasverglasung (pro Seite)" fieldKey="faltglasverglasung" value={prices.faltglasverglasung} onChange={set} />
-              <PriceInput label="Schiebeverglasung (pro Seite)" fieldKey="schiebeverglasung" value={prices.schiebeverglasung} onChange={set} />
-              <PriceInput label="Guillotine-Verglasung (pro Seite)" fieldKey="guillotineVerglasung" value={prices.guillotineVerglasung} onChange={set} />
+            <SectionCard title="Seitenwände (€/m²)">
+              <p className="text-[11px] text-zinc-400 mb-3 -mt-1">Preis pro m² der jeweiligen Wandfläche (Breite oder Tiefe × Höhe).</p>
+              <PriceInput label="Zip-Screen / Screen Rollo" fieldKey="screenRollo" value={prices.screenRollo} onChange={set} suffix="€/m²" />
+              <PriceInput label="Faltglasverglasung" fieldKey="faltglasverglasung" value={prices.faltglasverglasung} onChange={set} suffix="€/m²" />
+              <PriceInput label="Schiebeverglasung" fieldKey="schiebeverglasung" value={prices.schiebeverglasung} onChange={set} suffix="€/m²" />
+              <PriceInput label="Guillotine-Verglasung" fieldKey="guillotineVerglasung" value={prices.guillotineVerglasung} onChange={set} suffix="€/m²" />
             </SectionCard>
 
-            <SectionCard title="Zubehör – Beleuchtung">
-              <PriceInput label="Warmweißes Licht" fieldKey="warmweissesLicht" value={prices.warmweissesLicht} onChange={set} />
-              <PriceInput label="Kaltweiß Licht" fieldKey="kaltweissLicht" value={prices.kaltweissLicht} onChange={set} />
-              <PriceInput label="RGB-Beleuchtung" fieldKey="rgbBeleuchtung" value={prices.rgbBeleuchtung} onChange={set} />
-              <PriceInput label="Perimeter-Beleuchtung" fieldKey="perimeterBeleuchtung" value={prices.perimeterBeleuchtung} onChange={set} />
-              <PriceInput label="Spot-Beleuchtung" fieldKey="spotBeleuchtung" value={prices.spotBeleuchtung} onChange={set} />
+            <SectionCard title="Zubehör – Beleuchtung (€/m²)">
+              <p className="text-[11px] text-zinc-400 mb-3 -mt-1">Diese Preise werden mit der gewählten Fläche (Breite × Tiefe) multipliziert.</p>
+              <PriceInput label="Warmweißes Licht" fieldKey="warmweissesLicht" value={prices.warmweissesLicht} onChange={set} suffix="€/m²" />
+              <PriceInput label="Kaltweiß Licht" fieldKey="kaltweissLicht" value={prices.kaltweissLicht} onChange={set} suffix="€/m²" />
+              <PriceInput label="RGB-Beleuchtung" fieldKey="rgbBeleuchtung" value={prices.rgbBeleuchtung} onChange={set} suffix="€/m²" />
+              <PriceInput label="Perimeter-Beleuchtung" fieldKey="perimeterBeleuchtung" value={prices.perimeterBeleuchtung} onChange={set} suffix="€/m²" />
+              <PriceInput label="Spot-Beleuchtung" fieldKey="spotBeleuchtung" value={prices.spotBeleuchtung} onChange={set} suffix="€/m²" />
             </SectionCard>
 
-            <SectionCard title="Zubehör – Sensoren">
-              <PriceInput label="Windsensor" fieldKey="windsensor" value={prices.windsensor} onChange={set} />
-              <PriceInput label="Regensensor" fieldKey="regensensor" value={prices.regensensor} onChange={set} />
-              <PriceInput label="Schneesensor" fieldKey="schneesensor" value={prices.schneesensor} onChange={set} />
-              <PriceInput label="Sonnensensor" fieldKey="sonnensensor" value={prices.sonnensensor} onChange={set} />
-              <PriceInput label="Solar-System" fieldKey="solarSystem" value={prices.solarSystem} onChange={set} />
+            <SectionCard title="Zubehör – Sensoren (€/m²)">
+              <p className="text-[11px] text-zinc-400 mb-3 -mt-1">Diese Preise werden mit der gewählten Fläche (Breite × Tiefe) multipliziert.</p>
+              <PriceInput label="Windsensor" fieldKey="windsensor" value={prices.windsensor} onChange={set} suffix="€/m²" />
+              <PriceInput label="Regensensor" fieldKey="regensensor" value={prices.regensensor} onChange={set} suffix="€/m²" />
+              <PriceInput label="Schneesensor" fieldKey="schneesensor" value={prices.schneesensor} onChange={set} suffix="€/m²" />
+              <PriceInput label="Sonnensensor" fieldKey="sonnensensor" value={prices.sonnensensor} onChange={set} suffix="€/m²" />
+              <PriceInput label="Solar-System" fieldKey="solarSystem" value={prices.solarSystem} onChange={set} suffix="€/m²" />
             </SectionCard>
 
-            <SectionCard title="Zubehör – Heizung & Komfort">
-              <PriceInput label="Infrarot-Heizung" fieldKey="infrarotHeizung" value={prices.infrarotHeizung} onChange={set} />
-              <PriceInput label="Integrierte Steckdosen" fieldKey="integriertSteckdosen" value={prices.integriertSteckdosen} onChange={set} />
-              <PriceInput label="Soundsystem" fieldKey="soundsystem" value={prices.soundsystem} onChange={set} />
+            <SectionCard title="Zubehör – Heizung & Komfort (€/m²)">
+              <p className="text-[11px] text-zinc-400 mb-3 -mt-1">Diese Preise werden mit der gewählten Fläche (Breite × Tiefe) multipliziert.</p>
+              <PriceInput label="Infrarot-Heizung" fieldKey="infrarotHeizung" value={prices.infrarotHeizung} onChange={set} suffix="€/m²" />
+              <PriceInput label="Integrierte Steckdosen" fieldKey="integriertSteckdosen" value={prices.integriertSteckdosen} onChange={set} suffix="€/m²" />
+              <PriceInput label="Soundsystem" fieldKey="soundsystem" value={prices.soundsystem} onChange={set} suffix="€/m²" />
             </SectionCard>
 
             <SectionCard title="Wintergarten – Konfigurator">
