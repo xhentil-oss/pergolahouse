@@ -50,7 +50,10 @@ interface PergolaModelProps {
   louversOpen: boolean;
   louversRetracted: boolean;
   showDimensions: boolean;
-  sidePanel: string;
+  leftPanel: string;
+  rightPanel: string;
+  frontPanel: string;
+  backPanel: string;
   faltOpen: boolean;
   schOpen: boolean;
   zipDown: boolean;
@@ -96,7 +99,7 @@ const LouverBlade = ({ position, bladeW, bladeD, material, targetAngle, targetX,
   );
 };
 
-const PergolaModel = ({ width, depth, height, color, louversOpen, louversRetracted, showDimensions, sidePanel, faltOpen, schOpen, zipDown }: PergolaModelProps) => {
+const PergolaModel = ({ width, depth, height, color, louversOpen, louversRetracted, showDimensions, leftPanel, rightPanel, frontPanel, backPanel, faltOpen, schOpen, zipDown }: PergolaModelProps) => {
   const groupRef = useRef<THREE.Group>(null!);
   const hex = colorMap[color] ?? color;
 
@@ -232,10 +235,15 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, louversRetract
   const roofY       = height;
   const beamCenterY = roofY - mainBeamH / 2;
 
+  const sides4 = [leftPanel, rightPanel, frontPanel, backPanel];
+  const hasFaltglas    = sides4.includes("faltglas");
+  const hasZip         = sides4.includes("zip");
+  const hasSchiebeglas = sides4.includes("schiebeglas");
+
   /* ── Animation frame ── */
   useFrame((_, delta) => {
     // Faltglas
-    if (sidePanel === "faltglas") {
+    if (hasFaltglas) {
       const target = faltOpen ? 1.30 : 0.03;
       foldCurrentRef.current = THREE.MathUtils.lerp(foldCurrentRef.current, target, Math.min(1, delta * 2.2));
       const fold   = foldCurrentRef.current;
@@ -266,7 +274,7 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, louversRetract
     }
 
     // Zip screens
-    if (sidePanel === "zip") {
+    if (hasZip) {
       const zipTarget = zipDown ? 1 : 0;
       zipCurrentRef.current = THREE.MathUtils.lerp(zipCurrentRef.current, zipTarget, Math.min(1, delta * 2.5));
       const zc   = zipCurrentRef.current;
@@ -285,7 +293,7 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, louversRetract
     }
 
     // Schiebeglas
-    if (sidePanel === "schiebeglas") {
+    if (hasSchiebeglas) {
       frontSchRefs.current.forEach((ref, i) => {
         if (!ref) return;
         const tx = schOpen ? schOpenXs[i] : schClosedXs[i];
@@ -400,8 +408,8 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, louversRetract
         );
       })}
 
-      {/* ── Static side panels (guillotine) ── */}
-      {sidePanel === "guillotine" && (() => {
+      {/* ── Static side panels (guillotine) — per side ── */}
+      {(() => {
         const mW      = 0.038;
         const innerD  = depth - postD * 2;
         const innerWp = width - postW * 2;
@@ -409,64 +417,44 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, louversRetract
         const glassY  = height / 2;
         return (
           <>
-            {/* Left */}
-            <mesh position={[-halfW + panelT / 2, glassY, 0]} material={glassMat}>
-              <boxGeometry args={[panelT, height, innerD]} />
-            </mesh>
-            <mesh position={[-halfW + panelT / 2, glassY, 0]} material={mainMat}>
-              <boxGeometry args={[panelT + 0.01, height, mW]} />
-            </mesh>
-            <mesh position={[-halfW + panelT / 2, midY, 0]} material={mainMat}>
-              <boxGeometry args={[panelT + 0.01, mW, innerD]} />
-            </mesh>
-            <mesh position={[-halfW + panelT / 2, mW / 2, 0]} material={mainMat}>
-              <boxGeometry args={[panelT + 0.01, mW, innerD]} />
-            </mesh>
-            {/* Right */}
-            <mesh position={[halfW - panelT / 2, glassY, 0]} material={glassMat}>
-              <boxGeometry args={[panelT, height, innerD]} />
-            </mesh>
-            <mesh position={[halfW - panelT / 2, glassY, 0]} material={mainMat}>
-              <boxGeometry args={[panelT + 0.01, height, mW]} />
-            </mesh>
-            <mesh position={[halfW - panelT / 2, midY, 0]} material={mainMat}>
-              <boxGeometry args={[panelT + 0.01, mW, innerD]} />
-            </mesh>
-            <mesh position={[halfW - panelT / 2, mW / 2, 0]} material={mainMat}>
-              <boxGeometry args={[panelT + 0.01, mW, innerD]} />
-            </mesh>
-            {/* Front */}
-            <mesh position={[0, glassY, -halfD + panelT / 2]} material={glassMat}>
-              <boxGeometry args={[innerWp, height, panelT]} />
-            </mesh>
-            <mesh position={[0, glassY, -halfD + panelT / 2]} material={mainMat}>
-              <boxGeometry args={[mW, height, panelT + 0.01]} />
-            </mesh>
-            <mesh position={[0, midY, -halfD + panelT / 2]} material={mainMat}>
-              <boxGeometry args={[innerWp, mW, panelT + 0.01]} />
-            </mesh>
-            <mesh position={[0, mW / 2, -halfD + panelT / 2]} material={mainMat}>
-              <boxGeometry args={[innerWp, mW, panelT + 0.01]} />
-            </mesh>
-            {/* Back */}
-            <mesh position={[0, glassY, halfD - panelT / 2]} material={glassMat}>
-              <boxGeometry args={[innerWp, height, panelT]} />
-            </mesh>
-            <mesh position={[0, glassY, halfD - panelT / 2]} material={mainMat}>
-              <boxGeometry args={[mW, height, panelT + 0.01]} />
-            </mesh>
-            <mesh position={[0, midY, halfD - panelT / 2]} material={mainMat}>
-              <boxGeometry args={[innerWp, mW, panelT + 0.01]} />
-            </mesh>
-            <mesh position={[0, mW / 2, halfD - panelT / 2]} material={mainMat}>
-              <boxGeometry args={[innerWp, mW, panelT + 0.01]} />
-            </mesh>
+            {leftPanel === "guillotine" && (
+              <>
+                <mesh position={[-halfW + panelT / 2, glassY, 0]} material={glassMat}><boxGeometry args={[panelT, height, innerD]} /></mesh>
+                <mesh position={[-halfW + panelT / 2, glassY, 0]} material={mainMat}><boxGeometry args={[panelT + 0.01, height, mW]} /></mesh>
+                <mesh position={[-halfW + panelT / 2, midY, 0]} material={mainMat}><boxGeometry args={[panelT + 0.01, mW, innerD]} /></mesh>
+                <mesh position={[-halfW + panelT / 2, mW / 2, 0]} material={mainMat}><boxGeometry args={[panelT + 0.01, mW, innerD]} /></mesh>
+              </>
+            )}
+            {rightPanel === "guillotine" && (
+              <>
+                <mesh position={[halfW - panelT / 2, glassY, 0]} material={glassMat}><boxGeometry args={[panelT, height, innerD]} /></mesh>
+                <mesh position={[halfW - panelT / 2, glassY, 0]} material={mainMat}><boxGeometry args={[panelT + 0.01, height, mW]} /></mesh>
+                <mesh position={[halfW - panelT / 2, midY, 0]} material={mainMat}><boxGeometry args={[panelT + 0.01, mW, innerD]} /></mesh>
+                <mesh position={[halfW - panelT / 2, mW / 2, 0]} material={mainMat}><boxGeometry args={[panelT + 0.01, mW, innerD]} /></mesh>
+              </>
+            )}
+            {frontPanel === "guillotine" && (
+              <>
+                <mesh position={[0, glassY, -halfD + panelT / 2]} material={glassMat}><boxGeometry args={[innerWp, height, panelT]} /></mesh>
+                <mesh position={[0, glassY, -halfD + panelT / 2]} material={mainMat}><boxGeometry args={[mW, height, panelT + 0.01]} /></mesh>
+                <mesh position={[0, midY, -halfD + panelT / 2]} material={mainMat}><boxGeometry args={[innerWp, mW, panelT + 0.01]} /></mesh>
+                <mesh position={[0, mW / 2, -halfD + panelT / 2]} material={mainMat}><boxGeometry args={[innerWp, mW, panelT + 0.01]} /></mesh>
+              </>
+            )}
+            {backPanel === "guillotine" && (
+              <>
+                <mesh position={[0, glassY, halfD - panelT / 2]} material={glassMat}><boxGeometry args={[innerWp, height, panelT]} /></mesh>
+                <mesh position={[0, glassY, halfD - panelT / 2]} material={mainMat}><boxGeometry args={[mW, height, panelT + 0.01]} /></mesh>
+                <mesh position={[0, midY, halfD - panelT / 2]} material={mainMat}><boxGeometry args={[innerWp, mW, panelT + 0.01]} /></mesh>
+                <mesh position={[0, mW / 2, halfD - panelT / 2]} material={mainMat}><boxGeometry args={[innerWp, mW, panelT + 0.01]} /></mesh>
+              </>
+            )}
           </>
         );
       })()}
 
-      {/* ── Faltglas animated panels (all 4 sides) ── */}
-      {sidePanel === "faltglas" && (() => {
+      {/* ── Faltglas animated panels — per side ── */}
+      {hasFaltglas && (() => {
         const fold0       = foldCurrentRef.current;
         const projW0      = fPW * Math.cos(fold0);
         const projZ0      = sPW * Math.cos(fold0);
@@ -475,8 +463,8 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, louversRetract
         const panH        = height;
         return (
           <>
-            {/* Front */}
-            {Array.from({ length: faltCount }, (_, i) => {
+            {/* Front — only if frontPanel === faltglas */}
+            {frontPanel === "faltglas" && Array.from({ length: faltCount }, (_, i) => {
               const pcx0  = stackStartX + projW0 * i + projW0 / 2;
               const hSide = i % 2 === 0 ? 1 : -1;
               const hx    = hSide * (fPW / 2 - faltFrameW - handleThk * 1.2);
@@ -487,17 +475,14 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, louversRetract
                     <boxGeometry args={[fPW - faltFrameW * 2, panH - faltFrameW * 2, glassTh * 2]} />
                     <meshStandardMaterial color="#c8e4ee" transparent opacity={0.32} roughness={0.03} metalness={0.06} side={THREE.DoubleSide} depthWrite={false} />
                   </mesh>
-                  <RoundedBox args={[faltFrameW, panH, faltFrameW]} radius={0.005} smoothness={4}
-                    position={[-fPW / 2 + faltFrameW / 2, panH / 2, 0]} material={mainMat} castShadow />
-                  <RoundedBox args={[faltFrameW, panH, faltFrameW]} radius={0.005} smoothness={4}
-                    position={[fPW / 2 - faltFrameW / 2, panH / 2, 0]} material={mainMat} castShadow />
-                  <RoundedBox args={[handleThk, handleH, handleThk]} radius={0.004} smoothness={4}
-                    position={[hx, panH * 0.5, -handleThk * 0.8]} material={mainMat} castShadow />
+                  <RoundedBox args={[faltFrameW, panH, faltFrameW]} radius={0.005} smoothness={4} position={[-fPW / 2 + faltFrameW / 2, panH / 2, 0]} material={mainMat} castShadow />
+                  <RoundedBox args={[faltFrameW, panH, faltFrameW]} radius={0.005} smoothness={4} position={[fPW / 2 - faltFrameW / 2, panH / 2, 0]} material={mainMat} castShadow />
+                  <RoundedBox args={[handleThk, handleH, handleThk]} radius={0.004} smoothness={4} position={[hx, panH * 0.5, -handleThk * 0.8]} material={mainMat} castShadow />
                 </group>
               );
             })}
-            {/* Back */}
-            {Array.from({ length: faltCount }, (_, i) => {
+            {/* Back — only if backPanel === faltglas */}
+            {backPanel === "faltglas" && Array.from({ length: faltCount }, (_, i) => {
               const pcx0  = stackStartX + projW0 * i + projW0 / 2;
               const hSide = i % 2 === 0 ? 1 : -1;
               const hx    = hSide * (fPW / 2 - faltFrameW - handleThk * 1.2);
@@ -508,17 +493,14 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, louversRetract
                     <boxGeometry args={[fPW - faltFrameW * 2, panH - faltFrameW * 2, glassTh * 2]} />
                     <meshStandardMaterial color="#c8e4ee" transparent opacity={0.32} roughness={0.03} metalness={0.06} side={THREE.DoubleSide} depthWrite={false} />
                   </mesh>
-                  <RoundedBox args={[faltFrameW, panH, faltFrameW]} radius={0.005} smoothness={4}
-                    position={[-fPW / 2 + faltFrameW / 2, panH / 2, 0]} material={mainMat} castShadow />
-                  <RoundedBox args={[faltFrameW, panH, faltFrameW]} radius={0.005} smoothness={4}
-                    position={[fPW / 2 - faltFrameW / 2, panH / 2, 0]} material={mainMat} castShadow />
-                  <RoundedBox args={[handleThk, handleH, handleThk]} radius={0.004} smoothness={4}
-                    position={[hx, panH * 0.5, handleThk * 0.8]} material={mainMat} castShadow />
+                  <RoundedBox args={[faltFrameW, panH, faltFrameW]} radius={0.005} smoothness={4} position={[-fPW / 2 + faltFrameW / 2, panH / 2, 0]} material={mainMat} castShadow />
+                  <RoundedBox args={[faltFrameW, panH, faltFrameW]} radius={0.005} smoothness={4} position={[fPW / 2 - faltFrameW / 2, panH / 2, 0]} material={mainMat} castShadow />
+                  <RoundedBox args={[handleThk, handleH, handleThk]} radius={0.004} smoothness={4} position={[hx, panH * 0.5, handleThk * 0.8]} material={mainMat} castShadow />
                 </group>
               );
             })}
-            {/* Left */}
-            {Array.from({ length: faltCount }, (_, i) => {
+            {/* Left — only if leftPanel === faltglas */}
+            {leftPanel === "faltglas" && Array.from({ length: faltCount }, (_, i) => {
               const pcz0    = stackStartZ + projZ0 * i + projZ0 / 2;
               const hSide   = i % 2 === 0 ? 1 : -1;
               const handleZ = hSide * (sPW / 2 - faltFrameW - handleThk * 1.2);
@@ -529,17 +511,14 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, louversRetract
                     <boxGeometry args={[glassTh * 2, panH - faltFrameW * 2, sPW - faltFrameW * 2]} />
                     <meshStandardMaterial color="#c8e4ee" transparent opacity={0.32} roughness={0.03} metalness={0.06} side={THREE.DoubleSide} depthWrite={false} />
                   </mesh>
-                  <RoundedBox args={[faltFrameW, panH, faltFrameW]} radius={0.005} smoothness={4}
-                    position={[0, panH / 2, -sPW / 2 + faltFrameW / 2]} material={mainMat} castShadow />
-                  <RoundedBox args={[faltFrameW, panH, faltFrameW]} radius={0.005} smoothness={4}
-                    position={[0, panH / 2, sPW / 2 - faltFrameW / 2]} material={mainMat} castShadow />
-                  <RoundedBox args={[handleThk, handleH * 0.75, handleThk]} radius={0.004} smoothness={4}
-                    position={[-handleThk * 0.8, panH * 0.5, handleZ]} material={mainMat} castShadow />
+                  <RoundedBox args={[faltFrameW, panH, faltFrameW]} radius={0.005} smoothness={4} position={[0, panH / 2, -sPW / 2 + faltFrameW / 2]} material={mainMat} castShadow />
+                  <RoundedBox args={[faltFrameW, panH, faltFrameW]} radius={0.005} smoothness={4} position={[0, panH / 2, sPW / 2 - faltFrameW / 2]} material={mainMat} castShadow />
+                  <RoundedBox args={[handleThk, handleH * 0.75, handleThk]} radius={0.004} smoothness={4} position={[-handleThk * 0.8, panH * 0.5, handleZ]} material={mainMat} castShadow />
                 </group>
               );
             })}
-            {/* Right */}
-            {Array.from({ length: faltCount }, (_, i) => {
+            {/* Right — only if rightPanel === faltglas */}
+            {rightPanel === "faltglas" && Array.from({ length: faltCount }, (_, i) => {
               const pcz0    = stackStartZ + projZ0 * i + projZ0 / 2;
               const hSide   = i % 2 === 0 ? 1 : -1;
               const handleZ = hSide * (sPW / 2 - faltFrameW - handleThk * 1.2);
@@ -550,96 +529,68 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, louversRetract
                     <boxGeometry args={[glassTh * 2, panH - faltFrameW * 2, sPW - faltFrameW * 2]} />
                     <meshStandardMaterial color="#c8e4ee" transparent opacity={0.32} roughness={0.03} metalness={0.06} side={THREE.DoubleSide} depthWrite={false} />
                   </mesh>
-                  <RoundedBox args={[faltFrameW, panH, faltFrameW]} radius={0.005} smoothness={4}
-                    position={[0, panH / 2, -sPW / 2 + faltFrameW / 2]} material={mainMat} castShadow />
-                  <RoundedBox args={[faltFrameW, panH, faltFrameW]} radius={0.005} smoothness={4}
-                    position={[0, panH / 2, sPW / 2 - faltFrameW / 2]} material={mainMat} castShadow />
-                  <RoundedBox args={[handleThk, handleH * 0.75, handleThk]} radius={0.004} smoothness={4}
-                    position={[handleThk * 0.8, panH * 0.5, handleZ]} material={mainMat} castShadow />
+                  <RoundedBox args={[faltFrameW, panH, faltFrameW]} radius={0.005} smoothness={4} position={[0, panH / 2, -sPW / 2 + faltFrameW / 2]} material={mainMat} castShadow />
+                  <RoundedBox args={[faltFrameW, panH, faltFrameW]} radius={0.005} smoothness={4} position={[0, panH / 2, sPW / 2 - faltFrameW / 2]} material={mainMat} castShadow />
+                  <RoundedBox args={[handleThk, handleH * 0.75, handleThk]} radius={0.004} smoothness={4} position={[handleThk * 0.8, panH * 0.5, handleZ]} material={mainMat} castShadow />
                 </group>
               );
             })}
-            {/* Bottom tracks */}
-            <RoundedBox args={[width - postW * 2, trackH * 0.7, trackD * 0.7]} radius={0.006} smoothness={4}
-              position={[0, trackH * 0.35, -halfD + trackD * 0.35]} material={mainMat} castShadow />
-            <RoundedBox args={[width - postW * 2, trackH * 0.7, trackD * 0.7]} radius={0.006} smoothness={4}
-              position={[0, trackH * 0.35, halfD - trackD * 0.35]} material={mainMat} castShadow />
-            <RoundedBox args={[trackD * 0.7, trackH * 0.7, depth - postD * 2]} radius={0.007} smoothness={4}
-              position={[-halfW + trackD * 0.35, trackH * 0.35, 0]} material={mainMat} castShadow />
-            <RoundedBox args={[trackD * 0.7, trackH * 0.7, depth - postD * 2]} radius={0.007} smoothness={4}
-              position={[halfW - trackD * 0.35, trackH * 0.35, 0]} material={mainMat} castShadow />
+            {/* Bottom tracks — per side */}
+            {frontPanel === "faltglas" && <RoundedBox args={[width - postW * 2, trackH * 0.7, trackD * 0.7]} radius={0.006} smoothness={4} position={[0, trackH * 0.35, -halfD + trackD * 0.35]} material={mainMat} castShadow />}
+            {backPanel === "faltglas" && <RoundedBox args={[width - postW * 2, trackH * 0.7, trackD * 0.7]} radius={0.006} smoothness={4} position={[0, trackH * 0.35, halfD - trackD * 0.35]} material={mainMat} castShadow />}
+            {leftPanel === "faltglas" && <RoundedBox args={[trackD * 0.7, trackH * 0.7, depth - postD * 2]} radius={0.007} smoothness={4} position={[-halfW + trackD * 0.35, trackH * 0.35, 0]} material={mainMat} castShadow />}
+            {rightPanel === "faltglas" && <RoundedBox args={[trackD * 0.7, trackH * 0.7, depth - postD * 2]} radius={0.007} smoothness={4} position={[halfW - trackD * 0.35, trackH * 0.35, 0]} material={mainMat} castShadow />}
             {/* Corner feet */}
-            <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4}
-              position={[-halfW + postW / 2, trackH / 2, -halfD + postD / 2]} material={mainMat} castShadow />
-            <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4}
-              position={[halfW - postW / 2, trackH / 2, -halfD + postD / 2]} material={mainMat} castShadow />
-            <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4}
-              position={[-halfW + postW / 2, trackH / 2, halfD - postD / 2]} material={mainMat} castShadow />
-            <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4}
-              position={[halfW - postW / 2, trackH / 2, halfD - postD / 2]} material={mainMat} castShadow />
+            <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4} position={[-halfW + postW / 2, trackH / 2, -halfD + postD / 2]} material={mainMat} castShadow />
+            <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4} position={[halfW - postW / 2, trackH / 2, -halfD + postD / 2]} material={mainMat} castShadow />
+            <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4} position={[-halfW + postW / 2, trackH / 2, halfD - postD / 2]} material={mainMat} castShadow />
+            <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4} position={[halfW - postW / 2, trackH / 2, halfD - postD / 2]} material={mainMat} castShadow />
           </>
         );
       })()}
 
-      {/* ── Schiebeglas animated sliding panels (all 4 sides) ── */}
-      {sidePanel === "schiebeglas" && (
+      {/* ── Schiebeglas animated sliding panels — per side ── */}
+      {hasSchiebeglas && (
         <>
-          {/* ── Front panels (slide in X) ── */}
-          {Array.from({ length: schCount }, (_, i) => (
+          {frontPanel === "schiebeglas" && Array.from({ length: schCount }, (_, i) => (
             <group key={i} ref={el => { frontSchRefs.current[i] = el; }}
               position={[schClosedXs[i], 0, schTracks_front[i]]}>
               {buildSchPanel(schPanelW, schPH, schPCy, true, i === 2, "right")}
             </group>
           ))}
-
-          {/* ── Back panels (slide in X, tracks inside back beam) ── */}
-          {Array.from({ length: schCount }, (_, i) => (
+          {backPanel === "schiebeglas" && Array.from({ length: schCount }, (_, i) => (
             <group key={i} ref={el => { backSchRefs.current[i] = el; }}
               position={[schClosedXs[i], 0, schTracks_back[i]]}>
               {buildSchPanel(schPanelW, schPH, schPCy, true, i === 2, "left")}
             </group>
           ))}
-
-          {/* ── Left panels (slide in Z) ── */}
-          {Array.from({ length: schCount }, (_, i) => (
+          {leftPanel === "schiebeglas" && Array.from({ length: schCount }, (_, i) => (
             <group key={i} ref={el => { leftSchRefs.current[i] = el; }}
               position={[schSideTracks_L[i], 0, schSideClosedZs[i]]}>
               {buildSchPanel(sSPW, schPH, schPCy, false, i === 0, "front")}
             </group>
           ))}
-
-          {/* ── Right panels (slide in Z) ── */}
-          {Array.from({ length: schCount }, (_, i) => (
+          {rightPanel === "schiebeglas" && Array.from({ length: schCount }, (_, i) => (
             <group key={i} ref={el => { rightSchRefs.current[i] = el; }}
               position={[schSideTracks_R[i], 0, schSideClosedZs[i]]}>
               {buildSchPanel(sSPW, schPH, schPCy, false, i === 0, "back")}
             </group>
           ))}
-
-          {/* ── Bottom floor tracks ── */}
-          <RoundedBox args={[width - postW * 2, trackH * 0.5, trackH * 0.65]} radius={0.005} smoothness={4}
-            position={[0, trackH * 0.25, -halfD + trackH * 0.33]} material={mainMat} castShadow />
-          <RoundedBox args={[width - postW * 2, trackH * 0.5, trackH * 0.65]} radius={0.005} smoothness={4}
-            position={[0, trackH * 0.25, halfD - trackH * 0.33]} material={mainMat} castShadow />
-          <RoundedBox args={[trackH * 0.65, trackH * 0.5, depth - postD * 2]} radius={0.005} smoothness={4}
-            position={[-halfW + trackH * 0.33, trackH * 0.25, 0]} material={mainMat} castShadow />
-          <RoundedBox args={[trackH * 0.65, trackH * 0.5, depth - postD * 2]} radius={0.005} smoothness={4}
-            position={[halfW - trackH * 0.33, trackH * 0.25, 0]} material={mainMat} castShadow />
-
-          {/* ── Corner feet ── */}
-          <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4}
-            position={[-halfW + postW / 2, trackH / 2, -halfD + postD / 2]} material={mainMat} castShadow />
-          <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4}
-            position={[halfW - postW / 2, trackH / 2, -halfD + postD / 2]} material={mainMat} castShadow />
-          <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4}
-            position={[-halfW + postW / 2, trackH / 2, halfD - postD / 2]} material={mainMat} castShadow />
-          <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4}
-            position={[halfW - postW / 2, trackH / 2, halfD - postD / 2]} material={mainMat} castShadow />
+          {/* Bottom floor tracks — per side */}
+          {frontPanel === "schiebeglas" && <RoundedBox args={[width - postW * 2, trackH * 0.5, trackH * 0.65]} radius={0.005} smoothness={4} position={[0, trackH * 0.25, -halfD + trackH * 0.33]} material={mainMat} castShadow />}
+          {backPanel === "schiebeglas" && <RoundedBox args={[width - postW * 2, trackH * 0.5, trackH * 0.65]} radius={0.005} smoothness={4} position={[0, trackH * 0.25, halfD - trackH * 0.33]} material={mainMat} castShadow />}
+          {leftPanel === "schiebeglas" && <RoundedBox args={[trackH * 0.65, trackH * 0.5, depth - postD * 2]} radius={0.005} smoothness={4} position={[-halfW + trackH * 0.33, trackH * 0.25, 0]} material={mainMat} castShadow />}
+          {rightPanel === "schiebeglas" && <RoundedBox args={[trackH * 0.65, trackH * 0.5, depth - postD * 2]} radius={0.005} smoothness={4} position={[halfW - trackH * 0.33, trackH * 0.25, 0]} material={mainMat} castShadow />}
+          {/* Corner feet */}
+          <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4} position={[-halfW + postW / 2, trackH / 2, -halfD + postD / 2]} material={mainMat} castShadow />
+          <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4} position={[halfW - postW / 2, trackH / 2, -halfD + postD / 2]} material={mainMat} castShadow />
+          <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4} position={[-halfW + postW / 2, trackH / 2, halfD - postD / 2]} material={mainMat} castShadow />
+          <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4} position={[halfW - postW / 2, trackH / 2, halfD - postD / 2]} material={mainMat} castShadow />
         </>
       )}
 
-      {/* ── Zip screens animated roll-down (all 4 sides) ── */}
-      {sidePanel === "zip" && (() => {
+      {/* ── Zip screens animated roll-down — per side ── */}
+      {hasZip && (() => {
         const zipH       = height - mainBeamH * 0.6;   // stops just below top beam, same as Wintergarten
         const hsH        = mainBeamH * 1.4;             // roller housing height
         const hsY        = zipH - hsH / 2;              // housing center — top flush with zipH
@@ -652,91 +603,48 @@ const PergolaModel = ({ width, depth, height, color, louversOpen, louversRetract
         return (
           <>
             {/* ── Front ── */}
-            {/* Roller housing (kasete) flush under top beam */}
-            <RoundedBox args={[innerWp + chW * 2, hsH, mainBeamW * 1.1]} radius={0.010} smoothness={4}
-              position={[0, hsY, -halfD + mainBeamW * 0.55]} material={mainMat} castShadow />
-            {/* Side guide channels */}
-            <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4}
-              position={[-halfW + postW + chW * 0.5, zipH / 2, -halfD + chW * 0.5]} material={mainMat} castShadow />
-            <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4}
-              position={[ halfW - postW - chW * 0.5, zipH / 2, -halfD + chW * 0.5]} material={mainMat} castShadow />
-            {/* Screen fabric — animated */}
-            <mesh ref={el => { zipFrontRef.current = el; }}
-              position={[0, zipH / 2, -halfD + glassTh * 2]} material={zipFabricMat}>
-              <boxGeometry args={[innerWp - chW * 2 - 0.008, zipH, glassTh * 2]} />
-            </mesh>
-            {/* Moving bottom rail */}
-            <mesh ref={el => { zipFrontRailRef.current = el; }} position={[0, 0, -halfD + glassTh * 2]}>
-              <boxGeometry args={[innerWp - chW * 2, railH, railH]} />
-              <meshStandardMaterial color={hex} roughness={0.38} metalness={0.28} />
-            </mesh>
-            {/* Fixed floor traversa */}
-            <RoundedBox args={[innerWp, floorRailH, floorRailH]} radius={0.005} smoothness={4}
-              position={[0, floorRailH / 2, -halfD + floorRailH / 2]} material={mainMat} castShadow />
-            {/* Front corner feet */}
-            <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4}
-              position={[-halfW + postW / 2, trackH / 2, -halfD + postD / 2]} material={mainMat} castShadow />
-            <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4}
-              position={[ halfW - postW / 2, trackH / 2, -halfD + postD / 2]} material={mainMat} castShadow />
+            {frontPanel === "zip" && (<>
+              <RoundedBox args={[innerWp + chW * 2, hsH, mainBeamW * 1.1]} radius={0.010} smoothness={4} position={[0, hsY, -halfD + mainBeamW * 0.55]} material={mainMat} castShadow />
+              <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4} position={[-halfW + postW + chW * 0.5, zipH / 2, -halfD + chW * 0.5]} material={mainMat} castShadow />
+              <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4} position={[halfW - postW - chW * 0.5, zipH / 2, -halfD + chW * 0.5]} material={mainMat} castShadow />
+              <mesh ref={el => { zipFrontRef.current = el; }} position={[0, zipH / 2, -halfD + glassTh * 2]} material={zipFabricMat}><boxGeometry args={[innerWp - chW * 2 - 0.008, zipH, glassTh * 2]} /></mesh>
+              <mesh ref={el => { zipFrontRailRef.current = el; }} position={[0, 0, -halfD + glassTh * 2]}><boxGeometry args={[innerWp - chW * 2, railH, railH]} /><meshStandardMaterial color={hex} roughness={0.38} metalness={0.28} /></mesh>
+              <RoundedBox args={[innerWp, floorRailH, floorRailH]} radius={0.005} smoothness={4} position={[0, floorRailH / 2, -halfD + floorRailH / 2]} material={mainMat} castShadow />
+              <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4} position={[-halfW + postW / 2, trackH / 2, -halfD + postD / 2]} material={mainMat} castShadow />
+              <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4} position={[halfW - postW / 2, trackH / 2, -halfD + postD / 2]} material={mainMat} castShadow />
+            </>)}
 
             {/* ── Back ── */}
-            <RoundedBox args={[innerWp + chW * 2, hsH, mainBeamW * 1.1]} radius={0.010} smoothness={4}
-              position={[0, hsY, halfD - mainBeamW * 0.55]} material={mainMat} castShadow />
-            <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4}
-              position={[-halfW + postW + chW * 0.5, zipH / 2, halfD - chW * 0.5]} material={mainMat} castShadow />
-            <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4}
-              position={[ halfW - postW - chW * 0.5, zipH / 2, halfD - chW * 0.5]} material={mainMat} castShadow />
-            <mesh ref={el => { zipBackRef.current = el; }}
-              position={[0, zipH / 2, halfD - glassTh * 2]} material={zipFabricMat}>
-              <boxGeometry args={[innerWp - chW * 2 - 0.008, zipH, glassTh * 2]} />
-            </mesh>
-            <mesh ref={el => { zipBackRailRef.current = el; }} position={[0, 0, halfD - glassTh * 2]}>
-              <boxGeometry args={[innerWp - chW * 2, railH, railH]} />
-              <meshStandardMaterial color={hex} roughness={0.38} metalness={0.28} />
-            </mesh>
-            <RoundedBox args={[innerWp, floorRailH, floorRailH]} radius={0.005} smoothness={4}
-              position={[0, floorRailH / 2, halfD - floorRailH / 2]} material={mainMat} castShadow />
-            {/* Back corner feet */}
-            <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4}
-              position={[-halfW + postW / 2, trackH / 2, halfD - postD / 2]} material={mainMat} castShadow />
-            <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4}
-              position={[ halfW - postW / 2, trackH / 2, halfD - postD / 2]} material={mainMat} castShadow />
+            {backPanel === "zip" && (<>
+              <RoundedBox args={[innerWp + chW * 2, hsH, mainBeamW * 1.1]} radius={0.010} smoothness={4} position={[0, hsY, halfD - mainBeamW * 0.55]} material={mainMat} castShadow />
+              <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4} position={[-halfW + postW + chW * 0.5, zipH / 2, halfD - chW * 0.5]} material={mainMat} castShadow />
+              <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4} position={[halfW - postW - chW * 0.5, zipH / 2, halfD - chW * 0.5]} material={mainMat} castShadow />
+              <mesh ref={el => { zipBackRef.current = el; }} position={[0, zipH / 2, halfD - glassTh * 2]} material={zipFabricMat}><boxGeometry args={[innerWp - chW * 2 - 0.008, zipH, glassTh * 2]} /></mesh>
+              <mesh ref={el => { zipBackRailRef.current = el; }} position={[0, 0, halfD - glassTh * 2]}><boxGeometry args={[innerWp - chW * 2, railH, railH]} /><meshStandardMaterial color={hex} roughness={0.38} metalness={0.28} /></mesh>
+              <RoundedBox args={[innerWp, floorRailH, floorRailH]} radius={0.005} smoothness={4} position={[0, floorRailH / 2, halfD - floorRailH / 2]} material={mainMat} castShadow />
+              <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4} position={[-halfW + postW / 2, trackH / 2, halfD - postD / 2]} material={mainMat} castShadow />
+              <RoundedBox args={[postW + 0.02, trackH, postD + 0.02]} radius={0.010} smoothness={4} position={[halfW - postW / 2, trackH / 2, halfD - postD / 2]} material={mainMat} castShadow />
+            </>)}
 
             {/* ── Left ── */}
-            <RoundedBox args={[mainBeamW * 1.1, hsH, innerD + chW * 2]} radius={0.010} smoothness={4}
-              position={[-halfW + mainBeamW * 0.55, hsY, 0]} material={mainMat} castShadow />
-            <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4}
-              position={[-halfW + chW * 0.5, zipH / 2, -halfD + postD + chW * 0.5]} material={mainMat} castShadow />
-            <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4}
-              position={[-halfW + chW * 0.5, zipH / 2,  halfD - postD - chW * 0.5]} material={mainMat} castShadow />
-            <mesh ref={el => { zipLeftRef.current = el; }}
-              position={[-halfW + glassTh * 2, zipH / 2, 0]} material={zipFabricMat}>
-              <boxGeometry args={[glassTh * 2, zipH, innerD - chW * 2 - 0.008]} />
-            </mesh>
-            <mesh ref={el => { zipLeftRailRef.current = el; }} position={[-halfW + glassTh * 2, 0, 0]}>
-              <boxGeometry args={[railH, railH, innerD - chW * 2]} />
-              <meshStandardMaterial color={hex} roughness={0.38} metalness={0.28} />
-            </mesh>
-            <RoundedBox args={[floorRailH, floorRailH, innerD]} radius={0.005} smoothness={4}
-              position={[-halfW + floorRailH / 2, floorRailH / 2, 0]} material={mainMat} castShadow />
+            {leftPanel === "zip" && (<>
+              <RoundedBox args={[mainBeamW * 1.1, hsH, innerD + chW * 2]} radius={0.010} smoothness={4} position={[-halfW + mainBeamW * 0.55, hsY, 0]} material={mainMat} castShadow />
+              <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4} position={[-halfW + chW * 0.5, zipH / 2, -halfD + postD + chW * 0.5]} material={mainMat} castShadow />
+              <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4} position={[-halfW + chW * 0.5, zipH / 2, halfD - postD - chW * 0.5]} material={mainMat} castShadow />
+              <mesh ref={el => { zipLeftRef.current = el; }} position={[-halfW + glassTh * 2, zipH / 2, 0]} material={zipFabricMat}><boxGeometry args={[glassTh * 2, zipH, innerD - chW * 2 - 0.008]} /></mesh>
+              <mesh ref={el => { zipLeftRailRef.current = el; }} position={[-halfW + glassTh * 2, 0, 0]}><boxGeometry args={[railH, railH, innerD - chW * 2]} /><meshStandardMaterial color={hex} roughness={0.38} metalness={0.28} /></mesh>
+              <RoundedBox args={[floorRailH, floorRailH, innerD]} radius={0.005} smoothness={4} position={[-halfW + floorRailH / 2, floorRailH / 2, 0]} material={mainMat} castShadow />
+            </>)}
 
             {/* ── Right ── */}
-            <RoundedBox args={[mainBeamW * 1.1, hsH, innerD + chW * 2]} radius={0.010} smoothness={4}
-              position={[ halfW - mainBeamW * 0.55, hsY, 0]} material={mainMat} castShadow />
-            <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4}
-              position={[ halfW - chW * 0.5, zipH / 2, -halfD + postD + chW * 0.5]} material={mainMat} castShadow />
-            <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4}
-              position={[ halfW - chW * 0.5, zipH / 2,  halfD - postD - chW * 0.5]} material={mainMat} castShadow />
-            <mesh ref={el => { zipRightRef.current = el; }}
-              position={[ halfW - glassTh * 2, zipH / 2, 0]} material={zipFabricMat}>
-              <boxGeometry args={[glassTh * 2, zipH, innerD - chW * 2 - 0.008]} />
-            </mesh>
-            <mesh ref={el => { zipRightRailRef.current = el; }} position={[ halfW - glassTh * 2, 0, 0]}>
-              <boxGeometry args={[railH, railH, innerD - chW * 2]} />
-              <meshStandardMaterial color={hex} roughness={0.38} metalness={0.28} />
-            </mesh>
-            <RoundedBox args={[floorRailH, floorRailH, innerD]} radius={0.005} smoothness={4}
-              position={[ halfW - floorRailH / 2, floorRailH / 2, 0]} material={mainMat} castShadow />
+            {rightPanel === "zip" && (<>
+              <RoundedBox args={[mainBeamW * 1.1, hsH, innerD + chW * 2]} radius={0.010} smoothness={4} position={[halfW - mainBeamW * 0.55, hsY, 0]} material={mainMat} castShadow />
+              <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4} position={[halfW - chW * 0.5, zipH / 2, -halfD + postD + chW * 0.5]} material={mainMat} castShadow />
+              <RoundedBox args={[chW, zipH, chW]} radius={0.004} smoothness={4} position={[halfW - chW * 0.5, zipH / 2, halfD - postD - chW * 0.5]} material={mainMat} castShadow />
+              <mesh ref={el => { zipRightRef.current = el; }} position={[halfW - glassTh * 2, zipH / 2, 0]} material={zipFabricMat}><boxGeometry args={[glassTh * 2, zipH, innerD - chW * 2 - 0.008]} /></mesh>
+              <mesh ref={el => { zipRightRailRef.current = el; }} position={[halfW - glassTh * 2, 0, 0]}><boxGeometry args={[railH, railH, innerD - chW * 2]} /><meshStandardMaterial color={hex} roughness={0.38} metalness={0.28} /></mesh>
+              <RoundedBox args={[floorRailH, floorRailH, innerD]} radius={0.005} smoothness={4} position={[halfW - floorRailH / 2, floorRailH / 2, 0]} material={mainMat} castShadow />
+            </>)}
           </>
         );
       })()}
@@ -913,24 +821,23 @@ interface Pergola3DViewerProps {
   color: string;
   louversOpen?: boolean;
   showRetract?: boolean;
+  leftPanel?: string;
+  rightPanel?: string;
+  frontPanel?: string;
+  backPanel?: string;
 }
 
-const sidePanelOptions = [
-  { value: "none",        label: "Keine" },
-  { value: "guillotine",  label: "Guillotine" },
-  { value: "faltglas",    label: "Faltglas" },
-  { value: "schiebeglas", label: "Schiebeglas" },
-  { value: "zip",         label: "Zip-Screens" },
-];
-
-export const Pergola3DViewer = ({ breite, laenge, hoehe, color, showRetract = true }: Pergola3DViewerProps) => {
-  const [louversOpen, setLouversOpen]       = useState(true);
+export const Pergola3DViewer = ({ breite, laenge, hoehe, color, showRetract = true, leftPanel = "none", rightPanel = "none", frontPanel = "none", backPanel = "none" }: Pergola3DViewerProps) => {
+  const [louversOpen, setLouversOpen]           = useState(true);
   const [louversRetracted, setLouversRetracted] = useState(false);
-  const [showDimensions, setShowDimensions] = useState(false);
-  const [sidePanel, setSidePanel]           = useState("none");
-  const [faltOpen, setFaltOpen]             = useState(true);
-  const [schOpen, setSchOpen]               = useState(false);
-  const [zipDown, setZipDown]               = useState(true);
+  const [showDimensions, setShowDimensions]     = useState(false);
+  const [faltOpen, setFaltOpen]                 = useState(true);
+  const [schOpen, setSchOpen]                   = useState(false);
+  const [zipDown, setZipDown]                   = useState(true);
+
+  const hasFaltglas    = [leftPanel, rightPanel, frontPanel, backPanel].includes("faltglas");
+  const hasSchiebeglas = [leftPanel, rightPanel, frontPanel, backPanel].includes("schiebeglas");
+  const hasZip         = [leftPanel, rightPanel, frontPanel, backPanel].includes("zip");
 
   const w = breite / 1000;
   const d = laenge / 1000;
@@ -944,8 +851,8 @@ export const Pergola3DViewer = ({ breite, laenge, hoehe, color, showRetract = tr
       <Suspense fallback={<Loader />}>
         <Canvas
           shadows
-          camera={{ position: [camDist * 0.65, h * 0.5 + camDist * 0.75, camDist * 1.35], fov: 40, near: 0.1, far: 200 }}
-          style={{ background: "#b8d4e8", position: "absolute", inset: 0, width: "100%", height: "calc(100% - 88px)" }}
+          camera={{ position: [camDist * 0.65, h * 0.5 + camDist * 0.75, -camDist * 1.35], fov: 40, near: 0.1, far: 200 }}
+          style={{ background: "#b8d4e8", position: "absolute", inset: 0, width: "100%", height: "calc(100% - 44px)" }}
           gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.15 }}
         >
           <ambientLight intensity={0.9} color="#d6eaf8" />
@@ -961,7 +868,8 @@ export const Pergola3DViewer = ({ breite, laenge, hoehe, color, showRetract = tr
           <PergolaModel
             width={w} depth={d} height={h} color={color}
             louversOpen={louversOpen} louversRetracted={louversRetracted}
-            showDimensions={showDimensions} sidePanel={sidePanel}
+            showDimensions={showDimensions}
+            leftPanel={leftPanel} rightPanel={rightPanel} frontPanel={frontPanel} backPanel={backPanel}
             faltOpen={faltOpen} schOpen={schOpen} zipDown={zipDown}
           />
 
@@ -975,7 +883,7 @@ export const Pergola3DViewer = ({ breite, laenge, hoehe, color, showRetract = tr
       </Suspense>
 
       {/* dimension badge */}
-      <div className="pointer-events-none absolute left-3 rounded-lg bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-white backdrop-blur" style={{ bottom: 96 }}>
+      <div className="pointer-events-none absolute left-3 rounded-lg bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-white backdrop-blur" style={{ bottom: 52 }}>
         {(laenge / 1000).toFixed(1)}m × {(breite / 1000).toFixed(1)}m × {(hoehe / 1000).toFixed(1)}m
       </div>
 
@@ -987,34 +895,17 @@ export const Pergola3DViewer = ({ breite, laenge, hoehe, color, showRetract = tr
         3D drehen
       </div>
 
-      {/* Side panel pill buttons */}
-      <div className="absolute left-0 right-0 flex items-center justify-center gap-1.5 bg-white border-t border-zinc-200 px-3 overflow-x-auto" style={{ bottom: 44, height: 44 }}>
-        {sidePanelOptions.map((opt) => (
-          <button key={opt.value} type="button"
-            onClick={() => setSidePanel(opt.value)}
-            className="shrink-0 rounded-full px-3 py-1 text-xs font-semibold transition-all"
-            style={{
-              backgroundColor: sidePanel === opt.value ? "#344148" : "#f5f5f4",
-              color: sidePanel === opt.value ? "#fff" : "#52525b",
-              border: sidePanel === opt.value ? "2px solid #344148" : "2px solid #e7e5e4",
-            }}
-          >
-            {opt.label}
-          </button>
-        ))}
-      </div>
-
       {/* Toggle buttons row */}
-      <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center gap-5 bg-white border-t border-zinc-200" style={{ height: 44 }}>
+      <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center gap-5 bg-white border-t border-zinc-200 flex-wrap px-3" style={{ height: 44 }}>
         <ToggleSwitch checked={louversOpen} onChange={() => setLouversOpen(v => !v)} label="Lamellen öffnen" />
         {showRetract && <ToggleSwitch checked={louversRetracted} onChange={() => setLouversRetracted(v => !v)} label="Lamellen einziehen" />}
-        {sidePanel === "faltglas" && (
+        {hasFaltglas && (
           <ToggleSwitch checked={faltOpen} onChange={() => setFaltOpen(v => !v)} label={faltOpen ? "Geöffnet" : "Geschlossen"} />
         )}
-        {sidePanel === "schiebeglas" && (
+        {hasSchiebeglas && (
           <ToggleSwitch checked={schOpen} onChange={() => setSchOpen(v => !v)} label={schOpen ? "Geöffnet" : "Geschlossen"} />
         )}
-        {sidePanel === "zip" && (
+        {hasZip && (
           <div className="flex items-center gap-1">
             <button onClick={() => setZipDown(false)}
               className={`flex items-center gap-1 rounded-lg px-3 py-1 text-[11px] font-semibold border transition-all ${!zipDown ? "bg-[#344148] text-white border-[#344148]" : "bg-white text-zinc-500 border-zinc-200 hover:border-zinc-400"}`}>

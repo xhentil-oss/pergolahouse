@@ -284,11 +284,15 @@ export const LuxusPergolaPage = () => {
   const sqm = (breite / 1000) * (laenge / 1000);
   const basePrice = Math.round(sqm * pricePerSqm);
   const mountData = mountOptions.find((o) => o.label === selectedMount) ?? mountOptions[0];
-  const sideTotal = Object.values(sides).reduce((sum, v) => {
+  const sideWallArea = (key: string) =>
+    (key === "left" || key === "right")
+      ? (laenge / 1000) * (hoehe / 1000)
+      : (breite / 1000) * (hoehe / 1000);
+  const sideTotal = Object.entries(sides).reduce((sum, [key, v]) => {
     const choice = sideTypeChoices.find((c) => c.value === v);
-    return sum + (choice?.price ?? 0);
+    return sum + Math.round((choice?.price ?? 0) * sideWallArea(key));
   }, 0);
-  const accTotal = accessoryOptions.filter((o) => selectedAccessories.includes(o.label)).reduce((s, o) => s + o.price, 0);
+  const accTotal = accessoryOptions.filter((o) => selectedAccessories.includes(o.label)).reduce((s, o) => s + Math.round(o.price * sqm), 0);
   const { isActive } = useDiscounts();
   const luxusPromo = getPromotion("luxus-pergola");
   const discountFactor = (luxusPromo && isActive("luxus-pergola")) ? (1 - prices.luxus_discountPercent / 100) : 1;
@@ -306,11 +310,11 @@ export const LuxusPergolaPage = () => {
       .filter((s) => sides[s.key] !== "none")
       .map((s) => {
         const choice = sideTypeChoices.find((c) => c.value === sides[s.key])!;
-        return { key: s.key, label: s.label, type: choice.label, price: choice.price };
+        return { key: s.key, label: s.label, type: choice.label, price: Math.round(choice.price * sideWallArea(s.key)) };
       });
     const cartAccessories = accessoryOptions
       .filter((o) => selectedAccessories.includes(o.label))
-      .map((o) => ({ label: o.label, price: o.price }));
+      .map((o) => ({ label: o.label, price: Math.round(o.price * sqm) }));
 
     addToCart({
       productName: "Luxus Pergola",
@@ -372,7 +376,7 @@ export const LuxusPergolaPage = () => {
                   <div ref={galleryRef} className="relative overflow-hidden rounded-2xl">
                     {activeImage === 0 ? (
                       <div className="aspect-[4/3] w-full md:h-[480px]">
-                        <Pergola3DViewer breite={breite} laenge={laenge} hoehe={hoehe} color={selectedColor} louversOpen={louversOpen} />
+                        <Pergola3DViewer breite={breite} laenge={laenge} hoehe={hoehe} color={selectedColor} louversOpen={louversOpen} leftPanel={sides.left} rightPanel={sides.right} frontPanel={sides.front} backPanel={sides.back} />
                       </div>
                     ) : (
                       <img
@@ -541,7 +545,7 @@ export const LuxusPergolaPage = () => {
                         >
                           {sideTypeChoices.map((choice) => (
                             <option key={choice.value} value={choice.value}>
-                              {choice.label}{choice.price ? ` (+${formatPrice(choice.price)})` : ""}
+                              {choice.label}{choice.price ? ` (${choice.price} €/m²)` : ""}
                             </option>
                           ))}
                         </select>
@@ -573,7 +577,7 @@ export const LuxusPergolaPage = () => {
                                   </div>
                                   <div className="flex-1 min-w-0">
                                     <div className="text-sm font-semibold leading-tight text-zinc-800">{acc.label}</div>
-                                    <div className="text-xs text-zinc-400">+{formatPrice(acc.price)}</div>
+                                    <div className="text-xs text-zinc-400">{acc.price} €/m²</div>
                                   </div>
                                   <button
                                     type="button"
