@@ -30,6 +30,7 @@ import montage6 from "@/assets/montage6.png";
 import zubehor from "@/assets/zubehor.png";
 import permasa from "@/assets/permasat-elegante.png";
 import montageVersion from "@/assets/montage-version.png";
+import xhamaElegante from "@/assets/xhama-elegante.png";
 
 import photo1 from "../assets/elegante6.png";
 import photo2 from "../assets/elegante2.png";
@@ -234,10 +235,8 @@ export const ElegantePergolaPage = () => {
     ]},
     { key: "sensoren", label: "Sensoren", icon: "📡", items: [
       { label: "Windsensor", description: "Schließt die Lamellen automatisch bei starkem Wind.", price: prices.windsensor },
-      { label: "Regensensor", description: "Schließt die Lamellen automatisch bei Regen.", price: prices.regensensor },
       { label: "Schneesensor", description: "Automatischer Schutz gegen Schnee und Lasteinwirkungen.", price: prices.schneesensor },
       { label: "Sonnensensor", description: "Regelt die Lamellen automatisch je nach Sonneneinstrahlung.", price: prices.sonnensensor },
-      { label: "Solar-System", description: "Optionales Solarsystem für den Motor – ideal ohne Stromanschluss.", price: prices.solarSystem },
     ]},
     { key: "heizung", label: "Heizung & Komfort", icon: "🔥", items: [
       { label: "Infrarot-Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühlen Tagen.", price: prices.infrarotHeizung },
@@ -421,14 +420,6 @@ export const ElegantePergolaPage = () => {
                     </div>
                   </div>
 
-                  {/* Feature icons — same width as image above */}
-                  <div className="grid grid-cols-3 gap-2">
-                    {featureStory.map((item, i) => (
-                      <div key={i} className="overflow-hidden rounded-xl">
-                        <img src={item.image} alt="Feature" className="w-full h-full object-cover block" />
-                      </div>
-                    ))}
-                  </div>
                 </div>
               </div>
             </div>
@@ -713,13 +704,8 @@ export const ElegantePergolaPage = () => {
               </h2>
             </div>
 
-            {/* Content: image left + features right */}
+            {/* Content: features left + image right */}
             <div className="flex flex-col gap-10 md:flex-row md:gap-16 items-start">
-
-              {/* Image */}
-              <div className="w-full md:w-1/2 flex-shrink-0 rounded-2xl overflow-hidden">
-                <img src={zubehor} alt="Ausstattung" className="w-full object-cover" />
-              </div>
 
               {/* Features */}
               <div className="w-full md:w-1/2 flex flex-col gap-10">
@@ -777,6 +763,12 @@ export const ElegantePergolaPage = () => {
                 </div>
 
               </div>
+
+              {/* Image */}
+              <div className="w-full md:w-1/2 flex-shrink-0 rounded-2xl overflow-hidden md:-mt-16">
+                <img src={zubehor} alt="Ausstattung" className="w-full object-cover" />
+              </div>
+
             </div>
           </div>
         </section>
@@ -865,6 +857,52 @@ export const ElegantePergolaPage = () => {
               <img src={montageVersion} alt="Montagevarianten" className="w-full max-w-3xl object-contain" />
             </div>
 
+          </div>
+        </section>
+
+        {/* ── Seitensysteme ── */}
+        <section className="bg-[#f2f2f2] py-16 md:py-28 overflow-hidden">
+          <div className="mx-auto max-w-[1440px] px-6 md:px-16">
+            <div className="flex flex-col gap-14 md:flex-row md:items-center md:gap-20">
+
+              {/* Left — content */}
+              <div className="w-full md:w-1/2 flex flex-col gap-10">
+                <div>
+                  <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
+                    Seitensysteme
+                  </span>
+                  <h2 className="mt-5 text-3xl font-bold text-[#344148] md:text-5xl leading-tight">
+                    Optionale<br />Seitensysteme
+                  </h2>
+                  <p className="mt-4 text-sm leading-relaxed text-zinc-500 md:text-base max-w-sm">
+                    Die Elegante Pergola lässt sich mit verschiedenen Seitensystemen kombinieren – für mehr Schutz, Privatsphäre und Wohnkomfort.
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-0 divide-y divide-zinc-200">
+                  {[
+                    { label: "Guillotine-Glassysteme", desc: "Vertikale Glasscheiben für maximalen Wetterschutz und klare Sicht." },
+                    { label: "Faltglassysteme", desc: "Platzsparend faltbar – öffnen Sie die Seite vollständig oder partiell." },
+                    { label: "Schiebeglassysteme", desc: "Elegantes Schiebeglas für flexible Raumöffnung und modernen Look." },
+                    { label: "Zip-Screens", desc: "Windresistenter Textilschutz mit sauberer Führung – Sicht- und Sonnenschutz in einem." },
+                  ].map((item) => (
+                    <div key={item.label} className="flex items-start gap-4 py-5">
+                      <div className="mt-0.5 w-2 h-2 rounded-full bg-[#82B2CA] flex-shrink-0" />
+                      <div>
+                        <div className="text-sm font-bold text-[#344148]">{item.label}</div>
+                        <div className="text-xs text-zinc-400 mt-0.5 leading-relaxed">{item.desc}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right — image */}
+              <div className="w-full md:w-1/2 flex-shrink-0">
+                <img src={xhamaElegante} alt="Seitensysteme" className="w-full object-contain" />
+              </div>
+
+            </div>
           </div>
         </section>
 

@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
-import photo2 from "@/assets/Photo (2).png";
-import photo3 from "@/assets/Photo (3).png";
-import photo4 from "@/assets/Photo (4).png";
-import photo5 from "@/assets/Photo (5).png";
-import photo6 from "@/assets/Photo (6).png";
+import photo2 from "@/assets/elegante8.png";
+import photo3 from "@/assets/luxus1.png";
+import photo4 from "@/assets/Preiswerte2.png";
+import photo5 from "@/assets/wintergarden1.png";
+import photo6 from "@/assets/carpots4.png";
 import photo7 from "@/assets/Photo (7).png";
 
 const modelCards = [
@@ -14,8 +14,8 @@ const modelCards = [
   { url: "/pergola/luxus-pergola",      img: photo3, name: "Luxus-Pergola"      },
   { url: "/pergola/preiswerte-pergola", img: photo4, name: "Preiswerte Pergola" },
   { url: "/wintergarten",               img: photo5, name: "Wintergärten"       },
-  { url: "/carports",                   img: photo7, name: "Carports"           },
-  { url: "/zip-screens",                img: photo6, name: "Zip Screens"        },
+  { url: "/carports",                   img: photo6, name: "Carports"           },
+  { url: "/zip-screens",                img: photo7, name: "Zip Screens"        },
 ];
 
 const FREE_SHIPPING_THRESHOLD = 5000;

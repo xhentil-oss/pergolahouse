@@ -10,7 +10,7 @@ const colorMap: Record<string, string> = {
   "White 9016 T": "#F0EDE8",
 };
 
-type SideSystem = "none" | "guillotine" | "faltglas" | "schiebeglas" | "zip";
+export type SideSystem = "none" | "guillotine" | "faltglas" | "schiebeglas" | "zip";
 
 const SIDE_SYSTEMS: { value: SideSystem; label: string }[] = [
   { value: "none",        label: "Keine" },
@@ -394,9 +394,9 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
               });
             })()
           ) : (
-            <mesh position={[-halfW + glassTh / 2, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
-              <shapeGeometry args={[sideShape]} />
-              <meshStandardMaterial color="#c8e4ee" transparent opacity={0.22} roughness={0.04} metalness={0.05} side={THREE.DoubleSide} depthWrite={false} />
+            <mesh position={[-halfW + glassTh / 2, (frontH - beamH * 0.6) / 2, 0]}>
+              <boxGeometry args={[glassTh, frontH - beamH * 0.6, depth - postS * 2]} />
+              <meshStandardMaterial color="#c8e4ee" transparent opacity={0.45} roughness={0.04} metalness={0.05} side={THREE.DoubleSide} depthWrite={false} />
             </mesh>
           ))}
 
@@ -466,9 +466,9 @@ const WintergartenModel = ({ width, depth, backH, frontH, color, showDimensions,
               });
             })()
           ) : (
-            <mesh position={[halfW - glassTh / 2, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
-              <shapeGeometry args={[sideShape]} />
-              <meshStandardMaterial color="#c8e4ee" transparent opacity={0.22} roughness={0.04} metalness={0.05} side={THREE.DoubleSide} depthWrite={false} />
+            <mesh position={[halfW - glassTh / 2, (frontH - beamH * 0.6) / 2, 0]}>
+              <boxGeometry args={[glassTh, frontH - beamH * 0.6, depth - postS * 2]} />
+              <meshStandardMaterial color="#c8e4ee" transparent opacity={0.45} roughness={0.04} metalness={0.05} side={THREE.DoubleSide} depthWrite={false} />
             </mesh>
           ))}
 
@@ -806,14 +806,19 @@ const ToggleSwitch = ({ checked, onChange, label }: { checked: boolean; onChange
 
 interface Wintergarten3DViewerProps {
   breite: number; tiefe: number; hoehe: number; color: string;
+  leftSystem?: SideSystem; rightSystem?: SideSystem; frontSystem?: SideSystem;
 }
 
-export const Wintergarten3DViewer = ({ breite, tiefe, hoehe, color }: Wintergarten3DViewerProps) => {
+export const Wintergarten3DViewer = ({ breite, tiefe, hoehe, color, leftSystem: leftProp, rightSystem: rightProp, frontSystem: frontProp }: Wintergarten3DViewerProps) => {
   const [showDimensions, setShowDimensions] = useState(false);
-  const [sideSystem, setSideSystem] = useState<SideSystem>("none");
   const [faltOpen, setFaltOpen] = useState(true);
   const [schOpen, setSchOpen] = useState(false);
   const [zipDown, setZipDown] = useState(true);
+
+  const leftSystem: SideSystem = leftProp ?? "none";
+  const rightSystem: SideSystem = rightProp ?? "none";
+  const frontSystem: SideSystem = frontProp ?? "none";
+  const anySideSystem = leftSystem !== "none" ? leftSystem : rightSystem !== "none" ? rightSystem : frontSystem;
 
   const w = breite / 1000;
   const d = tiefe / 1000;
@@ -829,8 +834,8 @@ export const Wintergarten3DViewer = ({ breite, tiefe, hoehe, color }: Wintergart
       <Suspense fallback={<Loader />}>
         <Canvas
           shadows
-          camera={{ position: [camDist*1.1, camDist*0.9, camDist*0.8], fov: 40, near: 0.1, far: 200 }}
-          style={{ background: "#e8e8e8", position: "absolute", inset: 0, width: "100%", height: "calc(100% - 90px)" }}
+          camera={{ position: [camDist*0.5, camDist*0.9, -camDist*1.2], fov: 40, near: 0.1, far: 200 }}
+          style={{ background: "#e8e8e8", position: "absolute", inset: 0, width: "100%", height: "calc(100% - 48px)" }}
           gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.1 }}
         >
           <ambientLight intensity={1.3} />
@@ -843,7 +848,9 @@ export const Wintergarten3DViewer = ({ breite, tiefe, hoehe, color }: Wintergart
           <hemisphereLight intensity={0.45} color="#d4ecf5" groundColor="#ffffff" />
 
           <WintergartenModel width={w} depth={d} backH={backH} frontH={frontH}
-            color={color} showDimensions={showDimensions} sideSystem={sideSystem} faltOpen={faltOpen} schOpen={schOpen} zipDown={zipDown} />
+            color={color} showDimensions={showDimensions}
+            leftSystem={rightSystem} rightSystem={leftSystem} frontSystem={frontSystem}
+            faltOpen={faltOpen} schOpen={schOpen} zipDown={zipDown} />
 
           <OrbitControls enablePan={false} minPolarAngle={Math.PI/10} maxPolarAngle={Math.PI*0.82}
             minDistance={maxDim*0.7} maxDistance={maxDim*5} />
@@ -853,7 +860,7 @@ export const Wintergarten3DViewer = ({ breite, tiefe, hoehe, color }: Wintergart
 
       {/* Dimension badge */}
       <div className="pointer-events-none absolute left-3 rounded-lg bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-white backdrop-blur"
-        style={{ bottom: 98 }}>
+        style={{ bottom: 56 }}>
         {(breite/1000).toFixed(1)}m × {(tiefe/1000).toFixed(1)}m
       </div>
 
@@ -865,36 +872,17 @@ export const Wintergarten3DViewer = ({ breite, tiefe, hoehe, color }: Wintergart
         3D drehen
       </div>
 
-      {/* Control bar — 2 rows */}
-      <div className="absolute bottom-0 left-0 right-0 border-t border-zinc-200 bg-white" style={{ height: 90 }}>
-
-        {/* Row 1: Side system buttons */}
-        <div className="flex items-center justify-center gap-1.5 px-3 pt-2 pb-1">
-          {SIDE_SYSTEMS.map(({ value, label }) => (
-            <button
-              key={value}
-              onClick={() => setSideSystem(value)}
-              className={`rounded-lg px-2.5 py-1 text-[11px] font-semibold transition-all border ${
-                sideSystem === value
-                  ? "bg-[#344148] text-white border-[#344148]"
-                  : "bg-white text-zinc-500 border-zinc-200 hover:border-zinc-400 hover:text-zinc-700"
-              }`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-
-        {/* Row 2: Maße toggle + Faltglas open/close */}
-        <div className="flex items-center justify-center gap-6 pb-2">
+      {/* Control bar — 1 row */}
+      <div className="absolute bottom-0 left-0 right-0 border-t border-zinc-200 bg-white" style={{ height: 48 }}>
+        <div className="flex items-center justify-center gap-6 h-full px-3">
           <ToggleSwitch checked={showDimensions} onChange={() => setShowDimensions(v => !v)} label="Maße anzeigen" />
-          {sideSystem === "faltglas" && (
+          {anySideSystem === "faltglas" && (
             <ToggleSwitch checked={faltOpen} onChange={() => setFaltOpen(v => !v)} label={faltOpen ? "Geöffnet" : "Geschlossen"} />
           )}
-          {sideSystem === "schiebeglas" && (
+          {anySideSystem === "schiebeglas" && (
             <ToggleSwitch checked={schOpen} onChange={() => setSchOpen(v => !v)} label={schOpen ? "Geöffnet" : "Geschlossen"} />
           )}
-          {sideSystem === "zip" && (
+          {anySideSystem === "zip" && (
             <div className="flex items-center gap-1">
               <button onClick={() => setZipDown(false)}
                 className={`flex items-center gap-1 rounded-lg px-3 py-1 text-[11px] font-semibold border transition-all ${!zipDown ? "bg-[#344148] text-white border-[#344148]" : "bg-white text-zinc-500 border-zinc-200 hover:border-zinc-400"}`}>

@@ -225,10 +225,8 @@ export const LuxusPergolaPage = () => {
     ]},
     { key: "sensoren", label: "Sensoren", icon: "📡", items: [
       { label: "Windsensor", description: "Schließt die Lamellen automatisch bei starkem Wind.", price: prices.windsensor },
-      { label: "Regensensor", description: "Schließt die Lamellen automatisch bei Regen.", price: prices.regensensor },
       { label: "Schneesensor", description: "Automatischer Schutz gegen Schnee und Lasteinwirkungen.", price: prices.schneesensor },
       { label: "Sonnensensor", description: "Regelt die Lamellen automatisch je nach Sonneneinstrahlung.", price: prices.sonnensensor },
-      { label: "Solar-System", description: "Optionales Solarsystem für den Motor – ideal ohne Stromanschluss.", price: prices.solarSystem },
     ]},
     { key: "heizung", label: "Heizung & Komfort", icon: "🔥", items: [
       { label: "Infrarot-Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühlen Tagen.", price: prices.infrarotHeizung },
@@ -404,14 +402,6 @@ export const LuxusPergolaPage = () => {
                         <button key={i} type="button" onClick={() => setActiveImage(i)} className={`h-1.5 rounded-full transition-all ${activeImage === i ? "w-5 bg-white" : "w-1.5 bg-white/40"}`} />
                       ))}
                     </div>
-                  </div>
-                  {/* Feature icons */}
-                  <div className="grid grid-cols-3 gap-2">
-                    {featureStory.map((item, i) => (
-                      <div key={i} className="overflow-hidden rounded-xl">
-                        <img src={item.image} alt="Feature" className="w-full h-full object-cover block" />
-                      </div>
-                    ))}
                   </div>
                 </div>
               </div>

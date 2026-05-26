@@ -11,33 +11,50 @@ import { PriceConfig } from "@/config/prices";
 
 
 
-import Photo1 from "../../assets/image-pergola.png";
-import Photo10 from "../../assets/pergola-glass-guillot.png";
-import Photo11 from "../../assets/image-light.png";
-import Photo12 from "../../assets/Photo (1).png";
+import SlideElegante from "../../assets/elegante8.png";
+import SlideLuxus from "../../assets/luxus1.png";
+import SlidePreiswerte from "../../assets/Preiswerte2.png";
+import SlideWintergarten from "../../assets/wintergarden1.png";
+import SlideCarports from "../../assets/carpots4.png";
+import SlideZipScreen from "../../assets/Photo (7).png";
 
-// Carousel data me imazhe nga assets
 const slides = [
   {
-    image: Photo1,
-    title: "HÖCHSTER KOMFORT FÜR IHR ZUHAUSE",
-    desc: "Genießen Sie ein einzigartiges Wohngefühl mit durchdachtem Design und maximalem Komfort – für entspannte Momente zu jeder Jahreszeit."
+    image: SlideElegante,
+    title: "ELEGANTE PERGOLA",
+    desc: "Zeitloses Design trifft Funktion – die Elegante Pergola aus hochwertigem Aluminium für Ihren Außenbereich.",
+    link: "/pergola/elegante-pergola",
   },
   {
-    image: Photo10,
-    title: "IHR STIL, IHR DESIGN",
-    desc: "Gestalten Sie Ihre Pergola ganz nach Ihren Wünschen – von Farben bis zu Funktionen. Für ein Zuhause, das so individuell ist wie Sie."
+    image: SlideLuxus,
+    title: "LUXUS PERGOLA",
+    desc: "Maximaler Komfort, exklusives Design – die Luxus Pergola für anspruchsvolle Außenbereiche.",
+    link: "/pergola/luxus-pergola",
   },
   {
-    image: Photo11,
-    title: "QUALITÄT, DIE ÜBERZEUGT",
-    desc: "Unsere Produkte stehen für Langlebigkeit und höchste Verarbeitungsqualität. Verlassen Sie sich auf geprüfte Materialien und präzise Fertigung."
+    image: SlidePreiswerte,
+    title: "PREISWERTE PERGOLA",
+    desc: "Hochwertige Qualität zum attraktiven Preis – perfekte Lösung für jeden Garten und jede Terrasse.",
+    link: "/pergola/preiswerte-pergola",
   },
   {
-    image: Photo12,
-    title: "ELEGANZ TRIFFT FUNKTION",
-    desc: "Hochwertige Glaslösungen für Ihre Pergola – maximaler Lichteinfall, perfekter Witterungsschutz und zeitloses Design für Ihren Außenbereich."
-  }
+    image: SlideWintergarten,
+    title: "WINTERGARTEN",
+    desc: "Genießen Sie Ihr Zuhause das ganze Jahr – moderne Wintergärten für maximalen Lichteinfall und Wohnkomfort.",
+    link: "/wintergarten",
+  },
+  {
+    image: SlideCarports,
+    title: "CARPORTS",
+    desc: "Stilvoller Schutz für Ihr Fahrzeug – unsere Carports verbinden Funktionalität mit modernem Design.",
+    link: "/carports",
+  },
+  {
+    image: SlideZipScreen,
+    title: "ZIP-SCREENS",
+    desc: "Effektiver Sicht- und Wetterschutz – unsere Zip-Screens schaffen ein einzigartiges Raumgefühl im Freien.",
+    link: "/zip-screens",
+  },
 ];
 
 
@@ -70,7 +87,7 @@ export const Hero = () => {
     if (imageRef.current) {
       gsap.fromTo(
         imageRef.current,
-        { scale: 1.08, opacity: 0 },
+        { scale: 1.03, opacity: 0 },
         { scale: 1, opacity: 1, duration: 6, ease: "power2.out" }
       );
     }
@@ -158,11 +175,11 @@ export const Hero = () => {
             </p>
             <Link
               ref={btnRef}
-              to="/pergola/elegante-pergola"
+              to={slides[active].link}
               className="inline-flex items-center px-6 md:px-10 py-3 md:py-4 rounded bg-[#82B2CA] text-black font-bold text-sm md:text-lg shadow hover:bg-[#5fa0b8] transition-colors"
               style={{ opacity: 0 }}
             >
-              Produkte ansehen
+              Jetzt entdecken
               <svg className="ml-2 w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
