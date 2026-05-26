@@ -2,10 +2,10 @@ import { ProductCard } from "@/sections/ProductSlider/components/ProductCard";
 import { useRef, useState, useEffect } from "react";
 import photo2 from "@/assets/elegante8.png";
 import photo3 from "@/assets/luxus1.png";
-import photo4 from "@/assets/Photo (4).png";
+import photo4 from "@/assets/Preiswerte2.png";
 import photo5 from "@/assets/wintergarden1.png";
-import photo6 from "@/assets/Photo (6).png";
-import photo7 from "@/assets/Photo (7).png";
+import photo6 from "@/assets/Photo (7).png";
+import photo7 from "@/assets/carpots4.png";
 
 const toKebab = (str) => str.toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 

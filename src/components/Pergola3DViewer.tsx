@@ -869,7 +869,7 @@ export const Pergola3DViewer = ({ breite, laenge, hoehe, color, showRetract = tr
             width={w} depth={d} height={h} color={color}
             louversOpen={louversOpen} louversRetracted={louversRetracted}
             showDimensions={showDimensions}
-            leftPanel={leftPanel} rightPanel={rightPanel} frontPanel={frontPanel} backPanel={backPanel}
+            leftPanel={rightPanel} rightPanel={leftPanel} frontPanel={frontPanel} backPanel={backPanel}
             faltOpen={faltOpen} schOpen={schOpen} zipDown={zipDown}
           />
 

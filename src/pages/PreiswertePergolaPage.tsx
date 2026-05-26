@@ -295,14 +295,6 @@ export const PreiswertePergolaPage = () => {
                     </div>
                   </div>
 
-                  {/* Feature icons */}
-                  <div className="grid grid-cols-3 gap-2">
-                    {featureStory.map((item, i) => (
-                      <div key={i} className="overflow-hidden rounded-xl">
-                        <img src={item.image} alt="Feature" className="w-full h-full object-cover block" />
-                      </div>
-                    ))}
-                  </div>
                 </div>
               </div>
             </div>

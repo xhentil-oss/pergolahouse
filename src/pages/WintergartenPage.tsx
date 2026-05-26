@@ -7,7 +7,7 @@ import { useCart } from "@/context/CartContext";
 import { getPromotion } from "@/config/promotions";
 import { useDiscounts } from "@/context/DiscountContext";
 import { usePrices } from "@/context/PriceContext";
-import { Wintergarten3DViewer } from "@/components/Wintergarten3DViewer";
+import { Wintergarten3DViewer, SideSystem } from "@/components/Wintergarten3DViewer";
 import photo1 from "../assets/wintergarden1.png";
 import photo2 from "../assets/wintergarden2.png";
 import photo3 from "../assets/wintergarden3.png";
@@ -276,6 +276,9 @@ export const WintergartenPage = () => {
                           tiefe={laenge}
                           hoehe={hoehe}
                           color={selectedColor}
+                          leftSystem={sides.left as SideSystem}
+                          rightSystem={sides.right as SideSystem}
+                          frontSystem={sides.front as SideSystem}
                         />
                       </div>
                     ) : (
@@ -306,14 +309,6 @@ export const WintergartenPage = () => {
                     </div>
                   </div>
 
-                  {/* Feature icons */}
-                  <div className="grid grid-cols-3 gap-2">
-                    {featureStory.map((item, i) => (
-                      <div key={i} className="overflow-hidden rounded-xl">
-                        <img src={item.image} alt="Feature" className="w-full h-full object-cover block" />
-                      </div>
-                    ))}
-                  </div>
                 </div>
               </div>
             </div>
