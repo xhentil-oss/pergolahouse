@@ -396,10 +396,34 @@ export const ElegantePergolaPage = () => {
 
               {/* ── Photo grid ── */}
               <div className="mt-3 grid grid-cols-3 gap-1">
-                {[photo8, photo2, photo3, photo4, photo5, photo7].map((src, i) => (
-                  <div key={i} className="aspect-square overflow-hidden rounded-lg">
-                    <img src={src} alt={`Elegante Pergola ${i + 1}`} className="h-full w-full object-cover transition-transform duration-300 hover:scale-105" />
-                  </div>
+                {/* 3D thumbnail */}
+                <button
+                  type="button"
+                  onClick={() => setActiveImage(0)}
+                  className={`aspect-square overflow-hidden rounded-lg flex flex-col items-center justify-center gap-1 transition-all ${activeImage === 0 ? "ring-2 ring-[#82B2CA]" : "opacity-70 hover:opacity-100"}`}
+                  style={{ backgroundColor: '#d1d5db' }}
+                >
+                  <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                  </svg>
+                  <span className="text-[10px] font-bold text-white/80 tracking-widest">3D</span>
+                </button>
+                {/* Photo thumbnails */}
+                {[
+                  { src: photo8, idx: 8 },
+                  { src: photo2, idx: 2 },
+                  { src: photo3, idx: 3 },
+                  { src: photo4, idx: 4 },
+                  { src: photo5, idx: 5 },
+                ].map(({ src, idx }) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setActiveImage(idx)}
+                    className={`aspect-square overflow-hidden rounded-lg transition-all ${activeImage === idx ? "ring-2 ring-[#82B2CA]" : "opacity-80 hover:opacity-100"}`}
+                  >
+                    <img src={src} alt={`Elegante Pergola ${idx}`} className="h-full w-full object-cover transition-transform duration-300 hover:scale-105" />
+                  </button>
                 ))}
               </div>
             </div>
@@ -823,12 +847,12 @@ export const ElegantePergolaPage = () => {
             <div className="flex flex-col gap-8 md:flex-row md:items-center md:gap-10">
 
               {/* Left — image */}
-              <div className="w-full md:w-3/5 flex justify-start">
+              <div className="w-full md:w-[55%] flex justify-start">
                 <img src={montageVersion} alt="Montagevarianten" className="w-3/5 object-contain" />
               </div>
 
               {/* Right — text */}
-              <div className="w-full md:w-2/5 flex flex-col gap-5">
+              <div className="w-full md:w-[45%] flex flex-col gap-5">
                 <span className="inline-block w-fit rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
                   Montage
                 </span>
@@ -880,7 +904,7 @@ export const ElegantePergolaPage = () => {
               </div>
 
               {/* Right — image */}
-              <div className="w-full md:w-1/2 flex-shrink-0 flex justify-end -mr-6 md:-mr-16">
+              <div className="w-full md:w-1/2 flex-shrink-0 flex justify-start -mr-6 md:-mr-16 md:translate-x-[40px]">
                 <img src={xhamaElegante} alt="Seitensysteme" className="w-full object-contain" />
               </div>
 

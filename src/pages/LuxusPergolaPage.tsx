@@ -345,65 +345,64 @@ export const LuxusPergolaPage = () => {
           <div className="mx-auto flex max-w-[1440px] flex-col gap-6 px-5 pb-10 pt-4 md:px-12 lg:grid lg:grid-cols-[58fr_42fr] lg:items-start lg:gap-8 lg:px-16 lg:pb-16">
             {/* LEFT: Gallery */}
             <div className="w-full">
-              <div className="flex gap-3">
-                {/* Vertical thumbnail strip */}
-                <div className="hidden flex-col gap-2 md:flex">
-                  {/* 3D thumbnail */}
-                  <button
-                    type="button"
-                    onClick={() => setActiveImage(0)}
-                    className={`h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 transition-all relative flex items-center justify-center bg-gradient-to-br from-stone-200 to-stone-100 ${activeImage === 0 ? "border-[#82B2CA] opacity-100" : "border-transparent opacity-50 hover:opacity-80"}`}
-                  >
-                    <svg className="h-7 w-7 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" /></svg>
-                    <span className="absolute bottom-1 text-[9px] font-semibold text-zinc-500">3D</span>
-                  </button>
-                  {gallery.map((img, i) => (
-                    <button
-                      key={img.src}
-                      type="button"
-                      onClick={() => setActiveImage(i + 1)}
-                      className={`h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 transition-all ${activeImage === i + 1 ? "border-[#82B2CA] opacity-100" : "border-transparent opacity-50 hover:opacity-80"}`}
-                    >
-                      <img src={img.src} alt={img.alt} className="h-full w-full object-cover" />
-                    </button>
+              <div ref={galleryRef} className="relative overflow-hidden rounded-2xl">
+                {activeImage === 0 ? (
+                  <div className="aspect-[4/3] w-full md:h-[480px]">
+                    <Pergola3DViewer breite={breite} laenge={laenge} hoehe={hoehe} color={selectedColor} louversOpen={louversOpen} leftPanel={sides.left} rightPanel={sides.right} frontPanel={sides.front} backPanel={sides.back} />
+                  </div>
+                ) : (
+                  <img
+                    src={gallery[activeImage - 1].src}
+                    alt={gallery[activeImage - 1].alt}
+                    className="aspect-[4/3] w-full object-cover md:h-[480px]"
+                  />
+                )}
+                <button
+                  type="button"
+                  onClick={() => setActiveImage((p) => Math.max(p - 1, 0))}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/60"
+                >
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveImage((p) => Math.min(p + 1, gallery.length))}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/60"
+                >
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                </button>
+                <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5 md:hidden">
+                  {[...Array(gallery.length + 1)].map((_, i) => (
+                    <button key={i} type="button" onClick={() => setActiveImage(i)} className={`h-1.5 rounded-full transition-all ${activeImage === i ? "w-5 bg-white" : "w-1.5 bg-white/40"}`} />
                   ))}
                 </div>
+              </div>
 
-                {/* Main image + featureStory below */}
-                <div className="flex flex-1 flex-col gap-2">
-                  <div ref={galleryRef} className="relative overflow-hidden rounded-2xl">
-                    {activeImage === 0 ? (
-                      <div className="aspect-[4/3] w-full md:h-[480px]">
-                        <Pergola3DViewer breite={breite} laenge={laenge} hoehe={hoehe} color={selectedColor} louversOpen={louversOpen} leftPanel={sides.left} rightPanel={sides.right} frontPanel={sides.front} backPanel={sides.back} />
-                      </div>
-                    ) : (
-                      <img
-                        src={gallery[activeImage - 1].src}
-                        alt={gallery[activeImage - 1].alt}
-                        className="aspect-[4/3] w-full object-cover md:h-[480px]"
-                      />
-                    )}
-                    <button
-                      type="button"
-                      onClick={() => setActiveImage((p) => Math.max(p - 1, 0))}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/60"
-                    >
-                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setActiveImage((p) => Math.min(p + 1, gallery.length))}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/60"
-                    >
-                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
-                    </button>
-                    <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5 md:hidden">
-                      {[...Array(gallery.length + 1)].map((_, i) => (
-                        <button key={i} type="button" onClick={() => setActiveImage(i)} className={`h-1.5 rounded-full transition-all ${activeImage === i ? "w-5 bg-white" : "w-1.5 bg-white/40"}`} />
-                      ))}
-                    </div>
-                  </div>
-                </div>
+              {/* ── Photo grid ── */}
+              <div className="mt-3 grid grid-cols-3 gap-1">
+                {/* 3D thumbnail */}
+                <button
+                  type="button"
+                  onClick={() => setActiveImage(0)}
+                  className={`aspect-square overflow-hidden rounded-lg flex flex-col items-center justify-center gap-1 transition-all ${activeImage === 0 ? "ring-2 ring-[#82B2CA]" : "opacity-70 hover:opacity-100"}`}
+                  style={{ backgroundColor: '#d1d5db' }}
+                >
+                  <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                  </svg>
+                  <span className="text-[10px] font-bold text-white/80 tracking-widest">3D</span>
+                </button>
+                {/* Photo thumbnails */}
+                {[photo1, photo2, photo3, photo4, photo5].map((src, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setActiveImage(i + 1)}
+                    className={`aspect-square overflow-hidden rounded-lg transition-all ${activeImage === i + 1 ? "ring-2 ring-[#82B2CA]" : "opacity-80 hover:opacity-100"}`}
+                  >
+                    <img src={src} alt={`Luxus Pergola ${i + 1}`} className="h-full w-full object-cover transition-transform duration-300 hover:scale-105" />
+                  </button>
+                ))}
               </div>
             </div>
 
