@@ -29,18 +29,18 @@ import montage5 from "@/assets/montage5.png";
 import montage6 from "@/assets/montage6.png";
 import zubehor from "@/assets/zubehor.png";
 import permasa from "@/assets/permasat-elegante.png";
-import montageVersion from "@/assets/montage-version.png";
+import montageVersion from "@/assets/montage-version-transparent.png";
 import xhamaElegante from "@/assets/xhama-elegante.png";
 
-import photo1 from "../assets/elegante6.png";
-import photo2 from "../assets/elegante2.png";
-import photo3 from "../assets/elegante3.png";
-import photo4 from "../assets/elegante4.png";
-import photo5 from "../assets/elegante5.png";
-import photo6 from "../assets/elegante1.png";
-import photo7 from "../assets/elegante7.png";
-import photo8 from "../assets/elegante8.png";
-import photo9 from "../assets/elegante9.png";
+import photo1 from "../assets/elegante6.jpg";
+import photo2 from "../assets/elegante2.jpg";
+import photo3 from "../assets/elegante3.jpg";
+import photo4 from "../assets/elegante4.jpg";
+import photo5 from "../assets/elegante5.jpg";
+import photo6 from "../assets/elegante1.jpg";
+import photo7 from "../assets/elegante7.jpg";
+import photo8 from "../assets/elegante8.jpg";
+import photo9 from "../assets/elegante9.jpg";
 
 const gallery = [
   { src: photo1, alt: "Elegante Pergola 1" },
@@ -342,7 +342,7 @@ export const ElegantePergolaPage = () => {
   };
 
   return (
-    <div className="relative overflow-x-hidden bg-white font-inter_tight text-neutral-900">
+    <div className="relative overflow-x-hidden bg-white text-neutral-900">
       <Header />
       <main role="main">
 
@@ -361,66 +361,46 @@ export const ElegantePergolaPage = () => {
 
             {/* ── LEFT: Gallery ── */}
             <div className="w-full">
-              <div className="flex gap-3">
-                {/* Vertical thumbnail strip */}
-                <div className="hidden flex-col gap-2 md:flex">
-                  {/* 3D thumbnail */}
-                  <button
-                    type="button"
-                    onClick={() => setActiveImage(0)}
-                    className={`h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 transition-all relative flex items-center justify-center bg-gradient-to-br from-stone-200 to-stone-100 ${activeImage === 0 ? "border-[#82B2CA] opacity-100" : "border-transparent opacity-50 hover:opacity-80"}`}
-                  >
-                    <svg className="h-7 w-7 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" /></svg>
-                    <span className="absolute bottom-1 text-[9px] font-semibold text-zinc-500">3D</span>
-                  </button>
-                  {gallery.map((img, i) => (
-                    <button
-                      key={img.src}
-                      type="button"
-                      onClick={() => setActiveImage(i + 1)}
-                      className={`h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 transition-all ${activeImage === i + 1 ? "border-[#82B2CA] opacity-100" : "border-transparent opacity-50 hover:opacity-80"}`}
-                    >
-                      <img src={img.src} alt={img.alt} className="h-full w-full object-cover" />
-                    </button>
+              <div ref={galleryRef} className="relative overflow-hidden rounded-2xl">
+                {activeImage === 0 ? (
+                  <div className="aspect-[4/3] w-full md:h-[480px]">
+                    <Pergola3DViewer breite={breite} laenge={laenge} hoehe={hoehe} color={selectedColor} louversOpen={louversOpen} showRetract={false} leftPanel={sides.left} rightPanel={sides.right} frontPanel={sides.front} backPanel={sides.back} />
+                  </div>
+                ) : (
+                  <img
+                    src={gallery[activeImage - 1].src}
+                    alt={gallery[activeImage - 1].alt}
+                    className="aspect-[4/3] w-full object-cover md:h-[480px]"
+                  />
+                )}
+                <button
+                  type="button"
+                  onClick={() => setActiveImage((p) => Math.max(p - 1, 0))}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/60"
+                >
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveImage((p) => Math.min(p + 1, gallery.length))}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/60"
+                >
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                </button>
+                <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5 md:hidden">
+                  {[...Array(gallery.length + 1)].map((_, i) => (
+                    <button key={i} type="button" onClick={() => setActiveImage(i)} className={`h-1.5 rounded-full transition-all ${activeImage === i ? "w-5 bg-white" : "w-1.5 bg-white/40"}`} />
                   ))}
                 </div>
+              </div>
 
-                {/* Main image + icons below */}
-                <div className="flex flex-1 flex-col gap-2">
-                  <div ref={galleryRef} className="relative overflow-hidden rounded-2xl">
-                    {activeImage === 0 ? (
-                      <div className="aspect-[4/3] w-full md:h-[480px]">
-                        <Pergola3DViewer breite={breite} laenge={laenge} hoehe={hoehe} color={selectedColor} louversOpen={louversOpen} showRetract={false} leftPanel={sides.left} rightPanel={sides.right} frontPanel={sides.front} backPanel={sides.back} />
-                      </div>
-                    ) : (
-                      <img
-                        src={gallery[activeImage - 1].src}
-                        alt={gallery[activeImage - 1].alt}
-                        className="aspect-[4/3] w-full object-cover md:h-[480px]"
-                      />
-                    )}
-                    <button
-                      type="button"
-                      onClick={() => setActiveImage((p) => Math.max(p - 1, 0))}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/60"
-                    >
-                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setActiveImage((p) => Math.min(p + 1, gallery.length))}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition hover:bg-black/60"
-                    >
-                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
-                    </button>
-                    <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5 md:hidden">
-                      {[...Array(gallery.length + 1)].map((_, i) => (
-                        <button key={i} type="button" onClick={() => setActiveImage(i)} className={`h-1.5 rounded-full transition-all ${activeImage === i ? "w-5 bg-white" : "w-1.5 bg-white/40"}`} />
-                      ))}
-                    </div>
+              {/* ── Photo grid ── */}
+              <div className="mt-3 grid grid-cols-3 gap-1">
+                {[photo8, photo2, photo3, photo4, photo5, photo7].map((src, i) => (
+                  <div key={i} className="aspect-square overflow-hidden rounded-lg">
+                    <img src={src} alt={`Elegante Pergola ${i + 1}`} className="h-full w-full object-cover transition-transform duration-300 hover:scale-105" />
                   </div>
-
-                </div>
+                ))}
               </div>
             </div>
 
@@ -491,7 +471,7 @@ export const ElegantePergolaPage = () => {
                       {/* Länge */}
                       <div>
                         <div className="mb-1.5 flex items-center justify-between">
-                          <span className="text-sm font-semibold text-[#344148]">Länge</span>
+                          <span className="text-sm font-medium text-[#344148]">Länge</span>
                           {(() => { const err = laengeInput !== "" && (Number(laengeInput) > laengeRange.max || Number(laengeInput) < laengeRange.min); return (
                           <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
                             <input type="number" value={laengeInput}
@@ -510,7 +490,7 @@ export const ElegantePergolaPage = () => {
                       {/* Breite */}
                       <div>
                         <div className="mb-1.5 flex items-center justify-between">
-                          <span className="text-sm font-semibold text-[#344148]">Breite</span>
+                          <span className="text-sm font-medium text-[#344148]">Breite</span>
                           {(() => { const err = breiteInput !== "" && (Number(breiteInput) > breiteRange.max || Number(breiteInput) < breiteRange.min); return (
                           <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
                             <input type="number" value={breiteInput}
@@ -529,7 +509,7 @@ export const ElegantePergolaPage = () => {
                       {/* Höhe */}
                       <div>
                         <div className="mb-1.5 flex items-center justify-between">
-                          <span className="text-sm font-semibold text-[#344148]">Höhe</span>
+                          <span className="text-sm font-medium text-[#344148]">Höhe</span>
                           {(() => { const err = hoeheInput !== "" && (Number(hoeheInput) > hoeheRange.max || Number(hoeheInput) < hoeheRange.min); return (
                           <div className={`flex items-center rounded-lg bg-white shadow-sm border ${err ? "border-red-400" : "border-stone-200"}`}>
                             <input type="number" value={hoeheInput}
@@ -556,7 +536,7 @@ export const ElegantePergolaPage = () => {
                         <button key={m.label} type="button" onClick={() => setSelectedMount(m.label)}
                           className={`flex flex-col items-center gap-2 rounded-3xl border-2 p-3 transition-all ${selectedMount === m.label ? "border-[#344148] bg-[#344148]/5" : "border-stone-200 hover:border-zinc-300"}`}>
                           <img src={m.img} alt={m.label} className="h-9 object-contain" />
-                          <span className={`text-sm font-semibold ${selectedMount === m.label ? "text-[#344148]" : "text-zinc-600"}`}>{m.label}</span>
+                          <span className={`text-sm font-medium ${selectedMount === m.label ? "text-[#344148]" : "text-zinc-600"}`}>{m.label}</span>
                         </button>
                       ))}
                     </div>
@@ -614,8 +594,8 @@ export const ElegantePergolaPage = () => {
                                       <div className="scale-75">{addonItem?.icon}</div>
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                      <div className="text-sm font-semibold leading-tight text-zinc-800">{acc.label}</div>
-                                      <div className="text-xs text-zinc-400">{acc.price} €/m²</div>
+                                      <div className="text-sm font-medium leading-tight text-zinc-800">{acc.label}</div>
+                                      <div className="text-xs text-zinc-400">{acc.price} €</div>
                                     </div>
                                     <button
                                       type="button"
@@ -668,11 +648,6 @@ export const ElegantePergolaPage = () => {
           <div className="mx-auto max-w-[1440px] px-6 md:px-16">
             <div className="flex flex-col items-center gap-10 md:flex-row md:gap-16">
 
-              {/* Image */}
-              <div className="w-full md:w-1/2 overflow-hidden rounded-2xl">
-                <img src={photo6} alt="Elegant Pergola" className="w-full h-full object-cover" />
-              </div>
-
               {/* Text */}
               <div className="w-full md:w-1/2">
                 <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
@@ -686,16 +661,21 @@ export const ElegantePergolaPage = () => {
                 </p>
               </div>
 
+              {/* Image */}
+              <div className="w-full md:w-1/2 overflow-hidden rounded-2xl">
+                <img src={photo6} alt="Elegant Pergola" className="w-full h-full object-cover" />
+              </div>
+
             </div>
           </div>
         </section>
 
         {/* ── Ausstattung & Funktionen ── */}
-        <section className="bg-[#f2f2f2] py-14 md:py-24 overflow-hidden">
+        <section className="bg-[#f2f2f2] py-10 md:py-16 overflow-hidden">
           <div className="mx-auto max-w-[1440px] px-6 md:px-16">
 
             {/* Header */}
-            <div className="mb-12 md:mb-16">
+            <div className="mb-6 md:mb-8">
               <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
                 Ausstattung
               </span>
@@ -704,20 +684,20 @@ export const ElegantePergolaPage = () => {
               </h2>
             </div>
 
-            {/* Content: features left + image right */}
-            <div className="flex flex-col gap-10 md:flex-row md:gap-16 items-start">
+            {/* Content: image left + features right */}
+            <div className="flex flex-col gap-8 md:flex-row-reverse md:gap-12 items-start">
 
               {/* Features */}
-              <div className="w-full md:w-1/2 flex flex-col gap-10">
+              <div className="w-full md:w-1/2 flex flex-col gap-3">
 
                 {/* Standard */}
                 <div>
-                  <div className="flex items-center gap-3 mb-5">
+                  <div className="flex items-center gap-3 mb-3">
                     <div className="h-px flex-1 bg-zinc-300" />
                     <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">Standard</span>
                     <div className="h-px flex-1 bg-zinc-300" />
                   </div>
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-1.5">
                     {[
                       "Stabile Aluminiumkonstruktion",
                       "Drehbare Lamellen bis 120°",
@@ -725,11 +705,11 @@ export const ElegantePergolaPage = () => {
                       "Integrierte Entwässerung",
                       "Motorisierte Bedienung",
                     ].map((f) => (
-                      <div key={f} className="flex items-center gap-3">
-                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-[#82B2CA]/20 flex items-center justify-center">
-                          <svg className="w-3 h-3 text-[#82B2CA]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>
+                      <div key={f} className="flex items-center gap-2.5">
+                        <div className="flex-shrink-0 w-4 h-4 rounded-full bg-[#82B2CA]/20 flex items-center justify-center">
+                          <svg className="w-2.5 h-2.5 text-[#82B2CA]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>
                         </div>
-                        <span className="text-sm text-zinc-700">{f}</span>
+                        <span className="text-body text-[#344148]">{f}</span>
                       </div>
                     ))}
                   </div>
@@ -737,12 +717,12 @@ export const ElegantePergolaPage = () => {
 
                 {/* Optional */}
                 <div>
-                  <div className="flex items-center gap-3 mb-5">
+                  <div className="flex items-center gap-3 mb-3">
                     <div className="h-px flex-1 bg-zinc-300" />
                     <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">Optional</span>
                     <div className="h-px flex-1 bg-zinc-300" />
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                     {[
                       "LED-Beleuchtung",
                       "Automatische Sensoren",
@@ -752,11 +732,11 @@ export const ElegantePergolaPage = () => {
                       "Audiosystem",
                       "Solarsystem für den Motor",
                     ].map((f) => (
-                      <div key={f} className="flex items-center gap-3">
-                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-zinc-200 flex items-center justify-center">
-                          <svg className="w-3 h-3 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4"/></svg>
+                      <div key={f} className="flex items-center gap-2.5">
+                        <div className="flex-shrink-0 w-4 h-4 rounded-full bg-zinc-200 flex items-center justify-center">
+                          <svg className="w-2.5 h-2.5 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4"/></svg>
                         </div>
-                        <span className="text-sm text-zinc-500">{f}</span>
+                        <span className="text-body text-[#344148]">{f}</span>
                       </div>
                     ))}
                   </div>
@@ -765,71 +745,71 @@ export const ElegantePergolaPage = () => {
               </div>
 
               {/* Image */}
-              <div className="w-full md:w-1/2 flex-shrink-0 rounded-2xl overflow-hidden md:-mt-16">
-                <img src={zubehor} alt="Ausstattung" className="w-full object-cover" />
+              <div className="w-full md:w-1/2 flex-shrink-0 flex justify-center">
+                <img src={zubehor} alt="Ausstattung" className="w-[60%] object-contain" />
               </div>
 
             </div>
           </div>
         </section>
         {/* ── Maximale Abmessungen ── */}
-        <section className="bg-[#344148] py-16 md:py-28 overflow-hidden">
+        <section className="bg-white py-10 md:py-16 overflow-hidden">
           <div className="mx-auto max-w-[1440px] px-6 md:px-16">
-            <div className="flex flex-col gap-14 md:flex-row md:items-center md:gap-20">
+            <div className="flex flex-col gap-8 md:flex-row md:items-center md:gap-12">
 
-              {/* Left — image */}
-              <div className="w-full md:w-1/2 flex-shrink-0">
-                <div className="rounded-2xl overflow-hidden">
-                  <img src={permasa} alt="Maximale Abmessungen" className="w-full object-contain" />
-                </div>
-              </div>
-
-              {/* Right — content */}
-              <div className="w-full md:w-1/2 flex flex-col gap-10">
+              {/* Left — content */}
+              <div className="w-full md:w-1/2 flex flex-col gap-6">
                 <div>
                   <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
                     Abmessungen
                   </span>
-                  <h2 className="mt-5 text-3xl font-bold text-white md:text-5xl leading-tight">
+                  <h2 className="mt-5 font-bold text-[#344148] leading-tight">
                     Maximale<br />Abmessungen
                   </h2>
-                  <p className="mt-4 text-sm leading-relaxed text-white/50 md:text-base max-w-sm">
+                  <p className="mt-4 max-w-sm text-zinc-500">
                     Die Elegante Pergola überzeugt mit großzügigen Maßen — für jeden Außenbereich die passende Größe.
                   </p>
                 </div>
 
                 {/* Dimension blocks */}
-                <div className="flex flex-col gap-0 divide-y divide-white/10">
+                <div className="flex flex-col gap-0 divide-y divide-zinc-100">
                   {/* A — Tiefe */}
-                  <div className="flex items-center gap-6 py-6">
-                    <div className="w-12 h-12 rounded-full bg-[#82B2CA]/20 border border-[#82B2CA]/40 flex items-center justify-center flex-shrink-0">
-                      <span className="text-[#82B2CA] font-bold text-lg">A</span>
+                  <div className="flex items-center gap-6 py-3">
+                    <div className="w-11 h-11 rounded-full bg-[#82B2CA]/20 border border-[#82B2CA]/40 flex items-center justify-center flex-shrink-0">
+                      <span className="text-[#82B2CA] font-bold">A</span>
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-white/40 text-xs uppercase tracking-widest font-semibold">Tiefe</span>
-                      <span className="text-white text-2xl font-bold md:text-3xl">bis ca. 5,5 m</span>
+                      <span className="text-zinc-400 text-xs uppercase tracking-widest font-semibold">Tiefe</span>
+                      <span className="text-[#344148] font-bold">bis ca. 5,5 m</span>
                     </div>
                   </div>
                   {/* B — Breite */}
-                  <div className="flex items-center gap-6 py-6">
-                    <div className="w-12 h-12 rounded-full bg-[#82B2CA]/20 border border-[#82B2CA]/40 flex items-center justify-center flex-shrink-0">
-                      <span className="text-[#82B2CA] font-bold text-lg">B</span>
+                  <div className="flex items-center gap-6 py-3">
+                    <div className="w-11 h-11 rounded-full bg-[#82B2CA]/20 border border-[#82B2CA]/40 flex items-center justify-center flex-shrink-0">
+                      <span className="text-[#82B2CA] font-bold">B</span>
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-white/40 text-xs uppercase tracking-widest font-semibold">Breite</span>
-                      <span className="text-white text-2xl font-bold md:text-3xl">bis ca. 7,0 m</span>
+                      <span className="text-zinc-400 text-xs uppercase tracking-widest font-semibold">Breite</span>
+                      <span className="text-[#344148] font-bold">bis ca. 7,0 m</span>
                     </div>
                   </div>
                   {/* C — Höhe */}
-                  <div className="flex items-center gap-6 py-6">
-                    <div className="w-12 h-12 rounded-full bg-[#82B2CA]/20 border border-[#82B2CA]/40 flex items-center justify-center flex-shrink-0">
-                      <span className="text-[#82B2CA] font-bold text-lg">C</span>
+                  <div className="flex items-center gap-6 py-3">
+                    <div className="w-11 h-11 rounded-full bg-[#82B2CA]/20 border border-[#82B2CA]/40 flex items-center justify-center flex-shrink-0">
+                      <span className="text-[#82B2CA] font-bold">C</span>
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-white/40 text-xs uppercase tracking-widest font-semibold">Höhe</span>
-                      <span className="text-white text-2xl font-bold md:text-3xl">bis ca. 3,5 m</span>
+                      <span className="text-zinc-400 text-xs uppercase tracking-widest font-semibold">Höhe</span>
+                      <span className="text-[#344148] font-bold">bis ca. 3,5 m</span>
                     </div>
                   </div>
+                </div>
+              </div>
+
+              {/* Right — image */}
+              <div className="w-full md:w-1/2 flex-shrink-0">
+                <div className="rounded-2xl overflow-hidden">
+                  <img src={permasa} alt="Maximale Abmessungen" className="w-full object-contain" />
                 </div>
               </div>
 
@@ -838,35 +818,37 @@ export const ElegantePergolaPage = () => {
         </section>
 
         {/* ── Montagevarianten ── */}
-        <section className="bg-white py-14 md:py-24">
+        <section className="bg-[#f2f2f2] py-10 md:py-20">
           <div className="mx-auto max-w-[1440px] px-6 md:px-16">
+            <div className="flex flex-col gap-8 md:flex-row md:items-center md:gap-10">
 
-            {/* Header */}
-            <div className="text-center">
-              <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
-                Montage
-              </span>
-              <h2 className="mt-4 text-2xl font-bold text-[#344148] md:text-4xl">Montagevarianten</h2>
-              <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-zinc-500 md:text-base">
-                Die Elegant Pergola kann flexibel an die jeweilige Bausituation angepasst werden. Je nach Projekt ist eine Montage ohne Stützen, mit 2 Stützen, 3 Stützen oder 4 Stützen möglich. Zusätzlich können mehrere Module miteinander kombiniert werden – ideal für private Terrassen, Gärten sowie größere Außenbereiche von Hotels, Restaurants und Cafés.
-              </p>
+              {/* Left — image */}
+              <div className="w-full md:w-3/5 flex justify-start">
+                <img src={montageVersion} alt="Montagevarianten" className="w-3/5 object-contain" />
+              </div>
+
+              {/* Right — text */}
+              <div className="w-full md:w-2/5 flex flex-col gap-5">
+                <span className="inline-block w-fit rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
+                  Montage
+                </span>
+                <h2 className="font-bold text-[#344148]">Montagevarianten</h2>
+                <p className="text-zinc-500">
+                  Die Elegant Pergola kann flexibel an die jeweilige Bausituation angepasst werden. Je nach Projekt ist eine Montage ohne Stützen, mit 2 Stützen, 3 Stützen oder 4 Stützen möglich. Zusätzlich können mehrere Module miteinander kombiniert werden – ideal für private Terrassen, Gärten sowie größere Außenbereiche von Hotels, Restaurants und Cafés.
+                </p>
+              </div>
+
             </div>
-
-            {/* Image */}
-            <div className="mt-12 flex justify-center">
-              <img src={montageVersion} alt="Montagevarianten" className="w-full max-w-3xl object-contain" />
-            </div>
-
           </div>
         </section>
 
         {/* ── Seitensysteme ── */}
-        <section className="bg-[#f2f2f2] py-16 md:py-28 overflow-hidden">
+        <section className="bg-white py-10 md:py-16 overflow-hidden">
           <div className="mx-auto max-w-[1440px] px-6 md:px-16">
-            <div className="flex flex-col gap-14 md:flex-row md:items-center md:gap-20">
+            <div className="flex flex-col gap-10 md:flex-row md:items-center md:gap-14">
 
               {/* Left — content */}
-              <div className="w-full md:w-1/2 flex flex-col gap-10">
+              <div className="w-full md:w-1/2 flex flex-col gap-6">
                 <div>
                   <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
                     Seitensysteme
@@ -886,11 +868,11 @@ export const ElegantePergolaPage = () => {
                     { label: "Schiebeglassysteme", desc: "Elegantes Schiebeglas für flexible Raumöffnung und modernen Look." },
                     { label: "Zip-Screens", desc: "Windresistenter Textilschutz mit sauberer Führung – Sicht- und Sonnenschutz in einem." },
                   ].map((item) => (
-                    <div key={item.label} className="flex items-start gap-4 py-5">
+                    <div key={item.label} className="flex items-start gap-4 py-3">
                       <div className="mt-0.5 w-2 h-2 rounded-full bg-[#82B2CA] flex-shrink-0" />
                       <div>
                         <div className="text-sm font-bold text-[#344148]">{item.label}</div>
-                        <div className="text-xs text-zinc-400 mt-0.5 leading-relaxed">{item.desc}</div>
+                        <div className="text-body text-zinc-500 mt-0.5">{item.desc}</div>
                       </div>
                     </div>
                   ))}
@@ -898,7 +880,7 @@ export const ElegantePergolaPage = () => {
               </div>
 
               {/* Right — image */}
-              <div className="w-full md:w-1/2 flex-shrink-0">
+              <div className="w-full md:w-1/2 flex-shrink-0 flex justify-end -mr-6 md:-mr-16">
                 <img src={xhamaElegante} alt="Seitensysteme" className="w-full object-contain" />
               </div>
 

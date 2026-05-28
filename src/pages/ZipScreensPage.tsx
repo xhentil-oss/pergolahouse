@@ -115,7 +115,7 @@ export const ZipScreensPage = () => {
   };
 
   return (
-    <div className="relative overflow-x-hidden bg-white font-inter_tight text-neutral-900">
+    <div className="relative overflow-x-hidden bg-white text-neutral-900">
       <Header />
       <main role="main">
 

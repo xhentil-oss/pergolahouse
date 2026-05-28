@@ -182,7 +182,7 @@ export const MontageServicePage = () => {
   const selectedDoc = productDocs.find((p) => p.id === selectedProduct);
 
   return (
-    <div className="relative text-neutral-900 bg-white overflow-x-hidden font-inter_tight">
+    <div className="relative text-neutral-900 bg-white overflow-x-hidden">
       <Header />
       <main role="main">
 

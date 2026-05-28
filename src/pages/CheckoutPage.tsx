@@ -41,7 +41,7 @@ export const CheckoutPage = () => {
 
   if (submitted) {
     return (
-      <div className="relative text-neutral-900 bg-white overflow-x-hidden font-inter_tight">
+      <div className="relative text-neutral-900 bg-white overflow-x-hidden">
         <Header />
         <main role="main" className="min-h-[70vh] flex items-center justify-center px-4 py-24">
           <div className="max-w-lg w-full text-center">
@@ -77,7 +77,7 @@ export const CheckoutPage = () => {
   }
 
   return (
-    <div className="relative text-neutral-900 bg-white overflow-x-hidden font-inter_tight">
+    <div className="relative text-neutral-900 bg-white overflow-x-hidden">
       <Header />
       <main role="main">
 
