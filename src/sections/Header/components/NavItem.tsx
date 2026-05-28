@@ -48,10 +48,10 @@ export const NavItem = ({ label, href, dropdownItems }: NavItemProps) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="group flex items-center gap-1 px-3 py-2 rounded-lg transition-colors hover:bg-zinc-50">
+      <div className="group flex items-center gap-1 px-2 py-2 rounded-lg transition-colors hover:bg-zinc-50">
         <Link
           to={href}
-          className="text-sm font-medium tracking-wide transition-colors"
+          className="whitespace-nowrap text-sm font-medium tracking-wide transition-colors"
           style={{ color: '#344148' }}
         >
           {label}

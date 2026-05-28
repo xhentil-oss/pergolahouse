@@ -22,7 +22,7 @@ export const Header = () => {
           : "border-b border-zinc-100"
       }`}
     >
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-0 md:px-12 lg:px-16" style={{ minHeight: 72 }}>
+      <div className="mx-auto flex max-w-[1440px] items-center justify-between pl-4 pr-4 py-0 md:pl-6 md:pr-6 lg:pl-8 lg:pr-8 xl:pl-10 xl:pr-10" style={{ minHeight: 72 }}>
 
         {/* Hamburger - mobile only */}
         <button

@@ -59,7 +59,7 @@ export const HeaderActions = () => {
           <button
             type="button"
             onClick={() => setModelsOpen(!modelsOpen)}
-            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold text-white transition-all hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
+            className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-1.5 text-xs font-semibold text-white transition-all hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
             style={{ backgroundColor: "#82B2CA" }}
           >
             <span>Modelle entdecken</span>

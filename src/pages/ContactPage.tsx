@@ -25,7 +25,7 @@ const contactMethods = [
 
 export const ContactPage = () => {
   return (
-    <div className="relative text-neutral-900 bg-white overflow-x-hidden font-inter_tight">
+    <div className="relative text-neutral-900 bg-white overflow-x-hidden">
       <Header />
       <main role="main">
         <section className="relative isolate overflow-hidden min-h-[380px] md:min-h-[460px] flex items-center justify-center text-center px-4 py-16">

@@ -18,7 +18,7 @@ export const HomePage = () => {
 
 
   return (
-    <div className="relative text-neutral-900 bg-white overflow-x-hidden font-inter_tight">
+    <div className="relative text-neutral-900 bg-white overflow-x-hidden">
       <Header />
       <main role="main">
         <Hero />
