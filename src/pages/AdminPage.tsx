@@ -183,7 +183,10 @@ export const AdminPage = () => {
 
             <SectionCard title="Konfigurator – Grundpreis (Produktseiten)">
               <p className="text-[11px] text-zinc-400 mb-3 -mt-1">Diese Preise berechnen den Gesamtpreis direkt auf den Produktseiten.</p>
-              <PriceInput label="Preis pro m² (alle Pergolen)" fieldKey="pergolaPerSqm" value={prices.pergolaPerSqm} onChange={set} />
+              <PriceInput label="Elegante Pergola – Preis pro m²" fieldKey="elegante_perSqm" value={prices.elegante_perSqm} onChange={set} />
+              <PriceInput label="Luxus-Pergola – Preis pro m²" fieldKey="luxus_perSqm" value={prices.luxus_perSqm} onChange={set} />
+              <PriceInput label="Maßanfertigung – Preis pro m²" fieldKey="pergolaPerSqm" value={prices.pergolaPerSqm} onChange={set} />
+              <PriceInput label="Wintergarten – Preis pro m²" fieldKey="wintergarten_perSqm" value={prices.wintergarten_perSqm} onChange={set} />
               <PriceInput label="Wandmontage – Aufpreis" fieldKey="wandmontage" value={prices.wandmontage} onChange={set} />
             </SectionCard>
 
@@ -221,9 +224,24 @@ export const AdminPage = () => {
             </SectionCard>
 
             <SectionCard title="Wintergarten – Konfigurator">
-              <p className="text-[11px] text-zinc-400 mb-3 -mt-1">Der Preis wird je nach eingegebener Fläche (Breite × Länge) automatisch berechnet.</p>
-              <PriceInput label="Preis pro m² (Wintergarten)" fieldKey="wintergarten_perSqm" value={prices.wintergarten_perSqm} onChange={set} />
+              <p className="text-[11px] text-zinc-400 mb-3 -mt-1">Zusätzliche Wintergarten-Optionen.</p>
               <PriceInput label="Smart Steuerung" fieldKey="smartSteuerung" value={prices.smartSteuerung} onChange={set} />
+            </SectionCard>
+
+            <SectionCard title="Carports – Modelle nach Größe">
+              <p className="text-[11px] text-zinc-400 mb-3 -mt-1">Grundpreise der einzelnen Carport-Größen.</p>
+              <PriceInput label="3×5 m" fieldKey="carport_3x5" value={prices.carport_3x5} onChange={set} />
+              <PriceInput label="3×6 m" fieldKey="carport_3x6" value={prices.carport_3x6} onChange={set} />
+              <PriceInput label="4×5 m" fieldKey="carport_4x5" value={prices.carport_4x5} onChange={set} />
+              <PriceInput label="4×6 m" fieldKey="carport_4x6" value={prices.carport_4x6} onChange={set} />
+            </SectionCard>
+
+            <SectionCard title="Zip-Screens – Modelle nach Breite">
+              <p className="text-[11px] text-zinc-400 mb-3 -mt-1">Grundpreise der einzelnen Zip-Screen-Breiten.</p>
+              <PriceInput label="3 m" fieldKey="zipscreen_3m" value={prices.zipscreen_3m} onChange={set} />
+              <PriceInput label="4 m" fieldKey="zipscreen_4m" value={prices.zipscreen_4m} onChange={set} />
+              <PriceInput label="5 m" fieldKey="zipscreen_5m" value={prices.zipscreen_5m} onChange={set} />
+              <PriceInput label="6 m" fieldKey="zipscreen_6m" value={prices.zipscreen_6m} onChange={set} />
             </SectionCard>
 
             <SectionCard title="Preiswerte Pergola – Modelle PH1–PH6">

@@ -1,6 +1,8 @@
 export type PriceConfig = {
   // Base price per sqm (pergola configurators)
   pergolaPerSqm: number;
+  elegante_perSqm: number;
+  luxus_perSqm: number;
 
   // Wintergarten configurator – price per sqm
   wintergarten_perSqm: number;
@@ -51,10 +53,24 @@ export type PriceConfig = {
   preiswerte_ph4: number;
   preiswerte_ph5: number;
   preiswerte_ph6: number;
+
+  // Carports – Modelle nach Größe
+  carport_3x5: number;
+  carport_3x6: number;
+  carport_4x5: number;
+  carport_4x6: number;
+
+  // Zip-Screens – Modelle nach Breite
+  zipscreen_3m: number;
+  zipscreen_4m: number;
+  zipscreen_5m: number;
+  zipscreen_6m: number;
 };
 
 export const defaultPrices: PriceConfig = {
   pergolaPerSqm: 445,
+  elegante_perSqm: 443,
+  luxus_perSqm: 588,
   wintergarten_perSqm: 721,
 
   screenRollo: 45,
@@ -95,4 +111,14 @@ export const defaultPrices: PriceConfig = {
   preiswerte_ph4: 5190,
   preiswerte_ph5: 5790,
   preiswerte_ph6: 6390,
+
+  carport_3x5: 5390,
+  carport_3x6: 6090,
+  carport_4x5: 6590,
+  carport_4x6: 7290,
+
+  zipscreen_3m: 1390,
+  zipscreen_4m: 1690,
+  zipscreen_5m: 2390,
+  zipscreen_6m: 2850,
 };
