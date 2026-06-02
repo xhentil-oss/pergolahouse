@@ -53,11 +53,11 @@ const colorOptions = [
   { label: "Weiß 9016 T", color: "#F5F5F5", hint: "Verkehrsweiß – hell und minimalistisch" },
 ];
 
-const sizeOptions = [
-  { label: "3×5 m", price: 5390 },
-  { label: "3×6 m", price: 6090 },
-  { label: "4×5 m", price: 6590 },
-  { label: "4×6 m", price: 7290 },
+const buildSizeOptions = (prices: import("@/config/prices").PriceConfig) => [
+  { label: "3×5 m", price: prices.carport_3x5 },
+  { label: "3×6 m", price: prices.carport_3x6 },
+  { label: "4×5 m", price: prices.carport_4x5 },
+  { label: "4×6 m", price: prices.carport_4x6 },
 ];
 
 const faqItems = [
@@ -126,6 +126,8 @@ export const CarportsPage = () => {
     ]},
   ];
   const accessoryOptions = accessoryCategories.flatMap((c) => c.items);
+
+  const sizeOptions = buildSizeOptions(prices);
 
   const [activeImage, setActiveImage] = useState(0);
   const [descExpanded, setDescExpanded] = useState(false);

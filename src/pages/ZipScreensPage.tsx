@@ -4,6 +4,7 @@ import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
 import { FeatureTicker } from "@/sections/FeatureTicker";
 import { useCart } from "@/context/CartContext";
+import { usePrices } from "@/context/PriceContext";
 import pergolaImg from "../assets/image-pergola.png";
 import lightImg from "../assets/image-light.png";
 import photo26Img from "../assets/Photo (26).png";
@@ -26,11 +27,11 @@ const colorOptions = [
   { label: "Schwarz", color: "#0A0A0D", hint: "Tiefschwarz – markant und modern" },
 ];
 
-const sizeOptions = [
-  { label: "3 m", price: 1390 },
-  { label: "4 m", price: 1690 },
-  { label: "5 m", price: 2390 },
-  { label: "6 m", price: 2850 },
+const buildSizeOptions = (prices: import("@/config/prices").PriceConfig) => [
+  { label: "3 m", price: prices.zipscreen_3m },
+  { label: "4 m", price: prices.zipscreen_4m },
+  { label: "5 m", price: prices.zipscreen_5m },
+  { label: "6 m", price: prices.zipscreen_6m },
 ];
 
 const faqItems = [
@@ -67,6 +68,9 @@ const Stars = ({ count }: { count: number }) => (
 /* ─────────────────────────────────────────────── */
 export const ZipScreensPage = () => {
   const { addToCart } = useCart();
+  const { prices } = usePrices();
+  const sizeOptions = buildSizeOptions(prices);
+
   const [activeImage, setActiveImage] = useState(0);
   const [descExpanded, setDescExpanded] = useState(false);
   const [selectedColor, setSelectedColor] = useState(colorOptions[0].label);

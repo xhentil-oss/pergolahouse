@@ -203,7 +203,7 @@ export const LuxusPergolaPage = () => {
   const { addToCart } = useCart();
   const { prices } = usePrices();
 
-  const pricePerSqm = prices.luxus_originalPrice / 9;
+  const pricePerSqm = prices.luxus_perSqm;
   const mountOptions = [
     { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
     { label: "Wandmontage", img: ikonaMuri, surcharge: prices.wandmontage },

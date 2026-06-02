@@ -188,6 +188,16 @@ const addonItems = [
     ),
     color: "#F59E0B",
   },
+  {
+    title: "Sensor-Kit",
+    subtitle: "Wind, Schnee & Sonne",
+    icon: (
+      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2" />
+      </svg>
+    ),
+    color: "#06B6D4",
+  },
 ];
 
 const formatPrice = (n: number) =>
@@ -207,7 +217,7 @@ export const ElegantePergolaPage = () => {
   const { addToCart } = useCart();
   const { prices } = usePrices();
 
-  const pricePerSqm = prices.elegante_originalPrice / 9;
+  const pricePerSqm = prices.elegante_perSqm;
   const mountOptions = [
     { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
     { label: "Wandmontage", img: ikonaMuri, surcharge: prices.wandmontage },
@@ -221,24 +231,22 @@ export const ElegantePergolaPage = () => {
   ];
   const accessoryCategories = [
     { key: "beleuchtung", label: "Beleuchtung", icon: "💡", items: [
-      { label: "Warmweißes Licht", description: "Warmes Ambiente-Licht für gemütliche Abende.", price: prices.warmweissesLicht },
-      { label: "Kaltweiß Licht", description: "Klares, modernes Kaltweiß-Licht für die Pergola.", price: prices.kaltweissLicht },
-      { label: "RGB-Beleuchtung", description: "Farbwechsel-Beleuchtung für individuelle Stimmungen.", price: prices.rgbBeleuchtung },
-      { label: "Perimeter-Beleuchtung", description: "Umlaufende Beleuchtung – dekorativer Premium-Effekt.", price: prices.perimeterBeleuchtung },
-      { label: "Spot-Beleuchtung", description: "Fokussierte Beleuchtung – integrierte Spots in der Struktur.", price: prices.spotBeleuchtung },
+      { label: "Perimeterbeleuchtung", description: "", price: 0, isSubheader: true, isCollapsible: true, groupKey: "perimeter" },
+      { label: "Warmweiß", iconKey: "Warmweißes Licht", description: "Warmes Ambiente-Licht für gemütliche Abende.", price: prices.warmweissesLicht, group: "perimeter" },
+      { label: "Neutralweiß", iconKey: "Kaltweiß Licht", description: "Klares, modernes Neutralweiß-Licht für die Pergola.", price: prices.kaltweissLicht, group: "perimeter" },
+      { label: "RGB-Farbwechsel", iconKey: "RGB-Beleuchtung", description: "Farbwechsel-Beleuchtung für individuelle Stimmungen.", price: prices.rgbBeleuchtung, group: "perimeter" },
+      { label: "LED-Spots", iconKey: "Spot-Beleuchtung", description: "Fokussierte Beleuchtung – integrierte Spots in der Struktur.", price: prices.spotBeleuchtung },
     ]},
     { key: "sensoren", label: "Sensoren", icon: "📡", items: [
-      { label: "Windsensor", description: "Schließt die Lamellen automatisch bei starkem Wind.", price: prices.windsensor },
-      { label: "Schneesensor", description: "Automatischer Schutz gegen Schnee und Lasteinwirkungen.", price: prices.schneesensor },
-      { label: "Sonnensensor", description: "Regelt die Lamellen automatisch je nach Sonneneinstrahlung.", price: prices.sonnensensor },
+      { label: "Sensor-Kit", iconKey: "Sensor-Kit", description: "Wind-, Schnee- und Sonnensensor – Komplettpaket für automatischen Schutz.", price: prices.windsensor + prices.schneesensor + prices.sonnensensor },
     ]},
     { key: "heizung", label: "Heizung & Komfort", icon: "🔥", items: [
-      { label: "Infrarot-Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühlen Tagen.", price: prices.infrarotHeizung },
-      { label: "Integrierte Steckdosen", description: "Elektrische Steckdosen, integriert in die Pergola-Pfosten.", price: prices.integriertSteckdosen },
-      { label: "Soundsystem", description: "Integrierbares Soundsystem – Musik überall unter der Pergola.", price: prices.soundsystem },
+      { label: "Infrarot-Heizung", iconKey: "Infrarot-Heizung", description: "Infrarot-Wärmestrahler für behagliche Wärme an kühlen Tagen.", price: prices.infrarotHeizung },
+      { label: "Integrierte Steckdosen", iconKey: "Integrierte Steckdosen", description: "Elektrische Steckdosen, integriert in die Pergola-Pfosten.", price: prices.integriertSteckdosen },
+      { label: "Soundsystem", iconKey: "Soundsystem", description: "Integrierbares Soundsystem – Musik überall unter der Pergola.", price: prices.soundsystem },
     ]},
   ];
-  const accessoryOptions = accessoryCategories.flatMap((c) => c.items);
+  const accessoryOptions = accessoryCategories.flatMap((c) => c.items.filter(i => !i.isSubheader));
 
   const [activeImage, setActiveImage] = useState(0);
   const [louversOpen] = useState(false);
@@ -253,6 +261,8 @@ export const ElegantePergolaPage = () => {
   const [selectedMount, setSelectedMount] = useState("Freistehend");
   const [sides, setSides] = useState<Record<string, string>>({ left: "none", right: "none", front: "none", back: "none" });
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
+  const [openGroups, setOpenGroups] = useState<Set<string>>(new Set());
+  const toggleGroup = (key: string) => setOpenGroups(prev => { const n = new Set(prev); n.has(key) ? n.delete(key) : n.add(key); return n; });
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showStickyBar, setShowStickyBar] = useState(false);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -355,7 +365,7 @@ export const ElegantePergolaPage = () => {
 
             {/* ── LEFT: Gallery ── */}
             <div className="w-full">
-              <div ref={galleryRef} className="relative overflow-hidden rounded-2xl">
+              <div ref={galleryRef} className="relative overflow-hidden rounded-3xl">
                 {activeImage === 0 ? (
                   <div className="aspect-[4/3] w-full md:h-[480px]">
                     <Pergola3DViewer breite={breite} laenge={laenge} hoehe={hoehe} color={selectedColor} louversOpen={louversOpen} showRetract={false} leftPanel={sides.left} rightPanel={sides.right} frontPanel={sides.front} backPanel={sides.back} />
@@ -389,12 +399,12 @@ export const ElegantePergolaPage = () => {
               </div>
 
               {/* ── Photo grid ── */}
-              <div className="mt-3 grid grid-cols-3 gap-1">
+              <div className="mt-3 grid grid-cols-3 gap-3">
                 {/* 3D thumbnail */}
                 <button
                   type="button"
                   onClick={() => setActiveImage(0)}
-                  className={`aspect-square overflow-hidden rounded-lg flex flex-col items-center justify-center gap-1 transition-all ${activeImage === 0 ? "ring-2 ring-[#82B2CA]" : "opacity-70 hover:opacity-100"}`}
+                  className={`aspect-square overflow-hidden rounded-xl flex flex-col items-center justify-center gap-1 transition-all ${activeImage === 0 ? "ring-2 ring-[#82B2CA]" : "opacity-70 hover:opacity-100"}`}
                   style={{ backgroundColor: '#d1d5db' }}
                 >
                   <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -414,7 +424,7 @@ export const ElegantePergolaPage = () => {
                     key={idx}
                     type="button"
                     onClick={() => setActiveImage(idx)}
-                    className={`aspect-square overflow-hidden rounded-lg transition-all ${activeImage === idx ? "ring-2 ring-[#82B2CA]" : "opacity-80 hover:opacity-100"}`}
+                    className={`aspect-square overflow-hidden rounded-xl transition-all ${activeImage === idx ? "ring-2 ring-[#82B2CA]" : "opacity-80 hover:opacity-100"}`}
                   >
                     <img src={src} alt={`Elegante Pergola ${idx}`} className="h-full w-full object-cover transition-transform duration-300 hover:scale-105" />
                   </button>
@@ -604,10 +614,37 @@ export const ElegantePergolaPage = () => {
                             {/* Items */}
                             <div className="divide-y divide-stone-100">
                               {cat.items.map((acc) => {
+                                if (acc.isSubheader && acc.isCollapsible) {
+                                  const isOpen = openGroups.has(acc.groupKey!);
+                                  return (
+                                    <button
+                                      key={acc.label}
+                                      type="button"
+                                      onClick={() => toggleGroup(acc.groupKey!)}
+                                      className={`w-full flex items-center gap-2.5 px-3 py-2.5 transition-colors text-left ${isOpen ? "bg-[#344148]/5" : "hover:bg-stone-50"}`}
+                                    >
+                                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg" style={{ backgroundColor: "#F59E0B20", color: "#F59E0B" }}>
+                                        <svg className="h-5 w-5 scale-75" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m1.343-5.657l-.707-.707M6.343 17.657l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                                        </svg>
+                                      </div>
+                                      <div className="flex-1 min-w-0">
+                                        <div className="text-sm font-medium leading-tight text-zinc-800">{acc.label}</div>
+                                        <div className="text-xs text-zinc-400">3 Optionen</div>
+                                      </div>
+                                      <div className="shrink-0 flex h-7 w-7 items-center justify-center rounded-full bg-[#344148] text-white">
+                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}>
+                                          <path d="M2.5 4.5L6 8L9.5 4.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                      </div>
+                                    </button>
+                                  );
+                                }
+                                if (acc.group && !openGroups.has(acc.group)) return null;
                                 const active = selectedAccessories.includes(acc.label);
-                                const addonItem = addonItems.find(a => a.title === acc.label);
+                                const addonItem = addonItems.find(a => a.title === (acc.iconKey || acc.label));
                                 return (
-                                  <div key={acc.label} className={`flex items-center gap-2.5 px-3 py-2.5 transition-colors ${active ? "bg-[#344148]/5" : ""}`}>
+                                  <div key={acc.label} className={`flex items-center gap-2.5 px-3 py-2.5 transition-colors ${active ? "bg-[#344148]/5" : ""} ${acc.group ? "pl-6" : ""}`}>
                                     <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg" style={{ backgroundColor: addonItem ? `${addonItem.color}20` : '#f5f5f4', color: addonItem?.color }}>
                                       <div className="scale-75">{addonItem?.icon}</div>
                                     </div>
