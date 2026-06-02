@@ -21,15 +21,9 @@ import ikon4 from "@/assets/4 png.png";
 import ikon5 from "@/assets/5 png.png";
 import ikon6 from "@/assets/6 png.png";
 import { Pergola3DViewer } from "@/components/Pergola3DViewer";
-import montage1 from "@/assets/montage1.png";
-import montage2 from "@/assets/montage2.png";
-import montage3 from "@/assets/montage3.png";
-import montage4 from "@/assets/montage4.png";
-import montage5 from "@/assets/montage5.png";
-import montage6 from "@/assets/montage6.png";
 import zubehor from "@/assets/zubehor.png";
 import permasa from "@/assets/permasat-elegante.png";
-import montageVersion from "@/assets/montage-version-transparent.png";
+import montageVersion from "@/assets/pergola-modele-1.png";
 import xhamaElegante from "@/assets/xhama-elegante.png";
 
 import photo1 from "../assets/elegante6.jpg";
@@ -656,31 +650,18 @@ export const ElegantePergolaPage = () => {
           </div>
         </section>
 
-        {/* ── Contact CTA ── */}
-        <section className="bg-zinc-950 py-10 text-center text-white md:py-16 px-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#82B2CA]">Über 100.000 zufriedene Kunden weltweit</p>
-          <h2 className="mx-auto mt-3 max-w-xl text-2xl font-semibold md:text-4xl">Haben Sie noch Fragen?</h2>
-          <p className="mx-auto mt-4 max-w-md text-sm text-white/70">Unser Kundenservice-Team steht Ihnen gerne zur Verfügung. Kontaktieren Sie uns für eine persönliche Beratung.</p>
-          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 px-4">
-            <Link to="/contact" className="w-full sm:w-auto rounded-full border border-white/30 px-6 py-2.5 text-sm font-semibold transition hover:bg-white hover:text-zinc-900 text-center">Kontaktieren Sie uns</Link>
-            <a href="tel:+49" className="w-full sm:w-auto rounded-full bg-[#82B2CA] px-6 py-2.5 text-sm font-semibold text-zinc-900 transition hover:opacity-90 text-center">Anrufen</a>
-          </div>
-        </section>
 
         {/* ── Premium Outdoor-Living ── */}
-        <section className="bg-white py-14 md:py-24">
-          <div className="mx-auto max-w-[1440px] px-6 md:px-16">
-            <div className="flex flex-col items-center gap-10 md:flex-row md:gap-16">
+        <section className="bg-white overflow-hidden md:min-h-[400px] flex flex-col justify-center">
+          <div className="mx-auto max-w-[1440px] px-6 md:px-16 w-full py-2">
+            <div className="flex flex-col gap-10 md:flex-row md:gap-16 md:items-stretch">
 
               {/* Text */}
               <div className="w-full md:w-1/2">
-                <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
-                  Outdoor Living
-                </span>
-                <h2 className="mt-4 text-2xl font-bold text-[#344148] md:text-4xl">
+                <h2 className="text-2xl font-bold text-[#344148] md:text-3xl mb-5">
                   Premium Outdoor-Living für das ganze Jahr
                 </h2>
-                <p className="mt-5 text-sm leading-relaxed text-zinc-500 md:text-base">
+                <p className="text-sm leading-relaxed text-[#344148]" style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}>
                   Elegant Pergola steht für modernes Outdoor-Living auf höchstem Niveau. Die hochwertige Aluminiumkonstruktion mit drehbaren Lamellen verbindet zeitloses Design, zuverlässigen Wetterschutz und maximalen Komfort. Ob Sonne, Regen oder Schnee – durch das integrierte Entwässerungssystem, die flexible Lamellenausrichtung und optionale Ausstattung wie LED-Beleuchtung, Sensoren und Motorisierung entsteht ein exklusiver Außenbereich, der das ganze Jahr über nutzbar bleibt. Ideal für stilvolle Terrassen, Gärten, Hotels, Restaurants und Cafés.
                 </p>
               </div>
@@ -695,146 +676,71 @@ export const ElegantePergolaPage = () => {
         </section>
 
         {/* ── Ausstattung & Funktionen ── */}
-        <section className="bg-[#f2f2f2] py-10 md:py-16 overflow-hidden">
-          <div className="mx-auto max-w-[1440px] px-6 md:px-16">
+        <section className="bg-[#f2f2f2] overflow-hidden md:min-h-[400px]">
+          <div className="mx-auto max-w-[1440px] px-6 md:px-16 w-full">
+            <div className="flex flex-col gap-8 md:flex-row md:gap-12 md:items-start">
 
-            {/* Header */}
-            <div className="mb-6 md:mb-8">
-              <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
-                Ausstattung
-              </span>
-              <h2 className="mt-4 text-2xl font-bold text-[#344148] md:text-4xl max-w-xl">
-                Ausstattung & Funktionen der Elegant Pergola
-              </h2>
-            </div>
-
-            {/* Content: image left + features right */}
-            <div className="flex flex-col gap-8 md:flex-row-reverse md:gap-12 items-start">
-
-              {/* Features */}
-              <div className="w-full md:w-1/2 flex flex-col gap-3">
-
-                {/* Standard */}
-                <div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="h-px flex-1 bg-zinc-300" />
-                    <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">Standard</span>
-                    <div className="h-px flex-1 bg-zinc-300" />
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    {[
-                      "Stabile Aluminiumkonstruktion",
-                      "Drehbare Lamellen bis 120°",
-                      "Schutz vor Sonne, Regen und Schnee",
-                      "Integrierte Entwässerung",
-                      "Motorisierte Bedienung",
-                    ].map((f) => (
-                      <div key={f} className="flex items-center gap-2.5">
-                        <div className="flex-shrink-0 w-4 h-4 rounded-full bg-[#82B2CA]/20 flex items-center justify-center">
-                          <svg className="w-2.5 h-2.5 text-[#82B2CA]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>
-                        </div>
-                        <span className="text-body text-[#344148]">{f}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Optional */}
-                <div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="h-px flex-1 bg-zinc-300" />
-                    <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">Optional</span>
-                    <div className="h-px flex-1 bg-zinc-300" />
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-                    {[
-                      "LED-Beleuchtung",
-                      "Automatische Sensoren",
-                      "Smart-System / Smartphone-Steuerung",
-                      "Infrarotheizung",
-                      "230V-Steckdosen",
-                      "Audiosystem",
-                      "Solarsystem für den Motor",
-                    ].map((f) => (
-                      <div key={f} className="flex items-center gap-2.5">
-                        <div className="flex-shrink-0 w-4 h-4 rounded-full bg-zinc-200 flex items-center justify-center">
-                          <svg className="w-2.5 h-2.5 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4"/></svg>
-                        </div>
-                        <span className="text-body text-[#344148]">{f}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
+              {/* Image - LEFT */}
+              <div className="w-full md:w-1/2 flex-shrink-0 flex justify-center">
+                <img src={zubehor} alt="Ausstattung" className="w-[75%] object-contain max-h-[360px]" />
               </div>
 
-              {/* Image */}
-              <div className="w-full md:w-1/2 flex-shrink-0 flex justify-center">
-                <img src={zubehor} alt="Ausstattung" className="w-[60%] object-contain" />
+              {/* Features - RIGHT */}
+              <div className="w-full md:w-1/2 flex flex-col mt-2">
+                <h2 className="text-2xl font-bold text-[#344148] md:text-3xl mb-5">
+                  Ausstattung &amp; Funktionen der Elegant Pergola
+                </h2>
+                <ul className="flex flex-col gap-0.5">
+                  {[
+                    "Stabile Aluminiumkonstruktion",
+                    "Drehbare Lamellen bis 120°",
+                    "Schutz vor Sonne, Regen und Schnee",
+                    "Integrierte Entwässerung",
+                    "Motorisierte Bedienung",
+                    "LED-Beleuchtung optional",
+                    "Automatische Sensoren optional",
+                    "Smart-System/Smartphone-Steuerung optional",
+                    "Infrarotheizung optional",
+                    "230V-Steckdosen optional",
+                    "Audiosystem optional",
+                    "Solarsystem für den Motor optional",
+                  ].map((f) => (
+                    <li key={f} className="flex items-center gap-2.5">
+                      <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#344148]" />
+                      <span className="text-sm text-[#344148]" style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}>{f}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
             </div>
           </div>
         </section>
         {/* ── Maximale Abmessungen ── */}
-        <section className="bg-white py-10 md:py-16 overflow-hidden">
-          <div className="mx-auto max-w-[1440px] px-6 md:px-16">
-            <div className="flex flex-col gap-8 md:flex-row md:items-center md:gap-12">
+        <section className="bg-white overflow-hidden md:min-h-[400px]">
+          <div className="mx-auto max-w-[1440px] px-6 md:px-16 w-full">
+            <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12">
 
               {/* Left — content */}
-              <div className="w-full md:w-1/2 flex flex-col gap-6">
-                <div>
-                  <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
-                    Abmessungen
-                  </span>
-                  <h2 className="mt-5 font-bold text-[#344148] leading-tight">
-                    Maximale<br />Abmessungen
-                  </h2>
-                  <p className="mt-4 max-w-sm text-zinc-500">
-                    Die Elegante Pergola überzeugt mit großzügigen Maßen — für jeden Außenbereich die passende Größe.
-                  </p>
-                </div>
-
-                {/* Dimension blocks */}
-                <div className="flex flex-col gap-0 divide-y divide-zinc-100">
-                  {/* A — Tiefe */}
-                  <div className="flex items-center gap-6 py-3">
-                    <div className="w-11 h-11 rounded-full bg-[#82B2CA]/20 border border-[#82B2CA]/40 flex items-center justify-center flex-shrink-0">
-                      <span className="text-[#82B2CA] font-bold">A</span>
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-zinc-400 text-xs uppercase tracking-widest font-semibold">Tiefe</span>
-                      <span className="text-[#344148] font-bold">bis ca. 5,5 m</span>
-                    </div>
-                  </div>
-                  {/* B — Breite */}
-                  <div className="flex items-center gap-6 py-3">
-                    <div className="w-11 h-11 rounded-full bg-[#82B2CA]/20 border border-[#82B2CA]/40 flex items-center justify-center flex-shrink-0">
-                      <span className="text-[#82B2CA] font-bold">B</span>
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-zinc-400 text-xs uppercase tracking-widest font-semibold">Breite</span>
-                      <span className="text-[#344148] font-bold">bis ca. 7,0 m</span>
-                    </div>
-                  </div>
-                  {/* C — Höhe */}
-                  <div className="flex items-center gap-6 py-3">
-                    <div className="w-11 h-11 rounded-full bg-[#82B2CA]/20 border border-[#82B2CA]/40 flex items-center justify-center flex-shrink-0">
-                      <span className="text-[#82B2CA] font-bold">C</span>
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-zinc-400 text-xs uppercase tracking-widest font-semibold">Höhe</span>
-                      <span className="text-[#344148] font-bold">bis ca. 3,5 m</span>
-                    </div>
-                  </div>
-                </div>
+              <div className="w-full md:w-1/2 flex flex-col mt-2">
+                <h2 className="text-2xl font-bold text-[#344148] md:text-3xl mb-5">Maximale Abmessungen</h2>
+                <ul className="flex flex-col gap-0.5">
+                  {[
+                    "Tiefe: bis ca. 5,5 m",
+                    "Breite: bis ca. 7,0 m",
+                    "Höhe: bis ca. 3,5 m",
+                  ].map((f) => (
+                    <li key={f} className="flex items-center gap-2.5">
+                      <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#344148]" />
+                      <span className="text-sm text-[#344148]" style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}>{f}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               {/* Right — image */}
-              <div className="w-full md:w-1/2 flex-shrink-0">
-                <div className="rounded-2xl overflow-hidden">
-                  <img src={permasa} alt="Maximale Abmessungen" className="w-full object-contain" />
-                </div>
+              <div className="w-full md:w-1/2 flex-shrink-0 mt-2">
+                <img src={permasa} alt="Maximale Abmessungen" className="w-full object-contain max-h-[360px]" />
               </div>
 
             </div>
@@ -842,24 +748,32 @@ export const ElegantePergolaPage = () => {
         </section>
 
         {/* ── Montagevarianten ── */}
-        <section className="bg-[#f2f2f2] py-10 md:py-20">
-          <div className="mx-auto max-w-[1440px] px-6 md:px-16">
-            <div className="flex flex-col gap-8 md:flex-row md:items-center md:gap-10">
+        <section className="bg-[#f2f2f2] overflow-hidden md:min-h-[400px]">
+          <div className="mx-auto max-w-[1440px] px-6 md:px-16 w-full">
+            <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12">
 
               {/* Left — image */}
-              <div className="w-full md:w-[55%] flex justify-start">
-                <img src={montageVersion} alt="Montagevarianten" className="w-3/5 object-contain" />
+              <div className="w-full md:w-1/2 flex-shrink-0 mt-2">
+                <img src={montageVersion} alt="Montagevarianten" className="w-[80%] object-contain max-h-[360px]" />
               </div>
 
               {/* Right — text */}
-              <div className="w-full md:w-[45%] flex flex-col gap-5">
-                <span className="inline-block w-fit rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
-                  Montage
-                </span>
-                <h2 className="font-bold text-[#344148]">Montagevarianten</h2>
-                <p className="text-zinc-500">
-                  Die Elegant Pergola kann flexibel an die jeweilige Bausituation angepasst werden. Je nach Projekt ist eine Montage ohne Stützen, mit 2 Stützen, 3 Stützen oder 4 Stützen möglich. Zusätzlich können mehrere Module miteinander kombiniert werden – ideal für private Terrassen, Gärten sowie größere Außenbereiche von Hotels, Restaurants und Cafés.
-                </p>
+              <div className="w-full md:w-1/2 flex flex-col mt-2">
+                <h2 className="text-2xl font-bold text-[#344148] md:text-3xl mb-5">Montagevarianten</h2>
+                <ul className="flex flex-col gap-0.5">
+                  {[
+                    "Freitragende Montage ohne Stützen",
+                    "Montage mit 2 Stützen",
+                    "Montage mit 3 Stützen",
+                    "Montage mit 4 Stützen",
+                    "Kombination mehrerer Module möglich",
+                  ].map((f) => (
+                    <li key={f} className="flex items-center gap-2.5">
+                      <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#344148]" />
+                      <span className="text-sm text-[#344148]" style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}>{f}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
             </div>
@@ -867,45 +781,31 @@ export const ElegantePergolaPage = () => {
         </section>
 
         {/* ── Seitensysteme ── */}
-        <section className="bg-white py-10 md:py-16 overflow-hidden">
+        <section className="bg-white overflow-hidden md:min-h-[400px]">
           <div className="mx-auto max-w-[1440px] px-6 md:px-16">
-            <div className="flex flex-col gap-10 md:flex-row md:items-center md:gap-14">
+            <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12">
 
               {/* Left — content */}
-              <div className="w-full md:w-1/2 flex flex-col gap-6">
-                <div>
-                  <span className="inline-block rounded-full border border-[#82B2CA]/40 bg-[#82B2CA]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#82B2CA]">
-                    Seitensysteme
-                  </span>
-                  <h2 className="mt-5 text-3xl font-bold text-[#344148] md:text-5xl leading-tight">
-                    Optionale<br />Seitensysteme
-                  </h2>
-                  <p className="mt-4 text-sm leading-relaxed text-zinc-500 md:text-base max-w-sm">
-                    Die Elegante Pergola lässt sich mit verschiedenen Seitensystemen kombinieren – für mehr Schutz, Privatsphäre und Wohnkomfort.
-                  </p>
-                </div>
-
-                <div className="flex flex-col gap-0 divide-y divide-zinc-200">
+              <div className="w-full md:w-1/2 flex flex-col my-2">
+                <h2 className="text-2xl font-bold text-[#344148] md:text-3xl mb-5">Seitensysteme</h2>
+                <ul className="flex flex-col gap-0.5">
                   {[
-                    { label: "Guillotine-Glassysteme", desc: "Vertikale Glasscheiben für maximalen Wetterschutz und klare Sicht." },
-                    { label: "Faltglassysteme", desc: "Platzsparend faltbar – öffnen Sie die Seite vollständig oder partiell." },
-                    { label: "Schiebeglassysteme", desc: "Elegantes Schiebeglas für flexible Raumöffnung und modernen Look." },
-                    { label: "Zip-Screens", desc: "Windresistenter Textilschutz mit sauberer Führung – Sicht- und Sonnenschutz in einem." },
-                  ].map((item) => (
-                    <div key={item.label} className="flex items-start gap-4 py-3">
-                      <div className="mt-0.5 w-2 h-2 rounded-full bg-[#82B2CA] flex-shrink-0" />
-                      <div>
-                        <div className="text-sm font-bold text-[#344148]">{item.label}</div>
-                        <div className="text-body text-zinc-500 mt-0.5">{item.desc}</div>
-                      </div>
-                    </div>
+                    "Guillotine-Glassysteme",
+                    "Faltglassysteme",
+                    "Schiebeglassysteme",
+                    "Zip-Screens",
+                  ].map((f) => (
+                    <li key={f} className="flex items-center gap-2.5">
+                      <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#344148]" />
+                      <span className="text-sm text-[#344148]" style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}>{f}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
 
               {/* Right — image */}
-              <div className="w-full md:w-1/2 flex-shrink-0 flex justify-start -mr-6 md:-mr-16 md:translate-x-[40px]">
-                <img src={xhamaElegante} alt="Seitensysteme" className="w-full object-contain" />
+              <div className="w-full md:w-1/2 flex-shrink-0 my-2">
+                <img src={xhamaElegante} alt="Seitensysteme" className="w-full object-contain ml-16 max-h-[360px]" />
               </div>
 
             </div>

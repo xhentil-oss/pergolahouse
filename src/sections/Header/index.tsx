@@ -15,8 +15,9 @@ export const Header = () => {
   }, []);
 
   return (
+    <>
     <header
-      className={`sticky top-0 z-40 transition-all duration-300 bg-white ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-white ${
         scrolled
           ? "shadow-md shadow-black/5 border-b border-transparent"
           : "border-b border-zinc-100"
@@ -51,5 +52,7 @@ export const Header = () => {
 
       {mobileOpen && <MobileMenu onClose={() => setMobileOpen(false)} />}
     </header>
+    <div className="h-[72px]" />
+    </>
   );
 };
