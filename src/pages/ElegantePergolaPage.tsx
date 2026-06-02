@@ -361,7 +361,7 @@ export const ElegantePergolaPage = () => {
             </div>
           </div>
 
-          <div className="mx-auto flex max-w-[1440px] flex-col gap-6 px-5 pb-10 pt-4 md:px-12 lg:grid lg:grid-cols-[58fr_42fr] lg:items-start lg:gap-8 lg:px-16 lg:pb-16">
+          <div className="mx-auto flex max-w-[1440px] flex-col px-5 pb-10 pt-4 md:px-12 lg:grid lg:grid-cols-[58fr_42fr] lg:items-start lg:px-16 lg:pb-16" style={{ gap: '12px' }}>
 
             {/* ── LEFT: Gallery ── */}
             <div className="w-full">
