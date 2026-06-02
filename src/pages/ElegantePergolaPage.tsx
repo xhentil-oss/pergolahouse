@@ -713,17 +713,17 @@ export const ElegantePergolaPage = () => {
         </section>
 
         {/* ── Ausstattung & Funktionen ── */}
-        <section className="bg-[#f2f2f2] overflow-hidden md:min-h-[400px]">
+        <section className="bg-[#f2f2f2] overflow-hidden md:min-h-[400px] py-2">
           <div className="mx-auto max-w-[1440px] px-6 md:px-16 w-full">
             <div className="flex flex-col gap-8 md:flex-row md:gap-12 md:items-start">
 
               {/* Image - LEFT */}
               <div className="w-full md:w-1/2 flex-shrink-0 flex justify-center">
-                <img src={zubehor} alt="Ausstattung" className="w-[75%] object-contain max-h-[360px]" />
+                <img src={zubehor} alt="Ausstattung" className="w-[75%] object-contain max-h-[384px]" />
               </div>
 
               {/* Features - RIGHT */}
-              <div className="w-full md:w-1/2 flex flex-col mt-2">
+              <div className="w-full md:w-1/2 flex flex-col pb-2">
                 <h2 className="text-2xl font-bold text-[#344148] md:text-3xl mb-5">
                   Ausstattung &amp; Funktionen der Elegant Pergola
                 </h2>
@@ -754,12 +754,12 @@ export const ElegantePergolaPage = () => {
           </div>
         </section>
         {/* ── Maximale Abmessungen ── */}
-        <section className="bg-white overflow-hidden md:min-h-[400px]">
+        <section className="bg-white overflow-hidden md:min-h-[400px] py-2">
           <div className="mx-auto max-w-[1440px] px-6 md:px-16 w-full">
             <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12">
 
               {/* Left — content */}
-              <div className="w-full md:w-1/2 flex flex-col mt-2">
+              <div className="w-full md:w-1/2 flex flex-col">
                 <h2 className="text-2xl font-bold text-[#344148] md:text-3xl mb-5">Maximale Abmessungen</h2>
                 <ul className="flex flex-col gap-0.5">
                   {[
@@ -776,8 +776,8 @@ export const ElegantePergolaPage = () => {
               </div>
 
               {/* Right — image */}
-              <div className="w-full md:w-1/2 flex-shrink-0 mt-2">
-                <img src={permasa} alt="Maximale Abmessungen" className="w-full object-contain max-h-[360px]" />
+              <div className="w-full md:w-1/2 flex-shrink-0">
+                <img src={permasa} alt="Maximale Abmessungen" className="w-full object-contain max-h-[384px]" />
               </div>
 
             </div>
@@ -785,17 +785,17 @@ export const ElegantePergolaPage = () => {
         </section>
 
         {/* ── Montagevarianten ── */}
-        <section className="bg-[#f2f2f2] overflow-hidden md:min-h-[400px]">
+        <section className="bg-[#f2f2f2] overflow-hidden md:min-h-[400px] py-2">
           <div className="mx-auto max-w-[1440px] px-6 md:px-16 w-full">
             <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12">
 
               {/* Left — image */}
-              <div className="w-full md:w-1/2 flex-shrink-0 mt-2">
-                <img src={montageVersion} alt="Montagevarianten" className="w-[80%] object-contain max-h-[360px]" />
+              <div className="w-full md:w-1/2 flex-shrink-0">
+                <img src={montageVersion} alt="Montagevarianten" className="w-[80%] object-contain max-h-[384px]" />
               </div>
 
               {/* Right — text */}
-              <div className="w-full md:w-1/2 flex flex-col mt-2">
+              <div className="w-full md:w-1/2 flex flex-col">
                 <h2 className="text-2xl font-bold text-[#344148] md:text-3xl mb-5">Montagevarianten</h2>
                 <ul className="flex flex-col gap-0.5">
                   {[
@@ -818,7 +818,7 @@ export const ElegantePergolaPage = () => {
         </section>
 
         {/* ── Seitensysteme ── */}
-        <section className="bg-white overflow-hidden md:min-h-[400px]">
+        <section className="bg-white">
           <div className="mx-auto max-w-[1440px] px-6 md:px-16">
             <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12">
 
@@ -842,7 +842,7 @@ export const ElegantePergolaPage = () => {
 
               {/* Right — image */}
               <div className="w-full md:w-1/2 flex-shrink-0 my-2">
-                <img src={xhamaElegante} alt="Seitensysteme" className="w-full object-contain ml-16 max-h-[360px]" />
+                <img src={xhamaElegante} alt="Seitensysteme" className="w-full object-contain ml-16 max-h-[384px]" />
               </div>
 
             </div>

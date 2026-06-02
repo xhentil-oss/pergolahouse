@@ -69,7 +69,7 @@ export type PriceConfig = {
 
 export const defaultPrices: PriceConfig = {
   pergolaPerSqm: 445,
-  elegante_perSqm: 443,
+  elegante_perSqm: 300,
   luxus_perSqm: 588,
   wintergarten_perSqm: 721,
 
