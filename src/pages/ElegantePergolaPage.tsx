@@ -841,7 +841,7 @@ export const ElegantePergolaPage = () => {
               </div>
 
               {/* Right — image */}
-              <div className="w-full md:w-1/2 flex-shrink-0 my-2 pr-10" style={{ paddingLeft: '90px' }}>
+              <div className="w-full md:w-1/2 flex-shrink-0 my-2 pr-10" style={{ paddingLeft: '100px' }}>
                 <img src={xhamaElegante} alt="Seitensysteme" className="w-full object-contain max-h-[384px]" />
               </div>
 
