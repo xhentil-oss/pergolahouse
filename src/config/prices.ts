@@ -77,7 +77,7 @@ export const defaultPrices: PriceConfig = {
   faltglasverglasung: 75,
   schiebeverglasung: 85,
   guillotineVerglasung: 115,
-  wandmontage: 240,
+  wandmontage: 200,
 
   warmweissesLicht: 35,
   kaltweissLicht: 32,

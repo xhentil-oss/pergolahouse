@@ -220,7 +220,7 @@ export const ElegantePergolaPage = () => {
   const pricePerSqm = prices.elegante_perSqm;
   const mountOptions = [
     { label: "Freistehend", img: ikonaThjesht, surcharge: 0 },
-    { label: "Wandmontage", img: ikonaMuri, surcharge: prices.wandmontage },
+    { label: "Wandmontage", img: ikonaMuri, surcharge: -prices.wandmontage },
   ];
   const sideTypeChoices = [
     { value: "none", label: "Keine", price: 0 },
@@ -719,7 +719,7 @@ export const ElegantePergolaPage = () => {
 
               {/* Image - LEFT */}
               <div className="w-full md:w-1/2 flex-shrink-0 flex justify-center">
-                <img src={zubehor} alt="Ausstattung" className="w-[75%] object-contain max-h-[384px]" />
+                <img src={zubehor} alt="Ausstattung" className="w-[75%] object-contain max-h-[384px]" style={{ marginRight: '28px' }} />
               </div>
 
               {/* Features - RIGHT */}
@@ -777,7 +777,7 @@ export const ElegantePergolaPage = () => {
 
               {/* Right — image */}
               <div className="w-full md:w-1/2 flex-shrink-0">
-                <img src={permasa} alt="Maximale Abmessungen" className="w-full object-contain max-h-[384px]" />
+                <img src={permasa} alt="Maximale Abmessungen" className="w-full object-contain max-h-[384px] ml-6" />
               </div>
 
             </div>
@@ -791,7 +791,7 @@ export const ElegantePergolaPage = () => {
 
               {/* Left — image */}
               <div className="w-full md:w-1/2 flex-shrink-0">
-                <img src={montageVersion} alt="Montagevarianten" className="w-[80%] object-contain max-h-[384px]" />
+                <img src={montageVersion} alt="Montagevarianten" className="w-[80%] object-contain max-h-[384px]" style={{ marginLeft: '45px' }} />
               </div>
 
               {/* Right — text */}
@@ -841,8 +841,8 @@ export const ElegantePergolaPage = () => {
               </div>
 
               {/* Right — image */}
-              <div className="w-full md:w-1/2 flex-shrink-0 my-2">
-                <img src={xhamaElegante} alt="Seitensysteme" className="w-full object-contain ml-16 max-h-[384px]" />
+              <div className="w-full md:w-1/2 flex-shrink-0 my-2 pr-10" style={{ paddingLeft: '90px' }}>
+                <img src={xhamaElegante} alt="Seitensysteme" className="w-full object-contain max-h-[384px]" />
               </div>
 
             </div>
