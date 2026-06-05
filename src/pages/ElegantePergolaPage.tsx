@@ -719,7 +719,7 @@ export const ElegantePergolaPage = () => {
 
               {/* Image - LEFT */}
               <div className="w-full md:w-1/2 flex-shrink-0 flex justify-center">
-                <img src={zubehor} alt="Ausstattung" className="w-[75%] object-contain max-h-[384px]" style={{ marginRight: '28px' }} />
+                <img src={zubehor} alt="Ausstattung" className="w-[75%] object-contain max-h-[384px]" style={{ marginRight: '35px' }} />
               </div>
 
               {/* Features - RIGHT */}
